@@ -43,7 +43,7 @@ public class RemoveSchema extends BaseSchema {
 
     @Override
     public String getKey() {
-        return key + "/" + item.getUnlocalizedName() + "/" + slot;
+        return key + "/" + item.getTranslationKey() + "/" + slot;
     }
 
     @Override

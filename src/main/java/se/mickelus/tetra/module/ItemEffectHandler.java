@@ -405,7 +405,7 @@ public class ItemEffectHandler {
     public static boolean breakBlock(World world, EntityPlayer breakingPlayer, ItemStack toolStack, BlockPos pos, IBlockState blockState) {
         boolean canRemove = blockState.getBlock().removedByPlayer(blockState, world, pos, breakingPlayer, true);
         if (canRemove && !world.isRemote) {
-            blockState.getBlock().onBlockDestroyedByPlayer(world, pos, blockState);
+            blockState.getBlock().onBlockHarvested(world, pos, blockState, breakingPlayer);
             blockState.getBlock().harvestBlock(world, breakingPlayer, pos, blockState, world.getTileEntity(pos), toolStack);
         }
 

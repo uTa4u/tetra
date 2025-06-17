@@ -66,7 +66,7 @@ public class PropertyMatcher implements Predicate<IBlockState> {
 
                     if (property == null) {
                         throw new JsonSyntaxException("Unknown block state property '" + entry.getKey() + "' for block '"
-                                + result.block.getUnlocalizedName() + "'");
+                                + result.block.getTranslationKey() + "'");
                     }
 
                     String s = JsonUtils.getString(entry.getValue(), entry.getKey());
@@ -74,7 +74,7 @@ public class PropertyMatcher implements Predicate<IBlockState> {
 
                     if (!optional.isPresent()) {
                         throw new JsonSyntaxException("Invalid block state value '" + s + "' for property '" + entry.getKey() + "' on block '"
-                                + result.block.getUnlocalizedName() + "'");
+                                + result.block.getTranslationKey() + "'");
                     }
 
                     result.propertyPredicates.put(property, Predicates.equalTo(optional.get()));

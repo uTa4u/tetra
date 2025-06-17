@@ -22,7 +22,7 @@ public class ItemMetalScrap extends TetraItem {
 
     public ItemMetalScrap() {
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
     }
 

@@ -47,7 +47,7 @@ public class BlockCoreExtractorPiston extends TetraBlock implements ITileEntityP
         super(Material.IRON);
 
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         GameRegistry.registerTileEntity(TileEntityCoreExtractorPiston.class, TetraMod.MOD_ID + ":" + "tile_" +unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
         setBlockUnbreakable();

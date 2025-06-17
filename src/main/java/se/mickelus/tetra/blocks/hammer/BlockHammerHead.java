@@ -46,7 +46,7 @@ public class BlockHammerHead extends TetraBlock implements ITileEntityProvider {
         super(Material.IRON);
 
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         GameRegistry.registerTileEntity(TileEntityHammerHead.class, TetraMod.MOD_ID + ":" + "tile_" +unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
         setBlockUnbreakable();

@@ -35,7 +35,7 @@ public class ModularOverrideList extends ItemOverrideList {
     public IBakedModel handleItemState(@Nonnull IBakedModel originalModel, final ItemStack stack, final World world, final EntityLivingBase entity) {
         NBTTagCompound baseTag = NBTHelper.getTag(stack);
         IBakedModel result = originalModel;
-        if(!baseTag.hasNoTags()) {
+        if(!baseTag.isEmpty()) {
             CacheKey key = getCacheKey(stack, originalModel);
 
             try {

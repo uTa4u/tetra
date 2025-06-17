@@ -15,7 +15,7 @@ public class ItemPristineLapis extends TetraItem {
 
     public ItemPristineLapis() {
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
     }
 

@@ -195,7 +195,7 @@ public class TetraMod {
 
     @SubscribeEvent
     public void lootTableLoad(LootTableLoadEvent event) {
-        if (TetraMod.MOD_ID.equals(event.getName().getResourceDomain())) {
+        if (TetraMod.MOD_ID.equals(event.getName().getNamespace())) {
             LootTable lootTable = event.getTable();
             LootPool[] extendedPools = DataHandler.instance.getExtendedLootPools(event.getName());
             Optional.ofNullable(extendedPools)

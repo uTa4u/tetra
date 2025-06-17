@@ -18,7 +18,7 @@ public class BlockForgedPipingLeaky extends TetraBlock {
         super(Materials.forged);
 
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
         setBlockUnbreakable();
         setResistance(23);

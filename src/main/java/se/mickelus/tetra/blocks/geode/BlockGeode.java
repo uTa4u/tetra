@@ -46,7 +46,7 @@ public class BlockGeode extends TetraBlock {
         setHarvestLevel("pickaxe", 0);
 
 
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         setRegistryName(unlocalizedName);
 
         setCreativeTab(TetraCreativeTabs.getInstance());

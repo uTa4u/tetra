@@ -74,7 +74,7 @@ public class BlockForgedCrate extends BlockFalling implements ITetraBlock, IBloc
     public BlockForgedCrate() {
         super(Materials.forgedCrate);
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
 
         setHardness(10);

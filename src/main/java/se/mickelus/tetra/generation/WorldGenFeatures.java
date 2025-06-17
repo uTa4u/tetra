@@ -64,7 +64,7 @@ public class WorldGenFeatures implements IWorldGenerator {
 
     public GenerationFeature getFeature(String name) {
         return Arrays.stream(features)
-                .filter(feature -> feature.location.getResourcePath().equals(name))
+                .filter(feature -> feature.location.getPath().equals(name))
                 .findFirst()
                 .orElse(null);
     }

@@ -22,7 +22,7 @@ public class ItemVentPlate extends TetraItem {
 
     public ItemVentPlate() {
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
     }
 

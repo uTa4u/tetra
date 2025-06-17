@@ -27,7 +27,7 @@ public class ForgedCrateProcessor implements ITemplateProcessor {
         if (blockInfo.blockState.getBlock() instanceof BlockForgedCrate) {
             IBlockState blockState = blockInfo.blockState
                     .withProperty(BlockForgedCrate.propIntegrity, random.nextInt(4))
-                    .withProperty(BlockForgedCrate.propFacing, EnumFacing.getHorizontal(random.nextInt(EnumFacing.HORIZONTALS.length)));
+                    .withProperty(BlockForgedCrate.propFacing, EnumFacing.HORIZONTALS[random.nextInt(EnumFacing.HORIZONTALS.length)]);
             return new Template.BlockInfo(pos, blockState, null);
         }
         return blockInfo;

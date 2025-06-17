@@ -26,7 +26,7 @@ public class ItemQuickLatch extends TetraItem {
 
     public ItemQuickLatch() {
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
     }
 

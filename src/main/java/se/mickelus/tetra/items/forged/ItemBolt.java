@@ -22,7 +22,7 @@ public class ItemBolt extends TetraItem {
 
     public ItemBolt() {
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
     }
 

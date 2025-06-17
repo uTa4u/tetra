@@ -39,7 +39,7 @@ public class BlockSeepingBedrock extends TetraBlock {
     public BlockSeepingBedrock() {
         super(Material.ROCK);
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
 
         setBlockUnbreakable();

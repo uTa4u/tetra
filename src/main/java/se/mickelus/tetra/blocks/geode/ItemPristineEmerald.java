@@ -15,7 +15,7 @@ public class ItemPristineEmerald extends TetraItem {
 
     public ItemPristineEmerald() {
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
     }
 

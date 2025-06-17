@@ -36,7 +36,7 @@ public class ItemSwordModular extends ItemModularHandheld {
     public static ItemSwordModular instance;
 
     public ItemSwordModular() {
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         setRegistryName(unlocalizedName);
         setMaxStackSize(1);
 

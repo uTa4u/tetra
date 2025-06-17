@@ -43,7 +43,7 @@ public class BlockCoreExtractorBase extends TetraBlock implements ITileEntityPro
     public BlockCoreExtractorBase() {
         super(Material.IRON);
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         GameRegistry.registerTileEntity(TileEntityCoreExtractorBase.class, new ResourceLocation(TetraMod.MOD_ID, unlocalizedName));
         setCreativeTab(TetraCreativeTabs.getInstance());
 
@@ -102,7 +102,7 @@ public class BlockCoreExtractorBase extends TetraBlock implements ITileEntityPro
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return getDefaultState()
-                .withProperty(propFacing, EnumFacing.getHorizontal(meta));
+                .withProperty(propFacing, EnumFacing.HORIZONTALS[meta]);
     }
 
     @Override

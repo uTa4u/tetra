@@ -32,7 +32,7 @@ public class ItemJournal extends TetraItem {
         super();
 
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
 
         setMaxStackSize(1);
 

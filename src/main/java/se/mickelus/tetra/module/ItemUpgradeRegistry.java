@@ -169,7 +169,7 @@ public class ItemUpgradeRegistry {
 
     public String getImprovementFromEnchantment(Enchantment enchantment) {
         return Optional.ofNullable(enchantment.getRegistryName())
-                .map(ResourceLocation::getResourcePath)
+                .map(ResourceLocation::getPath)
                 .map(path -> "enchantment/" + path)
                 .orElse(null);
     }

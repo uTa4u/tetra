@@ -15,7 +15,7 @@ public class ItemPristineDiamond extends TetraItem {
 
     public ItemPristineDiamond() {
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
     }
 

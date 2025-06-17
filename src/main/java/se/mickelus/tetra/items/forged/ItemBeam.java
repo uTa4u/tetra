@@ -22,7 +22,7 @@ public class ItemBeam extends TetraItem {
 
     public ItemBeam() {
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
     }
 

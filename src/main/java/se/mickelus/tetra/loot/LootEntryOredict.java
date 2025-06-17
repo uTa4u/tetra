@@ -31,7 +31,7 @@ public class LootEntryOredict extends LootEntryItem {
         String oreName = JsonUtils.getString(jsonObject, "ore");
         return OreDictionary.getOres(oreName).stream()
                 .filter(itemStack -> !itemStack.isEmpty())
-                .min(Comparator.comparing(itemStack -> itemStack.getItem().getUnlocalizedName()))
+                .min(Comparator.comparing(itemStack -> itemStack.getItem().getTranslationKey()))
                 .map(itemStack -> {
                     List<LootFunction> functions = new ArrayList<>();
 

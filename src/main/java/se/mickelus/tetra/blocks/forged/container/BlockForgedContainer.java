@@ -100,7 +100,7 @@ public class BlockForgedContainer extends TetraBlock implements ITileEntityProvi
     public BlockForgedContainer() {
         super(Material.IRON);
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         GameRegistry.registerTileEntity(TileEntityForgedContainer.class, new ResourceLocation(TetraMod.MOD_ID, unlocalizedName));
         setCreativeTab(TetraCreativeTabs.getInstance());
 
@@ -317,7 +317,7 @@ public class BlockForgedContainer extends TetraBlock implements ITileEntityProvi
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return super.getDefaultState()
-                .withProperty(propFacing, EnumFacing.getHorizontal(meta & 0b11))
+                .withProperty(propFacing, EnumFacing.HORIZONTALS[meta & 0b11])
                 .withProperty(propFlipped, ( meta >> 2 & 1 ) == 1);
     }
 

@@ -38,7 +38,7 @@ public class BlockForgedPillar extends TetraBlock {
         super(Materials.forged);
 
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
         setBlockUnbreakable();
         setResistance(25);

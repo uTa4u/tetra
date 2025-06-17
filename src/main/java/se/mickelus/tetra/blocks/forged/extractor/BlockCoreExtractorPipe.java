@@ -33,7 +33,7 @@ public class BlockCoreExtractorPipe extends TetraBlock {
     public BlockCoreExtractorPipe() {
         super(Material.IRON);
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
 
         setBlockUnbreakable();
@@ -88,7 +88,7 @@ public class BlockCoreExtractorPipe extends TetraBlock {
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return getDefaultState()
-                .withProperty(propFacing, EnumFacing.getFront(meta & 3))
+                .withProperty(propFacing, EnumFacing.VALUES[meta & 3])
                 .withProperty(propPowered, (meta >> 3 & 1) == 1);
     }
 

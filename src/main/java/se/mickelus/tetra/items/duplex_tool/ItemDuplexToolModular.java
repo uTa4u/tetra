@@ -78,7 +78,7 @@ public class ItemDuplexToolModular extends ItemModularHandheld {
 
     public ItemDuplexToolModular() {
 
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         setRegistryName(unlocalizedName);
         setMaxStackSize(1);
         setCreativeTab(TetraCreativeTabs.getInstance());

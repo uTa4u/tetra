@@ -33,7 +33,7 @@ public class ItemCellMagmatic extends TetraItem {
 
     public ItemCellMagmatic() {
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
         setMaxDamage(maxCharge);
         setMaxStackSize(1);

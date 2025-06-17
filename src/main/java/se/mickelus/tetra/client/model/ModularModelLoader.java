@@ -20,9 +20,9 @@ public class ModularModelLoader implements ICustomModelLoader {
 
     @Override
     public boolean accepts(ResourceLocation modelLocation) {
-        return modelLocation.getResourceDomain().equals(TetraMod.MOD_ID)
+        return modelLocation.getNamespace().equals(TetraMod.MOD_ID)
                 && !(modelLocation instanceof ModelResourceLocation)
-                && modelLocation.getResourcePath().contains("modular");
+                && modelLocation.getPath().contains("modular");
     }
 
     @Override
@@ -64,6 +64,6 @@ public class ModularModelLoader implements ICustomModelLoader {
     }
 
     private ResourceLocation getModelLocation(ResourceLocation location) {
-        return new ResourceLocation(location.getResourceDomain(), location.getResourcePath() + ".json");
+        return new ResourceLocation(location.getNamespace(), location.getPath() + ".json");
     }
 }

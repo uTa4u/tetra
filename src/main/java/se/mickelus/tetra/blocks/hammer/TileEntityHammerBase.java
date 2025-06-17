@@ -78,7 +78,7 @@ public class TileEntityHammerBase extends TileEntity {
     private void applyConsumeEffect() {
         EnumFacing facing = getWorld().getBlockState(getPos()).getValue(BlockHammerBase.propFacing);
         Vec3d pos = new Vec3d(getPos());
-        pos = pos.addVector(0.5, 0.5, 0.5);
+        pos = pos.add(0.5, 0.5, 0.5);
 
         if (!world.isRemote && hasEffect(EnumHammerEffect.LEAKY)) {
             int countCell0 = world.rand.nextInt(Math.min(16, getCellFuel(0)));
@@ -220,7 +220,7 @@ public class TileEntityHammerBase extends TileEntity {
     private void applyReconfigurationEffect(EnumHammerEffect effect) {
         EnumFacing facing = getWorld().getBlockState(getPos()).getValue(BlockHammerBase.propFacing);
         Vec3d pos = new Vec3d(getPos());
-        pos = pos.addVector(0.5, 0.5, 0.5);
+        pos = pos.add(0.5, 0.5, 0.5);
 
         if (EnumHammerEffect.OVERCHARGED.equals(effect)) {
             if (!hasCellInSlot(0)) {

@@ -222,7 +222,7 @@ public class DataHandler {
     }
 
     public LootPool[] getExtendedLootPools(ResourceLocation poolLocation) {
-        return getAsset(poolLocation.getResourceDomain(), String.format("loot_pools_extended/%s", poolLocation.getResourcePath()), LootPool[].class);
+        return getAsset(poolLocation.getNamespace(), String.format("loot_pools_extended/%s", poolLocation.getPath()), LootPool[].class);
 
     }
 }

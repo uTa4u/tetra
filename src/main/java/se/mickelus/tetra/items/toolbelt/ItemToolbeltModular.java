@@ -58,7 +58,7 @@ public class ItemToolbeltModular extends ItemModular implements IBauble {
         super();
 
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
 
         setMaxStackSize(1);
 

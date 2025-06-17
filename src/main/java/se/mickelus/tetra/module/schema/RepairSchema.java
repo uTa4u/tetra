@@ -37,7 +37,7 @@ public class RepairSchema extends BaseSchema {
 
     @Override
     public String getKey() {
-        return key + "/" + item.getUnlocalizedName();
+        return key + "/" + item.getTranslationKey();
     }
 
     @Override

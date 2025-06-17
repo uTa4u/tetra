@@ -22,7 +22,7 @@ public class ItemMesh extends TetraItem {
 
     public ItemMesh() {
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
     }
 

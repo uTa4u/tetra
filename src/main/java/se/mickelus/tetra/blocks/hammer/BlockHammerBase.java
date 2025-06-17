@@ -77,7 +77,7 @@ public class BlockHammerBase extends TetraBlock implements ITileEntityProvider, 
         super(Material.IRON);
 
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
         setBlockUnbreakable();
 
@@ -275,7 +275,7 @@ public class BlockHammerBase extends TetraBlock implements ITileEntityProvider, 
     }
 
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
@@ -303,7 +303,7 @@ public class BlockHammerBase extends TetraBlock implements ITileEntityProvider, 
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState()
-                .withProperty(propFacing, EnumFacing.getHorizontal(meta & 0xf));
+                .withProperty(propFacing, EnumFacing.HORIZONTALS[meta & 0xf]);
     }
 
     @Override

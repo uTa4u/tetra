@@ -79,7 +79,7 @@ public class BlockTransferUnit extends TetraBlock implements ITileEntityProvider
     public BlockTransferUnit() {
         super(Material.IRON);
         setRegistryName(unlocalizedName);
-        setUnlocalizedName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
         GameRegistry.registerTileEntity(TileEntityTransferUnit.class, new ResourceLocation(TetraMod.MOD_ID, unlocalizedName));
         setCreativeTab(TetraCreativeTabs.getInstance());
 
@@ -277,7 +277,7 @@ public class BlockTransferUnit extends TetraBlock implements ITileEntityProvider
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return super.getDefaultState()
-                .withProperty(propFacing, EnumFacing.getHorizontal(meta & 0b11));
+                .withProperty(propFacing, EnumFacing.HORIZONTALS[meta & 0b11]);
     }
 
     @Override
@@ -303,7 +303,7 @@ public class BlockTransferUnit extends TetraBlock implements ITileEntityProvider
     }
 
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
