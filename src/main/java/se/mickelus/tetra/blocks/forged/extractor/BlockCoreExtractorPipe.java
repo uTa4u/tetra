@@ -17,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.TetraBlock;
 import se.mickelus.tetra.items.TetraCreativeTabs;
@@ -27,7 +28,7 @@ public class BlockCoreExtractorPipe extends TetraBlock {
 
     public static final String unlocalizedName = "extractor_pipe";
 
-    @GameRegistry.ObjectHolder(TetraMod.MOD_ID + ":" + unlocalizedName)
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
     public static BlockCoreExtractorPipe instance;
 
     public BlockCoreExtractorPipe() {

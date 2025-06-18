@@ -1,6 +1,7 @@
 package se.mickelus.tetra.module.data;
 
 import net.minecraft.util.ResourceLocation;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.module.Priority;
 
@@ -147,6 +148,6 @@ public class ModuleData {
     }
 
     public ResourceLocation getTextureLocation() {
-        return new ResourceLocation(TetraMod.MOD_ID, "items/" + key);
+        return new ResourceLocation(Tags.MOD_ID, "items/" + key);
     }
 }

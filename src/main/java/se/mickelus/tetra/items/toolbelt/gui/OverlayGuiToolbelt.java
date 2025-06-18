@@ -5,6 +5,7 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.gui.*;
 import se.mickelus.tetra.items.toolbelt.inventory.InventoryPotions;
@@ -14,7 +15,7 @@ import se.mickelus.tetra.items.toolbelt.inventory.ToolbeltSlotType;
 
 public class OverlayGuiToolbelt extends GuiRoot {
 
-    private static final ResourceLocation toolbeltTexture = new ResourceLocation(TetraMod.MOD_ID, "textures/gui/toolbelt-inventory.png");
+    private static final ResourceLocation toolbeltTexture = TetraMod.getResource("textures/gui/toolbelt-inventory.png");
 
     private OverlayGuiQuickslotGroup quickslotGroup;
     private OverlayGuiPotionGroup potionGroup;

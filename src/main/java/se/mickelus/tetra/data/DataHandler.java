@@ -16,6 +16,7 @@ import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import net.minecraftforge.fml.common.Loader;
 import org.apache.commons.io.FilenameUtils;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.PropertyMatcher;
 import se.mickelus.tetra.generation.GenerationFeature;
@@ -99,8 +100,8 @@ public class DataHandler {
     }
 
     public <T> T getData(String path, Class<T> dataClass) {
-        String pathString = String.format("data/%s/%s.json", TetraMod.MOD_ID, path);
-        File configOverride = new File (configDir, String.format("%s/%s.json", TetraMod.MOD_ID, path));
+        String pathString = String.format("data/%s/%s.json", Tags.MOD_ID, path);
+        File configOverride = new File (configDir, String.format("%s/%s.json", Tags.MOD_ID, path));
 
         try {
             T data = null;
@@ -125,12 +126,12 @@ public class DataHandler {
     }
 
     public <T> T getAsset(String path, Class<T> assetClass) {
-        return getAsset(TetraMod.MOD_ID, path, assetClass);
+        return getAsset(Tags.MOD_ID, path, assetClass);
     }
 
     public <T> T getAsset(String namespace, String path, Class<T> assetClass) {
         String pathString = String.format("assets/%s/%s.json", namespace, path);
-        File configOverride = new File (configDir, String.format("%s/assets/%s/%s.json", TetraMod.MOD_ID, namespace, path));
+        File configOverride = new File (configDir, String.format("%s/assets/%s/%s.json", Tags.MOD_ID, namespace, path));
 
         try {
             T asset = null;
@@ -165,7 +166,7 @@ public class DataHandler {
     }
 
     public GenerationFeature[] getGenerationFeatures() {
-        String pathString = String.format("assets/%s/structures", TetraMod.MOD_ID);
+        String pathString = String.format("assets/%s/structures", Tags.MOD_ID);
 
         try {
             GenerationFeature[] features = null;
@@ -208,7 +209,7 @@ public class DataHandler {
             GenerationFeature generationFeature = gson.fromJson(reader, GenerationFeature.class);
 
             if (generationFeature != null && generationFeature.location == null) {
-                generationFeature.location = new ResourceLocation(TetraMod.MOD_ID, FilenameUtils.removeExtension(path.getFileName().toString()));
+                generationFeature.location = new ResourceLocation(Tags.MOD_ID, FilenameUtils.removeExtension(path.getFileName().toString()));
             }
 
 

@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.ConfigHandler;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.data.DataHandler;
 import se.mickelus.tetra.blocks.workbench.BlockWorkbench;
@@ -73,7 +74,7 @@ public class ItemDuplexToolModular extends ItemModularHandheld {
 
     public static BasicMajorModule handle;
 
-    @GameRegistry.ObjectHolder(TetraMod.MOD_ID + ":" + unlocalizedName)
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
     public static ItemDuplexToolModular instance;
 
     public ItemDuplexToolModular() {

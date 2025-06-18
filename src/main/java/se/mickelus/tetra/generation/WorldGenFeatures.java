@@ -24,6 +24,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.server.FMLServerHandler;
 import se.mickelus.tetra.ConfigHandler;
 import se.mickelus.tetra.RotationHelper;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.data.DataHandler;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.generation.processor.*;
@@ -46,7 +47,7 @@ public class WorldGenFeatures implements IWorldGenerator {
         } else {
             dataFixer = FMLServerHandler.instance().getServer().getDataFixer();
         }
-        templateManager = new TemplateManager(TetraMod.MOD_ID, dataFixer);
+        templateManager = new TemplateManager(Tags.MOD_ID, dataFixer);
 
         // reloads features once per second when in development mode
         if (ConfigHandler.development) {

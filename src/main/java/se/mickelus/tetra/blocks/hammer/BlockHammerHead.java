@@ -25,6 +25,7 @@ import net.minecraftforge.common.property.Properties;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.TetraBlock;
 import se.mickelus.tetra.capabilities.Capability;
@@ -47,7 +48,7 @@ public class BlockHammerHead extends TetraBlock implements ITileEntityProvider {
 
         setRegistryName(unlocalizedName);
         setTranslationKey(unlocalizedName);
-        GameRegistry.registerTileEntity(TileEntityHammerHead.class, TetraMod.MOD_ID + ":" + "tile_" +unlocalizedName);
+        GameRegistry.registerTileEntity(TileEntityHammerHead.class, Tags.MOD_ID + ":" + "tile_" +unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
         setBlockUnbreakable();
 

@@ -33,6 +33,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.registries.IForgeRegistry;
 import se.mickelus.tetra.ConfigHandler;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.advancements.BlockUseCriterion;
 import se.mickelus.tetra.blocks.ITetraBlock;
@@ -67,7 +68,7 @@ public class BlockWorkbench extends TetraBlock implements ITileEntityProvider {
 
         setRegistryName(unlocalizedName);
         setTranslationKey(unlocalizedName);
-        GameRegistry.registerTileEntity(TileEntityWorkbench.class, new ResourceLocation(TetraMod.MOD_ID, unlocalizedName));
+        GameRegistry.registerTileEntity(TileEntityWorkbench.class, new ResourceLocation(Tags.MOD_ID, unlocalizedName));
         setCreativeTab(TetraCreativeTabs.getInstance());
 
         hasItem = true;

@@ -31,6 +31,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.ITetraBlock;
 import se.mickelus.tetra.blocks.Materials;
@@ -66,10 +67,10 @@ public class BlockForgedCrate extends BlockFalling implements ITetraBlock, IBloc
 
     static final String unlocalizedName = "forged_crate";
 
-    @GameRegistry.ObjectHolder(TetraMod.MOD_ID + ":" + unlocalizedName)
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
     public static BlockForgedCrate instance;
 
-    public static final ResourceLocation crateLootTable = new ResourceLocation(TetraMod.MOD_ID, "forged/crate_break");
+    public static final ResourceLocation crateLootTable = TetraMod.getResource("forged/crate_break");
 
     public BlockForgedCrate() {
         super(Materials.forgedCrate);

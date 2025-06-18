@@ -19,6 +19,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootTable;
 import se.mickelus.tetra.NBTHelper;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 
 import javax.annotation.Nullable;
@@ -36,7 +37,7 @@ public class TileEntityForgedContainer extends TileEntity implements IInventory 
     public static int lidIntegrityMax = 5;
     private int lidIntegrity = 3;
 
-    private static final ResourceLocation lockLootTable = new ResourceLocation(TetraMod.MOD_ID, "forged/lock_break");
+    private static final ResourceLocation lockLootTable = TetraMod.getResource("forged/lock_break");
 
     public static int compartmentCount = 3;
     public static int compartmentSize = 54;

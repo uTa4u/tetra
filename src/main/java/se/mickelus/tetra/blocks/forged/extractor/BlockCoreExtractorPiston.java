@@ -22,6 +22,7 @@ import net.minecraftforge.common.property.Properties;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.TetraBlock;
 import se.mickelus.tetra.blocks.hammer.BlockHammerBase;
@@ -40,7 +41,7 @@ public class BlockCoreExtractorPiston extends TetraBlock implements ITileEntityP
     static final String unlocalizedName = "extractor_piston";
     public static final AxisAlignedBB boundingBox = new AxisAlignedBB(0.3125, 0, 0.3125, 0.6875, 1, 0.6875);
 
-    @GameRegistry.ObjectHolder(TetraMod.MOD_ID + ":" + unlocalizedName)
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
     public static BlockCoreExtractorPiston instance;
 
     public BlockCoreExtractorPiston() {
@@ -48,7 +49,7 @@ public class BlockCoreExtractorPiston extends TetraBlock implements ITileEntityP
 
         setRegistryName(unlocalizedName);
         setTranslationKey(unlocalizedName);
-        GameRegistry.registerTileEntity(TileEntityCoreExtractorPiston.class, TetraMod.MOD_ID + ":" + "tile_" +unlocalizedName);
+        GameRegistry.registerTileEntity(TileEntityCoreExtractorPiston.class, Tags.MOD_ID + ":" + "tile_" +unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
         setBlockUnbreakable();
 

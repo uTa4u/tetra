@@ -2,6 +2,7 @@ package se.mickelus.tetra.items.toolbelt.gui;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.gui.GuiElement;
 import se.mickelus.tetra.gui.GuiString;
@@ -14,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class GuiSlotEffect extends GuiElement {
-    private static final ResourceLocation texture = new ResourceLocation(TetraMod.MOD_ID, "textures/gui/toolbelt-inventory.png");
+    private static final ResourceLocation texture = TetraMod.getResource("textures/gui/toolbelt-inventory.png");
 
     String tooltip;
 

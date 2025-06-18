@@ -70,14 +70,12 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-@Mod(useMetadata = true, modid = TetraMod.MOD_ID, version = "#VERSION")
+@Mod(useMetadata = true, modid = Tags.MOD_ID, version = Tags.VERSION)
 public class TetraMod {
-    public static final String MOD_ID = "tetra";
-
     @SidedProxy(clientSide = "se.mickelus.tetra.proxy.ClientProxy", serverSide = "se.mickelus.tetra.proxy.ServerProxy")
     public static IProxy proxy;
 
-    @Mod.Instance(TetraMod.MOD_ID)
+    @Mod.Instance(Tags.MOD_ID)
     public static TetraMod instance;
 
     private Item[] items;
@@ -195,7 +193,7 @@ public class TetraMod {
 
     @SubscribeEvent
     public void lootTableLoad(LootTableLoadEvent event) {
-        if (TetraMod.MOD_ID.equals(event.getName().getNamespace())) {
+        if (Tags.MOD_ID.equals(event.getName().getNamespace())) {
             LootTable lootTable = event.getTable();
             LootPool[] extendedPools = DataHandler.instance.getExtendedLootPools(event.getName());
             Optional.ofNullable(extendedPools)
@@ -237,5 +235,9 @@ public class TetraMod {
                 .map(block -> (ITetraBlock) block)
                 .filter(ITetraBlock::hasItem)
                 .forEach(block -> block.registerItem(event.getRegistry()));
+    }
+
+    public static ResourceLocation getResource(String path) {
+        return new ResourceLocation(Tags.MOD_ID, path);
     }
 }

@@ -13,6 +13,7 @@ import net.minecraftforge.common.model.animation.CapabilityAnimation;
 import net.minecraftforge.common.model.animation.IAnimationStateMachine;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.util.TileEntityOptional;
 
@@ -31,7 +32,7 @@ public class TileEntityCoreExtractorPiston extends TileEntity implements ITickab
 
     public TileEntityCoreExtractorPiston() {
         if (FMLCommonHandler.instance().getEffectiveSide().equals(Side.CLIENT)) {
-            asm = ModelLoaderRegistry.loadASM(new ResourceLocation(TetraMod.MOD_ID, "asms/block/extractor_piston.json"),
+            asm = ModelLoaderRegistry.loadASM(new ResourceLocation(Tags.MOD_ID, "asms/block/extractor_piston.json"),
                     ImmutableMap.of("activation_time", activationTime));
         } else {
             asm = null;

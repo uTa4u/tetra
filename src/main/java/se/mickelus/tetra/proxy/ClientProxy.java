@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import se.mickelus.tetra.ConfigHandler;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.ITetraBlock;
 import se.mickelus.tetra.blocks.forged.BlockForgedCrate;
@@ -77,7 +78,7 @@ public class ClientProxy implements IProxy {
             ModelLoader.setCustomStateMapper(BlockForgedContainer.instance, new StateMapperBase() {
                 @Override
                 protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-                    return new ModelResourceLocation(TetraMod.MOD_ID + ":forged_container");
+                    return new ModelResourceLocation(Tags.MOD_ID + ":forged_container");
                 }
             });
 
@@ -86,7 +87,7 @@ public class ClientProxy implements IProxy {
             ModelLoader.setCustomStateMapper(BlockSeepingBedrock.instance, new StateMapperBase() {
                 @Override
                 protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-                    return new ModelResourceLocation(TetraMod.MOD_ID + ":seeping_bedrock",
+                    return new ModelResourceLocation(Tags.MOD_ID + ":seeping_bedrock",
                             "active=" + (state.getValue(BlockSeepingBedrock.propActive) > 0));
                 }
             });

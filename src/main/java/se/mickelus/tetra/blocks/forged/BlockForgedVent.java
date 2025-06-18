@@ -26,6 +26,7 @@ import net.minecraft.world.storage.loot.LootTable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.Materials;
 import se.mickelus.tetra.blocks.PropertyMatcher;
@@ -46,7 +47,7 @@ import static com.google.common.base.Predicates.equalTo;
 public class BlockForgedVent extends TetraBlock implements IBlockCapabilityInteractive {
 
     static final String unlocalizedName = "forged_vent";
-    @GameRegistry.ObjectHolder(TetraMod.MOD_ID + ":" + unlocalizedName)
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
     public static BlockForgedVent instance;
 
     public static final PropertyInteger propRotation = PropertyInteger.create("rotation", 0, 3);
@@ -88,8 +89,8 @@ public class BlockForgedVent extends TetraBlock implements IBlockCapabilityInter
                     BlockForgedVent::breakPlate),
     };
 
-    private static final ResourceLocation boltLootTable = new ResourceLocation(TetraMod.MOD_ID, "forged/bolt_break");
-    private static final ResourceLocation ventLootTable = new ResourceLocation(TetraMod.MOD_ID, "forged/vent_break");
+    private static final ResourceLocation boltLootTable = TetraMod.getResource("forged/bolt_break");
+    private static final ResourceLocation ventLootTable = TetraMod.getResource("forged/vent_break");
 
     public BlockForgedVent() {
         super(Materials.forged);

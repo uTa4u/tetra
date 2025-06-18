@@ -1,6 +1,7 @@
 package se.mickelus.tetra.module.data;
 
 import net.minecraft.util.ResourceLocation;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 
 /**
@@ -36,7 +37,7 @@ public class GlyphData {
      *
      * Json format: "domain:path"
      */
-    public ResourceLocation textureLocation = new ResourceLocation(TetraMod.MOD_ID, "textures/gui/glyphs.png");
+    public ResourceLocation textureLocation = TetraMod.getResource("textures/gui/glyphs.png");
 
     public GlyphData() {}
 
@@ -46,7 +47,7 @@ public class GlyphData {
     }
 
     public GlyphData(String texture, int textureX, int textureY) {
-        textureLocation = new ResourceLocation(TetraMod.MOD_ID, texture);
+        textureLocation = new ResourceLocation(Tags.MOD_ID, texture);
         this.textureX = textureX;
         this.textureY = textureY;
     }

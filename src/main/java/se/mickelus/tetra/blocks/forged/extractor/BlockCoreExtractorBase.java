@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.TetraBlock;
 import se.mickelus.tetra.blocks.forged.transfer.EnumTransferConfig;
@@ -37,14 +38,14 @@ public class BlockCoreExtractorBase extends TetraBlock implements ITileEntityPro
 
     public static final String unlocalizedName = "core_extractor";
 
-    @GameRegistry.ObjectHolder(TetraMod.MOD_ID + ":" + unlocalizedName)
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
     public static BlockCoreExtractorBase instance;
 
     public BlockCoreExtractorBase() {
         super(Material.IRON);
         setRegistryName(unlocalizedName);
         setTranslationKey(unlocalizedName);
-        GameRegistry.registerTileEntity(TileEntityCoreExtractorBase.class, new ResourceLocation(TetraMod.MOD_ID, unlocalizedName));
+        GameRegistry.registerTileEntity(TileEntityCoreExtractorBase.class, new ResourceLocation(Tags.MOD_ID, unlocalizedName));
         setCreativeTab(TetraCreativeTabs.getInstance());
 
         setBlockUnbreakable();

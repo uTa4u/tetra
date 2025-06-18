@@ -8,6 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ICustomModelLoader;
 import net.minecraftforge.client.model.IModel;
 import org.apache.commons.io.IOUtils;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 
 import java.io.*;
@@ -20,7 +21,7 @@ public class ModularModelLoader implements ICustomModelLoader {
 
     @Override
     public boolean accepts(ResourceLocation modelLocation) {
-        return modelLocation.getNamespace().equals(TetraMod.MOD_ID)
+        return modelLocation.getNamespace().equals(Tags.MOD_ID)
                 && !(modelLocation instanceof ModelResourceLocation)
                 && modelLocation.getPath().contains("modular");
     }

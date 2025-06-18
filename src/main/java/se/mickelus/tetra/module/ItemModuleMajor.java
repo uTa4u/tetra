@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import org.apache.commons.lang3.ArrayUtils;
 import se.mickelus.tetra.ConfigHandler;
 import se.mickelus.tetra.NBTHelper;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.items.ItemModular;
@@ -362,7 +363,7 @@ public abstract class ItemModuleMajor<T extends ModuleData> extends ItemModule<T
         return Arrays.stream(improvements)
                 .filter(improvement -> improvement.textured)
                 .map(improvement -> "items/" + improvement.key)
-                .map(resourceString -> new ResourceLocation(TetraMod.MOD_ID, resourceString))
+                .map(resourceString -> new ResourceLocation(Tags.MOD_ID, resourceString))
                 .toArray(ResourceLocation[]::new);
     }
 
@@ -375,7 +376,7 @@ public abstract class ItemModuleMajor<T extends ModuleData> extends ItemModule<T
         return Arrays.stream(getImprovements(itemStack))
                 .filter(improvement -> improvement.textured)
                 .map(improvement -> "items/" + improvement.key)
-                .map(resourceString -> new ResourceLocation(TetraMod.MOD_ID, resourceString))
+                .map(resourceString -> new ResourceLocation(Tags.MOD_ID, resourceString))
                 .toArray(ResourceLocation[]::new);
     }
 

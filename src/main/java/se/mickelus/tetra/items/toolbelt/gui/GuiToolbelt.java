@@ -6,6 +6,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.gui.*;
 import se.mickelus.tetra.gui.impl.GuiKeybinding;
@@ -21,7 +22,7 @@ public class GuiToolbelt extends GuiContainer {
 
     private static GuiToolbelt instance;
 
-    private static final ResourceLocation INVENTORY_TEXTURE = new ResourceLocation(TetraMod.MOD_ID, "textures/gui/player-inventory.png");
+    private static final ResourceLocation INVENTORY_TEXTURE = TetraMod.getResource("textures/gui/player-inventory.png");
 
     private GuiElement defaultGui;
 

@@ -27,6 +27,7 @@ import net.minecraft.world.storage.loot.LootTable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.advancements.BlockUseCriterion;
 import se.mickelus.tetra.blocks.TetraBlock;
@@ -51,10 +52,10 @@ public class BlockHammerBase extends TetraBlock implements ITileEntityProvider, 
     public static final PropertyBool propCell2 = PropertyBool.create("cell2");
     public static final PropertyBool propCell2Charged = PropertyBool.create("cell2charged");
 
-    private static final ResourceLocation plateLootTable = new ResourceLocation(TetraMod.MOD_ID, "forged/plate_break");
+    private static final ResourceLocation plateLootTable = TetraMod.getResource("forged/plate_break");
 
     static final String unlocalizedName = "hammer_base";
-    @GameRegistry.ObjectHolder(TetraMod.MOD_ID + ":" + unlocalizedName)
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
     public static BlockHammerBase instance;
 
     public static final BlockInteraction[] interactions = new BlockInteraction[] {
@@ -81,7 +82,7 @@ public class BlockHammerBase extends TetraBlock implements ITileEntityProvider, 
         setCreativeTab(TetraCreativeTabs.getInstance());
         setBlockUnbreakable();
 
-        GameRegistry.registerTileEntity(TileEntityHammerBase.class, new ResourceLocation(TetraMod.MOD_ID, unlocalizedName));
+        GameRegistry.registerTileEntity(TileEntityHammerBase.class, new ResourceLocation(Tags.MOD_ID, unlocalizedName));
 
         hasItem = true;
 

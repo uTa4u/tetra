@@ -9,6 +9,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.workbench.gui.GuiModuleGlyph;
 import se.mickelus.tetra.gui.impl.GuiColors;
@@ -21,7 +22,7 @@ import java.util.Optional;
 
 
 public class SettleToast implements IToast {
-    private static final ResourceLocation texture = new ResourceLocation(TetraMod.MOD_ID,"textures/gui/toasts.png");
+    private static final ResourceLocation texture = TetraMod.getResource("textures/gui/toasts.png");
 
     private boolean hasPlayedSound = false;
     private ItemStack itemStack;

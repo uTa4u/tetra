@@ -3,11 +3,12 @@ package se.mickelus.tetra.blocks.forged.container;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 
 
 public class TESRForgedContainer extends TileEntitySpecialRenderer<TileEntityForgedContainer> {
-    private static final ResourceLocation texture = new ResourceLocation(TetraMod.MOD_ID,"textures/blocks/forged_container/forged_container.png");
+    private static final ResourceLocation texture = TetraMod.getResource("textures/blocks/forged_container/forged_container.png");
     private ModelForgedContainer model = new ModelForgedContainer();
 
     private static final float openDuration = 300;

@@ -3,6 +3,7 @@ package se.mickelus.tetra.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 
 /**
@@ -18,11 +19,11 @@ public class GuiTextureOffset extends GuiElement {
     protected int color = 0xffffff;
 
     public GuiTextureOffset(int x, int y, int width, int height, String texture) {
-        this(x, y, width, height, new ResourceLocation(TetraMod.MOD_ID, texture));
+        this(x, y, width, height, new ResourceLocation(Tags .MOD_ID, texture));
     }
 
     public GuiTextureOffset(int x, int y, int width, int height, int textureX, int textureY, String texture) {
-        this(x, y, width, height, textureX, textureY, new ResourceLocation(TetraMod.MOD_ID, texture));
+        this(x, y, width, height, textureX, textureY, new ResourceLocation(Tags.MOD_ID, texture));
     }
 
     public GuiTextureOffset(int x, int y, int width, int height, ResourceLocation textureLocation) {

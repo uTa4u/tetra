@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 public class PotionEarthbound extends Potion {
     public static PotionEarthbound instance;
 
-    public static final ResourceLocation texture = new ResourceLocation(TetraMod.MOD_ID,"textures/gui/potions.png");
+    public static final ResourceLocation texture = TetraMod.getResource("textures/gui/potions.png");
 
     protected PotionEarthbound() {
         super(true, 0);

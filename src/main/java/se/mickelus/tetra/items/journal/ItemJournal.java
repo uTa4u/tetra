@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.items.TetraCreativeTabs;
 import se.mickelus.tetra.items.TetraItem;
@@ -25,7 +26,7 @@ public class ItemJournal extends TetraItem {
 
     private static final String unlocalizedName = "journal";
 
-    @GameRegistry.ObjectHolder(TetraMod.MOD_ID + ":" + unlocalizedName)
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
     public static ItemJournal instance;
 
     public ItemJournal() {

@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.gui.*;
 import se.mickelus.tetra.gui.animation.Applier;
@@ -14,7 +15,7 @@ import se.mickelus.tetra.gui.impl.GuiColors;
 
 public class OverlayGuiQuiverSlot extends GuiElement {
 
-    private static final ResourceLocation texture = new ResourceLocation(TetraMod.MOD_ID, "textures/gui/toolbelt-inventory.png");
+    private static final ResourceLocation texture = TetraMod.getResource("textures/gui/toolbelt-inventory.png");
 
     private ItemStack itemStack;
 

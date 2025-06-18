@@ -12,6 +12,7 @@ import net.minecraftforge.common.model.animation.CapabilityAnimation;
 import net.minecraftforge.common.model.animation.IAnimationStateMachine;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 
 import javax.annotation.Nullable;
@@ -25,7 +26,7 @@ public class TileEntityHammerHead extends TileEntity {
 
     public TileEntityHammerHead() {
         if (FMLCommonHandler.instance().getEffectiveSide().equals(Side.CLIENT)) {
-            asm = ModelLoaderRegistry.loadASM(new ResourceLocation(TetraMod.MOD_ID, "asms/block/hammer_head.json"),
+            asm = ModelLoaderRegistry.loadASM(new ResourceLocation(Tags.MOD_ID, "asms/block/hammer_head.json"),
                     ImmutableMap.of("activation_time", activationTime));
         } else {
             asm = null;

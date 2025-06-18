@@ -30,6 +30,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.PropertyMatcher;
 import se.mickelus.tetra.blocks.TetraBlock;
@@ -94,14 +95,14 @@ public class BlockForgedContainer extends TetraBlock implements ITileEntityProvi
 
     public static final String unlocalizedName = "forged_container";
 
-    @GameRegistry.ObjectHolder(TetraMod.MOD_ID + ":" + unlocalizedName)
+    @GameRegistry.ObjectHolder(Tags .MOD_ID + ":" + unlocalizedName)
     public static BlockForgedContainer instance;
 
     public BlockForgedContainer() {
         super(Material.IRON);
         setRegistryName(unlocalizedName);
         setTranslationKey(unlocalizedName);
-        GameRegistry.registerTileEntity(TileEntityForgedContainer.class, new ResourceLocation(TetraMod.MOD_ID, unlocalizedName));
+        GameRegistry.registerTileEntity(TileEntityForgedContainer.class, new ResourceLocation(Tags.MOD_ID, unlocalizedName));
         setCreativeTab(TetraCreativeTabs.getInstance());
 
         setBlockUnbreakable();

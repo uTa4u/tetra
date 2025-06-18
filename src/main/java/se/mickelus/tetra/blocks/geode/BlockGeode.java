@@ -19,6 +19,7 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import se.mickelus.tetra.ConfigHandler;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.TetraBlock;
 import se.mickelus.tetra.data.DataHandler;
@@ -29,7 +30,7 @@ public class BlockGeode extends TetraBlock {
 
     static final String unlocalizedName = "block_geode";
 
-    @GameRegistry.ObjectHolder(TetraMod.MOD_ID + ":" + unlocalizedName)
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
     public static BlockGeode instance;
 
     // hacky, but avoids some log warnings

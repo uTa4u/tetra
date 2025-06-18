@@ -30,6 +30,7 @@ import net.minecraft.world.storage.loot.LootTable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.advancements.BlockUseCriterion;
 import se.mickelus.tetra.blocks.PropertyMatcher;
@@ -55,7 +56,7 @@ public class BlockTransferUnit extends TetraBlock implements ITileEntityProvider
     public static final PropertyInteger propCell = PropertyInteger.create("cell", 0, 2);
     public static final PropertyInteger propTransfer = PropertyInteger.create("transfer", 0, 2);
 
-    private static final ResourceLocation plateLootTable = new ResourceLocation(TetraMod.MOD_ID, "forged/plate_break");
+    private static final ResourceLocation plateLootTable = TetraMod.getResource("forged/plate_break");
 
     public static final BlockInteraction[] interactions = new BlockInteraction[] {
             new BlockInteraction(Capability.pry, 1, EnumFacing.SOUTH, 5, 7, 2, 5,
@@ -73,14 +74,14 @@ public class BlockTransferUnit extends TetraBlock implements ITileEntityProvider
 
     public static final String unlocalizedName = "transfer_unit";
 
-    @GameRegistry.ObjectHolder(TetraMod.MOD_ID + ":" + unlocalizedName)
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
     public static BlockTransferUnit instance;
 
     public BlockTransferUnit() {
         super(Material.IRON);
         setRegistryName(unlocalizedName);
         setTranslationKey(unlocalizedName);
-        GameRegistry.registerTileEntity(TileEntityTransferUnit.class, new ResourceLocation(TetraMod.MOD_ID, unlocalizedName));
+        GameRegistry.registerTileEntity(TileEntityTransferUnit.class, new ResourceLocation(Tags.MOD_ID, unlocalizedName));
         setCreativeTab(TetraCreativeTabs.getInstance());
 
         setBlockUnbreakable();

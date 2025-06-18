@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.IntegrationHelper;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.items.BasicModule;
 import se.mickelus.tetra.items.ItemModular;
 import se.mickelus.tetra.items.TetraCreativeTabs;
@@ -39,7 +40,7 @@ import java.util.stream.Collectors;
 @Optional.Interface(modid = IntegrationHelper.baublesModId, iface = IntegrationHelper.baublesApiClass)
 public class ItemToolbeltModular extends ItemModular implements IBauble {
     private final static String unlocalizedName = "toolbelt_modular";
-    @GameRegistry.ObjectHolder(TetraMod.MOD_ID + ":" + unlocalizedName)
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
     public static ItemToolbeltModular instance;
 
     public final static String slot1Key = "toolbelt/slot1";

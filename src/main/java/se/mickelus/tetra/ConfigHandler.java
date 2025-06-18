@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import se.mickelus.tetra.items.duplex_tool.ItemDuplexToolModular;
 import se.mickelus.tetra.items.sword.ItemSwordModular;
 
-@Config(modid = TetraMod.MOD_ID, name = TetraMod.MOD_ID + "/" + TetraMod.MOD_ID)
+@Config(modid = Tags.MOD_ID, name = Tags.MOD_NAME)
 public class ConfigHandler {
 
     public static boolean development = false;
@@ -35,8 +35,8 @@ public class ConfigHandler {
     private static class EventHandler {
         @SubscribeEvent
         public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-            if (event.getModID().equals(TetraMod.MOD_ID)) {
-                ConfigManager.sync(TetraMod.MOD_ID, Config.Type.INSTANCE);
+            if (event.getModID().equals(Tags.MOD_ID)) {
+                ConfigManager.sync(Tags.MOD_ID, Config.Type.INSTANCE);
 
                 ItemDuplexToolModular.instance.updateConfig(honeDuplexBase, honeDuplexIntegrityMultiplier);
                 ItemSwordModular.instance.updateConfig(honeSwordBase, honeSwordIntegrityMultiplier);

@@ -22,6 +22,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraLogger;
 import se.mickelus.tetra.TetraMod;
 
@@ -31,7 +32,7 @@ import se.mickelus.tetra.TetraMod;
  */
 public class PacketHandler implements IMessageHandler<AbstractPacket, AbstractPacket> {
 
-    public static final SimpleNetworkWrapper channel = NetworkRegistry.INSTANCE.newSimpleChannel(TetraMod.MOD_ID);
+    public static final SimpleNetworkWrapper channel = NetworkRegistry.INSTANCE.newSimpleChannel(Tags.MOD_ID);
     private ArrayList<Class<? extends AbstractPacket>> packets = new ArrayList<>();
 
     public static PacketHandler instance;
