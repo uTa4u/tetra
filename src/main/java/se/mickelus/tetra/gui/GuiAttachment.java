@@ -12,7 +12,7 @@ public enum GuiAttachment {
     bottomRight;
 
     public GuiAttachment flipHorizontal() {
-        switch(this) {
+        switch (this) {
             case topLeft:
                 return topRight;
             case topRight:

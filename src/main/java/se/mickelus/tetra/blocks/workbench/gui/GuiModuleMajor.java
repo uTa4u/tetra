@@ -2,13 +2,16 @@ package se.mickelus.tetra.blocks.workbench.gui;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import se.mickelus.tetra.gui.*;
+import se.mickelus.tetra.gui.GuiAttachment;
+import se.mickelus.tetra.gui.GuiString;
+import se.mickelus.tetra.gui.GuiStringSmall;
+import se.mickelus.tetra.gui.GuiTextureOffset;
 import se.mickelus.tetra.gui.animation.Applier;
 import se.mickelus.tetra.gui.animation.KeyframeAnimation;
 import se.mickelus.tetra.gui.impl.GuiColors;
+import se.mickelus.tetra.module.ItemModuleMajor;
 import se.mickelus.tetra.module.data.GlyphData;
 import se.mickelus.tetra.module.data.ImprovementData;
-import se.mickelus.tetra.module.ItemModuleMajor;
 
 import java.util.Arrays;
 import java.util.function.BiConsumer;
@@ -123,7 +126,7 @@ public class GuiModuleMajor extends GuiModule {
     }
 
     private void setupImprovements(ItemModuleMajor previewModule, ItemStack previewStack, ItemModuleMajor module,
-            ItemStack itemStack) {
+                                   ItemStack itemStack) {
         String[] improvements = getImprovementUnion(module.getImprovements(itemStack), previewModule.getImprovements(previewStack));
         improvementElements = new GuiModuleImprovement[improvements.length];
         for (int i = 0; i < improvements.length; i++) {
@@ -176,7 +179,7 @@ public class GuiModuleMajor extends GuiModule {
 
         slotString.setColor(color);
 
-        if(GuiColors.muted == color) {
+        if (GuiColors.muted == color) {
             Arrays.stream(improvementElements).forEach(element -> element.setOpacity(0.5f));
         } else {
             Arrays.stream(improvementElements).forEach(element -> element.setOpacity(1));

@@ -2,15 +2,14 @@ package se.mickelus.tetra.gui.impl.statbar.getter;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import se.mickelus.tetra.items.ItemModular;
 import se.mickelus.tetra.capabilities.Capability;
-import se.mickelus.tetra.module.ItemModule;
+import se.mickelus.tetra.items.ItemModular;
 import se.mickelus.tetra.module.ItemModuleMajor;
 import se.mickelus.tetra.util.CastOptional;
 
 public class StatGetterCapabilityLevel implements IStatGetter {
 
-    private Capability capability;
+    private final Capability capability;
 
     public StatGetterCapabilityLevel(Capability effect) {
         this.capability = effect;

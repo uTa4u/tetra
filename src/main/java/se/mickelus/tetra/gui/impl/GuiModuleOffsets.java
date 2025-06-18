@@ -24,11 +24,11 @@ public class GuiModuleOffsets {
     static GuiModuleOffsets duplexMajorOffsets = new GuiModuleOffsets(-13, -1, 3, 19, -13, 19);
     static GuiModuleOffsets duplexMinorOffsets = new GuiModuleOffsets(6, 1);
 
-    private int[] offsetX;
-    private int[] offsetY;
-    private boolean[] alignment;
+    private final int[] offsetX;
+    private final int[] offsetY;
+    private final boolean[] alignment;
 
-    public GuiModuleOffsets(int ... offsets) {
+    public GuiModuleOffsets(int... offsets) {
         offsetX = new int[offsets.length / 2];
         offsetY = new int[offsets.length / 2];
         alignment = new boolean[offsets.length / 2];
@@ -68,7 +68,7 @@ public class GuiModuleOffsets {
     public static GuiModuleOffsets getMinorOffsets(ItemModular item) {
         if (item instanceof ItemToolbeltModular) {
             return toolbeltMinorOffsets;
-        } else if (item instanceof ItemDuplexToolModular ) {
+        } else if (item instanceof ItemDuplexToolModular) {
             return duplexMinorOffsets;
         } else {
             return defaultMinorOffsets[item.getNumMinorModules() - 1];

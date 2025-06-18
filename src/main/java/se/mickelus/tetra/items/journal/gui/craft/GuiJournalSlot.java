@@ -1,6 +1,9 @@
 package se.mickelus.tetra.items.journal.gui.craft;
 
-import se.mickelus.tetra.gui.*;
+import se.mickelus.tetra.gui.GuiAttachment;
+import se.mickelus.tetra.gui.GuiClickable;
+import se.mickelus.tetra.gui.GuiString;
+import se.mickelus.tetra.gui.GuiTexture;
 import se.mickelus.tetra.gui.impl.GuiColors;
 
 import java.util.function.Consumer;

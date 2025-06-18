@@ -4,11 +4,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
 
 public class GuiTexture extends GuiElement {
 
-    private ResourceLocation textureLocation;
+    private final ResourceLocation textureLocation;
 
     private int textureX;
     private int textureY;
@@ -55,10 +54,10 @@ public class GuiTexture extends GuiElement {
         Minecraft.getMinecraft().getTextureManager().bindTexture(textureLocation);
 
         GlStateManager.color(
-            (color >> 16 & 255) / 255f,
-            (color >> 8 & 255) / 255f,
-            (color & 255) / 255f,
-            opacity * getOpacity());
+                (color >> 16 & 255) / 255f,
+                (color >> 8 & 255) / 255f,
+                (color & 255) / 255f,
+                opacity * getOpacity());
         GlStateManager.enableBlend();
         drawTexturedModalRect(
                 refX + x,

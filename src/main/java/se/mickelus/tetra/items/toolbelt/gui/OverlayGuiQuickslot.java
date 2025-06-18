@@ -5,22 +5,22 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
-import se.mickelus.tetra.gui.impl.GuiColors;
 import se.mickelus.tetra.gui.GuiElement;
 import se.mickelus.tetra.gui.animation.Applier;
 import se.mickelus.tetra.gui.animation.KeyframeAnimation;
+import se.mickelus.tetra.gui.impl.GuiColors;
 
 public class OverlayGuiQuickslot extends GuiElement {
 
     public static final int height = 20;
 
-    private ItemStack itemStack;
+    private final ItemStack itemStack;
 
-    private int slot;
+    private final int slot;
 
-    private Minecraft mc;
+    private final Minecraft mc;
 
-    private KeyframeAnimation showAnimation;
+    private final KeyframeAnimation showAnimation;
 
     private FontRenderer fontRenderer;
 
@@ -43,8 +43,8 @@ public class OverlayGuiQuickslot extends GuiElement {
         isVisible = false;
         opacity = 0;
         showAnimation = new KeyframeAnimation(80, this)
-            .applyTo(new Applier.Opacity(1), new Applier.TranslateY(y - 3, y))
-            .withDelay(slot * 100);
+                .applyTo(new Applier.Opacity(1), new Applier.TranslateY(y - 3, y))
+                .withDelay(slot * 100);
 
     }
 

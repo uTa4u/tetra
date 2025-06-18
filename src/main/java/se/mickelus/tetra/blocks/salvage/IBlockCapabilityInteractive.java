@@ -7,5 +7,5 @@ import se.mickelus.tetra.capabilities.Capability;
 import java.util.Collection;
 
 public interface IBlockCapabilityInteractive {
-    public BlockInteraction[] getPotentialInteractions(IBlockState blockState, EnumFacing face, Collection<Capability> capabilities);
+    BlockInteraction[] getPotentialInteractions(IBlockState blockState, EnumFacing face, Collection<Capability> capabilities);
 }

@@ -15,8 +15,8 @@ import java.util.*;
 public class ItemPredicateModular extends ItemPredicate {
 
     private String[][] modules = new String[0][0];
-    private Map<String, String> variants = new HashMap<>();
-    private Map<String, Integer> improvements = new HashMap<>();
+    private final Map<String, String> variants = new HashMap<>();
+    private final Map<String, Integer> improvements = new HashMap<>();
 
     public ItemPredicateModular(String[][] modules) {
         this.modules = modules;
@@ -54,9 +54,7 @@ public class ItemPredicateModular extends ItemPredicate {
                 return false;
             }
 
-            if (!improvements.isEmpty() && !checkImprovements(itemStack, slot)) {
-                return false;
-            }
+            return improvements.isEmpty() || checkImprovements(itemStack, slot);
         }
 
         return true;
@@ -160,7 +158,7 @@ public class ItemPredicateModular extends ItemPredicate {
         return improvements.entrySet().stream()
                 .filter(entry -> entry.getKey().startsWith("!"))
                 .anyMatch(entry -> {
-                    for (ImprovementData data: improvementData) {
+                    for (ImprovementData data : improvementData) {
                         if (entry.getKey().substring(1).equals(data.key) && (entry.getValue() == -1 || entry.getValue() == data.level)) {
                             return true;
                         }
@@ -176,7 +174,7 @@ public class ItemPredicateModular extends ItemPredicate {
         return improvements.entrySet().stream()
                 .filter(entry -> !entry.getKey().startsWith("!"))
                 .anyMatch(entry -> {
-                    for (ImprovementData data: improvementData) {
+                    for (ImprovementData data : improvementData) {
                         if (entry.getKey().equals(data.key) && (entry.getValue() == -1 || entry.getValue() == data.level)) {
                             return true;
                         }
@@ -188,6 +186,6 @@ public class ItemPredicateModular extends ItemPredicate {
 
     @Override
     public boolean test(ItemStack itemStack) {
-       return test(itemStack, null);
+        return test(itemStack, null);
     }
 }

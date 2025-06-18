@@ -10,10 +10,10 @@ import se.mickelus.tetra.blocks.PropertyMatcher;
 import se.mickelus.tetra.data.DataHandler;
 
 public class BlockUseCriterion extends AbstractCriterionInstance {
-    private PropertyMatcher before = null;
-    private PropertyMatcher after = null;
+    private final PropertyMatcher before = null;
+    private final PropertyMatcher after = null;
 
-    private ItemPredicate item = null;
+    private final ItemPredicate item = null;
 
     public static final GenericTrigger<BlockUseCriterion> trigger = new GenericTrigger<>("tetra:block_use", BlockUseCriterion::deserialize);
 
@@ -34,11 +34,7 @@ public class BlockUseCriterion extends AbstractCriterionInstance {
             return false;
         }
 
-        if (item != null && !item.test(usedItem)) {
-            return false;
-        }
-
-        return true;
+        return item == null || item.test(usedItem);
     }
 
     private static BlockUseCriterion deserialize(JsonObject json) {

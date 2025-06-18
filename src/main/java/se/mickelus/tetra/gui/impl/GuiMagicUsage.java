@@ -3,15 +3,16 @@ package se.mickelus.tetra.gui.impl;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import se.mickelus.tetra.gui.*;
-import se.mickelus.tetra.gui.impl.GuiColors;
+import se.mickelus.tetra.gui.GuiAttachment;
+import se.mickelus.tetra.gui.GuiElement;
+import se.mickelus.tetra.gui.GuiString;
+import se.mickelus.tetra.gui.GuiStringSmall;
 import se.mickelus.tetra.gui.impl.statbar.GuiBar;
 import se.mickelus.tetra.items.ItemModular;
 import se.mickelus.tetra.util.CastOptional;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class GuiMagicUsage extends GuiElement {
     protected GuiString valueString;

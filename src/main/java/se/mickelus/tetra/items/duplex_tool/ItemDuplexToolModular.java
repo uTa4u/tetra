@@ -5,7 +5,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.*;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -14,10 +14,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.ConfigHandler;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
-import se.mickelus.tetra.data.DataHandler;
 import se.mickelus.tetra.blocks.workbench.BlockWorkbench;
 import se.mickelus.tetra.capabilities.Capability;
+import se.mickelus.tetra.data.DataHandler;
 import se.mickelus.tetra.items.BasicMajorModule;
 import se.mickelus.tetra.items.BasicModule;
 import se.mickelus.tetra.items.ItemModularHandheld;
@@ -86,10 +85,10 @@ public class ItemDuplexToolModular extends ItemModularHandheld {
 
         entityHitDamage = 2;
 
-        majorModuleKeys = new String[] { headLeftKey, headRightKey, handleKey };
-        minorModuleKeys = new String[] { bindingKey };
+        majorModuleKeys = new String[]{headLeftKey, headRightKey, handleKey};
+        minorModuleKeys = new String[]{bindingKey};
 
-        requiredModules = new String[] { handleKey, headLeftKey, headRightKey };
+        requiredModules = new String[]{handleKey, headLeftKey, headRightKey};
 
         synergies = DataHandler.instance.getSynergyData("modules/duplex/synergies");
 

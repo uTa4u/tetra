@@ -24,6 +24,7 @@ public class InventoryQuiver extends InventoryToolbelt {
 
     /**
      * Returns the number of unique items in this inventory.
+     *
      * @return
      */
     public ItemStack[] getAggregatedStacks() {

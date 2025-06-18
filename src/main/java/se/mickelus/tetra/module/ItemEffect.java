@@ -3,12 +3,12 @@ package se.mickelus.tetra.module;
 /**
  * Item effects are used by modules to apply various effects when the item is used in different ways, or to alter
  * how the item can be used. Item effects have a level, and some also makes use of an efficiency value.
- *
+ * <p>
  * In json config files the effects are expressed as an object. Example with bleeding level 2 and
  * sweeping level 1 with efficiency 3.4:
  * {
- *     "bleeding": 2,
- *     "sweeping": [1, 3.4]
+ * "bleeding": 2,
+ * "sweeping": [1, 3.4]
  * }
  */
 public enum ItemEffect {
@@ -83,7 +83,7 @@ public enum ItemEffect {
      * enchant.
      * - deals 12.5% of weapon damage per sweeping level to sweeped entities, minimum damage is 1 before reductions
      * - knocks sweeped entities back, if sweeping level is 4 or above knockback strength is affected by the knockback
-     *   effect level
+     * effect level
      * - the sweeping effect only triggers if attack cooldown is 0.9 or above
      * - the effect efficiency affects the area in which entities are hit, ( 1 + efficiency ) blocks
      * todo: apply additional effects to sweeped targets at high levels
@@ -194,7 +194,7 @@ public enum ItemEffect {
     /**
      * Haunted: Using the item has a chance to spawn an invisible vex that holds a copy of the item, the vex will live for 1 second per effect level
      * and the probability for the effect to occur is equal to the effect efficiency.
-     *
+     * <p>
      * todo: less hack, If the item has a module with the "destabilized/haunted" improvement it's level will be reduced by 1 or removed if its level
      * is 1.
      */
@@ -202,10 +202,10 @@ public enum ItemEffect {
 
     /**
      * Critical strike: Hitting entities and destroying blocks has a chance to critically strike, the probability is equal to the level of the effect.
-     *
+     * <p>
      * A critical strike on an entity deals damage multiplied by the effects efficiency, e.g. a 1.5 efficiency would cause a critical strike to deal
      * 150% damage.
-     *
+     * <p>
      * A critical strike when mining blocks would cause the block to break instantly. Critical strikes can only occur when mining blocks
      * if the efficiency of the required tool is twice (or higher) as high as the blocks hardness.
      */

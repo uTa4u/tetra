@@ -1,6 +1,9 @@
 package se.mickelus.tetra.gui.impl;
 
-import se.mickelus.tetra.gui.*;
+import se.mickelus.tetra.gui.GuiAttachment;
+import se.mickelus.tetra.gui.GuiClickable;
+import se.mickelus.tetra.gui.GuiRect;
+import se.mickelus.tetra.gui.GuiString;
 import se.mickelus.tetra.gui.animation.AnimationChain;
 import se.mickelus.tetra.gui.animation.Applier;
 import se.mickelus.tetra.gui.animation.KeyframeAnimation;
@@ -10,17 +13,17 @@ public class GuiTabVerticalButton extends GuiClickable {
     private boolean hasContent = false;
     private boolean isActive;
 
-    private GuiRect indicator;
-    private GuiString label;
-    private GuiKeybinding keybinding;
+    private final GuiRect indicator;
+    private final GuiString label;
+    private final GuiKeybinding keybinding;
 
-    private AnimationChain indicatorFlash;
+    private final AnimationChain indicatorFlash;
 
-    private KeyframeAnimation labelShow;
-    private KeyframeAnimation labelHide;
+    private final KeyframeAnimation labelShow;
+    private final KeyframeAnimation labelHide;
 
-    private KeyframeAnimation keybindShow;
-    private KeyframeAnimation keybindHide;
+    private final KeyframeAnimation keybindShow;
+    private final KeyframeAnimation keybindHide;
 
     public GuiTabVerticalButton(int x, int y, String label, String keybinding, Runnable onClickHandler, boolean initiallyActive) {
         super(x, y, 0, 15, onClickHandler);

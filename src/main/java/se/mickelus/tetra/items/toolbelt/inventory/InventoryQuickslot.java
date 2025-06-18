@@ -16,7 +16,7 @@ public class InventoryQuickslot extends InventoryToolbelt {
     private static final String shadowsKey = "quickShadows";
 
 
-    private NonNullList<ItemStack> inventoryShadows;
+    private final NonNullList<ItemStack> inventoryShadows;
 
     public InventoryQuickslot(ItemStack stack) {
         super(inventoryKey, stack, maxSize, SlotType.quick);
@@ -49,10 +49,10 @@ public class InventoryQuickslot extends InventoryToolbelt {
         NBTTagList shadows = new NBTTagList();
 
         for (int i = 0; i < maxSize; i++) {
-                NBTTagCompound item = new NBTTagCompound();
-                item.setInteger(slotKey, i);
-                getShadowOfSlot(i).writeToNBT(item);
-                shadows.appendTag(item);
+            NBTTagCompound item = new NBTTagCompound();
+            item.setInteger(slotKey, i);
+            getShadowOfSlot(i).writeToNBT(item);
+            shadows.appendTag(item);
         }
         tagcompound.setTag(shadowsKey, shadows);
     }

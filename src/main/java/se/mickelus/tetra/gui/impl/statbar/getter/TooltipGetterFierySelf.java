@@ -11,7 +11,8 @@ public class TooltipGetterFierySelf implements ITooltipGetter {
     private static final IStatGetter efficiencyGetter = new StatGetterEffectEfficiency(ItemEffect.fierySelf, 100);
     private static final IStatGetter levelGetter = new StatGetterEffectLevel(ItemEffect.fierySelf, 1);
 
-    public TooltipGetterFierySelf() { }
+    public TooltipGetterFierySelf() {
+    }
 
 
     @Override

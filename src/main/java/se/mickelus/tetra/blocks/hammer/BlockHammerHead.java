@@ -26,7 +26,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.TetraBlock;
 import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.items.TetraCreativeTabs;
@@ -48,7 +47,7 @@ public class BlockHammerHead extends TetraBlock implements ITileEntityProvider {
 
         setRegistryName(unlocalizedName);
         setTranslationKey(unlocalizedName);
-        GameRegistry.registerTileEntity(TileEntityHammerHead.class, Tags.MOD_ID + ":" + "tile_" +unlocalizedName);
+        GameRegistry.registerTileEntity(TileEntityHammerHead.class, Tags.MOD_ID + ":" + "tile_" + unlocalizedName);
         setCreativeTab(TetraCreativeTabs.getInstance());
         setBlockUnbreakable();
 
@@ -113,7 +112,7 @@ public class BlockHammerHead extends TetraBlock implements ITileEntityProvider {
 
     @Override
     public ItemStack onActionConsumeCapability(World world, BlockPos pos, IBlockState blockState, ItemStack targetStack, EntityPlayer player, boolean consumeResources) {
-    BlockPos basePos = pos.offset(EnumFacing.UP);
+        BlockPos basePos = pos.offset(EnumFacing.UP);
         if (consumeResources && world.getBlockState(basePos).getBlock() instanceof BlockHammerBase) {
             BlockHammerBase baseBlock = (BlockHammerBase) world.getBlockState(basePos).getBlock();
             baseBlock.consumeFuel(world, basePos);
@@ -131,7 +130,7 @@ public class BlockHammerHead extends TetraBlock implements ITileEntityProvider {
 
     @Override
     public ExtendedBlockState createBlockState() {
-        return new ExtendedBlockState(this, new IProperty[]{ Properties.StaticProperty }, new IUnlistedProperty[]{ Properties.AnimationProperty });
+        return new ExtendedBlockState(this, new IProperty[]{Properties.StaticProperty}, new IUnlistedProperty[]{Properties.AnimationProperty});
     }
 
     @Override
@@ -165,8 +164,12 @@ public class BlockHammerHead extends TetraBlock implements ITileEntityProvider {
     }
 
     @Override
-    public boolean isOpaqueCube(IBlockState state) { return false; }
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
 
     @Override
-    public boolean isFullCube(IBlockState state) { return false; }
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
 }

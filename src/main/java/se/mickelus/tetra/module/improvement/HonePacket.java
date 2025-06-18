@@ -10,7 +10,8 @@ public class HonePacket extends AbstractPacket {
 
     ItemStack itemStack;
 
-    public HonePacket() {}
+    public HonePacket() {
+    }
 
     public HonePacket(ItemStack itemStack) {
         this.itemStack = itemStack;

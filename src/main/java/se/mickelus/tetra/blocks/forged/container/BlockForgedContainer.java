@@ -1,6 +1,5 @@
 package se.mickelus.tetra.blocks.forged.container;
 
-import com.google.common.primitives.Booleans;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
@@ -88,14 +87,14 @@ public class BlockForgedContainer extends TetraBlock implements ITileEntityProvi
                     BlockForgedContainer::open)
     };
 
-    private static AxisAlignedBB aabbZ1 = new AxisAlignedBB(0.0625,  0.0, -0.9375, 0.9375, 0.75, 0.9375);
-    private static AxisAlignedBB aabbZ2 = new AxisAlignedBB(0.0625,  0.0, 0.0625,  0.9375, 0.75, 1.9375);
-    private static AxisAlignedBB aabbX1 = new AxisAlignedBB(-0.9375, 0.0, 0.0625,  0.9375, 0.75, 0.9375);
-    private static AxisAlignedBB aabbX2 = new AxisAlignedBB(0.0625,  0.0, 0.0625,  1.9375, 0.75, 0.9375);
+    private static final AxisAlignedBB aabbZ1 = new AxisAlignedBB(0.0625, 0.0, -0.9375, 0.9375, 0.75, 0.9375);
+    private static final AxisAlignedBB aabbZ2 = new AxisAlignedBB(0.0625, 0.0, 0.0625, 0.9375, 0.75, 1.9375);
+    private static final AxisAlignedBB aabbX1 = new AxisAlignedBB(-0.9375, 0.0, 0.0625, 0.9375, 0.75, 0.9375);
+    private static final AxisAlignedBB aabbX2 = new AxisAlignedBB(0.0625, 0.0, 0.0625, 1.9375, 0.75, 0.9375);
 
     public static final String unlocalizedName = "forged_container";
 
-    @GameRegistry.ObjectHolder(Tags .MOD_ID + ":" + unlocalizedName)
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
     public static BlockForgedContainer instance;
 
     public BlockForgedContainer() {
@@ -127,6 +126,7 @@ public class BlockForgedContainer extends TetraBlock implements ITileEntityProvi
 
     /**
      * Special item registration to to check that multiblock is allowed to be placed
+     *
      * @param registry Item registry
      */
     @Override
@@ -153,31 +153,31 @@ public class BlockForgedContainer extends TetraBlock implements ITileEntityProvi
     }
 
     private static boolean breakLock0(IBlockAccess world, BlockPos pos, IBlockState blockState, EntityPlayer player,
-            EnumHand hand, EnumFacing facing) {
+                                      EnumHand hand, EnumFacing facing) {
         breakLock(world, pos, player, 0);
         return true;
     }
 
     private static boolean breakLock1(IBlockAccess world, BlockPos pos, IBlockState blockState, EntityPlayer player,
-            EnumHand hand, EnumFacing facing) {
+                                      EnumHand hand, EnumFacing facing) {
         breakLock(world, pos, player, 1);
         return true;
     }
 
     private static boolean breakLock2(IBlockAccess world, BlockPos pos, IBlockState blockState, EntityPlayer player,
-            EnumHand hand, EnumFacing facing) {
+                                      EnumHand hand, EnumFacing facing) {
         breakLock(world, pos, player, 2);
         return true;
     }
 
     private static boolean breakLock3(IBlockAccess world, BlockPos pos, IBlockState blockState, EntityPlayer player,
-            EnumHand hand, EnumFacing facing) {
+                                      EnumHand hand, EnumFacing facing) {
         breakLock(world, pos, player, 3);
         return true;
     }
 
     private static boolean open(IBlockAccess world, BlockPos pos, IBlockState blockState, EntityPlayer player,
-            EnumHand hand, EnumFacing facing) {
+                                EnumHand hand, EnumFacing facing) {
 
         TileEntityForgedContainer te = (TileEntityForgedContainer) world.getTileEntity(pos);
         if (te != null) {
@@ -196,7 +196,7 @@ public class BlockForgedContainer extends TetraBlock implements ITileEntityProvi
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
-            EnumFacing facing, float hitX, float hitY, float hitZ) {
+                                    EnumFacing facing, float hitX, float hitY, float hitZ) {
         boolean didInteract = BlockInteraction.attemptInteraction(world, getActualState(world.getBlockState(pos), world, pos), pos, player, hand,
                 facing, hitX, hitY, hitZ);
 
@@ -302,12 +302,12 @@ public class BlockForgedContainer extends TetraBlock implements ITileEntityProvi
                         .withProperty(propLocked1, te.isLocked(2))
                         .withProperty(propLocked2, te.isLocked(3));
             } else {
-                actualState =  actualState
+                actualState = actualState
                         .withProperty(propLocked1, te.isLocked(0))
                         .withProperty(propLocked2, te.isLocked(1));
             }
 
-            actualState =  actualState
+            actualState = actualState
                     .withProperty(propOpen, te.isOpen())
                     .withProperty(propLockedAdjacent, anyLocked);
         }
@@ -319,7 +319,7 @@ public class BlockForgedContainer extends TetraBlock implements ITileEntityProvi
     public IBlockState getStateFromMeta(int meta) {
         return super.getDefaultState()
                 .withProperty(propFacing, EnumFacing.HORIZONTALS[meta & 0b11])
-                .withProperty(propFlipped, ( meta >> 2 & 1 ) == 1);
+                .withProperty(propFlipped, (meta >> 2 & 1) == 1);
     }
 
     @Override
@@ -371,8 +371,8 @@ public class BlockForgedContainer extends TetraBlock implements ITileEntityProvi
         EnumFacing facing = state.getValue(propFacing);
 
         if (Rotation.CLOCKWISE_180.equals(rot)
-                || Rotation.CLOCKWISE_90.equals(rot) && ( EnumFacing.NORTH.equals(facing) || EnumFacing.SOUTH.equals(facing))
-                || Rotation.COUNTERCLOCKWISE_90.equals(rot) && ( EnumFacing.EAST.equals(facing) || EnumFacing.WEST.equals(facing))) {
+                || Rotation.CLOCKWISE_90.equals(rot) && (EnumFacing.NORTH.equals(facing) || EnumFacing.SOUTH.equals(facing))
+                || Rotation.COUNTERCLOCKWISE_90.equals(rot) && (EnumFacing.EAST.equals(facing) || EnumFacing.WEST.equals(facing))) {
             state = state.withProperty(propFlipped, state.getValue(propFlipped));
         }
 

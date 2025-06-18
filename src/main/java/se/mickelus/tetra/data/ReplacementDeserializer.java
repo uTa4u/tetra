@@ -1,13 +1,6 @@
 package se.mickelus.tetra.data;
 
-import java.util.Map;
-import java.lang.reflect.Type;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSyntaxException;
+import com.google.gson.*;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,6 +11,9 @@ import se.mickelus.tetra.module.ItemModule;
 import se.mickelus.tetra.module.ItemModuleMajor;
 import se.mickelus.tetra.module.ItemUpgradeRegistry;
 import se.mickelus.tetra.module.ReplacementDefinition;
+
+import java.lang.reflect.Type;
+import java.util.Map;
 
 public class ReplacementDeserializer implements JsonDeserializer<ReplacementDefinition> {
 
@@ -43,7 +39,7 @@ public class ReplacementDeserializer implements JsonDeserializer<ReplacementDefi
         replacement.itemStack = new ItemStack(item);
 
         if (item instanceof ItemModular) {
-            for (Map.Entry<String, JsonElement> moduleDefinition: JsonUtils.getJsonObject(jsonObject, "modules").entrySet()) {
+            for (Map.Entry<String, JsonElement> moduleDefinition : JsonUtils.getJsonObject(jsonObject, "modules").entrySet()) {
                 String moduleKey = moduleDefinition.getValue().getAsJsonArray().get(0).getAsString();
                 String moduleVariant = moduleDefinition.getValue().getAsJsonArray().get(1).getAsString();
                 ItemModule module = ItemUpgradeRegistry.instance.getModule(moduleKey);
@@ -54,8 +50,8 @@ public class ReplacementDeserializer implements JsonDeserializer<ReplacementDefi
             }
 
             if (jsonObject.has("improvements")) {
-                for (Map.Entry<String, JsonElement> improvement: JsonUtils.getJsonObject(jsonObject, "improvements").entrySet()) {
-                    String temp[] = improvement.getKey().split(":");
+                for (Map.Entry<String, JsonElement> improvement : JsonUtils.getJsonObject(jsonObject, "improvements").entrySet()) {
+                    String[] temp = improvement.getKey().split(":");
                     ItemModuleMajor.addImprovement(replacement.itemStack, temp[0], temp[1], improvement.getValue().getAsInt());
                 }
             }

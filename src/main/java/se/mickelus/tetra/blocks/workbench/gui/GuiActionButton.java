@@ -14,25 +14,25 @@ public class GuiActionButton extends GuiElement {
 
     private static final String WORKBENCH_TEXTURE = "textures/gui/workbench.png";
 
-    private WorkbenchAction action;
-    private ItemStack targetStack;
+    private final WorkbenchAction action;
+    private final ItemStack targetStack;
 
-    private GuiCapabilityRequirement capabilityIndicator;
+    private final GuiCapabilityRequirement capabilityIndicator;
 
-    private GuiClickable iconClickable;
-    private GuiClickable labelClickable;
+    private final GuiClickable iconClickable;
+    private final GuiClickable labelClickable;
 
-    private GuiTexture borderLeft;
-    private GuiTexture borderRight;
-    private GuiRect borderTop;
-    private GuiRect borderBottom;
+    private final GuiTexture borderLeft;
+    private final GuiTexture borderRight;
+    private final GuiRect borderTop;
+    private final GuiRect borderBottom;
 
     public GuiActionButton(int x, int y, WorkbenchAction action, ItemStack targetStack, Consumer<WorkbenchAction> clickHandler) {
         this(x, y, action, targetStack, GuiAlignment.left, clickHandler);
     }
 
     public GuiActionButton(int x, int y, WorkbenchAction action, ItemStack targetStack, GuiAlignment alignment,
-            Consumer<WorkbenchAction> clickHandler) {
+                           Consumer<WorkbenchAction> clickHandler) {
         super(x, y, 0, 11);
 
         this.action = action;

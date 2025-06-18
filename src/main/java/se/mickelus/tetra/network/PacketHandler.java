@@ -1,22 +1,8 @@
 package se.mickelus.tetra.network;
 
-import java.util.*;
-
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.MessageToMessageCodec;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.INetHandler;
-import net.minecraft.network.NetHandlerPlayServer;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.network.FMLEmbeddedChannel;
-import net.minecraftforge.fml.common.network.FMLOutboundHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -24,7 +10,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraLogger;
-import se.mickelus.tetra.TetraMod;
+
+import java.util.ArrayList;
 
 /**
  * Packet pipeline class. Directs all registered packet data to be handled by the packets themselves. Based on the works
@@ -33,7 +20,7 @@ import se.mickelus.tetra.TetraMod;
 public class PacketHandler implements IMessageHandler<AbstractPacket, AbstractPacket> {
 
     public static final SimpleNetworkWrapper channel = NetworkRegistry.INSTANCE.newSimpleChannel(Tags.MOD_ID);
-    private ArrayList<Class<? extends AbstractPacket>> packets = new ArrayList<>();
+    private final ArrayList<Class<? extends AbstractPacket>> packets = new ArrayList<>();
 
     public static PacketHandler instance;
 
@@ -45,8 +32,7 @@ public class PacketHandler implements IMessageHandler<AbstractPacket, AbstractPa
      * Register your packet with the pipeline. Discriminators are automatically set.
      *
      * @param packetClass the class to register
-     * @param side The side that the handler is supposed to handle packages on (the side they are sent to, not from)
-     *
+     * @param side        The side that the handler is supposed to handle packages on (the side they are sent to, not from)
      * @return whether registration was successful. Failure may occur if 256 packets have been registered or if the registry already contains this packet
      */
     public boolean registerPacket(Class<? extends AbstractPacket> packetClass, Side side) {

@@ -32,22 +32,22 @@ public class GuiSlotDetail extends GuiElement {
 
     private int tab = 0;
 
-    private GuiTabVerticalGroup tabGroup;
+    private final GuiTabVerticalGroup tabGroup;
 
-    private GuiModuleDetails moduleDetails;
+    private final GuiModuleDetails moduleDetails;
 
-    private GuiElement schemaGroup;
-    private GuiSchemaList schemaList;
-    private GuiSchemaDetail schemaDetail;
+    private final GuiElement schemaGroup;
+    private final GuiSchemaList schemaList;
+    private final GuiSchemaDetail schemaDetail;
 
-    private GuiTweakControls tweakControls;
+    private final GuiTweakControls tweakControls;
 
-    private Consumer<UpgradeSchema> selectSchemaHandler;
+    private final Consumer<UpgradeSchema> selectSchemaHandler;
 
     private final AnimationChain slotTransition;
 
     public GuiSlotDetail(int x, int y, Consumer<UpgradeSchema> selectSchemaHandler, Runnable closeHandler,
-            Runnable craftHandler, Consumer<Map<String, Integer>> previewTweak, Consumer<Map<String, Integer>> applyTweak) {
+                         Runnable craftHandler, Consumer<Map<String, Integer>> previewTweak, Consumer<Map<String, Integer>> applyTweak) {
         super(x, y, 224, 67);
 
         this.selectSchemaHandler = selectSchemaHandler;
@@ -60,7 +60,7 @@ public class GuiSlotDetail extends GuiElement {
                 I18n.format("workbench.slot_detail.details_tab"),
                 I18n.format("workbench.slot_detail.craft_tab"),
                 I18n.format("workbench.slot_detail.tweak_tab")
-                );
+        );
         tabGroup.setHasContent(1, true);
         addChild(tabGroup);
 

@@ -9,20 +9,20 @@ import java.util.HashMap;
  * module or improvement.
  * Example json:
  * {
- *     "material": {
- *         "item": "minecraft:planks",
- *         "count": 2,
- *         "data": 4
- *     },
- *     "requiredCapabilities": {
- *         "axe": 1,
- *         "hammer": 4
- *     },
- *     "moduleKey": "sword/basic_blade",
- *     "moduleVariant": "basic_blade/acacia",
- *     "improvements": {
- *         "enchantment/looting": 2
- *     }
+ * "material": {
+ * "item": "minecraft:planks",
+ * "count": 2,
+ * "data": 4
+ * },
+ * "requiredCapabilities": {
+ * "axe": 1,
+ * "hammer": 4
+ * },
+ * "moduleKey": "sword/basic_blade",
+ * "moduleVariant": "basic_blade/acacia",
+ * "improvements": {
+ * "enchantment/looting": 2
+ * }
  * }
  */
 public class OutcomeDefinition {
@@ -49,11 +49,11 @@ public class OutcomeDefinition {
      * An object containing required capabilities and levels for each capability. Available capabilities:
      * hammer, axe, pickaxe, cut, shovel (there may be more, check the Capability class).
      * Optional, if no capabilities are required this field can be omitted.
-     *
+     * <p>
      * Json format:
      * {
-     *     "capabilityA": level,
-     *     "capabilityB": level
+     * "capabilityA": level,
+     * "capabilityB": level
      * }
      */
     public CapabilityData requiredCapabilities = new CapabilityData();
@@ -74,11 +74,11 @@ public class OutcomeDefinition {
      * An object describing which improvements to apply to which slot, where the key is the improvement and the value
      * is the improvement level.
      * Optional, this can be used both with and without the moduleKey being set.
-     *
+     * <p>
      * Json format:
      * {
-     *     "improvementA": level,
-     *     "improvementB": level
+     * "improvementA": level,
+     * "improvementB": level
      * }
      */
     public HashMap<String, Integer> improvements = new HashMap<>();

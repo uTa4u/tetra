@@ -5,7 +5,6 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.config.GuiUtils;
@@ -14,13 +13,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.blocks.workbench.ContainerWorkbench;
 import se.mickelus.tetra.blocks.workbench.TileEntityWorkbench;
 import se.mickelus.tetra.capabilities.CapabilityHelper;
-import se.mickelus.tetra.gui.*;
+import se.mickelus.tetra.gui.GuiAttachment;
+import se.mickelus.tetra.gui.GuiElement;
+import se.mickelus.tetra.gui.GuiTexture;
+import se.mickelus.tetra.gui.GuiTextureOffset;
 import se.mickelus.tetra.items.ItemModular;
 import se.mickelus.tetra.module.schema.UpgradeSchema;
 import se.mickelus.tetra.util.CastOptional;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @SideOnly(Side.CLIENT)
@@ -31,29 +36,29 @@ public class GuiWorkbench extends GuiContainer {
     private static final String WORKBENCH_TEXTURE = "textures/gui/workbench.png";
     private static final String INVENTORY_TEXTURE = "textures/gui/player-inventory.png";
 
-    private EntityPlayer viewingPlayer;
+    private final EntityPlayer viewingPlayer;
 
     private final TileEntityWorkbench tileEntity;
     private final ContainerWorkbench container;
 
-    private GuiElement defaultGui;
+    private final GuiElement defaultGui;
 
-    private GuiModuleList moduleList;
-    private GuiStatGroup statGroup;
-    private GuiIntegrityBar integrityBar;
-    private GuiActionList actionList;
+    private final GuiModuleList moduleList;
+    private final GuiStatGroup statGroup;
+    private final GuiIntegrityBar integrityBar;
+    private final GuiActionList actionList;
 
     private final GuiInventoryInfo inventoryInfo;
     private String selectedSlot;
     private int previewMaterialSlot = -1;
 
-    private GuiSlotDetail slotDetail;
+    private final GuiSlotDetail slotDetail;
 
     private ItemStack currentTarget = ItemStack.EMPTY;
     private ItemStack currentPreview = ItemStack.EMPTY;
     private UpgradeSchema currentSchema = null;
 
-    private ItemStack[] currentMaterials;
+    private final ItemStack[] currentMaterials;
 
     private boolean hadItem = false;
 

@@ -71,7 +71,7 @@ public class GuiJournalItems extends GuiElement {
 
             tools.setVisible(true);
             tools.setSelected(true);
-        }else {
+        } else {
             sword.setSelected(false);
             toolbelt.setSelected(false);
             tools.setSelected(false);

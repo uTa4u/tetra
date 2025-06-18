@@ -6,26 +6,25 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.gui.GuiAttachment;
-import se.mickelus.tetra.gui.impl.GuiColors;
 import se.mickelus.tetra.gui.GuiElement;
 import se.mickelus.tetra.gui.GuiTexture;
 import se.mickelus.tetra.gui.animation.Applier;
 import se.mickelus.tetra.gui.animation.KeyframeAnimation;
+import se.mickelus.tetra.gui.impl.GuiColors;
 
 public class OverlayGuiPotionSlot extends GuiElement {
 
     private static final ResourceLocation texture = TetraMod.getResource("textures/gui/toolbelt-inventory.png");
 
-    private ItemStack itemStack;
+    private final ItemStack itemStack;
 
-    private int slot;
+    private final int slot;
 
-    private Minecraft mc;
+    private final Minecraft mc;
 
-    private KeyframeAnimation showAnimation;
+    private final KeyframeAnimation showAnimation;
 
     private FontRenderer fontRenderer;
 
@@ -50,13 +49,13 @@ public class OverlayGuiPotionSlot extends GuiElement {
             fontRenderer = mc.fontRenderer;
         }
 
-        backdrop  = new GuiTexture(0, 0, 23, 23, 32, 28, texture);
+        backdrop = new GuiTexture(0, 0, 23, 23, 32, 28, texture);
         addChild(backdrop);
 
         isVisible = false;
         showAnimation = new KeyframeAnimation(80, this)
-            .applyTo(new Applier.TranslateY(animateUp ? y + 2 : y - 2, y), new Applier.Opacity(0, 1))
-            .withDelay((int) (Math.random() * 300));
+                .applyTo(new Applier.TranslateY(animateUp ? y + 2 : y - 2, y), new Applier.Opacity(0, 1))
+                .withDelay((int) (Math.random() * 300));
     }
 
     @Override
@@ -114,11 +113,7 @@ public class OverlayGuiPotionSlot extends GuiElement {
     protected void calculateFocusState(int refX, int refY, int mouseX, int mouseY) {
         mouseX -= refX + x;
         mouseY -= refY + y;
-        boolean gainFocus = true;
-
-        if (mouseX + mouseY < 12) {
-            gainFocus = false;
-        }
+        boolean gainFocus = mouseX + mouseY >= 12;
 
         if (mouseX + mouseY > 34) {
             gainFocus = false;

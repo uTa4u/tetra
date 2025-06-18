@@ -10,7 +10,7 @@ public class AnimationChain {
     private boolean looping = false;
     private Consumer<Boolean> stopHandler;
 
-    public AnimationChain(KeyframeAnimation ... animations) {
+    public AnimationChain(KeyframeAnimation... animations) {
         this.animations = animations;
 
         for (int i = 0; i < animations.length; i++) {

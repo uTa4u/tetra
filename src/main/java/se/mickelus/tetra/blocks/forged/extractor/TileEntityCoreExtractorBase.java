@@ -1,18 +1,12 @@
 package se.mickelus.tetra.blocks.forged.extractor;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
 import se.mickelus.tetra.blocks.IHeatTransfer;
 import se.mickelus.tetra.util.TileEntityOptional;
 
@@ -189,7 +183,7 @@ public class TileEntityCoreExtractorBase extends TileEntity implements ITickable
     private void notifyBlockUpdate() {
         markDirty();
         IBlockState state = world.getBlockState(pos);
-        world.notifyBlockUpdate(pos, state, state,3);
+        world.notifyBlockUpdate(pos, state, state, 3);
     }
 
     public EnumFacing getFacing() {
@@ -241,6 +235,6 @@ public class TileEntityCoreExtractorBase extends TileEntity implements ITickable
         IBlockState state = world.getBlockState(pos);
 
         updateTransferState();
-        world.notifyBlockUpdate(pos, state, state,3);
+        world.notifyBlockUpdate(pos, state, state, 3);
     }
 }

@@ -23,7 +23,7 @@ public class TileEntityHammerBase extends TileEntity {
 
     private static final String slotsKey = "slots";
     private static final String indexKey = "slot";
-    private ItemStack[] slots;
+    private final ItemStack[] slots;
 
     private boolean hasPlateWest = true;
     private boolean hasPlateEast = true;
@@ -264,7 +264,7 @@ public class TileEntityHammerBase extends TileEntity {
      */
     private void spawnParticle(EnumParticleTypes particle, Vec3d pos, int count, float speed) {
         if (world instanceof WorldServer) {
-            ((WorldServer) world).spawnParticle(particle, pos.x, pos.y, pos.z, count,  0, 0, 0, speed);
+            ((WorldServer) world).spawnParticle(particle, pos.x, pos.y, pos.z, count, 0, 0, 0, speed);
         }
     }
 

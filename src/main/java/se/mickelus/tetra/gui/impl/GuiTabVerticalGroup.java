@@ -1,20 +1,18 @@
 package se.mickelus.tetra.gui.impl;
 
 import se.mickelus.tetra.gui.GuiElement;
-import se.mickelus.tetra.gui.GuiRect;
-import se.mickelus.tetra.gui.impl.GuiTabVerticalButton;
 
 import java.util.function.Consumer;
 
 public class GuiTabVerticalGroup extends GuiElement {
 
-    private static final char[] keybindings = new char[] {'a', 's', 'd', 'f', 'g'};
+    private static final char[] keybindings = new char[]{'a', 's', 'd', 'f', 'g'};
 
-    private GuiTabVerticalButton[] buttons;
+    private final GuiTabVerticalButton[] buttons;
 
-    private Consumer<Integer> clickHandler;
+    private final Consumer<Integer> clickHandler;
 
-    public GuiTabVerticalGroup(int x, int y, Consumer<Integer> clickHandler, String ... labels) {
+    public GuiTabVerticalGroup(int x, int y, Consumer<Integer> clickHandler, String... labels) {
         super(x, y, 3, labels.length * 16 + 1);
 
         buttons = new GuiTabVerticalButton[labels.length];

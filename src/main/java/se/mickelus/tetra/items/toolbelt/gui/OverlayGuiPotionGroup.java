@@ -1,8 +1,6 @@
 package se.mickelus.tetra.items.toolbelt.gui;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.gui.GuiAttachment;
 import se.mickelus.tetra.gui.GuiElement;
 import se.mickelus.tetra.gui.GuiString;
@@ -52,9 +50,9 @@ public class OverlayGuiPotionGroup extends GuiElement {
                 if (i > 6) {
                     slots[i] = new OverlayGuiPotionSlot(22, 22, itemStack, i, true);
                 } else if (i > 4) {
-                    slots[i] = new OverlayGuiPotionSlot((i-5) * 22 +11, -11, itemStack, i, true);
+                    slots[i] = new OverlayGuiPotionSlot((i - 5) * 22 + 11, -11, itemStack, i, true);
                 } else if (i > 2) {
-                    slots[i] = new OverlayGuiPotionSlot((i-3) * 22 + 11, 11, itemStack, i, true);
+                    slots[i] = new OverlayGuiPotionSlot((i - 3) * 22 + 11, 11, itemStack, i, true);
                 } else {
                     slots[i] = new OverlayGuiPotionSlot(i * 22, 0, itemStack, i, true);
                 }

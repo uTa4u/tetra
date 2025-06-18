@@ -1,7 +1,10 @@
 package se.mickelus.tetra.items.journal.gui.craft;
 
 import net.minecraft.client.resources.I18n;
-import se.mickelus.tetra.gui.*;
+import se.mickelus.tetra.gui.GuiAttachment;
+import se.mickelus.tetra.gui.GuiButton;
+import se.mickelus.tetra.gui.GuiElement;
+import se.mickelus.tetra.gui.GuiString;
 import se.mickelus.tetra.gui.animation.Applier;
 import se.mickelus.tetra.gui.animation.KeyframeAnimation;
 import se.mickelus.tetra.gui.impl.GuiColors;
@@ -13,17 +16,17 @@ import java.util.function.Consumer;
 
 public class GuiJournalBreadcrumbs extends GuiElement {
 
-    private Consumer<Integer> onClick;
+    private final Consumer<Integer> onClick;
 
-    private KeyframeAnimation openAnimation;
-    private KeyframeAnimation showAnimation;
-    private KeyframeAnimation hideAnimation;
+    private final KeyframeAnimation openAnimation;
+    private final KeyframeAnimation showAnimation;
+    private final KeyframeAnimation hideAnimation;
 
-    private KeyframeAnimation focusAnimation;
-    private KeyframeAnimation blurAnimation;
+    private final KeyframeAnimation focusAnimation;
+    private final KeyframeAnimation blurAnimation;
 
-    private List<GuiElement> separators;
-    private List<GuiButton> buttons;
+    private final List<GuiElement> separators;
+    private final List<GuiButton> buttons;
 
     public GuiJournalBreadcrumbs(int x, int y, int width, Consumer<Integer> onClick) {
         super(x, y, width, 16);

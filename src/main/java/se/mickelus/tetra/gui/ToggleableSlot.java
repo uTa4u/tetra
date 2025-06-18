@@ -9,8 +9,9 @@ import javax.annotation.Nullable;
 
 public class ToggleableSlot extends Slot {
 
-    private boolean isEnabled = true;
-    private int realX, realY;
+    private final boolean isEnabled = true;
+    private final int realX;
+    private final int realY;
 
     public ToggleableSlot(IInventory inventoryIn, int index, int xPosition, int yPosition) {
         super(inventoryIn, index, xPosition, yPosition);

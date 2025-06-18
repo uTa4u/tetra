@@ -7,8 +7,8 @@ import se.mickelus.tetra.module.schema.UpgradeSchema;
 
 public class GuiJournalSchema extends GuiElement {
 
-    private GuiJournalVariants list;
-    private GuiJournalVariantDetail detail;
+    private final GuiJournalVariants list;
+    private final GuiJournalVariantDetail detail;
 
     private OutcomePreview selectedVariant;
     private OutcomePreview hoveredVariant;

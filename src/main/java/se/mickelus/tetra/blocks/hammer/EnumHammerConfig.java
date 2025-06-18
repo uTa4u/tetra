@@ -19,7 +19,7 @@ public enum EnumHammerConfig implements IStringSerializable {
     }
 
     public static EnumHammerConfig getNextConfiguration(EnumHammerConfig config) {
-        int index = ( config.ordinal() + 1 ) % values().length;
+        int index = (config.ordinal() + 1) % values().length;
         return values()[index];
     }
 }

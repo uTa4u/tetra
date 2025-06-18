@@ -2,28 +2,28 @@ package se.mickelus.tetra.blocks.workbench.gui;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
-import se.mickelus.tetra.gui.*;
-import se.mickelus.tetra.gui.animation.Applier;
-import se.mickelus.tetra.gui.animation.KeyframeAnimation;
+import se.mickelus.tetra.gui.GuiButton;
+import se.mickelus.tetra.gui.GuiElement;
+import se.mickelus.tetra.gui.GuiText;
 import se.mickelus.tetra.module.schema.UpgradeSchema;
 
 import java.util.function.Consumer;
 
 public class GuiSchemaList extends GuiElement {
-    private static int pageLength = 8;
+    private static final int pageLength = 8;
 
     private int page = 0;
 
     private UpgradeSchema[] schemas;
 
-    private Consumer<UpgradeSchema> schemaSelectionConsumer;
+    private final Consumer<UpgradeSchema> schemaSelectionConsumer;
 
-    private GuiElement listGroup;
+    private final GuiElement listGroup;
 
-    private GuiButton buttonBack;
-    private GuiButton buttonForward;
+    private final GuiButton buttonBack;
+    private final GuiButton buttonForward;
 
-    private GuiText emptyStateText;
+    private final GuiText emptyStateText;
 
     public GuiSchemaList(int x, int y, Consumer<UpgradeSchema> schemaSelectionConsumer) {
         super(x, y, 224, 67);
@@ -80,7 +80,7 @@ public class GuiSchemaList extends GuiElement {
     }
 
     private int getNumPages() {
-        return (int) Math.ceil(1f * schemas.length / pageLength );
+        return (int) Math.ceil(1f * schemas.length / pageLength);
     }
 
     @Override

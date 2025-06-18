@@ -15,7 +15,8 @@ public class UpdateWorkbenchPacket extends AbstractPacket {
     private UpgradeSchema schema;
     private String selectedSlot;
 
-    public UpdateWorkbenchPacket() {}
+    public UpdateWorkbenchPacket() {
+    }
 
     public UpdateWorkbenchPacket(BlockPos pos, UpgradeSchema schema, String selectedSlot) {
         this.pos = pos;

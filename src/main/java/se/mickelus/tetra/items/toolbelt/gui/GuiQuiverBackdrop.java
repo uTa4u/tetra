@@ -1,7 +1,6 @@
 package se.mickelus.tetra.items.toolbelt.gui;
 
 import net.minecraft.util.ResourceLocation;
-import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.gui.GuiAttachment;
 import se.mickelus.tetra.gui.GuiElement;
@@ -14,6 +13,7 @@ import java.util.Collection;
 
 public class GuiQuiverBackdrop extends GuiElement {
     private static final ResourceLocation texture = TetraMod.getResource("textures/gui/toolbelt-inventory.png");
+
     public GuiQuiverBackdrop(int x, int y, int numSlots, Collection<Collection<ItemEffect>> inventoryEffects) {
         super(x, y, numSlots * 17 - 9, 28);
 

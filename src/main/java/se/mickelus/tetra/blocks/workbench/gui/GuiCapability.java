@@ -12,7 +12,7 @@ public class GuiCapability extends GuiElement {
 
     protected Capability capability;
 
-    private GuiString levelIndicator;
+    private final GuiString levelIndicator;
 
     public GuiCapability(int x, int y, Capability capability) {
         super(x, y, 16, 16);

@@ -11,7 +11,7 @@ public class JumpHandlerBooster {
 
     private final Minecraft mc;
 
-    private KeyBinding jumpKey;
+    private final KeyBinding jumpKey;
 
     private boolean wasJumpKeyDown = false;
 

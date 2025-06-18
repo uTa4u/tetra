@@ -9,6 +9,7 @@ import java.io.IOException;
 
 /**
  * AbstractPacket class. Should be the parent of all packets wishing to use the PacketHandler.
+ *
  * @author sirgingalot, mickelus
  */
 public abstract class AbstractPacket implements IMessage {
@@ -36,6 +37,7 @@ public abstract class AbstractPacket implements IMessage {
 
     /**
      * Utility method that reads a string from a buffer object.
+     *
      * @param buffer The buffer containing the string to be read.
      * @return A string read from the buffer
      * @throws IOException
@@ -44,7 +46,7 @@ public abstract class AbstractPacket implements IMessage {
         String string = "";
         char c = buffer.readChar();
 
-        while(c != '\0') {
+        while (c != '\0') {
             string += c;
             c = buffer.readChar();
         }

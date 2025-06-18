@@ -27,10 +27,10 @@ public class ConfigSchema extends BaseSchema {
     private static final String descriptionSuffix = ".description";
     private static final String slotSuffix = ".slot";
 
-    private SchemaDefinition definition;
+    private final SchemaDefinition definition;
 
-    private String keySuffix;
-    private String moduleSlot;
+    private final String keySuffix;
+    private final String moduleSlot;
 
     public ConfigSchema(SchemaDefinition definition) throws InvalidSchemaException {
         this(definition, "", null);
@@ -291,7 +291,7 @@ public class ConfigSchema extends BaseSchema {
     }
 
     private void triggerAdvancement(OutcomeDefinition outcome, EntityPlayer player, ItemStack itemStack, ItemStack upgradedStack, String slot) {
-        if(player instanceof EntityPlayerMP) {
+        if (player instanceof EntityPlayerMP) {
 
             if (outcome.moduleKey != null) {
                 if (outcome.requiredCapabilities.getValues().isEmpty()) {
@@ -310,7 +310,7 @@ public class ConfigSchema extends BaseSchema {
                 } else {
                     outcome.requiredCapabilities.valueMap.forEach((capability, capabilityLevel) ->
                             ImprovementCraftCriterion.trigger((EntityPlayerMP) player, itemStack, upgradedStack, getKey(), slot, improvement, level,
-                            capability, capabilityLevel));
+                                    capability, capabilityLevel));
                 }
             });
         }

@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.GlStateManager;
 public class GuiRect extends GuiElement {
 
     private int color;
-    private boolean offset;
+    private final boolean offset;
 
     public GuiRect(int x, int y, int width, int height, int color) {
         this(x, y, width, height, color, false);

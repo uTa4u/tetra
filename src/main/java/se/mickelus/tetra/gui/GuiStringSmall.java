@@ -6,19 +6,19 @@ import se.mickelus.tetra.gui.animation.KeyframeAnimation;
 public class GuiStringSmall extends GuiString {
 
     public GuiStringSmall(int x, int y, String string) {
-        super(x*2, y*2, string);
+        super(x * 2, y * 2, string);
     }
 
     public GuiStringSmall(int x, int y, String string, int color) {
-        super(x*2, y*2, string, color);
+        super(x * 2, y * 2, string, color);
     }
 
     public GuiStringSmall(int x, int y, String string, GuiAttachment attachment) {
-        super(x*2, y*2, string, attachment);
+        super(x * 2, y * 2, string, attachment);
     }
 
     public GuiStringSmall(int x, int y, String string, int color, GuiAttachment attachment) {
-        super(x*2, y*2, string, color, attachment);
+        super(x * 2, y * 2, string, color, attachment);
     }
 
     @Override

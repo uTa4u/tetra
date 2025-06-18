@@ -28,11 +28,11 @@ public abstract class ConfigAction implements WorkbenchAction {
     /**
      * Defines which capabilities are required for this action, a map where the capability is the key and the value
      * is the required level.
-     *
+     * <p>
      * Json format:
      * {
-     *     "capabilityA": level,
-     *     "capabilityB": level
+     * "capabilityA": level,
+     * "capabilityB": level
      * }
      */
     public CapabilityData requiredCapabilities = new CapabilityData();

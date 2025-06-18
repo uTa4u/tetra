@@ -1,9 +1,5 @@
 package se.mickelus.tetra.blocks.geode;
 
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Set;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -14,8 +10,13 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Set;
+
 public class GeodeGenerator implements IWorldGenerator {
-    public GeodeGenerator() { }
+    public GeodeGenerator() {
+    }
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {

@@ -1,6 +1,9 @@
 package se.mickelus.tetra.items.journal.gui;
 
-import se.mickelus.tetra.gui.*;
+import se.mickelus.tetra.gui.GuiAttachment;
+import se.mickelus.tetra.gui.GuiButton;
+import se.mickelus.tetra.gui.GuiElement;
+import se.mickelus.tetra.gui.GuiRect;
 import se.mickelus.tetra.gui.animation.Applier;
 import se.mickelus.tetra.gui.animation.KeyframeAnimation;
 import se.mickelus.tetra.gui.impl.GuiColors;
@@ -94,7 +97,7 @@ public class GuiJournalHeader extends GuiElement {
     }
 
     public void changePage(JournalPage page) {
-        for (GuiButton button: buttons) {
+        for (GuiButton button : buttons) {
             button.setOpacity(0.5f);
         }
 

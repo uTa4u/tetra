@@ -10,7 +10,7 @@ public class TweakData {
     public String key;
     public int steps;
 
-    private ModuleData baseStats = new ModuleData();
+    private final ModuleData baseStats = new ModuleData();
     private ModuleData stepStats;
 
 
@@ -27,7 +27,7 @@ public class TweakData {
     }
 
     public float getAttackSpeedMultiplier(int step) {
-        return baseStats.attackSpeedMultiplier + step * (stepStats.attackSpeedMultiplier -1);
+        return baseStats.attackSpeedMultiplier + step * (stepStats.attackSpeedMultiplier - 1);
     }
 
     public int getDurability(int step) {

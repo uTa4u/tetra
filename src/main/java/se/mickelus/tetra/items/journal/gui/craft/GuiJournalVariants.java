@@ -2,12 +2,12 @@ package se.mickelus.tetra.items.journal.gui.craft;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import se.mickelus.tetra.gui.impl.GuiColors;
 import se.mickelus.tetra.gui.GuiElement;
 import se.mickelus.tetra.gui.GuiString;
 import se.mickelus.tetra.gui.GuiStringSmall;
 import se.mickelus.tetra.gui.animation.Applier;
 import se.mickelus.tetra.gui.animation.KeyframeAnimation;
+import se.mickelus.tetra.gui.impl.GuiColors;
 import se.mickelus.tetra.items.ItemModular;
 import se.mickelus.tetra.module.schema.OutcomePreview;
 import se.mickelus.tetra.module.schema.SchemaType;
@@ -18,20 +18,20 @@ import java.util.function.Consumer;
 
 public class GuiJournalVariants extends GuiElement {
 
-    private GuiElement variantsContainer;
+    private final GuiElement variantsContainer;
 
     private GuiJournalVariantItem[] variants;
 
-    private KeyframeAnimation labelAnimation;
+    private final KeyframeAnimation labelAnimation;
 
     private KeyframeAnimation[] itemAnimations;
 
-    private Consumer<OutcomePreview> onVariantHover;
-    private Consumer<OutcomePreview> onVariantBlur;
-    private Consumer<OutcomePreview> onVariantSelect;
+    private final Consumer<OutcomePreview> onVariantHover;
+    private final Consumer<OutcomePreview> onVariantBlur;
+    private final Consumer<OutcomePreview> onVariantSelect;
 
     public GuiJournalVariants(int x, int y, int width, Consumer<OutcomePreview> onVariantHover, Consumer<OutcomePreview> onVariantBlur,
-            Consumer<OutcomePreview> onVariantSelect) {
+                              Consumer<OutcomePreview> onVariantSelect) {
         super(x, y, width, 50);
 
         GuiString variantsLabel = new GuiStringSmall(0, 0, I18n.format("journal.craft.variants"));
@@ -87,7 +87,7 @@ public class GuiJournalVariants extends GuiElement {
     }
 
     public void updateSelection(OutcomePreview outcome) {
-        for (GuiJournalVariantItem variant: variants) {
+        for (GuiJournalVariantItem variant : variants) {
             variant.updateSelection(outcome);
         }
     }

@@ -8,12 +8,12 @@ import net.minecraft.util.math.BlockPos;
  * Used to specify where and which features can be generated as a part of another feature.
  * Example json:
  * {
- *     "offset": [3, 2, 6],
- *     "facing": "SOUTH",
- *     "features": [
- *         "tetra:forged_hallway_1",
- *         "tetra:forged_wall_1"
- *     ]
+ * "offset": [3, 2, 6],
+ * "facing": "SOUTH",
+ * "features": [
+ * "tetra:forged_hallway_1",
+ * "tetra:forged_wall_1"
+ * ]
  * }
  */
 public class FeatureChild {
@@ -21,7 +21,7 @@ public class FeatureChild {
      * The position offset relative to the parent at which this child feature should be generated.
      * Json format: [x, y, z]
      */
-    public BlockPos offset = new BlockPos(0, 0 ,0);
+    public BlockPos offset = new BlockPos(0, 0, 0);
 
     /**
      * The direction in which the child feature should be facing.

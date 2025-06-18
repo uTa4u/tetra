@@ -13,7 +13,7 @@ public class TileEntityOptional {
         TileEntity tileEntity;
 
         if (world instanceof ChunkCache) {
-            tileEntity = ((ChunkCache)world).getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK);
+            tileEntity = ((ChunkCache) world).getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK);
         } else {
             tileEntity = world.getTileEntity(pos);
         }

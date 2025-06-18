@@ -1,12 +1,15 @@
 package se.mickelus.tetra.blocks.workbench.gui;
 
 import net.minecraft.item.ItemStack;
-import se.mickelus.tetra.gui.*;
+import se.mickelus.tetra.gui.GuiAttachment;
+import se.mickelus.tetra.gui.GuiClickable;
+import se.mickelus.tetra.gui.GuiString;
+import se.mickelus.tetra.gui.GuiTextureOffset;
 import se.mickelus.tetra.gui.animation.Applier;
 import se.mickelus.tetra.gui.animation.KeyframeAnimation;
 import se.mickelus.tetra.gui.impl.GuiColors;
-import se.mickelus.tetra.module.data.GlyphData;
 import se.mickelus.tetra.module.ItemModule;
+import se.mickelus.tetra.module.data.GlyphData;
 import se.mickelus.tetra.module.data.ModuleData;
 
 import java.util.function.BiConsumer;
@@ -134,7 +137,7 @@ public class GuiModule extends GuiClickable {
 
     public void updateSelectedHighlight(String selectedSlot) {
         isUnselected = selectedSlot != null && !slotKey.equals(selectedSlot);
-        isSelected = selectedSlot != null && slotKey.equals(selectedSlot);
+        isSelected = slotKey.equals(selectedSlot);
         updateColors();
 
     }

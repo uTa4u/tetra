@@ -11,11 +11,11 @@ import se.mickelus.tetra.items.toolbelt.inventory.*;
 
 
 public class ContainerToolbelt extends Container {
-    private ItemStack itemStackToolbelt;
-    private InventoryQuickslot quickslotInventory;
-    private InventoryStorage storageInventory;
-    private InventoryPotions potionsInventory;
-    private InventoryQuiver quiverInventory;
+    private final ItemStack itemStackToolbelt;
+    private final InventoryQuickslot quickslotInventory;
+    private final InventoryStorage storageInventory;
+    private final InventoryPotions potionsInventory;
+    private final InventoryQuiver quiverInventory;
 
     public ContainerToolbelt(IInventory playerInventory, ItemStack itemStackToolbelt, EntityPlayer player) {
         this.quickslotInventory = new InventoryQuickslot(itemStackToolbelt);
@@ -34,28 +34,28 @@ public class ContainerToolbelt extends Container {
         int offset = 0;
 
         for (int i = 0; i < numPotionSlots; i++) {
-            this.addSlotToContainer(new PotionSlot(potionsInventory, i, (int)(-8.5 * numPotionSlots + 17 * i + 90), 61 - offset * 30));
+            this.addSlotToContainer(new PotionSlot(potionsInventory, i, (int) (-8.5 * numPotionSlots + 17 * i + 90), 61 - offset * 30));
         }
         if (numPotionSlots > 0) {
             offset++;
         }
 
         for (int i = 0; i < numQuiverSlots; i++) {
-            this.addSlotToContainer(new PredicateSlot(quiverInventory, i, (int)(-8.5 * numQuiverSlots + 17 * i + 90), 61 - offset * 30, quiverInventory::isItemValid));
+            this.addSlotToContainer(new PredicateSlot(quiverInventory, i, (int) (-8.5 * numQuiverSlots + 17 * i + 90), 61 - offset * 30, quiverInventory::isItemValid));
         }
         if (numQuiverSlots > 0) {
             offset++;
         }
 
         for (int i = 0; i < numQuickslots; i++) {
-            this.addSlotToContainer(new PredicateSlot(quickslotInventory, i, (int)(-8.5 * numQuickslots + 17 * i + 90), 61 - offset * 30, quickslotInventory::isItemValid));
+            this.addSlotToContainer(new PredicateSlot(quickslotInventory, i, (int) (-8.5 * numQuickslots + 17 * i + 90), 61 - offset * 30, quickslotInventory::isItemValid));
         }
         if (numQuickslots > 0) {
             offset++;
         }
 
         for (int i = 0; i < numStorageSlots; i++) {
-            this.addSlotToContainer(new PredicateSlot(storageInventory, i, (int)(-8.5 * numStorageSlots + 17 * i + 90), 61 - offset * 30, storageInventory::isItemValid));
+            this.addSlotToContainer(new PredicateSlot(storageInventory, i, (int) (-8.5 * numStorageSlots + 17 * i + 90), 61 - offset * 30, storageInventory::isItemValid));
         }
 
         for (int i = 0; i < 3; i++) {
@@ -84,9 +84,10 @@ public class ContainerToolbelt extends Container {
     /**
      * Attempts to merge the given stack into the slots between the given indexes, prioritizing slot stack limits
      * over item stack limits.
+     *
      * @param incomingStack an item stack
-     * @param startIndex an integer
-     * @param endIndex an integer, preferrably larger than startIndex
+     * @param startIndex    an integer
+     * @param endIndex      an integer, preferrably larger than startIndex
      * @return true if the given itemstack has been emptied, otherwise false
      */
     private boolean mergeItemStackExtended(ItemStack incomingStack, int startIndex, int endIndex) {
@@ -187,7 +188,7 @@ public class ContainerToolbelt extends Container {
                 if (slot.isHere(potionsInventory, index)) {
                     int count = slot.getStack().getCount();
                     itemStack = slot.decrStackSize(64);
-                    if (!this.mergeItemStack(itemStack, playerInventoryStart,  inventorySlots.size(), true)) {
+                    if (!this.mergeItemStack(itemStack, playerInventoryStart, inventorySlots.size(), true)) {
                         // reset count if it was not possible to move the itemstack
                         itemStack.setCount(count);
                         slot.putStack(itemStack);
@@ -195,23 +196,23 @@ public class ContainerToolbelt extends Container {
                     }
                 } else {
                     // move item from slot into player inventory
-                    if (!this.mergeItemStack(itemStack, playerInventoryStart,  inventorySlots.size(), true)) {
+                    if (!this.mergeItemStack(itemStack, playerInventoryStart, inventorySlots.size(), true)) {
                         return ItemStack.EMPTY;
                     }
                 }
 
                 slot.onSlotChanged();
             } else {
-                if (numPotionSlots > 0 && mergeItemStackExtended(itemStack, 0,  numPotionSlots)) {
+                if (numPotionSlots > 0 && mergeItemStackExtended(itemStack, 0, numPotionSlots)) {
                     return itemStack;
                 }
-                if (numQuiverSlots > 0 && mergeItemStack(itemStack, numPotionSlots,  numPotionSlots + numQuiverSlots, false)) {
+                if (numQuiverSlots > 0 && mergeItemStack(itemStack, numPotionSlots, numPotionSlots + numQuiverSlots, false)) {
                     return itemStack;
                 }
-                if (numQuickslots > 0 && mergeItemStack(itemStack, numPotionSlots + numQuiverSlots,  numPotionSlots + numQuiverSlots + numQuickslots, false)) {
+                if (numQuickslots > 0 && mergeItemStack(itemStack, numPotionSlots + numQuiverSlots, numPotionSlots + numQuiverSlots + numQuickslots, false)) {
                     return itemStack;
                 }
-                if (numStorageSlots > 0 && mergeItemStack(itemStack, numPotionSlots + numQuiverSlots + numQuickslots,  playerInventoryStart, false)) {
+                if (numStorageSlots > 0 && mergeItemStack(itemStack, numPotionSlots + numQuiverSlots + numQuickslots, playerInventoryStart, false)) {
                     return itemStack;
                 }
                 return ItemStack.EMPTY;

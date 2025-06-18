@@ -44,43 +44,43 @@ public class GuiRootHud extends GuiElement {
 
         switch (facing) {
             case NORTH:
-                mouseX = (int) ( ( boundingBox.maxX - hitX ) * 32 );
-                mouseY = (int) ( ( boundingBox.maxY - hitY ) * 32 );
+                mouseX = (int) ((boundingBox.maxX - hitX) * 32);
+                mouseY = (int) ((boundingBox.maxY - hitY) * 32);
 
                 GlStateManager.translate(boundingBox.maxX, boundingBox.maxY, boundingBox.minZ);
                 GlStateManager.rotate(180, 0, 1, 0);
                 break;
             case SOUTH:
-                mouseX = (int) ( ( hitX - boundingBox.minX ) * 32 );
-                mouseY = (int) ( ( boundingBox.maxY - hitY ) * 32 );
+                mouseX = (int) ((hitX - boundingBox.minX) * 32);
+                mouseY = (int) ((boundingBox.maxY - hitY) * 32);
 
                 GlStateManager.translate(boundingBox.minX, boundingBox.maxY, boundingBox.maxZ);
                 break;
             case EAST:
-                mouseX = (int) ( ( boundingBox.maxZ - hitZ ) * 32 );
-                mouseY = (int) ( ( boundingBox.maxY - hitY ) * 32 );
+                mouseX = (int) ((boundingBox.maxZ - hitZ) * 32);
+                mouseY = (int) ((boundingBox.maxY - hitY) * 32);
 
                 GlStateManager.translate(boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ);
                 GlStateManager.rotate(90, 0, 1, 0);
                 break;
             case WEST:
-                mouseX = (int) ( ( hitZ - boundingBox.minZ ) * 32 );
-                mouseY = (int) ( ( boundingBox.maxY - hitY ) * 32 );
+                mouseX = (int) ((hitZ - boundingBox.minZ) * 32);
+                mouseY = (int) ((boundingBox.maxY - hitY) * 32);
 
                 GlStateManager.translate(boundingBox.minX, boundingBox.maxY, boundingBox.minZ);
                 GlStateManager.rotate(-90, 0, 1, 0);
                 break;
             case UP:
-                mouseX = (int) ( ( boundingBox.maxX - hitX ) * 32 );
-                mouseY = (int) ( ( boundingBox.maxZ - hitZ ) * 32 );
+                mouseX = (int) ((boundingBox.maxX - hitX) * 32);
+                mouseY = (int) ((boundingBox.maxZ - hitZ) * 32);
 
                 GlStateManager.translate(boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ);
                 GlStateManager.rotate(90, 1, 0, 0);
                 GlStateManager.scale(-1, 1, 1);
                 break;
             case DOWN:
-                mouseX = (int) ( ( hitX - boundingBox.minX ) * 32 );
-                mouseY = (int) ( ( boundingBox.maxZ - hitZ ) * 32 );
+                mouseX = (int) ((hitX - boundingBox.minX) * 32);
+                mouseY = (int) ((boundingBox.maxZ - hitZ) * 32);
 
                 GlStateManager.translate(boundingBox.minX, boundingBox.minY, boundingBox.maxZ);
                 GlStateManager.rotate(90, 1, 0, 0);

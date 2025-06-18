@@ -5,7 +5,7 @@ import se.mickelus.tetra.gui.GuiRoot;
 
 public class OverlayGuiBooster extends GuiRoot {
 
-    private GuiBarBooster barElement;
+    private final GuiBarBooster barElement;
 
     public OverlayGuiBooster(Minecraft mc) {
         super(mc);

@@ -41,7 +41,7 @@ public class BlockInteraction {
     public float successChance = 1;
 
     public <V extends Comparable<V>> BlockInteraction(Capability requiredCapability, int requiredLevel, EnumFacing face, float minX, float maxX, float minY,
-            float maxY, IProperty<V> property, V propertyValue, InteractionOutcome outcome) {
+                                                      float maxY, IProperty<V> property, V propertyValue, InteractionOutcome outcome) {
 
         this.requiredCapability = requiredCapability;
         this.requiredLevel = requiredLevel;
@@ -143,7 +143,7 @@ public class BlockInteraction {
     }
 
     public static BlockInteraction getInteractionAtPoint(EntityPlayer player, IBlockState blockState, BlockPos pos, EnumFacing hitFace, float hitX, float hitY,
-            float hitZ) {
+                                                         float hitZ) {
         AxisAlignedBB boundingBox = blockState.getBoundingBox(player.world, pos);
         float hitU = getHitU(hitFace, boundingBox, hitX, hitY, hitZ);
         float hitV = getHitV(hitFace, boundingBox, hitX, hitY, hitZ);

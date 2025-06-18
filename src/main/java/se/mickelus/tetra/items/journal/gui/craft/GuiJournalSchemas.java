@@ -16,12 +16,12 @@ import java.util.function.Consumer;
 
 public class GuiJournalSchemas extends GuiElement {
 
-    private Consumer<UpgradeSchema> onSchemaSelect;
+    private final Consumer<UpgradeSchema> onSchemaSelect;
 
-    private KeyframeAnimation openAnimation;
+    private final KeyframeAnimation openAnimation;
 
-    private KeyframeAnimation showAnimation;
-    private KeyframeAnimation hideAnimation;
+    private final KeyframeAnimation showAnimation;
+    private final KeyframeAnimation hideAnimation;
 
     public GuiJournalSchemas(int x, int y, int width, int height, Consumer<UpgradeSchema> onSchemaSelect) {
         super(x, y, width, height);

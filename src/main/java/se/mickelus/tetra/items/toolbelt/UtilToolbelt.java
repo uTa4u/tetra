@@ -9,15 +9,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.Loader;
 import se.mickelus.tetra.IntegrationHelper;
-import net.minecraft.util.text.TextComponentTranslation;
 import se.mickelus.tetra.blocks.salvage.BlockInteraction;
 import se.mickelus.tetra.blocks.salvage.IBlockCapabilityInteractive;
 import se.mickelus.tetra.capabilities.ICapabilityProvider;
@@ -75,6 +73,7 @@ public class UtilToolbelt {
     /**
      * Attempts to store the given players offhand or mainhand item in the toolbelt. Attempts to grab the offhand item
      * first and grabs the mainhand item if the offhand is empty.
+     *
      * @param player A player
      * @return false if the toolbelt is full, otherwise true
      */
@@ -112,16 +111,13 @@ public class UtilToolbelt {
             return true;
         }
 
-        if (new InventoryStorage(toolbeltStack).storeItemInInventory(itemStack)) {
-            return true;
-        }
-
-        return false;
+        return new InventoryStorage(toolbeltStack).storeItemInInventory(itemStack);
     }
 
     /**
      * Attempts to find the first itemstack containing a toolbelt in the given players inventory.
      * todo: add baubles support
+     *
      * @param player A player
      * @return A toolbelt itemstack, or an empty itemstack if the player has no toolbelt
      */
@@ -178,9 +174,10 @@ public class UtilToolbelt {
 
     /**
      * Attempts to find a suitable tool from the players quick access quickslots to be used on the given blockstate.
-     * @param player The player
+     *
+     * @param player      The player
      * @param traceResult The raytrace result for where the cursor was when the event was triggered
-     * @param blockState A blockstate
+     * @param blockState  A blockstate
      * @return a quickslot inventory index if a suitable tool is found, otherwise -1
      */
     public static int getQuickAccessSlotIndex(EntityPlayer player, RayTraceResult traceResult, IBlockState blockState) {

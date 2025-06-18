@@ -27,7 +27,7 @@ public class BookEnchantSchema implements UpgradeSchema {
 
     protected ItemModuleMajor module;
 
-    private GlyphData glyph = new GlyphData("textures/gui/workbench.png", 80, 32);
+    private final GlyphData glyph = new GlyphData("textures/gui/workbench.png", 80, 32);
 
     public BookEnchantSchema(ItemModuleMajor module) {
         this.module = module;

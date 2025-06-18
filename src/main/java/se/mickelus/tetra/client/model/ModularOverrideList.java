@@ -1,8 +1,5 @@
 package se.mickelus.tetra.client.model;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import javax.annotation.Nonnull;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.ImmutableList;
@@ -17,9 +14,14 @@ import net.minecraftforge.client.model.ItemLayerModel;
 import se.mickelus.tetra.NBTHelper;
 import se.mickelus.tetra.items.ItemModular;
 
+import javax.annotation.Nonnull;
+import java.util.Objects;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+
 public class ModularOverrideList extends ItemOverrideList {
 
-    private Cache<CacheKey, IBakedModel> bakedModelCache = CacheBuilder.newBuilder()
+    private final Cache<CacheKey, IBakedModel> bakedModelCache = CacheBuilder.newBuilder()
             .maximumSize(1000)
             .expireAfterWrite(5, TimeUnit.MINUTES)
             .build();
@@ -35,12 +37,12 @@ public class ModularOverrideList extends ItemOverrideList {
     public IBakedModel handleItemState(@Nonnull IBakedModel originalModel, final ItemStack stack, final World world, final EntityLivingBase entity) {
         NBTTagCompound baseTag = NBTHelper.getTag(stack);
         IBakedModel result = originalModel;
-        if(!baseTag.isEmpty()) {
+        if (!baseTag.isEmpty()) {
             CacheKey key = getCacheKey(stack, originalModel);
 
             try {
                 result = bakedModelCache.get(key, () -> getOverrideModel(stack, world, entity, originalModel));
-            } catch(ExecutionException e) {
+            } catch (ExecutionException e) {
                 // do nothing, return original model
                 e.printStackTrace();
             }
@@ -53,7 +55,7 @@ public class ModularOverrideList extends ItemOverrideList {
     }
 
     protected IBakedModel getOverrideModel(ItemStack itemStack, World world, EntityLivingBase entity, IBakedModel original) {
-        ItemModular item  = (ItemModular) itemStack.getItem();
+        ItemModular item = (ItemModular) itemStack.getItem();
 
         BakedWrapper wrapper = (BakedWrapper) original;
         ImmutableList<ResourceLocation> textures = item.getTextures(itemStack);
@@ -80,19 +82,19 @@ public class ModularOverrideList extends ItemOverrideList {
 
         @Override
         public boolean equals(Object o) {
-            if(this == o) {
+            if (this == o) {
                 return true;
             }
-            if(o == null || getClass() != o.getClass()) {
+            if (o == null || getClass() != o.getClass()) {
                 return false;
             }
 
             CacheKey cacheKey = (CacheKey) o;
 
-            if(parent != null ? parent != cacheKey.parent : cacheKey.parent != null) {
+            if (parent != null ? parent != cacheKey.parent : cacheKey.parent != null) {
                 return false;
             }
-            return data != null ? data.equals(cacheKey.data) : cacheKey.data == null;
+            return Objects.equals(data, cacheKey.data);
 
         }
 

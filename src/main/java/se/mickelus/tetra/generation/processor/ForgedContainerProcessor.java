@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class ForgedContainerProcessor implements ITemplateProcessor {
 
-    private Random random;
+    private final Random random;
 
     public ForgedContainerProcessor(Random random) {
         this.random = random;

@@ -2,7 +2,6 @@ package se.mickelus.tetra.items.toolbelt.gui;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.gui.GuiElement;
 import se.mickelus.tetra.gui.GuiRect;
@@ -17,8 +16,8 @@ import java.util.Objects;
 public class OverlayGuiQuickslotGroup extends GuiElement {
     private static final ResourceLocation toolbeltTexture = TetraMod.getResource("textures/gui/toolbelt-inventory.png");
 
-    private KeyframeAnimation showAnimation;
-    private KeyframeAnimation hideAnimation;
+    private final KeyframeAnimation showAnimation;
+    private final KeyframeAnimation hideAnimation;
 
     private OverlayGuiQuickslot[] slots = new OverlayGuiQuickslot[0];
 

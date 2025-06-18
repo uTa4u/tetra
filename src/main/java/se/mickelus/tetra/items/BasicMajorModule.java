@@ -10,7 +10,7 @@ import se.mickelus.tetra.module.data.ModuleData;
 import java.util.Arrays;
 
 public class BasicMajorModule extends ItemModuleMajor<ModuleData> {
-    public BasicMajorModule(String slotKey, String moduleKey, String ... improvementKeys) {
+    public BasicMajorModule(String slotKey, String moduleKey, String... improvementKeys) {
         super(slotKey, moduleKey);
 
         data = DataHandler.instance.getModuleData(moduleKey, ModuleData[].class);

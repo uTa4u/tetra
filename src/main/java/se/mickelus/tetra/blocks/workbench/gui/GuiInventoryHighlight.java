@@ -12,7 +12,7 @@ import se.mickelus.tetra.gui.impl.GuiColors;
 public class GuiInventoryHighlight extends GuiElement {
     private static final String WORKBENCH_TEXTURE = "textures/gui/workbench.png";
 
-    private AnimationChain animation;
+    private final AnimationChain animation;
     GuiElement dots;
 
     public GuiInventoryHighlight(int x, int y, int offset) {

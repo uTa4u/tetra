@@ -9,7 +9,8 @@ public class TooltipGetterSpeed implements ITooltipGetter {
     private static final IStatGetter statGetter = new StatGetterSpeed();
     private static final String localizationKey = "stats.speed.tooltip";
 
-    public TooltipGetterSpeed() { }
+    public TooltipGetterSpeed() {
+    }
 
 
     @Override

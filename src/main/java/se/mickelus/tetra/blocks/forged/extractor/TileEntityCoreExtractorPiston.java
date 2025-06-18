@@ -14,7 +14,6 @@ import net.minecraftforge.common.model.animation.IAnimationStateMachine;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.util.TileEntityOptional;
 
 import javax.annotation.Nullable;
@@ -70,14 +69,13 @@ public class TileEntityCoreExtractorPiston extends TileEntity implements ITickab
     }
 
     @Override
-    public boolean hasFastRenderer()
-    {
+    public boolean hasFastRenderer() {
         return true;
     }
 
     @Override
     public void update() {
-        if (endTime < world.getTotalWorldTime() ) {
+        if (endTime < world.getTotalWorldTime()) {
             TileEntityOptional.from(world, pos.offset(EnumFacing.DOWN), TileEntityCoreExtractorBase.class)
                     .ifPresent(base -> base.fill(fillAmount));
 
@@ -90,7 +88,7 @@ public class TileEntityCoreExtractorPiston extends TileEntity implements ITickab
         if (world instanceof WorldServer) {
             ((WorldServer) world).spawnParticle(EnumParticleTypes.SMOKE_LARGE,
                     pos.getX() + 0.5, pos.getY() + 0.1, pos.getZ() + 0.5,
-                    5,  0, 0, 0, 0.02f);
+                    5, 0, 0, 0, 0.02f);
         }
 
         world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS,

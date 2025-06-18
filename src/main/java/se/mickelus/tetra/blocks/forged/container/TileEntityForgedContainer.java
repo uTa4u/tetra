@@ -19,7 +19,6 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootTable;
 import se.mickelus.tetra.NBTHelper;
-import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 
 import javax.annotation.Nullable;
@@ -28,11 +27,11 @@ import java.util.Random;
 
 public class TileEntityForgedContainer extends TileEntity implements IInventory {
 
-    private NonNullList<ItemStack> stacks;
+    private final NonNullList<ItemStack> stacks;
 
     public static int lockIntegrityMax = 4;
     public static int lockCount = 4;
-    private int[] lockIntegrity;
+    private final int[] lockIntegrity;
 
     public static int lidIntegrityMax = 5;
     private int lidIntegrity = 3;
@@ -75,7 +74,7 @@ public class TileEntityForgedContainer extends TileEntity implements IInventory 
             markDirty();
 
             if (!world.isRemote) {
-                WorldServer worldServer = (WorldServer) world;;
+                WorldServer worldServer = (WorldServer) world;
                 if (lidIntegrity == 0) {
                     causeOpeningEffects(worldServer);
                 } else {
@@ -108,9 +107,9 @@ public class TileEntityForgedContainer extends TileEntity implements IInventory 
 
         for (int i = 0; i < smokeCount; i++) {
             worldServer.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
-                    smokeOrigin.getX() + smokeDirection.x * i * 2 / ( smokeCount - 1),
+                    smokeOrigin.getX() + smokeDirection.x * i * 2 / (smokeCount - 1),
                     smokeOrigin.getY() + 0.8,
-                    smokeOrigin.getZ() + smokeDirection.z * i * 2 / ( smokeCount - 1),
+                    smokeOrigin.getZ() + smokeDirection.z * i * 2 / (smokeCount - 1),
                     1, 0, 0, 0, 0d);
         }
 
@@ -140,9 +139,9 @@ public class TileEntityForgedContainer extends TileEntity implements IInventory 
                 WorldServer worldServer = (WorldServer) world;
 
                 if (lockIntegrity[index] == 0) {
-                    worldServer.playSound(null, pos, SoundEvents.ITEM_SHIELD_BREAK, SoundCategory.PLAYERS, 1,0.5f);
+                    worldServer.playSound(null, pos, SoundEvents.ITEM_SHIELD_BREAK, SoundCategory.PLAYERS, 1, 0.5f);
                 } else {
-                    worldServer.playSound(null, pos, SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, SoundCategory.PLAYERS, 1,0.5f);
+                    worldServer.playSound(null, pos, SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, SoundCategory.PLAYERS, 1, 0.5f);
                 }
 
                 if (lockIntegrity[index] == 0) {
@@ -275,10 +274,12 @@ public class TileEntityForgedContainer extends TileEntity implements IInventory 
     }
 
     @Override
-    public void openInventory(EntityPlayer player) { }
+    public void openInventory(EntityPlayer player) {
+    }
 
     @Override
-    public void closeInventory(EntityPlayer player) { }
+    public void closeInventory(EntityPlayer player) {
+    }
 
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
@@ -291,7 +292,8 @@ public class TileEntityForgedContainer extends TileEntity implements IInventory 
     }
 
     @Override
-    public void setField(int id, int value) { }
+    public void setField(int id, int value) {
+    }
 
     @Override
     public int getFieldCount() {

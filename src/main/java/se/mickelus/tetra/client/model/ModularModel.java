@@ -16,7 +16,10 @@ import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
 import se.mickelus.tetra.module.ItemUpgradeRegistry;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -41,7 +44,7 @@ public class ModularModel implements IModel {
 
     @Override
     public IBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
-        if(modelBlock == null) {
+        if (modelBlock == null) {
             return null; // todo: return "missing model" model
         }
 

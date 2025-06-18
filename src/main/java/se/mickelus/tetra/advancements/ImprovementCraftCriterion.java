@@ -9,17 +9,17 @@ import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.data.DataHandler;
 
 public class ImprovementCraftCriterion extends AbstractCriterionInstance {
-    private ItemPredicate before = null;
-    private ItemPredicate after = null;
+    private final ItemPredicate before = null;
+    private final ItemPredicate after = null;
 
-    private String schema = null;
+    private final String schema = null;
 
-    private String slot = null;
-    private String improvement = null;
-    private int improvementLevel = -1;
+    private final String slot = null;
+    private final String improvement = null;
+    private final int improvementLevel = -1;
 
-    private Capability capability = null;
-    private int capabilityLevel = -1;
+    private final Capability capability = null;
+    private final int capabilityLevel = -1;
 
     public static final GenericTrigger<ImprovementCraftCriterion> trigger = new GenericTrigger<>("tetra:craft_improvement", ImprovementCraftCriterion::deserialize);
 
@@ -28,13 +28,13 @@ public class ImprovementCraftCriterion extends AbstractCriterionInstance {
     }
 
     public static void trigger(EntityPlayerMP player, ItemStack before, ItemStack after, String schema, String slot, String improvement,
-            int improvementLevel, Capability capability, int capabilityLevel) {
+                               int improvementLevel, Capability capability, int capabilityLevel) {
         trigger.fulfillCriterion(player.getAdvancements(), criterion -> criterion.test(before, after, schema, slot, improvement, improvementLevel,
                 capability, capabilityLevel));
     }
 
     public boolean test(ItemStack before, ItemStack after, String schema, String slot, String improvement, int improvementLevel,
-            Capability capability, int capabilityLevel) {
+                        Capability capability, int capabilityLevel) {
 
         if (this.before != null && !this.before.test(before)) {
             return false;
@@ -64,11 +64,7 @@ public class ImprovementCraftCriterion extends AbstractCriterionInstance {
             return false;
         }
 
-        if (this.capabilityLevel != -1 && this.capabilityLevel != capabilityLevel) {
-            return false;
-        }
-
-        return true;
+        return this.capabilityLevel == -1 || this.capabilityLevel == capabilityLevel;
     }
 
     private static ImprovementCraftCriterion deserialize(JsonObject json) {

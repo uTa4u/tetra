@@ -3,13 +3,12 @@ package se.mickelus.tetra.blocks.workbench.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.gui.GuiElement;
 import se.mickelus.tetra.module.data.GlyphData;
 
 public class GuiModuleGlyph extends GuiElement {
 
-    private ResourceLocation textureLocation;
+    private final ResourceLocation textureLocation;
 
     int textureX;
     int textureY;
@@ -46,9 +45,9 @@ public class GuiModuleGlyph extends GuiElement {
 
         Minecraft.getMinecraft().getTextureManager().bindTexture(textureLocation);
 
-        float red = (float)(tint >> 16 & 255) / 255.0F;
-        float blue = (float)(tint >> 8 & 255) / 255.0F;
-        float green = (float)(tint & 255) / 255.0F;
+        float red = (float) (tint >> 16 & 255) / 255.0F;
+        float blue = (float) (tint >> 8 & 255) / 255.0F;
+        float green = (float) (tint & 255) / 255.0F;
 
         if (shift) {
             GlStateManager.translate(0.5F, 0.5F, 0);

@@ -10,7 +10,8 @@ public class TooltipGetterUnbreaking implements ITooltipGetter {
     private static final IStatGetter levelGetter = new StatGetterEffectLevel(ItemEffect.unbreaking, 1);
     private static final IStatGetter chanceGetter = new StatGetterUnbreaking();
 
-    public TooltipGetterUnbreaking() { }
+    public TooltipGetterUnbreaking() {
+    }
 
 
     @Override

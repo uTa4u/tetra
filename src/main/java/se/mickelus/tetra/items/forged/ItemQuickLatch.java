@@ -13,7 +13,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.items.TetraCreativeTabs;
 import se.mickelus.tetra.items.TetraItem;
 
@@ -55,6 +54,6 @@ public class ItemQuickLatch extends TetraItem {
         if (Math.random() > 0.5f) {
             event = SoundEvents.BLOCK_TRIPWIRE_CLICK_ON;
         }
-        world.playSound(player, player.getPosition(), event, SoundCategory.PLAYERS, 0.3f,  1f + 0.5f * (float) Math.random());
+        world.playSound(player, player.getPosition(), event, SoundCategory.PLAYERS, 0.3f, 1f + 0.5f * (float) Math.random());
     }
 }

@@ -8,5 +8,5 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public interface InteractionOutcome {
-    public boolean apply(World world, BlockPos pos, IBlockState blockState, EntityPlayer player, EnumHand hand, EnumFacing hitFace);
+    boolean apply(World world, BlockPos pos, IBlockState blockState, EntityPlayer player, EnumHand hand, EnumFacing hitFace);
 }

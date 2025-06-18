@@ -3,7 +3,6 @@ package se.mickelus.tetra.blocks.geode;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.items.TetraCreativeTabs;
 import se.mickelus.tetra.items.TetraItem;
 import se.mickelus.tetra.network.PacketHandler;

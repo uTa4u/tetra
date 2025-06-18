@@ -40,11 +40,11 @@ import java.util.stream.Stream;
 
 public class ItemEffectHandler {
 
-    private Cache<UUID, Integer> strikeCache;
+    private final Cache<UUID, Integer> strikeCache;
 
     public static ItemEffectHandler instance;
 
-    private static final BlockPos[] sweep1 = new BlockPos[] {
+    private static final BlockPos[] sweep1 = new BlockPos[]{
             new BlockPos(-2, 0, 0),
             new BlockPos(-1, 0, 0),
             new BlockPos(0, 0, 0),
@@ -71,7 +71,7 @@ public class ItemEffectHandler {
             new BlockPos(-1, -1, -1),
     };
 
-    private static final BlockPos[] sweep2 = new BlockPos[] {
+    private static final BlockPos[] sweep2 = new BlockPos[]{
             new BlockPos(-2, 0, 0),
             new BlockPos(-1, 0, 0),
             new BlockPos(0, 0, 0),
@@ -113,7 +113,7 @@ public class ItemEffectHandler {
         return item.getEffectEfficiency(itemStack, effect);
     }
 
-    @SubscribeEvent(priority=EventPriority.LOW)
+    @SubscribeEvent(priority = EventPriority.LOW)
     public void onExperienceDrop(LivingExperienceDropEvent event) {
         Optional.ofNullable(event.getAttackingPlayer())
                 .map(EntityLivingBase::getHeldItemMainhand)
@@ -156,7 +156,7 @@ public class ItemEffectHandler {
                                 .getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
                         float multiplier = quickStrikeLevel * 0.05f + 0.2f;
 
-                        if (event.getAmount() <  multiplier * maxDamage) {
+                        if (event.getAmount() < multiplier * maxDamage) {
                             event.setAmount(multiplier * maxDamage);
                         }
                     }
@@ -187,7 +187,7 @@ public class ItemEffectHandler {
 
                     int unarmoredBonusLevel = getEffectLevel(itemStack, ItemEffect.unarmoredDamage);
                     if (unarmoredBonusLevel > 0 && event.getEntityLiving().getTotalArmorValue() == 0) {
-                        event.setAmount(event.getAmount()  + unarmoredBonusLevel);
+                        event.setAmount(event.getAmount() + unarmoredBonusLevel);
                     }
                 });
     }
@@ -203,7 +203,7 @@ public class ItemEffectHandler {
     public void onCriticalHit(CriticalHitEvent event) {
         Optional.ofNullable(event.getEntityLiving())
                 .filter(entity -> entity instanceof EntityPlayer)
-                .map(entity -> (EntityLivingBase) entity)
+                .map(entity -> entity)
                 .map(EntityLivingBase::getHeldItemMainhand)
                 .filter(itemStack -> !itemStack.isEmpty())
                 .filter(itemStack -> itemStack.getItem() instanceof ItemModular)
@@ -232,8 +232,8 @@ public class ItemEffectHandler {
     public void onPlayerPickupXp(PlayerPickupXpEvent event) {
         EntityPlayer player = event.getEntityPlayer();
         Stream.concat(
-                player.inventory.mainInventory.stream(),
-                player.inventory.offHandInventory.stream())
+                        player.inventory.mainInventory.stream(),
+                        player.inventory.offHandInventory.stream())
                 .filter(itemStack -> !itemStack.isEmpty())
                 .filter(itemStack -> itemStack.getItem() instanceof ItemModular)
                 .filter(ItemStack::isItemDamaged)
@@ -345,7 +345,7 @@ public class ItemEffectHandler {
     private boolean critBlock(World world, EntityPlayer breakingPlayer, BlockPos pos, IBlockState blockState, ItemStack itemStack, String tool, int critLevel) {
         if (breakingPlayer.getRNG().nextFloat() < critLevel * 0.01 && itemStack.getItem().getDestroySpeed(itemStack, blockState) > 2 * blockState.getBlockHardness(world, pos)) {
             int toolLevel = itemStack.getItem().getHarvestLevel(itemStack, tool, breakingPlayer, blockState);
-            if (( toolLevel >= 0 && toolLevel >= blockState.getBlock().getHarvestLevel(blockState) ) || itemStack.canHarvestBlock(blockState)) {
+            if ((toolLevel >= 0 && toolLevel >= blockState.getBlock().getHarvestLevel(blockState)) || itemStack.canHarvestBlock(blockState)) {
                 world.playEvent(null, 2001, pos, Block.getStateId(blockState));
                 breakBlock(world, breakingPlayer, itemStack, pos, blockState);
                 itemStack.damageItem(2, breakingPlayer);
@@ -395,11 +395,12 @@ public class ItemEffectHandler {
 
     /**
      * Break a block in the world, as a player. Based on how players break blocks in vanilla.
-     * @param world the world in which to break blocks
+     *
+     * @param world          the world in which to break blocks
      * @param breakingPlayer the player which is breaking the blocks
-     * @param toolStack the itemstack used to break the blocks
-     * @param pos the position which to break blocks around
-     * @param blockState the state of the block that is to broken
+     * @param toolStack      the itemstack used to break the blocks
+     * @param pos            the position which to break blocks around
+     * @param blockState     the state of the block that is to broken
      * @return True if the player was allowed to break the block, otherwise false
      */
     public static boolean breakBlock(World world, EntityPlayer breakingPlayer, ItemStack toolStack, BlockPos pos, IBlockState blockState) {
@@ -414,13 +415,14 @@ public class ItemEffectHandler {
 
     /**
      * Breaks several blocks around the given blockpos.
-     * @param world the world in which to break blocks
+     *
+     * @param world          the world in which to break blocks
      * @param breakingPlayer the player which is breaking the blocks
-     * @param toolStack the itemstack used to break the blocks
-     * @param originPos the position which to break blocks around
-     * @param tool a string representation used to break the center block, the tool required to break nearby blocks has
-     *             to match this
-     * @param sweepingLevel the level of the sweeping effect on the toolStack
+     * @param toolStack      the itemstack used to break the blocks
+     * @param originPos      the position which to break blocks around
+     * @param tool           a string representation used to break the center block, the tool required to break nearby blocks has
+     *                       to match this
+     * @param sweepingLevel  the level of the sweeping effect on the toolStack
      */
     private void breakBlocksAround(World world, EntityPlayer breakingPlayer, ItemStack toolStack, BlockPos originPos,
                                    String tool, int sweepingLevel) {
@@ -463,6 +465,7 @@ public class ItemEffectHandler {
 
     /**
      * Gets and increments counter for recurrent strike made by the given entity. Expires after a minute.
+     *
      * @param entityId The ID of the responsible entity
      * @return The number of recurrent strikes
      */

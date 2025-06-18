@@ -38,15 +38,15 @@ public class TileEntityWorkbench extends TileEntity implements IInventory {
 
     public static final int MATERIAL_SLOT_COUNT = 4;
 
-    private NonNullList<ItemStack> stacks;
+    private final NonNullList<ItemStack> stacks;
 
-    private ItemStack previousTarget = ItemStack.EMPTY;
+    private final ItemStack previousTarget = ItemStack.EMPTY;
     private UpgradeSchema currentSchema;
     private String currentSlot;
 
-    private Map<String, Runnable> changeListeners;
+    private final Map<String, Runnable> changeListeners;
 
-    private static WorkbenchAction[] actions = new WorkbenchAction[] {
+    private static WorkbenchAction[] actions = new WorkbenchAction[]{
             new RepairAction()
     };
 
@@ -88,7 +88,7 @@ public class TileEntityWorkbench extends TileEntity implements IInventory {
                         if (!providingStack.isEmpty()) {
                             if (providingStack.getItem() instanceof ItemModular) {
                                 ((ItemModular) providingStack.getItem()).onActionConsumeCapability(providingStack,
-                                        targetStack, player, capability, requiredLevel,true);
+                                        targetStack, player, capability, requiredLevel, true);
                             }
                         } else {
                             if (getBlockType() instanceof BlockWorkbench) {
@@ -106,7 +106,7 @@ public class TileEntityWorkbench extends TileEntity implements IInventory {
         return Arrays.stream(action.getRequiredCapabilitiesFor(itemStack))
                 .allMatch(capability ->
                         CapabilityHelper.getCombinedCapabilityLevel(player, getWorld(), getPos(), world.getBlockState(getPos()), capability)
-                        >= action.getCapabilityLevel(itemStack, capability));
+                                >= action.getCapabilityLevel(itemStack, capability));
     }
 
     public UpgradeSchema getCurrentSchema() {
@@ -128,8 +128,9 @@ public class TileEntityWorkbench extends TileEntity implements IInventory {
 
     /**
      * Intended for updating the TE when receiving update packets on the server.
+     *
      * @param currentSchema A schema, or null if it should be unset
-     * @param currentSlot A slot key, or null if it should be unset
+     * @param currentSlot   A slot key, or null if it should be unset
      * @param player
      */
     public void update(UpgradeSchema currentSchema, String currentSlot, EntityPlayer player) {
@@ -143,6 +144,7 @@ public class TileEntityWorkbench extends TileEntity implements IInventory {
 
         sync();
     }
+
     public String getCurrentSlot() {
         return currentSlot;
     }
@@ -209,7 +211,7 @@ public class TileEntityWorkbench extends TileEntity implements IInventory {
                 if (!providingStack.isEmpty()) {
                     if (providingStack.getItem() instanceof ItemModular) {
                         upgradedStack = ((ItemModular) providingStack.getItem()).onCraftConsumeCapability(providingStack,
-                                upgradedStack, player, capability, requiredLevel,true);
+                                upgradedStack, player, capability, requiredLevel, true);
                     }
                 } else {
                     if (getBlockType() instanceof BlockWorkbench) {
@@ -326,6 +328,7 @@ public class TileEntityWorkbench extends TileEntity implements IInventory {
 
     /**
      * Empties all material slots into the given players inventory.
+     *
      * @param player
      */
     private void emptyMaterialSlots(EntityPlayer player) {
@@ -343,7 +346,7 @@ public class TileEntityWorkbench extends TileEntity implements IInventory {
             for (int i = 1; i < stacks.size(); i++) {
                 ItemStack materialStack = removeStackFromSlot(i);
                 if (!materialStack.isEmpty()) {
-                    EntityItem entityitem = new EntityItem(world, (double)pos.getX() + 0.5, (double)pos.getY() + 1.1, (double)pos.getZ() + 0.5, materialStack);
+                    EntityItem entityitem = new EntityItem(world, (double) pos.getX() + 0.5, (double) pos.getY() + 1.1, (double) pos.getZ() + 0.5, materialStack);
                     entityitem.setDefaultPickupDelay();
                     world.spawnEntity(entityitem);
                 }

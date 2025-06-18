@@ -3,17 +3,13 @@ package se.mickelus.tetra.loot;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.JsonUtils;
-import net.minecraft.util.NonNullList;
-import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootEntryItem;
 import net.minecraft.world.storage.loot.RandomValueRange;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraft.world.storage.loot.functions.SetNBT;
 import net.minecraftforge.oredict.OreDictionary;
-import se.mickelus.tetra.items.forged.ItemMetalScrap;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

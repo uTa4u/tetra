@@ -13,9 +13,9 @@ public abstract class TileEntityHudRenderer<T extends TileEntity> extends TileEn
         renderString(str);
 
         GlStateManager.pushMatrix();
-        GlStateManager.translate(1, 0.5 ,1);
+        GlStateManager.translate(1, 0.5, 1);
 
-        GlStateManager.scale(1/16f, -1/16f, 1/16f);
+        GlStateManager.scale(1 / 16f, -1 / 16f, 1 / 16f);
 
 //        GlStateManager.translate(0.0F, 0.33333334F, 0.046666667F);
 //        GlStateManager.scale(0.010416667F, -0.010416667F, 0.010416667F);
@@ -59,9 +59,9 @@ public abstract class TileEntityHudRenderer<T extends TileEntity> extends TileEn
             bottom = j;
         }
 
-        float red = (float)(color >> 16 & 255) / 255.0F;
-        float blue = (float)(color >> 8 & 255) / 255.0F;
-        float green = (float)(color & 255) / 255.0F;
+        float red = (float) (color >> 16 & 255) / 255.0F;
+        float blue = (float) (color >> 8 & 255) / 255.0F;
+        float green = (float) (color & 255) / 255.0F;
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferBuilder = tessellator.getBuffer();
         GlStateManager.enableBlend();
@@ -69,10 +69,10 @@ public abstract class TileEntityHudRenderer<T extends TileEntity> extends TileEn
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         GlStateManager.color(red, blue, green, opacity);
         bufferBuilder.begin(7, DefaultVertexFormats.POSITION);
-        bufferBuilder.pos((double)left, (double)bottom, 0.0D).endVertex();
-        bufferBuilder.pos((double)right, (double)bottom, 0.0D).endVertex();
-        bufferBuilder.pos((double)right, (double)top, 0.0D).endVertex();
-        bufferBuilder.pos((double)left, (double)top, 0.0D).endVertex();
+        bufferBuilder.pos(left, bottom, 0.0D).endVertex();
+        bufferBuilder.pos(right, bottom, 0.0D).endVertex();
+        bufferBuilder.pos(right, top, 0.0D).endVertex();
+        bufferBuilder.pos(left, top, 0.0D).endVertex();
         tessellator.draw();
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();

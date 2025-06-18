@@ -7,15 +7,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.ITemplateProcessor;
 import net.minecraft.world.gen.structure.template.Template;
 import se.mickelus.tetra.blocks.forged.BlockForgedCrate;
-import se.mickelus.tetra.blocks.forged.container.BlockForgedContainer;
-import se.mickelus.tetra.blocks.forged.container.TileEntityForgedContainer;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
 public class ForgedCrateProcessor implements ITemplateProcessor {
 
-    private Random random;
+    private final Random random;
 
     public ForgedCrateProcessor(Random random) {
         this.random = random;

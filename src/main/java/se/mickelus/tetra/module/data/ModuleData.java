@@ -2,29 +2,28 @@ package se.mickelus.tetra.module.data;
 
 import net.minecraft.util.ResourceLocation;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.module.Priority;
 
 /**
  * ModuleData contain stats and information for a variant of an item module.
  * Example json:
  * {
- *     "key": "heavy_blade/oak_log",
- *     "durability": 100,
- *     "integrity": -2,
- *     "damage": 3,
- *     "attackSpeed": -0.4,
- *     "glyph": {
- *         "tint": "9d804e",
- *         "textureX": 48
- *     },
- *     "effects": {
- *         "sweeping": 3
- *     },
- *     "capabilities": {
- *         "cut": [1, 3.443],
- *         "hammer": 2
- *     }
+ * "key": "heavy_blade/oak_log",
+ * "durability": 100,
+ * "integrity": -2,
+ * "damage": 3,
+ * "attackSpeed": -0.4,
+ * "glyph": {
+ * "tint": "9d804e",
+ * "textureX": 48
+ * },
+ * "effects": {
+ * "sweeping": 3
+ * },
+ * "capabilities": {
+ * "cut": [1, 3.443],
+ * "hammer": 2
+ * }
  * }
  */
 public class ModuleData {
@@ -111,11 +110,11 @@ public class ModuleData {
      * level and efficiency. The level is an integer and the efficiency is a decimal number. The efficiency is optional
      * and when not provided the level should not be placed within an array.
      * Optional, can be omitted if the module variant provides no effects.
-     *
+     * <p>
      * Json format:
      * {
-     *     "effectA": [level, efficiency],
-     *     "effectB": level
+     * "effectA": [level, efficiency],
+     * "effectB": level
      * }
      */
     public EffectData effects = new EffectData();
@@ -132,11 +131,11 @@ public class ModuleData {
      * the value is an array containing the level and efficiency. The level is an integer and the efficiency is a
      * decimal number. The efficiency is optional and when not provided the level should not be placed within an array.
      * Optional, can be omitted if the module variant provides no capabilities.
-     *
+     * <p>
      * Json format:
      * {
-     *     "capabilityA": [level, efficiency],
-     *     "capabilityB": level
+     * "capabilityA": [level, efficiency],
+     * "capabilityB": level
      * }
      */
     public CapabilityData capabilities = new CapabilityData();

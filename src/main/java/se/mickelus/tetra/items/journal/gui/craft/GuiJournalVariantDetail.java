@@ -7,7 +7,10 @@ import net.minecraft.item.ItemStack;
 import se.mickelus.tetra.blocks.workbench.gui.GuiCapabilityRequirement;
 import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.capabilities.CapabilityHelper;
-import se.mickelus.tetra.gui.*;
+import se.mickelus.tetra.gui.GuiElement;
+import se.mickelus.tetra.gui.GuiItem;
+import se.mickelus.tetra.gui.GuiString;
+import se.mickelus.tetra.gui.GuiStringSmall;
 import se.mickelus.tetra.gui.animation.Applier;
 import se.mickelus.tetra.gui.animation.KeyframeAnimation;
 import se.mickelus.tetra.gui.impl.GuiColors;
@@ -22,23 +25,23 @@ import java.util.Map;
 
 public class GuiJournalVariantDetail extends GuiElement {
 
-    private GuiString variantLabel;
+    private final GuiString variantLabel;
 
-    private GuiSynergyIndicator synergyIndicator;
+    private final GuiSynergyIndicator synergyIndicator;
 
-    private GuiString improvementsLabel;
-    private GuiElement improvements;
+    private final GuiString improvementsLabel;
+    private final GuiElement improvements;
 
-    private GuiElement requiredCapabilities;
-    private GuiItem material;
+    private final GuiElement requiredCapabilities;
+    private final GuiItem material;
 
-    private GuiJournalStats stats;
+    private final GuiJournalStats stats;
 
-    private int[] capabilityLevels;
+    private final int[] capabilityLevels;
 
-    private KeyframeAnimation openAnimation;
-    private KeyframeAnimation showAnimation;
-    private KeyframeAnimation hideAnimation;
+    private final KeyframeAnimation openAnimation;
+    private final KeyframeAnimation showAnimation;
+    private final KeyframeAnimation hideAnimation;
 
     public GuiJournalVariantDetail(int x, int y, int width) {
         super(x, y, width, 100);
@@ -125,7 +128,7 @@ public class GuiJournalVariantDetail extends GuiElement {
 
             requiredCapabilities.clearChildren();
             int i = 0;
-            for (Map.Entry<Capability, Integer> entry: baseOutcome.capabilities.valueMap.entrySet()) {
+            for (Map.Entry<Capability, Integer> entry : baseOutcome.capabilities.valueMap.entrySet()) {
                 GuiCapabilityRequirement requirement = new GuiCapabilityRequirement(20, i * 18, entry.getKey());
                 requirement.updateRequirement(entry.getValue(), capabilityLevels[entry.getKey().ordinal()]);
                 requiredCapabilities.addChild(requirement);
@@ -139,7 +142,7 @@ public class GuiJournalVariantDetail extends GuiElement {
             }
 
             stats.update(selectedOutcome != null ? selectedOutcome.itemStack : hoveredOutcome.itemStack,
-                    baseOutcome.itemStack,null, null, Minecraft.getMinecraft().player);
+                    baseOutcome.itemStack, null, null, Minecraft.getMinecraft().player);
 
             show();
         } else {

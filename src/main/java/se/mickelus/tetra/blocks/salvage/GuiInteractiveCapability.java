@@ -3,24 +3,24 @@ package se.mickelus.tetra.blocks.salvage;
 import net.minecraft.entity.player.EntityPlayer;
 import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.capabilities.CapabilityHelper;
-import se.mickelus.tetra.gui.impl.GuiColors;
 import se.mickelus.tetra.gui.GuiElement;
 import se.mickelus.tetra.gui.GuiTexture;
 import se.mickelus.tetra.gui.animation.Applier;
 import se.mickelus.tetra.gui.animation.KeyframeAnimation;
+import se.mickelus.tetra.gui.impl.GuiColors;
 
 public class GuiInteractiveCapability extends GuiElement {
     private static final String texture = "textures/gui/block-interaction.png";
 
-    private GuiTexture iconTexture;
-    private GuiTexture levelTexture;
+    private final GuiTexture iconTexture;
+    private final GuiTexture levelTexture;
 
     private KeyframeAnimation show;
-    private KeyframeAnimation hide;
+    private final KeyframeAnimation hide;
 
-    private Capability capability;
-    private int capabilityLevel;
-    private EntityPlayer player;
+    private final Capability capability;
+    private final int capabilityLevel;
+    private final EntityPlayer player;
 
     public GuiInteractiveCapability(int x, int y, Capability capability, int capabilityLevel, EntityPlayer player) {
         super(x, y, 10, 10);
@@ -33,7 +33,7 @@ public class GuiInteractiveCapability extends GuiElement {
         iconTexture = new GuiTexture(1, 0, 8, 8, capability.ordinal() * 8, 8, texture);
         addChild(iconTexture);
 
-        levelTexture = new GuiTexture(2, 6, 5, 5, ( capabilityLevel - 1 ) * 5, 21, texture);
+        levelTexture = new GuiTexture(2, 6, 5, 5, (capabilityLevel - 1) * 5, 21, texture);
         addChild(levelTexture);
 
         show = new KeyframeAnimation(100, this)

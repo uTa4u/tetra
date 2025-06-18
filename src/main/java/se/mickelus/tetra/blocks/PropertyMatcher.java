@@ -18,7 +18,8 @@ import java.util.function.Predicate;
 
 public class PropertyMatcher implements Predicate<IBlockState> {
     private Block block = null;
-    private final Map< IProperty<?>, Predicate<?>> propertyPredicates = Maps.newHashMap();
+    private final Map<IProperty<?>, Predicate<?>> propertyPredicates = Maps.newHashMap();
+
     @Override
     public boolean test(IBlockState blockState) {
         if (block != null && block != blockState.getBlock()) {
@@ -39,8 +40,8 @@ public class PropertyMatcher implements Predicate<IBlockState> {
     }
 
     public <V extends Comparable<V>> PropertyMatcher where(IProperty<V> property, Predicate<? extends V> is) {
-         this.propertyPredicates.put(property, is);
-         return this;
+        this.propertyPredicates.put(property, is);
+        return this;
     }
 
     public static PropertyMatcher deserialize(JsonElement json) {

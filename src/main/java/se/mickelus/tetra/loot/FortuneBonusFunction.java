@@ -19,14 +19,14 @@ import se.mickelus.tetra.module.ItemEffect;
 import java.util.Random;
 
 public class FortuneBonusFunction extends LootFunction {
-    private RandomValueRange count;
-    private int limit;
+    private final RandomValueRange count;
+    private final int limit;
 
-    private Capability requiredCapability;
+    private final Capability requiredCapability;
     private int capabilityLevel = -1;
 
     public FortuneBonusFunction(LootCondition[] conditionsIn, RandomValueRange count, int limit,
-            Capability requiredCapability, int capabilityLevel) {
+                                Capability requiredCapability, int capabilityLevel) {
         super(conditionsIn);
         this.count = count;
         this.limit = limit;
@@ -56,8 +56,7 @@ public class FortuneBonusFunction extends LootFunction {
     }
 
     public static class Serializer extends LootFunction.Serializer<FortuneBonusFunction> {
-        public Serializer()
-        {
+        public Serializer() {
             super(new ResourceLocation("tetra:fortune_enchant"), FortuneBonusFunction.class);
         }
 

@@ -53,7 +53,7 @@ public class BlockForgedCrate extends BlockFalling implements ITetraBlock, IBloc
     public static final PropertyBool propStacked = PropertyBool.create("stacked");
     public static final PropertyInteger propIntegrity = PropertyInteger.create("integrity", 0, 3);
 
-    static final BlockInteraction[] interactions = new BlockInteraction[] {
+    static final BlockInteraction[] interactions = new BlockInteraction[]{
             new BlockInteraction(Capability.pry, 1, EnumFacing.EAST, 6, 8, 6, 8,
                     BlockStateMatcher.ANY,
                     BlockForgedCrate::attemptBreakPry),
@@ -100,13 +100,13 @@ public class BlockForgedCrate extends BlockFalling implements ITetraBlock, IBloc
     }
 
     private static boolean attemptBreak(World world, BlockPos pos, IBlockState blockState, EntityPlayer player, ItemStack itemStack,
-            Capability capability, int min, int multiplier) {
+                                        Capability capability, int min, int multiplier) {
 
         int integrity = blockState.getValue(propIntegrity);
 
         int progress = CastOptional.cast(itemStack.getItem(), ItemModular.class)
                 .map(item -> item.getCapabilityLevel(itemStack, capability))
-                .map(level -> ( level - min ) * multiplier)
+                .map(level -> (level - min) * multiplier)
                 .orElse(1);
 
         if (integrity - progress >= 0) {
@@ -127,7 +127,7 @@ public class BlockForgedCrate extends BlockFalling implements ITetraBlock, IBloc
 
     @Override
     public BlockInteraction[] getPotentialInteractions(IBlockState state, EnumFacing face, Collection<Capability> capabilities) {
-            return interactions;
+        return interactions;
     }
 
     @Override

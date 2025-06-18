@@ -8,7 +8,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class TileEntityOutcome<T extends TileEntity> implements InteractionOutcome {

@@ -8,10 +8,6 @@ import net.minecraft.world.gen.structure.template.Template;
 import se.mickelus.tetra.blocks.forged.transfer.BlockTransferUnit;
 import se.mickelus.tetra.blocks.forged.transfer.EnumTransferConfig;
 import se.mickelus.tetra.blocks.forged.transfer.TileEntityTransferUnit;
-import se.mickelus.tetra.blocks.hammer.BlockHammerBase;
-import se.mickelus.tetra.blocks.hammer.EnumHammerConfig;
-import se.mickelus.tetra.blocks.hammer.EnumHammerPlate;
-import se.mickelus.tetra.blocks.hammer.TileEntityHammerBase;
 import se.mickelus.tetra.items.cell.ItemCellMagmatic;
 
 import javax.annotation.Nullable;
@@ -39,7 +35,7 @@ public class TransferUnitProcessor implements ITemplateProcessor {
             }
 
             // randomize configurations
-            EnumTransferConfig[] configs =  EnumTransferConfig.values();
+            EnumTransferConfig[] configs = EnumTransferConfig.values();
             TileEntityTransferUnit.writeConfig(blockInfo.tileentityData, configs[random.nextInt(configs.length)]);
 
             // randomize plates

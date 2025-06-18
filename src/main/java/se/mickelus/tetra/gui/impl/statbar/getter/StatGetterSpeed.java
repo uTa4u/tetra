@@ -7,14 +7,14 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import se.mickelus.tetra.items.ItemModular;
 import se.mickelus.tetra.items.ItemModularHandheld;
-import se.mickelus.tetra.module.ItemModule;
 import se.mickelus.tetra.module.ItemModuleMajor;
 import se.mickelus.tetra.module.data.ImprovementData;
 import se.mickelus.tetra.util.CastOptional;
 
 public class StatGetterSpeed implements IStatGetter {
 
-    public StatGetterSpeed() { }
+    public StatGetterSpeed() {
+    }
 
     @Override
     public boolean shouldShow(EntityPlayer player, ItemStack currentStack, ItemStack previewStack) {

@@ -12,7 +12,7 @@ public class CompoundProcessor implements ITemplateProcessor {
 
     ITemplateProcessor[] processors;
 
-    public CompoundProcessor(ITemplateProcessor ... processors) {
+    public CompoundProcessor(ITemplateProcessor... processors) {
         this.processors = processors;
     }
 

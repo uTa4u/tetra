@@ -1,6 +1,7 @@
 package se.mickelus.tetra.gui.impl.statbar;
 
-import se.mickelus.tetra.gui.*;
+import se.mickelus.tetra.gui.GuiAlignment;
+import se.mickelus.tetra.gui.GuiElement;
 
 public class GuiBar extends GuiElement {
 
@@ -59,21 +60,21 @@ public class GuiBar extends GuiElement {
         double minValue = Math.min(value, diffValue);
 
         barLength = (int) Math.floor((minValue - min) / (max - min) * width);
-        diffLength = (int) Math.ceil( Math.abs(value - diffValue) / (max - min) * width);
+        diffLength = (int) Math.ceil(Math.abs(value - diffValue) / (max - min) * width);
 
         diffColor = invertedDiff ^ value < diffValue ? increaseColorBar : decreaseColorBar;
     }
 
     @Override
     public void draw(int refX, int refY, int screenWidth, int screenHeight, int mouseX, int mouseY, float opacity) {
-        drawRect(refX + x, refY + y + 6,refX + x + width, refY + y + 6 + height, colorWithOpacity(0xffffff, 0.14f * opacity));
+        drawRect(refX + x, refY + y + 6, refX + x + width, refY + y + 6 + height, colorWithOpacity(0xffffff, 0.14f * opacity));
         if (alignment == GuiAlignment.right) {
-            drawRect(refX + x + width - barLength, refY + y + 6,refX + x + width, refY + y + 6 + height, colorWithOpacity(0xffffffff, opacity));
-            drawRect(refX + x + width - barLength - diffLength, refY + y + 6,refX + x + width - barLength, refY + y + 6 + height,
+            drawRect(refX + x + width - barLength, refY + y + 6, refX + x + width, refY + y + 6 + height, colorWithOpacity(0xffffffff, opacity));
+            drawRect(refX + x + width - barLength - diffLength, refY + y + 6, refX + x + width - barLength, refY + y + 6 + height,
                     diffColor);
         } else {
-            drawRect(refX + x, refY + y + 6,refX + x + barLength, refY + y + 6 + height, colorWithOpacity(0xffffffff, opacity));
-            drawRect(refX + x + barLength, refY + y + 6,refX + x + barLength + diffLength, refY + y + 6 + height,
+            drawRect(refX + x, refY + y + 6, refX + x + barLength, refY + y + 6 + height, colorWithOpacity(0xffffffff, opacity));
+            drawRect(refX + x + barLength, refY + y + 6, refX + x + barLength + diffLength, refY + y + 6 + height,
                     diffColor);
         }
     }

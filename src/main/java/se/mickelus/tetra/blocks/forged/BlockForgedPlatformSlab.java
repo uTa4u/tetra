@@ -2,7 +2,6 @@ package se.mickelus.tetra.blocks.forged;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.block.BlockSlab;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -23,18 +22,16 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.Materials;
 import se.mickelus.tetra.blocks.TetraBlock;
 import se.mickelus.tetra.items.TetraCreativeTabs;
 
 import javax.annotation.Nullable;
-import java.util.Collections;
 import java.util.List;
 
 
 public class BlockForgedPlatformSlab extends TetraBlock {
-    public static final PropertyEnum<BlockSlab.EnumBlockHalf> halfProp = PropertyEnum.<BlockSlab.EnumBlockHalf>create("half", BlockSlab.EnumBlockHalf.class);
+    public static final PropertyEnum<BlockSlab.EnumBlockHalf> halfProp = PropertyEnum.create("half", BlockSlab.EnumBlockHalf.class);
     protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
     protected static final AxisAlignedBB AABB_TOP_HALF = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 1.0D, 1.0D, 1.0D);
 
@@ -145,7 +142,7 @@ public class BlockForgedPlatformSlab extends TetraBlock {
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
         IBlockState iblockstate = super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(halfProp, BlockSlab.EnumBlockHalf.BOTTOM);
 
-        return facing != EnumFacing.DOWN && (facing == EnumFacing.UP || (double)hitY <= 0.5D) ? iblockstate : iblockstate.withProperty(halfProp, BlockSlab.EnumBlockHalf.TOP);
+        return facing != EnumFacing.DOWN && (facing == EnumFacing.UP || (double) hitY <= 0.5D) ? iblockstate : iblockstate.withProperty(halfProp, BlockSlab.EnumBlockHalf.TOP);
     }
 
     @SideOnly(Side.CLIENT)

@@ -215,11 +215,13 @@ public class GuiElement extends Gui {
         return isVisible;
     }
 
-    protected void onShow() {}
+    protected void onShow() {
+    }
 
     /**
      * Can be overridden to do something when the element is hidden. Returning false indicates that the handler will
      * take care of setting isVisible to false.
+     *
      * @return
      */
     protected boolean onHide() {
@@ -307,9 +309,9 @@ public class GuiElement extends Gui {
             bottom = j;
         }
 
-        float red = (float)(color >> 16 & 255) / 255.0F;
-        float green = (float)(color >> 8 & 255) / 255.0F;
-        float blue = (float)(color & 255) / 255.0F;
+        float red = (float) (color >> 16 & 255) / 255.0F;
+        float green = (float) (color >> 8 & 255) / 255.0F;
+        float blue = (float) (color & 255) / 255.0F;
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferBuilder = tessellator.getBuffer();
         GlStateManager.enableBlend();
@@ -317,10 +319,10 @@ public class GuiElement extends Gui {
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         GlStateManager.color(red, green, blue, opacity);
         bufferBuilder.begin(7, DefaultVertexFormats.POSITION);
-        bufferBuilder.pos((double)left, (double)bottom, zLevel).endVertex();
-        bufferBuilder.pos((double)right, (double)bottom, zLevel).endVertex();
-        bufferBuilder.pos((double)right, (double)top, zLevel).endVertex();
-        bufferBuilder.pos((double)left, (double)top, zLevel).endVertex();
+        bufferBuilder.pos(left, bottom, zLevel).endVertex();
+        bufferBuilder.pos(right, bottom, zLevel).endVertex();
+        bufferBuilder.pos(right, top, zLevel).endVertex();
+        bufferBuilder.pos(left, top, zLevel).endVertex();
         tessellator.draw();
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();

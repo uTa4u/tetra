@@ -4,22 +4,21 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
 
 /**
  * Texture with half "pixel" offset
  */
 public class GuiTextureOffset extends GuiElement {
 
-    private ResourceLocation textureLocation;
+    private final ResourceLocation textureLocation;
 
-    private int textureX;
-    private int textureY;
+    private final int textureX;
+    private final int textureY;
 
     protected int color = 0xffffff;
 
     public GuiTextureOffset(int x, int y, int width, int height, String texture) {
-        this(x, y, width, height, new ResourceLocation(Tags .MOD_ID, texture));
+        this(x, y, width, height, new ResourceLocation(Tags.MOD_ID, texture));
     }
 
     public GuiTextureOffset(int x, int y, int width, int height, int textureX, int textureY, String texture) {
@@ -47,10 +46,10 @@ public class GuiTextureOffset extends GuiElement {
         Minecraft.getMinecraft().getTextureManager().bindTexture(textureLocation);
 
         GlStateManager.color(
-            (color >> 16 & 255) / 255f,
-            (color >> 8 & 255) / 255f,
-            (color & 255) / 255f,
-            opacity * getOpacity() * 255f);
+                (color >> 16 & 255) / 255f,
+                (color >> 8 & 255) / 255f,
+                (color & 255) / 255f,
+                opacity * getOpacity() * 255f);
         GlStateManager.enableBlend();
         GlStateManager.translate(0.5F, 0.5F, 0);
         drawTexturedModalRect(

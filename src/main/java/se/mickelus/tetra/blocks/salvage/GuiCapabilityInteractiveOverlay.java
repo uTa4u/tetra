@@ -4,9 +4,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import se.mickelus.tetra.capabilities.CapabilityHelper;
-import se.mickelus.tetra.gui.GuiElement;
-import se.mickelus.tetra.gui.animation.Applier;
-import se.mickelus.tetra.gui.animation.KeyframeAnimation;
 import se.mickelus.tetra.gui.hud.GuiRootHud;
 
 import java.util.Arrays;

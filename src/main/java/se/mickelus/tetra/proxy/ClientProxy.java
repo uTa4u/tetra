@@ -18,7 +18,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import se.mickelus.tetra.ConfigHandler;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.ITetraBlock;
 import se.mickelus.tetra.blocks.forged.BlockForgedCrate;
 import se.mickelus.tetra.blocks.forged.container.BlockForgedContainer;
@@ -33,8 +32,8 @@ import se.mickelus.tetra.blocks.workbench.TileEntityWorkbench;
 import se.mickelus.tetra.client.model.ModularModelLoader;
 import se.mickelus.tetra.generation.ExtendedStructureTESR;
 import se.mickelus.tetra.items.ITetraItem;
-import se.mickelus.tetra.items.toolbelt.booster.OverlayBooster;
 import se.mickelus.tetra.items.toolbelt.OverlayToolbelt;
+import se.mickelus.tetra.items.toolbelt.booster.OverlayBooster;
 
 import java.util.Arrays;
 

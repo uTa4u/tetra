@@ -1,7 +1,9 @@
 package se.mickelus.tetra.blocks.workbench.gui;
 
 import net.minecraft.client.resources.I18n;
-import se.mickelus.tetra.gui.*;
+import se.mickelus.tetra.gui.GuiClickable;
+import se.mickelus.tetra.gui.GuiString;
+import se.mickelus.tetra.gui.GuiTexture;
 import se.mickelus.tetra.gui.impl.GuiColors;
 import se.mickelus.tetra.module.data.GlyphData;
 import se.mickelus.tetra.module.schema.SchemaRarity;
@@ -15,9 +17,9 @@ public class GuiSchemaListItem extends GuiClickable {
 
     private GuiTexture border;
     private GuiTexture glyph;
-    private GuiString label;
+    private final GuiString label;
 
-    private SchemaRarity rarity;
+    private final SchemaRarity rarity;
 
     public GuiSchemaListItem(int x, int y, UpgradeSchema schema, Runnable onClickHandler) {
         this(x, y, 109, schema, onClickHandler);

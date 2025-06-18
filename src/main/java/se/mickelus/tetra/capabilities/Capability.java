@@ -7,15 +7,15 @@ package se.mickelus.tetra.capabilities;
  * harvest level, note that capability levels start at 1 while the harvest tool levels start at 0, e.g pickaxe
  * capability level 4 is required to harvest obsidian. The harvest/mining speed is based on the capability efficiency
  * multiplied by the item attack speed.
- *
+ * <p>
  * Capabilities from different modules do not stack, major modules have capability levels and efficiencies added to its
  * own
- *
+ * <p>
  * In json config files the provided capabilities are expressed as an object, example with hammer level 2 and
  * axe level 1 with efficiency 0.93:
  * {
- *     "hammer": 2,
- *     "axe": [1, 0.93]
+ * "hammer": 2,
+ * "axe": [1, 0.93]
  * }
  */
 public enum Capability {

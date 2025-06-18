@@ -21,9 +21,11 @@ import java.util.Collections;
 
 public interface ITetraBlock {
 
-    default void clientPreInit() { }
+    default void clientPreInit() {
+    }
 
-    default void init(PacketHandler packetHandler) {}
+    default void init(PacketHandler packetHandler) {
+    }
 
     boolean hasItem();
 

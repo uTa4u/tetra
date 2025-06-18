@@ -7,10 +7,10 @@ import se.mickelus.tetra.gui.impl.GuiColors;
 public class GuiButtonOutlined extends GuiClickable {
     private static final String WORKBENCH_TEXTURE = "textures/gui/workbench.png";
 
-    private GuiTexture borderLeft;
-    private GuiTexture borderRight;
-    private GuiRect borderTop;
-    private GuiRect borderBottom;
+    private final GuiTexture borderLeft;
+    private final GuiTexture borderRight;
+    private final GuiRect borderTop;
+    private final GuiRect borderBottom;
 
     public GuiButtonOutlined(int x, int y, String label, Runnable onClickHandler) {
         this(x, y, label, GuiAlignment.left, onClickHandler);

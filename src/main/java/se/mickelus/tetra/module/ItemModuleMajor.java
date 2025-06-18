@@ -13,13 +13,12 @@ import org.apache.commons.lang3.ArrayUtils;
 import se.mickelus.tetra.ConfigHandler;
 import se.mickelus.tetra.NBTHelper;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.items.ItemModular;
-import se.mickelus.tetra.module.data.TweakData;
-import se.mickelus.tetra.module.improvement.SettlePacket;
 import se.mickelus.tetra.module.data.ImprovementData;
 import se.mickelus.tetra.module.data.ModuleData;
+import se.mickelus.tetra.module.data.TweakData;
+import se.mickelus.tetra.module.improvement.SettlePacket;
 import se.mickelus.tetra.network.PacketHandler;
 import se.mickelus.tetra.util.CastOptional;
 
@@ -70,6 +69,7 @@ public abstract class ItemModuleMajor<T extends ModuleData> extends ItemModule<T
 
     /**
      * Returns the remaining number of times the item has to be used before this module will settle.
+     *
      * @param itemStack The itemstack which the module is present on
      * @return
      */
@@ -84,16 +84,18 @@ public abstract class ItemModuleMajor<T extends ModuleData> extends ItemModule<T
 
     /**
      * Returns the total number of times the item has to be used before this module will settle.
+     *
      * @param itemStack The itemstack which the module is present on
      * @return
      */
     public int getSettleLimit(ItemStack itemStack) {
-        return (int) (( ConfigHandler.settleLimitBase + getDurability(itemStack) * ConfigHandler.settleLimitDurabilityMultiplier)
+        return (int) ((ConfigHandler.settleLimitBase + getDurability(itemStack) * ConfigHandler.settleLimitDurabilityMultiplier)
                 * Math.max(getImprovementLevel(itemStack, settleImprovement) * ConfigHandler.settleLimitLevelMultiplier, 1f));
     }
 
     /**
      * Returns the total number of times the item has to be used before this module will settle.
+     *
      * @param itemStack The itemstack which the module is present on
      * @return
      */
@@ -137,9 +139,9 @@ public abstract class ItemModuleMajor<T extends ModuleData> extends ItemModule<T
     public ImprovementData[] getImprovements(ItemStack itemStack) {
         NBTTagCompound tag = NBTHelper.getTag(itemStack);
         return Arrays.stream(improvements)
-            .filter(improvement -> tag.hasKey(slotKey + ":" + improvement.key))
-            .filter(improvement -> improvement.level == tag.getInteger(slotKey + ":" + improvement.key))
-            .toArray(ImprovementData[]::new);
+                .filter(improvement -> tag.hasKey(slotKey + ":" + improvement.key))
+                .filter(improvement -> improvement.level == tag.getInteger(slotKey + ":" + improvement.key))
+                .toArray(ImprovementData[]::new);
     }
 
     public boolean acceptsImprovement(String improvementKey) {
@@ -203,8 +205,8 @@ public abstract class ItemModuleMajor<T extends ModuleData> extends ItemModule<T
 
         NBTTagCompound tag = NBTHelper.getTag(targetStack);
         Arrays.stream(improvements)
-            .map(improvement -> slotKey + ":" + improvement.key)
-            .forEach(tag::removeTag);
+                .map(improvement -> slotKey + ":" + improvement.key)
+                .forEach(tag::removeTag);
 
         clearProgression(targetStack);
 
@@ -258,10 +260,10 @@ public abstract class ItemModuleMajor<T extends ModuleData> extends ItemModule<T
     @Override
     public Collection<ItemEffect> getEffects(ItemStack itemStack) {
         return Streams.concat(
-                super.getEffects(itemStack).stream(),
-                Arrays.stream(getImprovements(itemStack))
-                        .map(improvement -> improvement.effects)
-                        .flatMap(effects -> effects.getValues().stream()))
+                        super.getEffects(itemStack).stream(),
+                        Arrays.stream(getImprovements(itemStack))
+                                .map(improvement -> improvement.effects)
+                                .flatMap(effects -> effects.getValues().stream()))
                 .distinct()
                 .collect(Collectors.toSet());
     }
@@ -285,10 +287,10 @@ public abstract class ItemModuleMajor<T extends ModuleData> extends ItemModule<T
     @Override
     public Collection<Capability> getCapabilities(ItemStack itemStack) {
         return Streams.concat(
-                super.getCapabilities(itemStack).stream(),
-                Arrays.stream(getImprovements(itemStack))
-                        .map(improvement -> improvement.capabilities)
-                        .flatMap(capabilities -> capabilities.getValues().stream()))
+                        super.getCapabilities(itemStack).stream(),
+                        Arrays.stream(getImprovements(itemStack))
+                                .map(improvement -> improvement.capabilities)
+                                .flatMap(capabilities -> capabilities.getValues().stream()))
                 .distinct()
                 .collect(Collectors.toSet());
     }
@@ -343,7 +345,7 @@ public abstract class ItemModuleMajor<T extends ModuleData> extends ItemModule<T
 
     @Override
     public int getDurability(ItemStack itemStack) {
-        return (int)((super.getDurability(itemStack) + getImprovementDurability(itemStack)) * getImprovementDurabilityMultiplier(itemStack));
+        return (int) ((super.getDurability(itemStack) + getImprovementDurability(itemStack)) * getImprovementDurabilityMultiplier(itemStack));
     }
 
     private int getImprovementDurability(ItemStack itemStack) {

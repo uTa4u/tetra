@@ -9,7 +9,7 @@ public class GuiRoot extends GuiElement {
     protected Minecraft mc;
 
     public GuiRoot(Minecraft mc) {
-        super(0, 0, 0 ,0);
+        super(0, 0, 0, 0);
         this.mc = mc;
     }
 
@@ -19,7 +19,7 @@ public class GuiRoot extends GuiElement {
         int height = scaledResolution.getScaledHeight();
         int mouseX = Mouse.getX() * width / mc.displayWidth;
         int mouseY = height - Mouse.getY() * height / mc.displayHeight - 1;
-        drawChildren(0,0, width, height, mouseX, mouseY, 1);
+        drawChildren(0, 0, width, height, mouseX, mouseY, 1);
     }
 
 }

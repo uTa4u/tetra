@@ -56,7 +56,7 @@ public class ConfigActionImpl extends ConfigAction {
 
             world.spawnParticle(EnumParticleTypes.ITEM_CRACK,
                     pos.getX() + 0.5d, pos.getY() + 1.1d, pos.getZ() + 0.5d,
-                    6,  0, 0 ,0, world.rand.nextGaussian() * 0.2,
+                    6, 0, 0, 0, world.rand.nextGaussian() * 0.2,
                     Item.getIdFromItem(targetStack.getItem()), targetStack.getMetadata());
 
             // todo: add proper criteria

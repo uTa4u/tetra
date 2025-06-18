@@ -1,7 +1,9 @@
 package se.mickelus.tetra.blocks.workbench;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -13,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class TESRWorkbench extends TileEntitySpecialRenderer<TileEntityWorkbench> {
 
-    private RenderItem itemRenderer;
+    private final RenderItem itemRenderer;
 
 //    private GuiHudWorkbench gui;
 
@@ -56,7 +58,7 @@ public class TESRWorkbench extends TileEntitySpecialRenderer<TileEntityWorkbench
         int combinedLight = getWorld().getCombinedLight(te.getPos().offset(EnumFacing.UP), 0);
         int x = combinedLight % 65536;
         int y = combinedLight / 65536;
-        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)x, (float)y);
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) x, (float) y);
     }
 
     private void applyCorrections(ItemStack stack) {

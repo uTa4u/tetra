@@ -5,8 +5,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
 import se.mickelus.tetra.gui.ToggleableSlot;
 import se.mickelus.tetra.network.PacketHandler;
 
@@ -14,10 +12,10 @@ import java.util.Arrays;
 
 
 public class ContainerForgedContainer extends Container {
-    private TileEntityForgedContainer tileEntity;
-    private IInventory playerInventory;
+    private final TileEntityForgedContainer tileEntity;
+    private final IInventory playerInventory;
 
-    private ToggleableSlot[][] compartmentSlots;
+    private final ToggleableSlot[][] compartmentSlots;
     private int currentCompartment = 0;
 
     public ContainerForgedContainer(IInventory playerInventory, TileEntityForgedContainer tileEntity, EntityPlayer player) {
@@ -80,11 +78,11 @@ public class ContainerForgedContainer extends Container {
             ItemStack itemStack = slot.getStack();
 
             if (index < tileEntity.getSizeInventory()) {
-                if (!mergeItemStack(itemStack,  tileEntity.getSizeInventory(), inventorySlots.size(), true)) {
+                if (!mergeItemStack(itemStack, tileEntity.getSizeInventory(), inventorySlots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
             } else if (!mergeItemStack(itemStack, currentCompartment * TileEntityForgedContainer.compartmentSize,
-                    ( currentCompartment + 1) * TileEntityForgedContainer.compartmentSize, false)) {
+                    (currentCompartment + 1) * TileEntityForgedContainer.compartmentSize, false)) {
                 return ItemStack.EMPTY;
             }
 

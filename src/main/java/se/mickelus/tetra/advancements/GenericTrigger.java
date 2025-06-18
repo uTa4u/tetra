@@ -19,9 +19,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class GenericTrigger<T extends ICriterionInstance> implements ICriterionTrigger<T> {
-    private ResourceLocation id;
-    private Map<PlayerAdvancements, Set<Listener<T>>> listeners;
-    private Function<JsonObject, T> deserializer;
+    private final ResourceLocation id;
+    private final Map<PlayerAdvancements, Set<Listener<T>>> listeners;
+    private final Function<JsonObject, T> deserializer;
 
     public GenericTrigger(String id, Function<JsonObject, T> deserializer) {
         this.id = new ResourceLocation(id);
@@ -64,7 +64,8 @@ public class GenericTrigger<T extends ICriterionInstance> implements ICriterionT
 
     /**
      * Fulfills all criterion instances that pass the validation predicate.
-     * @param advancements An advancements object from the player that the criterion is to be fulfilled for
+     *
+     * @param advancements        An advancements object from the player that the criterion is to be fulfilled for
      * @param validationPredicate A predicate used to check which criterion will be fulfilled
      */
     public void fulfillCriterion(PlayerAdvancements advancements, Predicate<T> validationPredicate) {
@@ -75,7 +76,7 @@ public class GenericTrigger<T extends ICriterionInstance> implements ICriterionT
                 .collect(Collectors.toList());
 
         // grantCriterion removes the listeners from the list, so we run this separately to avoid concurrent modification issues
-        for (Listener<T> listener: advancementListeners) {
+        for (Listener<T> listener : advancementListeners) {
             listener.grantCriterion(advancements);
         }
     }

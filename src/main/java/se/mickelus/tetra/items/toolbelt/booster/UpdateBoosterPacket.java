@@ -12,7 +12,8 @@ public class UpdateBoosterPacket extends AbstractPacket {
     private boolean active;
     private boolean charged;
 
-    public UpdateBoosterPacket() { }
+    public UpdateBoosterPacket() {
+    }
 
     public UpdateBoosterPacket(boolean active) {
         this(active, false);

@@ -8,7 +8,9 @@ import se.mickelus.tetra.items.ITetraItem;
 
 public interface IProxy {
 
-    public void preInit(FMLPreInitializationEvent event, ITetraItem[] items, ITetraBlock[] blocks);
-    public void init(FMLInitializationEvent event);
-    public void postInit(FMLPostInitializationEvent event);
+    void preInit(FMLPreInitializationEvent event, ITetraItem[] items, ITetraBlock[] blocks);
+
+    void init(FMLInitializationEvent event);
+
+    void postInit(FMLPostInitializationEvent event);
 }

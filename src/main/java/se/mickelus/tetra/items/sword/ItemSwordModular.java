@@ -5,14 +5,15 @@ import net.minecraft.init.Blocks;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import se.mickelus.tetra.ConfigHandler;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.items.BasicMajorModule;
 import se.mickelus.tetra.items.BasicModule;
 import se.mickelus.tetra.items.ItemModularHandheld;
 import se.mickelus.tetra.module.ItemModuleMajor;
 import se.mickelus.tetra.module.ItemUpgradeRegistry;
 import se.mickelus.tetra.module.Priority;
-import se.mickelus.tetra.module.schema.*;
+import se.mickelus.tetra.module.schema.BookEnchantSchema;
+import se.mickelus.tetra.module.schema.RemoveSchema;
+import se.mickelus.tetra.module.schema.RepairSchema;
 import se.mickelus.tetra.network.PacketHandler;
 
 public class ItemSwordModular extends ItemModularHandheld {
@@ -43,10 +44,10 @@ public class ItemSwordModular extends ItemModularHandheld {
 
         blockDestroyDamage = 2;
 
-        majorModuleKeys = new String[] { bladeKey, hiltKey };
-        minorModuleKeys = new String[] { fullerKey, guardKey, pommelKey };
+        majorModuleKeys = new String[]{bladeKey, hiltKey};
+        minorModuleKeys = new String[]{fullerKey, guardKey, pommelKey};
 
-        requiredModules = new String[] { bladeKey, hiltKey };
+        requiredModules = new String[]{bladeKey, hiltKey};
 
         basicBladeModule = new BasicMajorModule(bladeKey, "sword/basic_blade",
                 "sword/improvements/shared_blade",

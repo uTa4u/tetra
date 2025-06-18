@@ -4,17 +4,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import se.mickelus.tetra.gui.GuiElement;
-import se.mickelus.tetra.gui.GuiTexture;
-import se.mickelus.tetra.gui.animation.Applier;
-import se.mickelus.tetra.gui.animation.KeyframeAnimation;
 import se.mickelus.tetra.module.schema.UpgradeSchema;
 
 public class GuiInventoryInfo extends GuiElement {
-    private InventoryPlayer inventory;
+    private final InventoryPlayer inventory;
     private ItemStack targetStack;
     private UpgradeSchema schema;
 
-    private GuiInventoryHighlight[] highlights;
+    private final GuiInventoryHighlight[] highlights;
 
     public GuiInventoryInfo(int x, int y, EntityPlayer player) {
         super(x, y, 224, 72);

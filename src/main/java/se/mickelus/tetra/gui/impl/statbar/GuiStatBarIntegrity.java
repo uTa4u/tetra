@@ -57,7 +57,8 @@ public class GuiStatBarIntegrity extends GuiStatBase {
     }
 
     @Override
-    public void setAlignment(GuiAlignment alignment) {}
+    public void setAlignment(GuiAlignment alignment) {
+    }
 
     @Override
     public void update(EntityPlayer player, ItemStack currentStack, ItemStack previewStack, String slot, String improvement) {

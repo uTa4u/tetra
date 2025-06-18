@@ -10,7 +10,6 @@ import net.minecraft.world.storage.loot.LootEntryItem;
 import net.minecraft.world.storage.loot.LootEntryTable;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.functions.LootFunction;
-import net.minecraftforge.common.ForgeHooks;
 
 import java.lang.reflect.Type;
 

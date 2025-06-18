@@ -1,7 +1,9 @@
 package se.mickelus.tetra.blocks.salvage;
 
 import net.minecraft.entity.player.EntityPlayer;
-import se.mickelus.tetra.gui.*;
+import se.mickelus.tetra.gui.GuiAttachment;
+import se.mickelus.tetra.gui.GuiElement;
+import se.mickelus.tetra.gui.GuiTexture;
 import se.mickelus.tetra.gui.animation.Applier;
 import se.mickelus.tetra.gui.animation.KeyframeAnimation;
 
@@ -9,12 +11,12 @@ public class GuiInteractiveOutline extends GuiElement {
 
     private static final String texture = "textures/gui/block-interaction.png";
 
-    private BlockInteraction blockInteraction;
+    private final BlockInteraction blockInteraction;
 
-    private GuiTexture topLeft;
-    private GuiTexture topRight;
-    private GuiTexture bottomLeft;
-    private GuiTexture bottomRight;
+    private final GuiTexture topLeft;
+    private final GuiTexture topRight;
+    private final GuiTexture bottomLeft;
+    private final GuiTexture bottomRight;
 
     private GuiInteractiveCapability capability;
 
@@ -74,8 +76,8 @@ public class GuiInteractiveOutline extends GuiElement {
                     blockInteraction.requiredCapability, blockInteraction.requiredLevel, player);
             addChild(capability);
 
-             float centerY = y + height / 2f;
-             float centerX = x + width / 2f;
+            float centerY = y + height / 2f;
+            float centerX = x + width / 2f;
 
             if (Math.abs(centerX - 16) > Math.abs(centerY - 16)) {
                 if (centerX < 16) {

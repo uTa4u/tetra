@@ -29,14 +29,14 @@ public class HammerProcessor implements ITemplateProcessor {
 
             // randomize cells
             ItemCellMagmatic item = ItemCellMagmatic.instance;
-            int discharge1 = random.nextInt(item.maxCharge);
-            int discharge2 = item.maxCharge - random.nextInt(Math.max(discharge1, 1));
+            int discharge1 = random.nextInt(ItemCellMagmatic.maxCharge);
+            int discharge2 = ItemCellMagmatic.maxCharge - random.nextInt(Math.max(discharge1, 1));
             TileEntityHammerBase.writeCells(blockInfo.tileentityData,
                     new ItemStack(item, 1, discharge1), new ItemStack(item, 1, discharge2));
 
 
             // randomize configurations
-            EnumHammerConfig[] configs =  EnumHammerConfig.values();
+            EnumHammerConfig[] configs = EnumHammerConfig.values();
             TileEntityHammerBase.writeConfig(blockInfo.tileentityData,
                     configs[random.nextInt(configs.length)], configs[random.nextInt(configs.length)]);
 

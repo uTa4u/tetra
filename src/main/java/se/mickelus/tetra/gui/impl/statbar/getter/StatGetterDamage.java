@@ -6,13 +6,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import se.mickelus.tetra.items.ItemModular;
-import se.mickelus.tetra.module.ItemModule;
 import se.mickelus.tetra.module.ItemModuleMajor;
 import se.mickelus.tetra.module.data.ImprovementData;
 import se.mickelus.tetra.util.CastOptional;
 
 public class StatGetterDamage implements IStatGetter {
-    public StatGetterDamage() { }
+    public StatGetterDamage() {
+    }
 
     @Override
     public double getValue(EntityPlayer player, ItemStack itemStack) {

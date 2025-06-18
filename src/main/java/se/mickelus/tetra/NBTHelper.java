@@ -10,7 +10,7 @@ public class NBTHelper {
     private static final String slotKey = "slot";
 
     public static NBTTagCompound getTag(ItemStack stack) {
-        if(stack == null) {
+        if (stack == null) {
             return new NBTTagCompound();
         }
 

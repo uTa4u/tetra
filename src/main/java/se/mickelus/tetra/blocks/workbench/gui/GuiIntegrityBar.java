@@ -27,9 +27,9 @@ public class GuiIntegrityBar extends GuiElement {
     private int integrityGain;
     private int integrityCost;
 
-    private GuiString label;
+    private final GuiString label;
 
-    private List<String> tooltip;
+    private final List<String> tooltip;
 
     public GuiIntegrityBar(int x, int y) {
         super(x, y, 0, 8);
@@ -61,7 +61,7 @@ public class GuiIntegrityBar extends GuiElement {
                 label.setString(I18n.format("stats.integrity_usage", -integrityCost, integrityGain));
             }
 
-            width = integrityGain * ( segmentWidth + 1);
+            width = integrityGain * (segmentWidth + 1);
         }
     }
 
@@ -87,17 +87,17 @@ public class GuiIntegrityBar extends GuiElement {
         super.draw(refX, refY, screenWidth, screenHeight, mouseX, mouseY, opacity);
 
         for (int i = 0; i < -integrityCost; i++) {
-            drawSegment(refX + x + i * (segmentWidth + 1),refY + y + segmentOffset,
+            drawSegment(refX + x + i * (segmentWidth + 1), refY + y + segmentOffset,
                     colorWithOpacity(i >= integrityGain ? overuseColor : costColor, opacity * getOpacity()));
         }
 
         for (int i = -integrityCost; i < integrityGain; i++) {
-            drawSegment(refX + x + i * (segmentWidth + 1),refY + y + segmentOffset, colorWithOpacity(gainColor, opacity * getOpacity()));
+            drawSegment(refX + x + i * (segmentWidth + 1), refY + y + segmentOffset, colorWithOpacity(gainColor, opacity * getOpacity()));
         }
     }
 
     private void drawSegment(int x, int y, int color) {
-        drawRect(x, y,x + segmentWidth, y + segmentHeight, color);
+        drawRect(x, y, x + segmentWidth, y + segmentHeight, color);
     }
 
 }

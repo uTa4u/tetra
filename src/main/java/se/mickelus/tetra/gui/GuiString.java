@@ -86,7 +86,7 @@ public class GuiString extends GuiElement {
 
         // if the vanilla fontrender considers the color to be almost transparent (0xfc) it flips the opacity back to 1
         if ((color & -67108864) != 0) {
-            fontRenderer.drawString(text, (float)x, (float)y, color, drawShadow);
+            fontRenderer.drawString(text, (float) x, (float) y, color, drawShadow);
         }
     }
 }

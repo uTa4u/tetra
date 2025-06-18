@@ -12,7 +12,8 @@ public class WorkbenchActionPacket extends BlockPosPacket {
 
     private String actionKey;
 
-    public WorkbenchActionPacket() {}
+    public WorkbenchActionPacket() {
+    }
 
     public WorkbenchActionPacket(BlockPos pos, String actionKey) {
         super(pos);

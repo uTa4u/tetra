@@ -79,7 +79,6 @@ public class BlockWorkbench extends TetraBlock implements ITileEntityProvider {
     }
 
 
-
     public static EnumActionResult upgradeWorkbench(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing) {
         ItemStack itemStack = player.getHeldItem(hand);
         if (!player.canPlayerEdit(pos.offset(facing), facing, itemStack)) {
@@ -103,6 +102,7 @@ public class BlockWorkbench extends TetraBlock implements ITileEntityProvider {
 
     /**
      * Special item regististration to handle multiple variants registered in the creative menu.
+     *
      * @param registry Item registry
      */
     @Override
@@ -117,7 +117,7 @@ public class BlockWorkbench extends TetraBlock implements ITileEntityProvider {
         registry.register(item);
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
             for (Variant variant : Variant.values()) {
-                ModelLoader.setCustomModelResourceLocation(item, variant.ordinal(), new ModelResourceLocation(getRegistryName(), "variant=" + variant.toString()));
+                ModelLoader.setCustomModelResourceLocation(item, variant.ordinal(), new ModelResourceLocation(getRegistryName(), "variant=" + variant));
             }
         }
     }
@@ -286,14 +286,14 @@ public class BlockWorkbench extends TetraBlock implements ITileEntityProvider {
         return state.getValue(propVariant).getHardness();
     }
 
-    public static enum Variant implements IStringSerializable {
+    public enum Variant implements IStringSerializable {
         wood(Material.WOOD, 2.5f),
         forged(Material.ANVIL, -1);
 
         private final Material material;
         private final float hardness;
 
-        Variant( Material material, float hardness) {
+        Variant(Material material, float hardness) {
             this.material = material;
             this.hardness = hardness;
         }

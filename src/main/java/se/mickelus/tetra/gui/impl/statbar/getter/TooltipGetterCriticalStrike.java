@@ -9,7 +9,8 @@ public class TooltipGetterCriticalStrike implements ITooltipGetter {
     private static final IStatGetter efficiencyGetter = new StatGetterEffectEfficiency(ItemEffect.criticalStrike, 100);
     private static final IStatGetter levelGetter = new StatGetterEffectLevel(ItemEffect.criticalStrike, 1);
 
-    public TooltipGetterCriticalStrike() { }
+    public TooltipGetterCriticalStrike() {
+    }
 
     @Override
     public String getTooltip(EntityPlayer player, ItemStack itemStack) {

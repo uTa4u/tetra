@@ -5,7 +5,9 @@ import net.minecraft.item.ItemStack;
 import java.util.Collection;
 
 public interface ICapabilityProvider {
-    public int getCapabilityLevel(ItemStack itemStack, Capability capability);
-    public float getCapabilityEfficiency(ItemStack itemStack, Capability capability);
-    public Collection<Capability> getCapabilities(ItemStack itemStack);
+    int getCapabilityLevel(ItemStack itemStack, Capability capability);
+
+    float getCapabilityEfficiency(ItemStack itemStack, Capability capability);
+
+    Collection<Capability> getCapabilities(ItemStack itemStack);
 }

@@ -58,7 +58,7 @@ public class BlockTransferUnit extends TetraBlock implements ITileEntityProvider
 
     private static final ResourceLocation plateLootTable = TetraMod.getResource("forged/plate_break");
 
-    public static final BlockInteraction[] interactions = new BlockInteraction[] {
+    public static final BlockInteraction[] interactions = new BlockInteraction[]{
             new BlockInteraction(Capability.pry, 1, EnumFacing.SOUTH, 5, 7, 2, 5,
                     new PropertyMatcher().where(propPlate, equalTo(true)),
                     BlockTransferUnit::removePlate),
@@ -67,10 +67,10 @@ public class BlockTransferUnit extends TetraBlock implements ITileEntityProvider
                     BlockTransferUnit::reconfigure),
     };
 
-    private static final AxisAlignedBB aabbEast = new AxisAlignedBB(0.1875,  0.0, 0.0625, 1, 0.75, 0.9375);
-    private static final AxisAlignedBB aabbNorth = new AxisAlignedBB(0.0625,  0.0, 0.0,  0.9375, 0.75, 0.8125);
-    private static final AxisAlignedBB aabbWest = new AxisAlignedBB(0.0, 0.0, 0.0625,  0.8125, 0.75, 0.9375);
-    private static final AxisAlignedBB aabbSouth = new AxisAlignedBB(0.0625,  0.0, 0.1875,  0.9375, 0.75, 1);
+    private static final AxisAlignedBB aabbEast = new AxisAlignedBB(0.1875, 0.0, 0.0625, 1, 0.75, 0.9375);
+    private static final AxisAlignedBB aabbNorth = new AxisAlignedBB(0.0625, 0.0, 0.0, 0.9375, 0.75, 0.8125);
+    private static final AxisAlignedBB aabbWest = new AxisAlignedBB(0.0, 0.0, 0.0625, 0.8125, 0.75, 0.9375);
+    private static final AxisAlignedBB aabbSouth = new AxisAlignedBB(0.0625, 0.0, 0.1875, 0.9375, 0.75, 1);
 
     public static final String unlocalizedName = "transfer_unit";
 
@@ -141,20 +141,20 @@ public class BlockTransferUnit extends TetraBlock implements ITileEntityProvider
     @Override
     public BlockInteraction[] getPotentialInteractions(IBlockState state, EnumFacing face, Collection<Capability> capabilities) {
         return Arrays.stream(new BlockInteraction[]{
-                new BlockInteraction(Capability.pry, 1, EnumFacing.SOUTH, 3, 11, 4, 6,
-                        new PropertyMatcher().where(propPlate, equalTo(true)),
-                        BlockTransferUnit::removePlate),
-                new BlockInteraction(Capability.hammer, 1, EnumFacing.SOUTH, 4, 10, 5, 9,
-                        new PropertyMatcher().where(propPlate, equalTo(false)),
-                        BlockTransferUnit::reconfigure),
-        })
+                        new BlockInteraction(Capability.pry, 1, EnumFacing.SOUTH, 3, 11, 4, 6,
+                                new PropertyMatcher().where(propPlate, equalTo(true)),
+                                BlockTransferUnit::removePlate),
+                        new BlockInteraction(Capability.hammer, 1, EnumFacing.SOUTH, 4, 10, 5, 9,
+                                new PropertyMatcher().where(propPlate, equalTo(false)),
+                                BlockTransferUnit::reconfigure),
+                })
                 .filter(interaction -> interaction.isPotentialInteraction(state, state.getValue(propFacing), face, capabilities))
                 .toArray(BlockInteraction[]::new);
     }
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
-            EnumFacing facing, float hitX, float hitY, float hitZ) {
+                                    EnumFacing facing, float hitX, float hitY, float hitZ) {
         EnumFacing blockFacing = state.getValue(propFacing);
         TileEntityTransferUnit te = TileEntityOptional.from(world, pos, TileEntityTransferUnit.class).orElse(null);
         ItemStack heldStack = player.getHeldItem(hand);

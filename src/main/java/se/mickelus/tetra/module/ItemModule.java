@@ -1,16 +1,11 @@
 package se.mickelus.tetra.module;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import org.apache.commons.lang3.ArrayUtils;
 import se.mickelus.tetra.NBTHelper;
 import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.capabilities.ICapabilityProvider;
@@ -18,6 +13,10 @@ import se.mickelus.tetra.module.data.ModuleData;
 import se.mickelus.tetra.module.data.TweakData;
 import se.mickelus.tetra.module.schema.Material;
 import se.mickelus.tetra.module.schema.RepairDefinition;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
 public abstract class ItemModule<T extends ModuleData> implements ICapabilityProvider {
 
@@ -141,7 +140,7 @@ public abstract class ItemModule<T extends ModuleData> implements ICapabilityPro
      */
     public int getIntegrityGain(ItemStack itemStack) {
         int integrity = getData(itemStack).integrity;
-        if (integrity > 0 ) {
+        if (integrity > 0) {
             return integrity;
         }
         return 0;
@@ -156,7 +155,7 @@ public abstract class ItemModule<T extends ModuleData> implements ICapabilityPro
      */
     public int getIntegrityCost(ItemStack itemStack) {
         int integrity = getData(itemStack).integrity;
-        if (integrity < 0 ) {
+        if (integrity < 0) {
             return integrity;
         }
         return 0;
@@ -168,7 +167,7 @@ public abstract class ItemModule<T extends ModuleData> implements ICapabilityPro
 
     public int getMagicCapacityGain(ItemStack itemStack) {
         int magicCapacity = getData(itemStack).magicCapacity;
-        if (magicCapacity > 0 ) {
+        if (magicCapacity > 0) {
             return magicCapacity;
         }
         return 0;
@@ -176,7 +175,7 @@ public abstract class ItemModule<T extends ModuleData> implements ICapabilityPro
 
     public int getMagicCapacityCost(ItemStack itemStack) {
         int magicCapacity = getData(itemStack).magicCapacity;
-        if (magicCapacity < 0 ) {
+        if (magicCapacity < 0) {
             return -magicCapacity;
         }
         return 0;
@@ -275,7 +274,7 @@ public abstract class ItemModule<T extends ModuleData> implements ICapabilityPro
     }
 
     public ResourceLocation[] getTextures(ItemStack itemStack) {
-        return new ResourceLocation[] { getData(itemStack).getTextureLocation() };
+        return new ResourceLocation[]{getData(itemStack).getTextureLocation()};
     }
 
     public Priority getRenderLayer() {
@@ -288,7 +287,8 @@ public abstract class ItemModule<T extends ModuleData> implements ICapabilityPro
                 .toArray(ResourceLocation[]::new);
     }
 
-    public void hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {}
+    public void hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+    }
 
     public int getEffectLevel(ItemStack itemStack, ItemEffect effect) {
         return getData(itemStack).effects.getLevel(effect);

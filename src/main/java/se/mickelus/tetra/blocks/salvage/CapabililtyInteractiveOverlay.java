@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class CapabililtyInteractiveOverlay {
 
-    private GuiCapabilityInteractiveOverlay gui;
+    private final GuiCapabilityInteractiveOverlay gui;
 
     private BlockPos previousPos;
     private EnumFacing previousFace;

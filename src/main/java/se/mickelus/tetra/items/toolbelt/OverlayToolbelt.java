@@ -35,7 +35,7 @@ public class OverlayToolbelt {
     // due to gui visibility tricks, let's use this to keep track of when we should show or hide the gui
     private boolean isActive = false;
 
-    private OverlayGuiToolbelt gui;
+    private final OverlayGuiToolbelt gui;
 
     public OverlayToolbelt(Minecraft mc) {
         this.mc = mc;

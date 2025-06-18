@@ -26,7 +26,6 @@ import se.mickelus.tetra.ConfigHandler;
 import se.mickelus.tetra.RotationHelper;
 import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.data.DataHandler;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.generation.processor.*;
 
 import java.util.*;
@@ -205,7 +204,7 @@ public class WorldGenFeatures implements IWorldGenerator {
         } else if (tileEntity instanceof IInventory) {
             // todo: implement setter interface for lockable loot TEs?
             LootTable lootTable = world.getLootTableManager().getLootTableFromLocation(lootLocation);
-            LootContext.Builder builder = new LootContext.Builder((WorldServer)world);
+            LootContext.Builder builder = new LootContext.Builder((WorldServer) world);
 
             lootTable.fillInventory((IInventory) tileEntity, random, builder.build());
         }

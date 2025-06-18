@@ -7,12 +7,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.WorldServer;
-import se.mickelus.tetra.module.ItemEffect;
 import se.mickelus.tetra.items.ItemModular;
 import se.mickelus.tetra.items.toolbelt.UtilToolbelt;
 import se.mickelus.tetra.items.toolbelt.inventory.InventoryQuickslot;
 import se.mickelus.tetra.items.toolbelt.inventory.InventoryStorage;
 import se.mickelus.tetra.items.toolbelt.inventory.InventoryToolbelt;
+import se.mickelus.tetra.module.ItemEffect;
 
 public class UtilBooster {
 
@@ -106,10 +106,10 @@ public class UtilBooster {
 
 
         if (player.world instanceof WorldServer) {
-            ((WorldServer)player.world).spawnParticle(EnumParticleTypes.SMOKE_LARGE, player.posX,
+            ((WorldServer) player.world).spawnParticle(EnumParticleTypes.SMOKE_LARGE, player.posX,
                     player.posY, player.posZ, 10, 0,
                     0, 0, 0.1D);
-            ((WorldServer)player.world).spawnParticle(EnumParticleTypes.FLAME, player.posX,
+            ((WorldServer) player.world).spawnParticle(EnumParticleTypes.FLAME, player.posX,
                     player.posY, player.posZ, 3, 0,
                     0, 0, 0.1D);
         }

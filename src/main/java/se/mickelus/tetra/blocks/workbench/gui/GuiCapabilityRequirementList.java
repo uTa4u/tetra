@@ -10,8 +10,8 @@ import java.util.Collection;
 
 public class GuiCapabilityRequirementList extends GuiElement {
 
-    private GuiCapabilityRequirement[] indicators;
-    private int[] requiredLevels;
+    private final GuiCapabilityRequirement[] indicators;
+    private final int[] requiredLevels;
 
     public GuiCapabilityRequirementList(int x, int y) {
         super(x, y, 54, 18);

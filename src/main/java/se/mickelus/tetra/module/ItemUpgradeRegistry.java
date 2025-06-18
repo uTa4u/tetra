@@ -16,18 +16,18 @@ public class ItemUpgradeRegistry {
 
     public static ItemUpgradeRegistry instance;
 
-    private List<Function<ItemStack, ItemStack>> replacementFunctions;
-    private List<ReplacementDefinition> replacementDefinitions;
+    private final List<Function<ItemStack, ItemStack>> replacementFunctions;
+    private final List<ReplacementDefinition> replacementDefinitions;
 
-    private Map<String, UpgradeSchema> schemaMap;
-    private Map<String, RepairDefinition> repairMap;
+    private final Map<String, UpgradeSchema> schemaMap;
+    private final Map<String, RepairDefinition> repairMap;
 
-    private Map<String, ItemModule> moduleMap;
+    private final Map<String, ItemModule> moduleMap;
 
     public ItemUpgradeRegistry() {
         instance = this;
-        replacementFunctions = new ArrayList<> ();
-        replacementDefinitions = new ArrayList<> ();
+        replacementFunctions = new ArrayList<>();
+        replacementDefinitions = new ArrayList<>();
         schemaMap = new HashMap<>();
         repairMap = new HashMap<>();
         moduleMap = new HashMap<>();
@@ -82,7 +82,7 @@ public class ItemUpgradeRegistry {
         registerSchema(schema);
 
         if (definition.repair) {
-            for (OutcomeDefinition outcomeDefinition: definition.outcomes) {
+            for (OutcomeDefinition outcomeDefinition : definition.outcomes) {
                 if (RepairDefinition.validateOutcome(outcomeDefinition)) {
                     registerRepairDefinition(new RepairDefinition(outcomeDefinition));
                 }
@@ -109,7 +109,7 @@ public class ItemUpgradeRegistry {
     }
 
     public ItemStack getReplacement(ItemStack itemStack) {
-        for (ReplacementDefinition replacementDefinition: replacementDefinitions) {
+        for (ReplacementDefinition replacementDefinition : replacementDefinitions) {
             if (replacementDefinition.predicate.test(itemStack)) {
                 ItemStack replacementStack = replacementDefinition.itemStack.copy();
                 replacementStack.setItemDamage(itemStack.getItemDamage());
@@ -118,7 +118,7 @@ public class ItemUpgradeRegistry {
                 return replacementStack;
             }
         }
-        for (Function<ItemStack, ItemStack> replacementFunction: replacementFunctions) {
+        for (Function<ItemStack, ItemStack> replacementFunction : replacementFunctions) {
             ItemStack replacementStack = replacementFunction.apply(itemStack);
             if (replacementStack != null) {
                 return replacementStack;
@@ -164,7 +164,7 @@ public class ItemUpgradeRegistry {
     }
 
     public Collection<ItemModule> getAllModules() {
-	    return moduleMap.values();
+        return moduleMap.values();
     }
 
     public String getImprovementFromEnchantment(Enchantment enchantment) {

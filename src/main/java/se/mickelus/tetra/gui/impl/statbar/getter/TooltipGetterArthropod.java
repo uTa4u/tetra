@@ -9,7 +9,8 @@ public class TooltipGetterArthropod implements ITooltipGetter {
 
     private static final IStatGetter levelGetter = new StatGetterEffectLevel(ItemEffect.arthropod, 1);
 
-    public TooltipGetterArthropod() { }
+    public TooltipGetterArthropod() {
+    }
 
 
     @Override

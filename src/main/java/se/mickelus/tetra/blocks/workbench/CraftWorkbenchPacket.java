@@ -6,7 +6,8 @@ import se.mickelus.tetra.network.BlockPosPacket;
 
 public class CraftWorkbenchPacket extends BlockPosPacket {
 
-    public CraftWorkbenchPacket() {}
+    public CraftWorkbenchPacket() {
+    }
 
     public CraftWorkbenchPacket(BlockPos pos) {
         super(pos);

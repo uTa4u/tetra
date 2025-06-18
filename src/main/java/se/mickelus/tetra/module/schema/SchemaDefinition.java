@@ -7,40 +7,40 @@ import se.mickelus.tetra.module.data.GlyphData;
  * Schemas define how players craft new modules, and which materials yield which module variant.
  * Example json:
  * {
- *     "key": "basic_blade_schema",
- *     "slots": ["sword/blade"],
- *     "materialSlotCount": 1,
- *     "displayType": "major",
- *     "outcomes": [
- *         {
- *             "material": {
- *                 "item": "minecraft:planks",
- *                 "count": 2,
- *                 "data": 4
- *             },
- *             "requiredCapabilities": {
- *                 "axe": 1,
- *                 "hammer": 4
- *             },
- *             "moduleKey": "sword/basic_blade",
- *             "moduleVariant": "basic_blade/acacia"
- *         },
- *         {
- *             "material": {
- *                 "type": "forge:ore_dict",
- *                 "ore": "ingotSteeleaf",
- *                 "count": 2
- *             },
- *             "requiredCapabilities": {
- *                 "hammer": 2
- *             },
- *             "moduleKey": "sword/basic_blade",
- *             "moduleVariant": "basic_blade/steeleaf",
- *             "improvements": {
- *                 "enchantment/looting": 2
- *             }
- *         }
- *     ]
+ * "key": "basic_blade_schema",
+ * "slots": ["sword/blade"],
+ * "materialSlotCount": 1,
+ * "displayType": "major",
+ * "outcomes": [
+ * {
+ * "material": {
+ * "item": "minecraft:planks",
+ * "count": 2,
+ * "data": 4
+ * },
+ * "requiredCapabilities": {
+ * "axe": 1,
+ * "hammer": 4
+ * },
+ * "moduleKey": "sword/basic_blade",
+ * "moduleVariant": "basic_blade/acacia"
+ * },
+ * {
+ * "material": {
+ * "type": "forge:ore_dict",
+ * "ore": "ingotSteeleaf",
+ * "count": 2
+ * },
+ * "requiredCapabilities": {
+ * "hammer": 2
+ * },
+ * "moduleKey": "sword/basic_blade",
+ * "moduleVariant": "basic_blade/steeleaf",
+ * "improvements": {
+ * "enchantment/looting": 2
+ * }
+ * }
+ * ]
  * }
  */
 public class SchemaDefinition {

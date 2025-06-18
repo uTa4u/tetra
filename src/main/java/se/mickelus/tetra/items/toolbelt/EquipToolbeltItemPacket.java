@@ -13,7 +13,8 @@ public class EquipToolbeltItemPacket extends AbstractPacket {
 
     private EnumHand hand;
 
-    public EquipToolbeltItemPacket() { }
+    public EquipToolbeltItemPacket() {
+    }
 
     public EquipToolbeltItemPacket(ToolbeltSlotType inventoryType, int toolbeltSlot, EnumHand hand) {
         this.slotType = inventoryType;

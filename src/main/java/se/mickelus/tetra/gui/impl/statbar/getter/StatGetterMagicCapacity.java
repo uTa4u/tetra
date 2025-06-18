@@ -11,7 +11,8 @@ import java.util.stream.Stream;
 
 public class StatGetterMagicCapacity implements IStatGetter {
 
-    public StatGetterMagicCapacity() { }
+    public StatGetterMagicCapacity() {
+    }
 
     @Override
     public double getValue(EntityPlayer player, ItemStack itemStack) {

@@ -9,7 +9,8 @@ public class ChangeCompartmentPacket extends AbstractPacket {
 
     private int compartmentIndex;
 
-    public ChangeCompartmentPacket() {}
+    public ChangeCompartmentPacket() {
+    }
 
     public ChangeCompartmentPacket(int compartmentIndex) {
         this.compartmentIndex = compartmentIndex;

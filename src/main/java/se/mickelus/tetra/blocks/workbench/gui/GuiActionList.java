@@ -22,7 +22,7 @@ public class GuiActionList extends GuiElement {
     }
 
     public void updateActions(ItemStack targetStack, WorkbenchAction[] actions, EntityPlayer player,
-            Consumer<WorkbenchAction> clickHandler) {
+                              Consumer<WorkbenchAction> clickHandler) {
         WorkbenchAction[] availableActions = Arrays.stream(actions)
                 .filter(action -> action.canPerformOn(player, targetStack))
                 .toArray(WorkbenchAction[]::new);

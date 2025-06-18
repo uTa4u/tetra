@@ -58,7 +58,7 @@ public class BlockHammerBase extends TetraBlock implements ITileEntityProvider, 
     @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
     public static BlockHammerBase instance;
 
-    public static final BlockInteraction[] interactions = new BlockInteraction[] {
+    public static final BlockInteraction[] interactions = new BlockInteraction[]{
             new BlockInteraction(Capability.pry, 1, EnumHammerPlate.EAST.face, 5, 11, 9, 11,
                     EnumHammerPlate.EAST.prop, true, (world, pos, blockState, player, hand, hitFace) ->
                     removePlate(world, pos, blockState, player, EnumHammerPlate.EAST, hitFace)),
@@ -170,7 +170,7 @@ public class BlockHammerBase extends TetraBlock implements ITileEntityProvider, 
 
                     world.playSound(player, pos, SoundEvents.ITEM_SHIELD_BREAK, SoundCategory.PLAYERS, 1, 0.5f);
                     world.notifyBlockUpdate(pos, state, state, 3);
-        });
+                });
 
         return true;
     }
@@ -181,7 +181,7 @@ public class BlockHammerBase extends TetraBlock implements ITileEntityProvider, 
                     te.reconfigure(adjustedFace);
                     world.playSound(player, pos, SoundEvents.BLOCK_ANVIL_HIT, SoundCategory.PLAYERS, 1, 1);
                     world.notifyBlockUpdate(pos, state, state, 3);
-        });
+                });
 
         return true;
     }
@@ -198,7 +198,7 @@ public class BlockHammerBase extends TetraBlock implements ITileEntityProvider, 
         }
 
         if (blockFacing.getAxis().equals(facing.getAxis())) {
-            int slotIndex = blockFacing.equals(facing)? 0 : 1;
+            int slotIndex = blockFacing.equals(facing) ? 0 : 1;
             if (te.hasCellInSlot(slotIndex)) {
                 ItemStack cell = te.removeCellFromSlot(slotIndex);
                 if (player.inventory.addItemStackToInventory(cell)) {
@@ -292,7 +292,7 @@ public class BlockHammerBase extends TetraBlock implements ITileEntityProvider, 
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, propFacing, propCell1, propCell1Charged, propCell2 , propCell2Charged,
+        return new BlockStateContainer(this, propFacing, propCell1, propCell1Charged, propCell2, propCell2Charged,
                 EnumHammerPlate.EAST.prop, EnumHammerPlate.WEST.prop, EnumHammerConfig.propE, EnumHammerConfig.propW);
     }
 

@@ -18,10 +18,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.IntegrationHelper;
 import se.mickelus.tetra.Tags;
+import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.items.BasicModule;
 import se.mickelus.tetra.items.ItemModular;
 import se.mickelus.tetra.items.TetraCreativeTabs;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.items.toolbelt.booster.JumpHandlerBooster;
 import se.mickelus.tetra.items.toolbelt.booster.TickHandlerBooster;
 import se.mickelus.tetra.items.toolbelt.booster.UpdateBoosterPacket;
@@ -52,8 +52,8 @@ public class ItemToolbeltModular extends ItemModular implements IBauble {
     public final static String slot2Suffix = "_slot2";
     public final static String slot3Suffix = "_slot3";
 
-    private ItemModule defaultBelt;
-    private ItemModule defaultStrap;
+    private final ItemModule defaultBelt;
+    private final ItemModule defaultStrap;
 
     public ItemToolbeltModular() {
         super();
@@ -65,10 +65,10 @@ public class ItemToolbeltModular extends ItemModular implements IBauble {
 
         setCreativeTab(TetraCreativeTabs.getInstance());
 
-        majorModuleKeys = new String[] { slot1Key, slot2Key, slot3Key };
-        minorModuleKeys = new String[] { beltKey };
+        majorModuleKeys = new String[]{slot1Key, slot2Key, slot3Key};
+        minorModuleKeys = new String[]{beltKey};
 
-        requiredModules = new String[] { beltKey };
+        requiredModules = new String[]{beltKey};
 
         defaultBelt = new BasicModule(beltKey, beltKey);
 
@@ -164,7 +164,7 @@ public class ItemToolbeltModular extends ItemModular implements IBauble {
                     Collection<Collection<ItemEffect>> result = new ArrayList<>(slotCount);
                     for (int i = 0; i < slotCount; i++) {
                         ArrayList<ItemEffect> slotEffects = new ArrayList<>();
-                        for (Map.Entry<ItemEffect, Integer> entry: effectLevelMap.entrySet()) {
+                        for (Map.Entry<ItemEffect, Integer> entry : effectLevelMap.entrySet()) {
                             if (entry.getValue() > i) {
                                 slotEffects.add(entry.getKey());
                             }
@@ -180,6 +180,7 @@ public class ItemToolbeltModular extends ItemModular implements IBauble {
 
     /**
      * Tells baubles which slot this item can go into. Implements a method in the IBauble interface.
+     *
      * @param itemstack The itemstack
      * @return
      */

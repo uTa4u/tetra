@@ -57,7 +57,7 @@ public class GuiKeybinding extends GuiElement {
 
             this.x = x - width;
 
-            addChild(new GuiRect(0, 1, 1, height  - 2, GuiColors.muted));
+            addChild(new GuiRect(0, 1, 1, height - 2, GuiColors.muted));
             addChild(new GuiRect(width - 1, 1, 1, height - 2, GuiColors.muted));
 
             addChild(new GuiRect(1, 0, width - 2, 1, GuiColors.muted));

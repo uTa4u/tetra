@@ -1,7 +1,8 @@
 package se.mickelus.tetra.items.journal.gui.craft;
 
 import se.mickelus.tetra.blocks.workbench.gui.GuiModuleGlyph;
-import se.mickelus.tetra.gui.*;
+import se.mickelus.tetra.gui.GuiClickable;
+import se.mickelus.tetra.gui.GuiTexture;
 import se.mickelus.tetra.gui.impl.GuiColors;
 import se.mickelus.tetra.module.schema.OutcomePreview;
 
@@ -19,7 +20,7 @@ public class GuiJournalVariantItem extends GuiClickable {
     protected boolean isMuted = false;
 
     public GuiJournalVariantItem(int x, int y, int width, int height, OutcomePreview outcome,
-            Consumer<OutcomePreview> onHover, Consumer<OutcomePreview> onBlur, Consumer<OutcomePreview> onSelect) {
+                                 Consumer<OutcomePreview> onHover, Consumer<OutcomePreview> onBlur, Consumer<OutcomePreview> onSelect) {
         super(x, y, width, height, () -> onSelect.accept(outcome));
 
         this.outcome = outcome;
@@ -28,7 +29,7 @@ public class GuiJournalVariantItem extends GuiClickable {
     }
 
     public GuiJournalVariantItem(int x, int y, OutcomePreview outcome,
-            Consumer<OutcomePreview> onHover, Consumer<OutcomePreview> onBlur, Consumer<OutcomePreview> onSelect) {
+                                 Consumer<OutcomePreview> onHover, Consumer<OutcomePreview> onBlur, Consumer<OutcomePreview> onSelect) {
         this(x, y, 11, 11, outcome, onHover, onBlur, onSelect);
 
         backdrop = new GuiTexture(0, 0, 11, 11, 68, 0, texture);

@@ -9,9 +9,9 @@ import net.minecraftforge.client.model.ICustomModelLoader;
 import net.minecraftforge.client.model.IModel;
 import org.apache.commons.io.IOUtils;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
 
-import java.io.*;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 
 public class ModularModelLoader implements ICustomModelLoader {

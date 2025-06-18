@@ -13,7 +13,6 @@ import net.minecraftforge.common.model.animation.IAnimationStateMachine;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
 
 import javax.annotation.Nullable;
 
@@ -56,8 +55,7 @@ public class TileEntityHammerHead extends TileEntity {
     }
 
     @Override
-    public boolean hasFastRenderer()
-    {
+    public boolean hasFastRenderer() {
         return true;
     }
 }

@@ -108,7 +108,7 @@ public class TetraMod {
         MinecraftForge.EVENT_BUS.register(TetraMod.proxy);
         MinecraftForge.EVENT_BUS.register(BlockLookTrigger.instance);
 
-        blocks = new Block[] {
+        blocks = new Block[]{
                 new BlockWorkbench(),
                 new BlockGeode(),
         };
@@ -132,7 +132,7 @@ public class TetraMod {
             );
         }
 
-        items = new Item[] {
+        items = new Item[]{
                 new ItemSwordModular(),
                 new ItemGeode(),
                 new ItemPristineLapis(),
@@ -161,7 +161,7 @@ public class TetraMod {
                         .filter(block -> block instanceof ITetraBlock)
                         .map(block -> (ITetraBlock) block).toArray(ITetraBlock[]::new));
     }
-    
+
     @EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.init(event);

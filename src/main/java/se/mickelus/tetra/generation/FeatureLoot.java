@@ -8,8 +8,8 @@ import net.minecraft.util.math.BlockPos;
  * contents added from the given loot table.
  * Example json:
  * {
- *     position: [1, 4, 1],
- *     table: "tetra:forged/chest_small"
+ * position: [1, 4, 1],
+ * table: "tetra:forged/chest_small"
  * }
  */
 public class FeatureLoot {

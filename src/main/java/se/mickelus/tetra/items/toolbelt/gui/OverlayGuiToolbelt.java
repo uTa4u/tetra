@@ -5,9 +5,8 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
-import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
-import se.mickelus.tetra.gui.*;
+import se.mickelus.tetra.gui.GuiRoot;
 import se.mickelus.tetra.items.toolbelt.inventory.InventoryPotions;
 import se.mickelus.tetra.items.toolbelt.inventory.InventoryQuickslot;
 import se.mickelus.tetra.items.toolbelt.inventory.InventoryQuiver;
@@ -17,9 +16,9 @@ public class OverlayGuiToolbelt extends GuiRoot {
 
     private static final ResourceLocation toolbeltTexture = TetraMod.getResource("textures/gui/toolbelt-inventory.png");
 
-    private OverlayGuiQuickslotGroup quickslotGroup;
-    private OverlayGuiPotionGroup potionGroup;
-    private OverlayGuiQuiverGroup quiverGroup;
+    private final OverlayGuiQuickslotGroup quickslotGroup;
+    private final OverlayGuiPotionGroup potionGroup;
+    private final OverlayGuiQuiverGroup quiverGroup;
 
     private boolean hasMouseMoved = false;
     private ScaledResolution scaledResolution;
@@ -76,7 +75,7 @@ public class OverlayGuiToolbelt extends GuiRoot {
                 mouseX = width / 2;
                 mouseY = height / 2;
             }
-            drawChildren(width/2, height/2, width, height, mouseX, mouseY, 1);
+            drawChildren(width / 2, height / 2, width, height, mouseX, mouseY, 1);
         }
     }
 
@@ -108,10 +107,6 @@ public class OverlayGuiToolbelt extends GuiRoot {
         }
 
         int quiverFocus = quiverGroup.getFocus();
-        if (quiverFocus != -1) {
-            return quiverFocus;
-        }
-
-        return -1;
+        return quiverFocus;
     }
 }

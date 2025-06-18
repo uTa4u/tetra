@@ -11,7 +11,7 @@ public class GuiHandlerRegistry implements IGuiHandler {
 
     public static GuiHandlerRegistry instance;
 
-    private Map<Integer, TetraGuiHandler> handlerMap;
+    private final Map<Integer, TetraGuiHandler> handlerMap;
 
     public GuiHandlerRegistry() {
         instance = this;

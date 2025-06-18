@@ -16,11 +16,11 @@ public class GuiJournalItem extends GuiClickable {
 
     GuiElement slotGroup;
 
-    private List<KeyframeAnimation> selectAnimations;
-    private List<KeyframeAnimation> deselectAnimations;
+    private final List<KeyframeAnimation> selectAnimations;
+    private final List<KeyframeAnimation> deselectAnimations;
 
-    private KeyframeAnimation itemShow;
-    private KeyframeAnimation itemHide;
+    private final KeyframeAnimation itemShow;
+    private final KeyframeAnimation itemHide;
 
     private boolean isSelected = false;
     private final GuiTexture backdrop;
@@ -121,11 +121,7 @@ public class GuiJournalItem extends GuiClickable {
     protected void calculateFocusState(int refX, int refY, int mouseX, int mouseY) {
         mouseX -= refX + x;
         mouseY -= refY + y;
-        boolean gainFocus = true;
-
-        if (mouseX + mouseY < 44) {
-            gainFocus = false;
-        }
+        boolean gainFocus = mouseX + mouseY >= 44;
 
         if (mouseX + mouseY > 84) {
             gainFocus = false;

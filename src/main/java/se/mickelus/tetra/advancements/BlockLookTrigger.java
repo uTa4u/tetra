@@ -3,13 +3,10 @@ package se.mickelus.tetra.advancements;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
 import net.minecraft.advancements.critereon.AbstractCriterionInstance;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.JsonUtils;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -18,12 +15,11 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import se.mickelus.tetra.blocks.PropertyMatcher;
 import se.mickelus.tetra.data.DataHandler;
 
-import javax.annotation.Nullable;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class BlockLookTrigger extends GenericTrigger<BlockLookTrigger.Instance> {
-    private Cache<UUID, IBlockState> stateCache;
+    private final Cache<UUID, IBlockState> stateCache;
 
     public static final BlockLookTrigger instance = new BlockLookTrigger();
 
@@ -64,7 +60,7 @@ public class BlockLookTrigger extends GenericTrigger<BlockLookTrigger.Instance> 
     }
 
     public static class Instance extends AbstractCriterionInstance {
-        private PropertyMatcher block = null;
+        private final PropertyMatcher block = null;
 
         public Instance() {
             super(instance.getId());

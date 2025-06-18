@@ -10,9 +10,9 @@ import se.mickelus.tetra.module.schema.UpgradeSchema;
 
 
 public class ContainerWorkbench extends Container {
-    private TileEntityWorkbench workbench;
+    private final TileEntityWorkbench workbench;
 
-    private ToggleableSlot[] materialSlots;
+    private final ToggleableSlot[] materialSlots;
 
     public ContainerWorkbench(IInventory playerInventory, TileEntityWorkbench workbench, EntityPlayer player) {
         this.workbench = workbench;
@@ -59,10 +59,10 @@ public class ContainerWorkbench extends Container {
             ItemStack itemStack = slot.getStack();
 
             if (index < this.workbench.getSizeInventory()) {
-                if (!this.mergeItemStack(itemStack,  this.workbench.getSizeInventory(), this.inventorySlots.size(), true)) {
+                if (!this.mergeItemStack(itemStack, this.workbench.getSizeInventory(), this.inventorySlots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.mergeItemStack(itemStack, 0,  this.workbench.getSizeInventory(), false)) {
+            } else if (!this.mergeItemStack(itemStack, 0, this.workbench.getSizeInventory(), false)) {
                 return ItemStack.EMPTY;
             }
 

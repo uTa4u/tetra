@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.gui.*;
 import se.mickelus.tetra.gui.animation.Applier;
@@ -17,11 +16,11 @@ public class OverlayGuiQuiverSlot extends GuiElement {
 
     private static final ResourceLocation texture = TetraMod.getResource("textures/gui/toolbelt-inventory.png");
 
-    private ItemStack itemStack;
+    private final ItemStack itemStack;
 
-    private Minecraft mc;
+    private final Minecraft mc;
 
-    private KeyframeAnimation showAnimation;
+    private final KeyframeAnimation showAnimation;
 
     private FontRenderer fontRenderer;
 
@@ -47,7 +46,7 @@ public class OverlayGuiQuiverSlot extends GuiElement {
             fontRenderer = mc.fontRenderer;
         }
 
-        backdrop  = new GuiTexture(0, 0, 23, 23, 32, 28, texture);
+        backdrop = new GuiTexture(0, 0, 23, 23, 32, 28, texture);
         addChild(backdrop);
 
         if (itemStack != null) {
@@ -67,12 +66,12 @@ public class OverlayGuiQuiverSlot extends GuiElement {
 
         isVisible = false;
         showAnimation = new KeyframeAnimation(80, this)
-            .applyTo(
-                    new Applier.TranslateX(x - 2, x),
-                    new Applier.TranslateY(y + 2, y),
-                    new Applier.Opacity(0, 1))
-            .withDelay(slot * 80)
-        .onStop((finished) -> count.setVisible(true));
+                .applyTo(
+                        new Applier.TranslateX(x - 2, x),
+                        new Applier.TranslateY(y + 2, y),
+                        new Applier.Opacity(0, 1))
+                .withDelay(slot * 80)
+                .onStop((finished) -> count.setVisible(true));
     }
 
     @Override

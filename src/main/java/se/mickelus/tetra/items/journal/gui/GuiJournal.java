@@ -26,7 +26,7 @@ public class GuiJournal extends GuiScreen {
     private final GuiJournalRootBase[] pages;
     private GuiJournalRootBase currentPage;
 
-    private GuiElement defaultGui;
+    private final GuiElement defaultGui;
 
     private static GuiJournal instance;
 

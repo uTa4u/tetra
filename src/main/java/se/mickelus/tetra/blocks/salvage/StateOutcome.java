@@ -10,8 +10,8 @@ import net.minecraft.world.World;
 
 public class StateOutcome<T extends Comparable<T>, V extends T> implements InteractionOutcome {
 
-    private IProperty<T> property;
-    private V value;
+    private final IProperty<T> property;
+    private final V value;
 
     public StateOutcome(IProperty<T> property, V value) {
         this.property = property;

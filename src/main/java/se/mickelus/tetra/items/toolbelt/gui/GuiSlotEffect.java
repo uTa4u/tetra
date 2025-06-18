@@ -2,7 +2,6 @@ package se.mickelus.tetra.items.toolbelt.gui;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.gui.GuiElement;
 import se.mickelus.tetra.gui.GuiString;
@@ -10,7 +9,9 @@ import se.mickelus.tetra.gui.GuiTexture;
 import se.mickelus.tetra.items.toolbelt.SlotType;
 import se.mickelus.tetra.module.ItemEffect;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 

@@ -10,7 +10,8 @@ import se.mickelus.tetra.util.CastOptional;
 
 public class StatGetterUnbreaking implements IStatGetter {
 
-    public StatGetterUnbreaking() { }
+    public StatGetterUnbreaking() {
+    }
 
     @Override
     public double getValue(EntityPlayer player, ItemStack itemStack) {

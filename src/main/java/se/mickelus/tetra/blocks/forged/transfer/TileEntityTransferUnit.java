@@ -63,6 +63,7 @@ public class TileEntityTransferUnit extends TileEntity implements ITickable, IHe
     /**
      * Returns the effect with redstone power taken into consideration, if the block is powered with redstone the
      * REDSTONE effect will be translated into SEND/RECEIVE depending on the powered side.
+     *
      * @return the effect with redstone power taken into consideration
      */
     public EnumTransferEffect getEffectPowered() {
@@ -251,7 +252,7 @@ public class TileEntityTransferUnit extends TileEntity implements ITickable, IHe
         if (world instanceof WorldServer) {
             ((WorldServer) world).spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
                     pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5,
-                    10,  0, 0, 0, 0.02f);
+                    10, 0, 0, 0, 0.02f);
             world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS,
                     0.2f, 1);
         }
@@ -261,7 +262,7 @@ public class TileEntityTransferUnit extends TileEntity implements ITickable, IHe
         if (world instanceof WorldServer) {
             ((WorldServer) world).spawnParticle(EnumParticleTypes.FLAME,
                     pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5,
-                    5,  0, 0, 0, 0.02f);
+                    5, 0, 0, 0, 0.02f);
             world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS,
                     0.2f, 1);
         }
@@ -306,7 +307,7 @@ public class TileEntityTransferUnit extends TileEntity implements ITickable, IHe
     public void notifyBlockUpdate() {
         markDirty();
         IBlockState state = world.getBlockState(pos);
-        world.notifyBlockUpdate(pos, state, state,3);
+        world.notifyBlockUpdate(pos, state, state, 3);
     }
 
     public EnumFacing getFacing() {
@@ -380,6 +381,6 @@ public class TileEntityTransferUnit extends TileEntity implements ITickable, IHe
         IBlockState state = world.getBlockState(pos);
 
         updateTransferState();
-        world.notifyBlockUpdate(pos, state, state,3);
+        world.notifyBlockUpdate(pos, state, state, 3);
     }
 }

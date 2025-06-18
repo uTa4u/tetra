@@ -21,7 +21,7 @@ public class FortuneBonusCondition implements LootCondition {
     private float fortuneMultiplier;
 
     private Capability requiredCapability;
-    private int capabilityLevel = -1;
+    private final int capabilityLevel = -1;
 
     @Override
     public boolean testCondition(Random rand, LootContext context) {

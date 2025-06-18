@@ -18,9 +18,9 @@ import java.lang.reflect.Type;
  * item predicate. Count is stored separately and has to be smaller than size of a provided itemstack for it to match.
  * Example json:
  * {
- *     "item": "minecraft:planks",
- *     "count": 2,
- *     "data": 0
+ * "item": "minecraft:planks",
+ * "count": 2,
+ * "data": 0
  * }
  */
 public class Material {
@@ -79,7 +79,7 @@ public class Material {
     @SideOnly(Side.CLIENT)
     public ItemStack[] getApplicableItemstacks() {
         if (itemStack != null && !itemStack.isEmpty()) {
-            return new ItemStack[] { itemStack };
+            return new ItemStack[]{itemStack};
         } else if (ore != null) {
             NonNullList<ItemStack> itemStacks = OreDictionary.getOres(ore);
 

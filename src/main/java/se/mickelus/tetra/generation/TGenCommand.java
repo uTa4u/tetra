@@ -3,12 +3,10 @@ package se.mickelus.tetra.generation;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.chunk.IChunkProvider;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -75,6 +73,6 @@ public class TGenCommand extends CommandBase {
                     .filter(location -> location.contains(args[0]))
                     .collect(Collectors.toList());
         }
-        return Collections.<String>emptyList();
+        return Collections.emptyList();
     }
 }

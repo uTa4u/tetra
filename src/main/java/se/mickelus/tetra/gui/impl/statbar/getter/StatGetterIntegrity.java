@@ -3,13 +3,13 @@ package se.mickelus.tetra.gui.impl.statbar.getter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import se.mickelus.tetra.items.ItemModular;
-import se.mickelus.tetra.module.ItemModule;
 import se.mickelus.tetra.module.ItemModuleMajor;
 import se.mickelus.tetra.util.CastOptional;
 
 public class StatGetterIntegrity implements IStatGetter {
 
-    public StatGetterIntegrity() {}
+    public StatGetterIntegrity() {
+    }
 
     @Override
     public boolean shouldShow(EntityPlayer player, ItemStack currentStack, ItemStack previewStack) {

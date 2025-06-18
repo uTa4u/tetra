@@ -2,15 +2,15 @@ package se.mickelus.tetra.module.data;
 
 /**
  * Data for improvements are mostly the same as module data but introduces a few additional fields.
- *
+ * <p>
  * Example json:
  * {
- *     "key": "enchantment/smite",
- *     "level": 2,
- *     "enchantment": true,
- *     "effects": {
- *         "smite": 2
- *     }
+ * "key": "enchantment/smite",
+ * "level": 2,
+ * "enchantment": true,
+ * "effects": {
+ * "smite": 2
+ * }
  * }
  */
 public class ImprovementData extends ModuleData {

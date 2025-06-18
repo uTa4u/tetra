@@ -4,7 +4,7 @@ import se.mickelus.tetra.gui.GuiAlignment;
 
 public class GuiBarSegmented extends GuiBar {
 
-    private int maxSegments;
+    private final int maxSegments;
     private int segmentCount;
     private int diffCount;
     private int segmentLength;
@@ -59,11 +59,11 @@ public class GuiBarSegmented extends GuiBar {
 
     private void drawSegment(int refX, int refY, int index, int color) {
         drawRect(
-            refX + x + (index * (segmentLength)),
-            refY + y + 6,
-            refX + x + ((index + 1) * segmentLength) - 1,
-            refY + y + 6 + height,
-            color);
+                refX + x + (index * (segmentLength)),
+                refY + y + 6,
+                refX + x + ((index + 1) * segmentLength) - 1,
+                refY + y + 6 + height,
+                color);
     }
 
     private void drawSegmentReverse(int refX, int refY, int index, int color) {

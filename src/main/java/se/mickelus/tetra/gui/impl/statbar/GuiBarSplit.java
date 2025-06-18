@@ -1,12 +1,15 @@
 package se.mickelus.tetra.gui.impl.statbar;
 
-import se.mickelus.tetra.gui.*;
+import se.mickelus.tetra.gui.GuiAlignment;
+import se.mickelus.tetra.gui.GuiAttachment;
+import se.mickelus.tetra.gui.GuiElement;
+import se.mickelus.tetra.gui.GuiRect;
 import se.mickelus.tetra.gui.impl.GuiColors;
 
 public class GuiBarSplit extends GuiBar {
 
-    private GuiBar negativeBar;
-    private GuiBar positiveBar;
+    private final GuiBar negativeBar;
+    private final GuiBar positiveBar;
 
     public GuiBarSplit(int x, int y, int barLength, double range) {
         super(x, y, barLength, -range, range);

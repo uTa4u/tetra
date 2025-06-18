@@ -10,7 +10,7 @@ public class GuiText extends GuiElement {
     String string;
 
     public GuiText(int x, int y, int width, String string) {
-        super(x, y, width ,0);
+        super(x, y, width, 0);
 
         fontRenderer = Minecraft.getMinecraft().fontRenderer;
         setString(string);

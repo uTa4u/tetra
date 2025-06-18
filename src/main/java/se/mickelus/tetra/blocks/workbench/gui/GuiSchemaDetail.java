@@ -17,25 +17,25 @@ public class GuiSchemaDetail extends GuiElement {
 
     private UpgradeSchema schema;
 
-    private GuiElement glyph;
-    private GuiString title;
-    private GuiTextSmall description;
+    private final GuiElement glyph;
+    private final GuiString title;
+    private final GuiTextSmall description;
 
-    private GuiButton craftButton;
+    private final GuiButton craftButton;
 
-    private GuiString[] slotNames;
-    private GuiString[] slotQuantities;
-    private GuiTexture[] slotBorders;
+    private final GuiString[] slotNames;
+    private final GuiString[] slotQuantities;
+    private final GuiTexture[] slotBorders;
 
-    private GuiMagicUsage magicCapacity;
+    private final GuiMagicUsage magicCapacity;
 
-    private GuiCapabilityRequirementList capabilityIndicatorList;
+    private final GuiCapabilityRequirementList capabilityIndicatorList;
 
-    private GuiExperience experienceIndicator;
+    private final GuiExperience experienceIndicator;
 
     public GuiSchemaDetail(int x, int y, Runnable backListener, Runnable craftListener) {
         super(x, y, 224, 67);
-        addChild(new GuiButton(-4 , height - 2, 40, 8, "< " + I18n.format("workbench.schema_detail.back"), backListener));
+        addChild(new GuiButton(-4, height - 2, 40, 8, "< " + I18n.format("workbench.schema_detail.back"), backListener));
 
         glyph = new GuiElement(3, 3, 16, 16);
         addChild(glyph);
@@ -63,7 +63,7 @@ public class GuiSchemaDetail extends GuiElement {
             addChild(slotBorders[i]);
         }
 
-        magicCapacity = new GuiMagicUsage(121, 28,80);
+        magicCapacity = new GuiMagicUsage(121, 28, 80);
         addChild(magicCapacity);
 
         capabilityIndicatorList = new GuiCapabilityRequirementList(80, 39);

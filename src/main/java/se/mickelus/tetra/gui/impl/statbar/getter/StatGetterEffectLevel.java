@@ -4,16 +4,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import se.mickelus.tetra.items.ItemModular;
 import se.mickelus.tetra.module.ItemEffect;
-import se.mickelus.tetra.module.ItemModule;
 import se.mickelus.tetra.module.ItemModuleMajor;
 import se.mickelus.tetra.util.CastOptional;
 
 public class StatGetterEffectLevel implements IStatGetter {
 
-    private ItemEffect effect;
+    private final ItemEffect effect;
 
-    private double multiplier;
-    private double base;
+    private final double multiplier;
+    private final double base;
 
     public StatGetterEffectLevel(ItemEffect effect, double multiplier) {
         this(effect, multiplier, 0);

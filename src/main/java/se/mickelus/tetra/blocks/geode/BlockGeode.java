@@ -1,9 +1,5 @@
 package se.mickelus.tetra.blocks.geode;
 
-import java.util.Arrays;
-import java.util.Random;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
@@ -20,11 +16,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import se.mickelus.tetra.ConfigHandler;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.TetraBlock;
 import se.mickelus.tetra.data.DataHandler;
 import se.mickelus.tetra.items.TetraCreativeTabs;
 import se.mickelus.tetra.network.PacketHandler;
+
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.Random;
 
 public class BlockGeode extends TetraBlock {
 
@@ -39,7 +38,7 @@ public class BlockGeode extends TetraBlock {
 
     public GeodeVariant[] variants = new GeodeVariant[0];
 
-    private GeodeVariant fallbackVariant = new GeodeVariant();
+    private final GeodeVariant fallbackVariant = new GeodeVariant();
 
     public BlockGeode() {
         super(Material.ROCK);

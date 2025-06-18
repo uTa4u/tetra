@@ -14,7 +14,9 @@ import se.mickelus.tetra.module.data.GlyphData;
 import se.mickelus.tetra.module.improvement.DestabilizationEffect;
 import se.mickelus.tetra.util.CastOptional;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.stream.Stream;
 
 public class CleanseSchema implements UpgradeSchema {
@@ -24,7 +26,7 @@ public class CleanseSchema implements UpgradeSchema {
     private static final String descriptionSuffix = ".description";
     private static final String slotLabel = "item.dyePowder.blue.name";
 
-    private GlyphData glyph = new GlyphData("textures/gui/workbench.png", 80, 32);
+    private final GlyphData glyph = new GlyphData("textures/gui/workbench.png", 80, 32);
 
     public CleanseSchema() {
 

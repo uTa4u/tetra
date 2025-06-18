@@ -3,25 +3,23 @@ package se.mickelus.tetra.advancements;
 import com.google.gson.JsonObject;
 import net.minecraft.advancements.critereon.AbstractCriterionInstance;
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import se.mickelus.tetra.blocks.PropertyMatcher;
 import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.data.DataHandler;
 
 public class ModuleCraftCriterion extends AbstractCriterionInstance {
-    private ItemPredicate before = null;
-    private ItemPredicate after = null;
+    private final ItemPredicate before = null;
+    private final ItemPredicate after = null;
 
-    private String schema = null;
+    private final String schema = null;
 
-    private String slot = null;
-    private String module = null;
-    private String variant = null;
+    private final String slot = null;
+    private final String module = null;
+    private final String variant = null;
 
-    private Capability capability = null;
-    private int capabilityLevel = -1;
+    private final Capability capability = null;
+    private final int capabilityLevel = -1;
 
     public static final GenericTrigger<ModuleCraftCriterion> trigger = new GenericTrigger<>("tetra:craft_module", ModuleCraftCriterion::deserialize);
 
@@ -30,13 +28,13 @@ public class ModuleCraftCriterion extends AbstractCriterionInstance {
     }
 
     public static void trigger(EntityPlayerMP player, ItemStack before, ItemStack after, String schema, String slot, String module,
-            String variant, Capability capability, int capabilityLevel) {
+                               String variant, Capability capability, int capabilityLevel) {
         trigger.fulfillCriterion(player.getAdvancements(), criterion -> criterion.test(before, after, schema, slot, module, variant, capability,
                 capabilityLevel));
     }
 
     public boolean test(ItemStack before, ItemStack after, String schema, String slot, String module, String variant,
-            Capability capability, int capabilityLevel) {
+                        Capability capability, int capabilityLevel) {
         if (this.before != null && !this.before.test(before)) {
             return false;
         }
@@ -65,11 +63,7 @@ public class ModuleCraftCriterion extends AbstractCriterionInstance {
             return false;
         }
 
-        if (this.capabilityLevel != -1 && this.capabilityLevel != capabilityLevel) {
-            return false;
-        }
-
-        return true;
+        return this.capabilityLevel == -1 || this.capabilityLevel == capabilityLevel;
     }
 
     private static ModuleCraftCriterion deserialize(JsonObject json) {

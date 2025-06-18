@@ -5,8 +5,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.items.ItemModular;
-import se.mickelus.tetra.module.data.GlyphData;
 import se.mickelus.tetra.module.ItemUpgradeRegistry;
+import se.mickelus.tetra.module.data.GlyphData;
 import se.mickelus.tetra.util.CastOptional;
 
 import javax.annotation.Nullable;
@@ -18,11 +18,11 @@ public class RepairSchema extends BaseSchema {
     private static final String descriptionSuffix = ".description";
     private static final String extendedDescriptionSuffix = ".description_details";
 
-    private String key = "repair_schema";
+    private final String key = "repair_schema";
 
-    private ItemModular item;
+    private final ItemModular item;
 
-    private GlyphData glyph = new GlyphData("textures/gui/workbench.png", 0, 52);
+    private final GlyphData glyph = new GlyphData("textures/gui/workbench.png", 0, 52);
 
     public RepairSchema(ItemModular item) {
         this.item = item;

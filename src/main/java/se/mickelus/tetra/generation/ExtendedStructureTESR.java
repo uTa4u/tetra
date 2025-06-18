@@ -1,7 +1,9 @@
 package se.mickelus.tetra.generation;
 
-import com.sun.javafx.geom.Vec3f;
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderGlobal;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntityStructureRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.tileentity.TileEntityStructure;
@@ -13,7 +15,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 @SideOnly(Side.CLIENT)
 public class ExtendedStructureTESR extends TileEntityStructureRenderer {
@@ -78,9 +79,9 @@ public class ExtendedStructureTESR extends TileEntityStructureRenderer {
         Vec3i facing = featureChild.facing.getDirectionVec();
         bufferBuilder.pos(x + offset.getX() + 0.5, y + offset.getY() + 0.5, z + offset.getZ() + 0.5).color(0.0F, 0.0F, 0.0F, 0.0F).endVertex();
         bufferBuilder.pos(
-                x + offset.getX() + 0.5 + 0.3 * facing.getX(),
-                y + offset.getY() + 0.5 + 0.3 * facing.getY(),
-                z + offset.getZ() + 0.5 + 0.3 * facing.getZ())
+                        x + offset.getX() + 0.5 + 0.3 * facing.getX(),
+                        y + offset.getY() + 0.5 + 0.3 * facing.getY(),
+                        z + offset.getZ() + 0.5 + 0.3 * facing.getZ())
                 .color(1, 1, 1, 1.0F).endVertex();
 
         tessellator.draw();

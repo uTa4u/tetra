@@ -11,7 +11,7 @@ import java.util.List;
 
 public class GuiItem extends GuiElement {
 
-    private Minecraft mc;
+    private final Minecraft mc;
     private FontRenderer fontRenderer;
 
     private ItemStack itemStack;

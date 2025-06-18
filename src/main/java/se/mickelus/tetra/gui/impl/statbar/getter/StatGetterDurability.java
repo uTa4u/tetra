@@ -3,14 +3,14 @@ package se.mickelus.tetra.gui.impl.statbar.getter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import se.mickelus.tetra.items.ItemModular;
-import se.mickelus.tetra.module.ItemModule;
 import se.mickelus.tetra.module.ItemModuleMajor;
 import se.mickelus.tetra.module.data.ImprovementData;
 import se.mickelus.tetra.util.CastOptional;
 
 public class StatGetterDurability implements IStatGetter {
 
-    public StatGetterDurability() { }
+    public StatGetterDurability() {
+    }
 
     @Override
     public double getValue(EntityPlayer player, ItemStack itemStack) {
@@ -31,7 +31,7 @@ public class StatGetterDurability implements IStatGetter {
                 .flatMap(item -> CastOptional.cast(item.getModuleFromSlot(itemStack, slot), ItemModuleMajor.class))
                 .map(module -> {
                     ImprovementData data = module.getImprovement(itemStack, improvement);
-                    return data.durability + (int)((data.durabilityMultiplier - 1) * module.getDurability(itemStack));
+                    return data.durability + (int) ((data.durabilityMultiplier - 1) * module.getDurability(itemStack));
                 })
                 .orElse(0);
     }

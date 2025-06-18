@@ -17,14 +17,16 @@ import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import net.minecraftforge.fml.common.Loader;
 import org.apache.commons.io.FilenameUtils;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.PropertyMatcher;
 import se.mickelus.tetra.generation.GenerationFeature;
 import se.mickelus.tetra.loot.LootEntryDeserializer;
 import se.mickelus.tetra.loot.LootPoolDeserializer;
-import se.mickelus.tetra.module.ReplacementDefinition;
-import se.mickelus.tetra.module.data.*;
 import se.mickelus.tetra.module.Priority;
+import se.mickelus.tetra.module.ReplacementDefinition;
+import se.mickelus.tetra.module.data.CapabilityData;
+import se.mickelus.tetra.module.data.EffectData;
+import se.mickelus.tetra.module.data.GlyphData;
+import se.mickelus.tetra.module.data.SynergyData;
 import se.mickelus.tetra.module.schema.Material;
 import se.mickelus.tetra.module.schema.SchemaDefinition;
 
@@ -43,7 +45,7 @@ public class DataHandler {
     private final File source;
     public final Gson gson;
 
-    private File configDir;
+    private final File configDir;
 
     public static DataHandler instance;
 
@@ -101,7 +103,7 @@ public class DataHandler {
 
     public <T> T getData(String path, Class<T> dataClass) {
         String pathString = String.format("data/%s/%s.json", Tags.MOD_ID, path);
-        File configOverride = new File (configDir, String.format("%s/%s.json", Tags.MOD_ID, path));
+        File configOverride = new File(configDir, String.format("%s/%s.json", Tags.MOD_ID, path));
 
         try {
             T data = null;
@@ -131,7 +133,7 @@ public class DataHandler {
 
     public <T> T getAsset(String namespace, String path, Class<T> assetClass) {
         String pathString = String.format("assets/%s/%s.json", namespace, path);
-        File configOverride = new File (configDir, String.format("%s/assets/%s/%s.json", Tags.MOD_ID, namespace, path));
+        File configOverride = new File(configDir, String.format("%s/assets/%s/%s.json", Tags.MOD_ID, namespace, path));
 
         try {
             T asset = null;
@@ -205,7 +207,7 @@ public class DataHandler {
 
     private GenerationFeature getGenerationFeature(Path path) {
 
-        try (BufferedReader reader = Files.newBufferedReader(path)){
+        try (BufferedReader reader = Files.newBufferedReader(path)) {
             GenerationFeature generationFeature = gson.fromJson(reader, GenerationFeature.class);
 
             if (generationFeature != null && generationFeature.location == null) {

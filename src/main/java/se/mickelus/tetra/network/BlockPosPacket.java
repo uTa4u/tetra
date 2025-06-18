@@ -7,7 +7,8 @@ public abstract class BlockPosPacket extends AbstractPacket {
 
     protected BlockPos pos;
 
-    public BlockPosPacket() {}
+    public BlockPosPacket() {
+    }
 
     public BlockPosPacket(BlockPos pos) {
         this.pos = pos;

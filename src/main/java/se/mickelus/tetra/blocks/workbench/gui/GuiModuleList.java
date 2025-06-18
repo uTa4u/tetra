@@ -8,7 +8,6 @@ import se.mickelus.tetra.items.ItemModular;
 import se.mickelus.tetra.module.ItemModule;
 import se.mickelus.tetra.module.ItemModuleMajor;
 
-import java.util.Arrays;
 import java.util.Random;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -16,7 +15,7 @@ import java.util.function.Consumer;
 public class GuiModuleList extends GuiElement {
     private final Consumer<String> slotClickHandler;
     private final BiConsumer<String, String> hoverHandler;
-    
+
     private GuiModuleMajor[] majorModuleElements;
     private GuiModule[] minorModuleElements;
 
@@ -52,7 +51,7 @@ public class GuiModuleList extends GuiElement {
             minorModuleElements[i].showAnimation(rand.nextInt(minorModuleElements.length + majorModuleElements.length));
         }
     }
-    
+
     public void setFocus(String slotKey) {
         for (GuiModuleMajor element :
                 majorModuleElements) {
@@ -70,7 +69,7 @@ public class GuiModuleList extends GuiElement {
         String[] majorModuleKeys = item.getMajorModuleKeys();
         ItemModuleMajor[] majorModules = item.getMajorModules(itemStack);
         GuiModuleOffsets offsets = GuiModuleOffsets.getMajorOffsets(item);
-        
+
         majorModuleElements = new GuiModuleMajor[majorModules.length];
 
         if (!previewStack.isEmpty()) {
@@ -112,8 +111,8 @@ public class GuiModuleList extends GuiElement {
         } else {
             for (int i = 0; i < minorModuleNames.length; i++) {
                 minorModuleElements[i] = getMinorModule(i, offsets,
-                    itemStack, itemStack, minorModuleKeys[i], minorModuleNames[i],
-                    minorModules[i], minorModules[i]);
+                        itemStack, itemStack, minorModuleKeys[i], minorModuleNames[i],
+                        minorModules[i], minorModules[i]);
                 addChild(minorModuleElements[i]);
             }
         }

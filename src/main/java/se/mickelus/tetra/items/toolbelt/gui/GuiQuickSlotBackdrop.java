@@ -1,9 +1,11 @@
 package se.mickelus.tetra.items.toolbelt.gui;
 
 import net.minecraft.util.ResourceLocation;
-import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
-import se.mickelus.tetra.gui.*;
+import se.mickelus.tetra.gui.GuiAttachment;
+import se.mickelus.tetra.gui.GuiElement;
+import se.mickelus.tetra.gui.GuiRect;
+import se.mickelus.tetra.gui.GuiTexture;
 import se.mickelus.tetra.items.toolbelt.SlotType;
 import se.mickelus.tetra.module.ItemEffect;
 
@@ -11,6 +13,7 @@ import java.util.Collection;
 
 public class GuiQuickSlotBackdrop extends GuiElement {
     private static final ResourceLocation texture = TetraMod.getResource("textures/gui/toolbelt-inventory.png");
+
     public GuiQuickSlotBackdrop(int x, int y, int numSlots, Collection<Collection<ItemEffect>> inventoryEffects) {
         super(x, y, numSlots * 17 - 9, 28);
 

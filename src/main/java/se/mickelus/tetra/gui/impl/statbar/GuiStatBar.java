@@ -2,7 +2,9 @@ package se.mickelus.tetra.gui.impl.statbar;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import se.mickelus.tetra.gui.*;
+import se.mickelus.tetra.gui.GuiAlignment;
+import se.mickelus.tetra.gui.GuiString;
+import se.mickelus.tetra.gui.GuiStringSmall;
 import se.mickelus.tetra.gui.impl.statbar.getter.ILabelGetter;
 import se.mickelus.tetra.gui.impl.statbar.getter.IStatGetter;
 import se.mickelus.tetra.gui.impl.statbar.getter.ITooltipGetter;
@@ -29,12 +31,12 @@ public class GuiStatBar extends GuiStatBase {
     protected ITooltipGetter tooltipGetter;
 
     public GuiStatBar(int x, int y, int barLength, String label, double min, double max, boolean segmented,
-            IStatGetter statGetter, ILabelGetter labelGetter, ITooltipGetter tooltipGetter) {
+                      IStatGetter statGetter, ILabelGetter labelGetter, ITooltipGetter tooltipGetter) {
         this(x, y, barLength, label, min, max, segmented, false, statGetter, labelGetter, tooltipGetter);
     }
 
     public GuiStatBar(int x, int y, int barLength, String label, double min, double max, boolean segmented, boolean split,
-            IStatGetter statGetter, ILabelGetter labelGetter, ITooltipGetter tooltipGetter) {
+                      IStatGetter statGetter, ILabelGetter labelGetter, ITooltipGetter tooltipGetter) {
         super(x, y, barLength, 12);
 
         this.min = min;

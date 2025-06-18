@@ -1,7 +1,6 @@
 package se.mickelus.tetra.blocks.forged;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -14,7 +13,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.Materials;
 import se.mickelus.tetra.blocks.TetraBlock;
 import se.mickelus.tetra.items.TetraCreativeTabs;

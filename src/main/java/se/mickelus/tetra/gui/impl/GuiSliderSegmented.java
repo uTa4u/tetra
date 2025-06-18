@@ -11,16 +11,17 @@ public class GuiSliderSegmented extends GuiClickable {
 
     private boolean isDragging = false;
 
-    private int valueSteps;
+    private final int valueSteps;
     private int value = 0;
 
-    private Consumer<Integer> onChange;
+    private final Consumer<Integer> onChange;
 
-    private GuiElement currentIndicator;
-    private GuiElement hoverIndicator;
+    private final GuiElement currentIndicator;
+    private final GuiElement hoverIndicator;
 
     public GuiSliderSegmented(int x, int y, int width, int valueSteps, Consumer<Integer> onChange) {
-        super(x, y, width, 12, () -> {});
+        super(x, y, width, 12, () -> {
+        });
 
         addChild(new GuiRect(5, 7, width - 9, 1, GuiColors.muted).setOpacity(0.7f));
 

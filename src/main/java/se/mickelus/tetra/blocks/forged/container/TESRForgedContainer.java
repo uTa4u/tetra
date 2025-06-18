@@ -3,13 +3,12 @@ package se.mickelus.tetra.blocks.forged.container;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
-import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.TetraMod;
 
 
 public class TESRForgedContainer extends TileEntitySpecialRenderer<TileEntityForgedContainer> {
     private static final ResourceLocation texture = TetraMod.getResource("textures/blocks/forged_container/forged_container.png");
-    private ModelForgedContainer model = new ModelForgedContainer();
+    private final ModelForgedContainer model = new ModelForgedContainer();
 
     private static final float openDuration = 300;
 
@@ -30,7 +29,7 @@ public class TESRForgedContainer extends TileEntitySpecialRenderer<TileEntityFor
         GlStateManager.pushMatrix();
         GlStateManager.enableRescaleNormal();
 
-        GlStateManager.translate((float)x, (float)y + 1.0F, (float)z + 1.0F);
+        GlStateManager.translate((float) x, (float) y + 1.0F, (float) z + 1.0F);
         GlStateManager.scale(1.0F, -1.0F, -1.0F);
         GlStateManager.translate(0.5F, 0.5F, 0.5F);
         int j = 270;
@@ -52,8 +51,8 @@ public class TESRForgedContainer extends TileEntitySpecialRenderer<TileEntityFor
         GlStateManager.translate(-0.5F, -0.5F, -0.5F);
 
         if (te.isOpen()) {
-            float progress  = Math.min(1, ( System.currentTimeMillis() - te.openTime) / openDuration);
-            model.lid.rotateAngleY = (progress * 0.1f * ((float)Math.PI / 2F));
+            float progress = Math.min(1, (System.currentTimeMillis() - te.openTime) / openDuration);
+            model.lid.rotateAngleY = (progress * 0.1f * ((float) Math.PI / 2F));
             //model.lid.offsetY = 0.5625f;
             model.lid.offsetZ = 0.3f * progress;
         } else {

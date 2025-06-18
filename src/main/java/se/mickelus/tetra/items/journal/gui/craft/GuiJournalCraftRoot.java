@@ -14,16 +14,16 @@ public class GuiJournalCraftRoot extends GuiJournalRootBase {
 
     public static final char backBinding = 'q';
 
-    private GuiJournalBreadcrumbs breadcrumbs;
+    private final GuiJournalBreadcrumbs breadcrumbs;
     private int depth = 0;
 
-    private GuiJournalItems itemsView;
+    private final GuiJournalItems itemsView;
     private ItemModular item;
 
-    private GuiJournalSchemas schemasView;
+    private final GuiJournalSchemas schemasView;
     private String slot;
 
-    private GuiJournalSchema schemaView;
+    private final GuiJournalSchema schemaView;
     private UpgradeSchema schema;
 
     public GuiJournalCraftRoot(int x, int y) {

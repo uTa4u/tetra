@@ -7,7 +7,7 @@ public class ModelForgedContainer extends ModelBase {
     public ModelRenderer lid;
     public ModelRenderer base;
 
-    public ModelRenderer locks[];
+    public ModelRenderer[] locks;
 
     public ModelForgedContainer() {
         lid = new ModelRenderer(this, 0, 0).setTextureSize(128, 64);

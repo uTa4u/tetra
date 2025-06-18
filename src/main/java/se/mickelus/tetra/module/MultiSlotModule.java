@@ -3,7 +3,6 @@ package se.mickelus.tetra.module;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.data.DataHandler;
 import se.mickelus.tetra.module.data.ImprovementData;
 import se.mickelus.tetra.module.data.ModuleData;
@@ -16,7 +15,7 @@ public class MultiSlotModule<T extends ModuleData> extends ItemModuleMajor<T> {
 
     protected String unlocalizedName;
 
-    public MultiSlotModule(String slotKey, String moduleKey, String slotSuffix, String ... improvementKeys) {
+    public MultiSlotModule(String slotKey, String moduleKey, String slotSuffix, String... improvementKeys) {
         super(slotKey, moduleKey + slotSuffix);
 
         this.slotSuffix = slotSuffix;
@@ -54,6 +53,6 @@ public class MultiSlotModule<T extends ModuleData> extends ItemModuleMajor<T> {
 
     public ResourceLocation[] getTextures(ItemStack itemStack) {
         String string = "items/" + getData(itemStack).key + slotSuffix;
-        return new ResourceLocation[] { new ResourceLocation(Tags.MOD_ID, string)};
+        return new ResourceLocation[]{new ResourceLocation(Tags.MOD_ID, string)};
     }
 }

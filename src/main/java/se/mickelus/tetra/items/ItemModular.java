@@ -1,5 +1,6 @@
 package se.mickelus.tetra.items;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -23,19 +24,21 @@ import se.mickelus.tetra.ConfigHandler;
 import se.mickelus.tetra.NBTHelper;
 import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.capabilities.ICapabilityProvider;
-import se.mickelus.tetra.module.*;
-
-import javax.annotation.Nullable;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import com.google.common.collect.ImmutableList;
+import se.mickelus.tetra.module.ItemEffect;
+import se.mickelus.tetra.module.ItemModule;
+import se.mickelus.tetra.module.ItemModuleMajor;
+import se.mickelus.tetra.module.ItemUpgradeRegistry;
 import se.mickelus.tetra.module.data.ImprovementData;
 import se.mickelus.tetra.module.data.SynergyData;
 import se.mickelus.tetra.module.improvement.DestabilizationEffect;
 import se.mickelus.tetra.module.improvement.HonePacket;
 import se.mickelus.tetra.module.schema.Material;
 import se.mickelus.tetra.network.PacketHandler;
+
+import javax.annotation.Nullable;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public abstract class ItemModular extends TetraItem implements IItemModular, ICapabilityProvider {
 
@@ -95,7 +98,7 @@ public abstract class ItemModular extends TetraItem implements IItemModular, ICa
         NBTTagCompound stackTag = NBTHelper.getTag(stack);
 
         if (stackTag != null) {
-            return Stream.concat(Arrays.stream(majorModuleKeys),Arrays.stream(minorModuleKeys))
+            return Stream.concat(Arrays.stream(majorModuleKeys), Arrays.stream(minorModuleKeys))
                     .map(stackTag::getString)
                     .map(ItemUpgradeRegistry.instance::getModule)
                     .filter(Objects::nonNull)
@@ -185,7 +188,7 @@ public abstract class ItemModular extends TetraItem implements IItemModular, ICa
 
     public boolean hasModule(ItemStack itemStack, ItemModule module) {
         return getAllModules(itemStack).stream()
-            .anyMatch(module::equals);
+                .anyMatch(module::equals);
     }
 
     public ItemModule getModuleFromSlot(ItemStack itemStack, String slot) {
@@ -212,7 +215,7 @@ public abstract class ItemModular extends TetraItem implements IItemModular, ICa
 
         tickHoningProgression(entity, itemStack, multiplier);
 
-        for (ItemModuleMajor module: getMajorModules(itemStack)) {
+        for (ItemModuleMajor module : getMajorModules(itemStack)) {
             module.tickProgression(entity, itemStack, multiplier);
         }
     }
@@ -363,6 +366,7 @@ public abstract class ItemModular extends TetraItem implements IItemModular, ICa
     /**
      * Returns an optional with the module that will be repaired in next repair attempt, the optional is empty if
      * there are no repairable modules in this item.
+     *
      * @param itemStack The itemstack for the modular item
      * @return An optional with the module that will be repaired in next repair attempt
      */
@@ -393,6 +397,7 @@ public abstract class ItemModular extends TetraItem implements IItemModular, ICa
     /**
      * Returns an itemstack with the material required for the next repair attempt. Rotates between materials required
      * for different modules
+     *
      * @param itemStack The itemstack for the modular item
      * @return The material definition for the material required for the next repair attempt
      */
@@ -404,6 +409,7 @@ public abstract class ItemModular extends TetraItem implements IItemModular, ICa
 
     /**
      * Returns the required size of the repair material itemstack for the next repair attempt.
+     *
      * @param itemStack The itemstack for the modular item
      * @return
      */
@@ -415,6 +421,7 @@ public abstract class ItemModular extends TetraItem implements IItemModular, ICa
 
     /**
      * Returns the amount of durability restored by the next repair attempt.
+     *
      * @param itemStack The itemstack for the modular item
      * @return
      */
@@ -447,6 +454,7 @@ public abstract class ItemModular extends TetraItem implements IItemModular, ICa
 
     /**
      * Returns the number of times this item has been repaired.
+     *
      * @param itemStack The itemstack for the modular item
      * @return
      */
@@ -486,7 +494,7 @@ public abstract class ItemModular extends TetraItem implements IItemModular, ICa
                     .forEach(module -> {
                         int instability = -module.getMagicCapacity(itemStack);
 
-                        for (DestabilizationEffect effect:
+                        for (DestabilizationEffect effect :
                                 DestabilizationEffect.getEffectsForImprovement(instability, module.getImprovements(itemStack))) {
                             int currentEffectLevel = module.getImprovementLevel(itemStack, effect.destabilizationKey);
                             int newLevel;
@@ -601,22 +609,23 @@ public abstract class ItemModular extends TetraItem implements IItemModular, ICa
         }
 
         return getAllModules(itemStack).stream()
-                .flatMap(module -> ((Collection<Capability>)module.getCapabilities(itemStack)).stream())
+                .flatMap(module -> ((Collection<Capability>) module.getCapabilities(itemStack)).stream())
                 .collect(Collectors.toSet());
     }
 
     /**
      * Apply special effects and possibly consume required resources after this item has been used to craft or upgrade
      * another item. This is called once for each capability used by the craft, which this item provide.
-     * @param providerStack The providing stack, the itemstack for this item
-     * @param targetStack The itemstack which is being upgraded/crafted/altered in some way
-     * @param player The player performing the actions
-     * @param capability The capability used
-     * @param capabilityLevel The level of the used capability
+     *
+     * @param providerStack    The providing stack, the itemstack for this item
+     * @param targetStack      The itemstack which is being upgraded/crafted/altered in some way
+     * @param player           The player performing the actions
+     * @param capability       The capability used
+     * @param capabilityLevel  The level of the used capability
      * @param consumeResources
      */
     public ItemStack onCraftConsumeCapability(ItemStack providerStack, ItemStack targetStack, EntityPlayer player,
-            Capability capability, int capabilityLevel, boolean consumeResources) {
+                                              Capability capability, int capabilityLevel, boolean consumeResources) {
         ItemStack result = targetStack.copy();
 
         return result;
@@ -625,15 +634,16 @@ public abstract class ItemModular extends TetraItem implements IItemModular, ICa
     /**
      * Apply special effects and possibly consume required resources after this item has been used to perform a
      * workbench action.
-     * @param providerStack The providing stack, the itemstack for this item
-     * @param targetStack The itemstack which the action is performed upon
-     * @param player The player performing the action
-     * @param capability The capability used
-     * @param capabilityLevel The level of the used capability
+     *
+     * @param providerStack    The providing stack, the itemstack for this item
+     * @param targetStack      The itemstack which the action is performed upon
+     * @param player           The player performing the action
+     * @param capability       The capability used
+     * @param capabilityLevel  The level of the used capability
      * @param consumeResources
      */
     public ItemStack onActionConsumeCapability(ItemStack providerStack, ItemStack targetStack, EntityPlayer player,
-            Capability capability, int capabilityLevel, boolean consumeResources) {
+                                               Capability capability, int capabilityLevel, boolean consumeResources) {
         ItemStack result = targetStack.copy();
 
         return result;
@@ -665,7 +675,7 @@ public abstract class ItemModular extends TetraItem implements IItemModular, ICa
         }
 
         return getAllModules(itemStack).stream()
-                .flatMap(module -> ((Collection<ItemEffect>)module.getEffects(itemStack)).stream())
+                .flatMap(module -> ((Collection<ItemEffect>) module.getEffects(itemStack)).stream())
                 .distinct()
                 .collect(Collectors.toSet());
 
@@ -691,15 +701,15 @@ public abstract class ItemModular extends TetraItem implements IItemModular, ICa
 
     protected String getDisplayNamePrefixes(ItemStack itemStack) {
         return Stream.concat(
-                Arrays.stream(getImprovements(itemStack))
-                        .map(improvement -> improvement.key + ".prefix")
-                        .filter(I18n::hasKey)
-                        .map(I18n::format),
-                getAllModules(itemStack).stream()
-                        .sorted(Comparator.comparing(module -> module.getItemPrefixPriority(itemStack)))
-                        .map(module -> module.getItemPrefix(itemStack))
-                        .filter(Objects::nonNull)
-        )
+                        Arrays.stream(getImprovements(itemStack))
+                                .map(improvement -> improvement.key + ".prefix")
+                                .filter(I18n::hasKey)
+                                .map(I18n::format),
+                        getAllModules(itemStack).stream()
+                                .sorted(Comparator.comparing(module -> module.getItemPrefixPriority(itemStack)))
+                                .map(module -> module.getItemPrefix(itemStack))
+                                .filter(Objects::nonNull)
+                )
                 .limit(2)
                 .reduce("", (result, prefix) -> result + prefix + " ");
     }

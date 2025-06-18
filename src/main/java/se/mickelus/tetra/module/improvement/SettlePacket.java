@@ -10,7 +10,8 @@ public class SettlePacket extends AbstractPacket {
     ItemStack itemStack;
     String slot;
 
-    public SettlePacket() {}
+    public SettlePacket() {
+    }
 
     public SettlePacket(ItemStack itemStack, String slot) {
         this.itemStack = itemStack;

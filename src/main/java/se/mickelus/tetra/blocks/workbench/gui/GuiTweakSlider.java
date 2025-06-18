@@ -1,8 +1,10 @@
 package se.mickelus.tetra.blocks.workbench.gui;
 
 import net.minecraft.client.resources.I18n;
-import se.mickelus.tetra.gui.*;
-import se.mickelus.tetra.gui.impl.GuiColors;
+import se.mickelus.tetra.gui.GuiAttachment;
+import se.mickelus.tetra.gui.GuiElement;
+import se.mickelus.tetra.gui.GuiString;
+import se.mickelus.tetra.gui.GuiStringSmall;
 import se.mickelus.tetra.gui.impl.GuiSliderSegmented;
 import se.mickelus.tetra.module.data.TweakData;
 
@@ -12,12 +14,12 @@ import java.util.function.Consumer;
 
 public class GuiTweakSlider extends GuiElement {
 
-    private GuiString labelString;
-    private GuiSliderSegmented slider;
+    private final GuiString labelString;
+    private final GuiSliderSegmented slider;
 
-    private List<String> tooltip;
+    private final List<String> tooltip;
 
-    private int steps;
+    private final int steps;
 
     public GuiTweakSlider(int x, int y, int width, TweakData tweak, Consumer<Integer> onChange) {
         super(x, y, width, 16);

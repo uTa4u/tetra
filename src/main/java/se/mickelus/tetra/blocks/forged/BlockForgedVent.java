@@ -2,7 +2,6 @@ package se.mickelus.tetra.blocks.forged;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
@@ -54,7 +53,7 @@ public class BlockForgedVent extends TetraBlock implements IBlockCapabilityInter
     public static final PropertyBool propX = PropertyBool.create("x");
     public static final PropertyBool propBroken = PropertyBool.create("broken");
 
-    public static final BlockInteraction[] interactions = new BlockInteraction[] {
+    public static final BlockInteraction[] interactions = new BlockInteraction[]{
             new BlockInteraction(Capability.hammer, 3, EnumFacing.EAST, 1, 4, 12, 15,
                     new PropertyMatcher().where(propBroken, equalTo(false)).where(propRotation, equalTo(0)),
                     BlockForgedVent::breakBolt),
@@ -115,7 +114,7 @@ public class BlockForgedVent extends TetraBlock implements IBlockCapabilityInter
     }
 
     private static boolean breakBolt(World world, BlockPos pos, IBlockState blockState, EntityPlayer player,
-            EnumHand hand, EnumFacing facing) {
+                                     EnumHand hand, EnumFacing facing) {
         world.setBlockState(pos, world.getBlockState(pos).withProperty(propBroken, true), 2);
 
         if (!world.isRemote) {
@@ -137,7 +136,7 @@ public class BlockForgedVent extends TetraBlock implements IBlockCapabilityInter
     }
 
     private static boolean breakPlate(World world, BlockPos pos, IBlockState blockState, EntityPlayer player,
-            EnumHand hand, EnumFacing facing) {
+                                      EnumHand hand, EnumFacing facing) {
         List<BlockPos> connectedVents = getConnectedBlocks(world, pos, new LinkedList<>(), blockState.getValue(propX));
 
         if (connectedVents.stream().anyMatch(blockPos -> !world.getBlockState(blockPos).getValue(propBroken))) {
@@ -220,8 +219,8 @@ public class BlockForgedVent extends TetraBlock implements IBlockCapabilityInter
         }
 
         iblockstate = iblockstate.withProperty(propRotation, rotation);
-        
-        return  iblockstate;
+
+        return iblockstate;
     }
 
     @Override

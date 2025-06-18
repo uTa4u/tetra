@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import se.mickelus.tetra.blocks.workbench.gui.GuiCapability;
 import se.mickelus.tetra.capabilities.Capability;
-import se.mickelus.tetra.gui.*;
+import se.mickelus.tetra.gui.GuiAlignment;
 import se.mickelus.tetra.gui.impl.GuiColors;
 import se.mickelus.tetra.gui.impl.statbar.getter.*;
 import se.mickelus.tetra.items.ItemModular;
@@ -14,8 +14,8 @@ public class GuiStatBarCapability extends GuiStatBar {
 
     private static final int efficiencyMax = 50;
 
-    private GuiCapability capabilityElement;
-    private IStatGetter levelGetter;
+    private final GuiCapability capabilityElement;
+    private final IStatGetter levelGetter;
 
     public GuiStatBarCapability(int x, int y, int width, Capability capability) {
         super(x, y, width, "", 0, efficiencyMax,
@@ -43,7 +43,7 @@ public class GuiStatBarCapability extends GuiStatBar {
             color = getDiffColor(level, previewLevel);
             level = previewLevel;
         } else if (slot != null) {
-            int previewLevel = level - getSlotLevel(player, currentStack, slot, improvement);;
+            int previewLevel = level - getSlotLevel(player, currentStack, slot, improvement);
 
             color = getDiffColor(previewLevel, level);
         }

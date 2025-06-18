@@ -9,7 +9,6 @@ import se.mickelus.tetra.items.ItemModular;
 import se.mickelus.tetra.module.ItemModule;
 import se.mickelus.tetra.module.ItemUpgradeRegistry;
 import se.mickelus.tetra.module.data.GlyphData;
-import se.mickelus.tetra.util.CastOptional;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,12 +20,12 @@ public class RemoveSchema extends BaseSchema {
     private static final String nameSuffix = ".name";
     private static final String descriptionSuffix = ".description";
 
-    private String key = "remove_schema";
+    private final String key = "remove_schema";
 
-    private ItemModular item;
-    private String slot;
+    private final ItemModular item;
+    private final String slot;
 
-    private GlyphData glyph = new GlyphData("textures/gui/workbench.png", 52, 32);
+    private final GlyphData glyph = new GlyphData("textures/gui/workbench.png", 52, 32);
 
     public RemoveSchema(ItemModular item, String slot) {
         this.item = item;

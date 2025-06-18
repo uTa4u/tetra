@@ -18,8 +18,8 @@ import java.util.List;
 
 public class GuiJournalStats extends GuiElement {
 
-    private List<GuiStatBase> bars;
-    private GuiElement barGroup;
+    private final List<GuiStatBase> bars;
+    private final GuiElement barGroup;
 
     public GuiJournalStats(int x, int y) {
         super(x, y, 200, 52);

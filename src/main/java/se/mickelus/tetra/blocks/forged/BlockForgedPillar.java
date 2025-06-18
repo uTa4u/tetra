@@ -1,7 +1,6 @@
 package se.mickelus.tetra.blocks.forged;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -19,7 +18,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.Materials;
 import se.mickelus.tetra.blocks.TetraBlock;
 import se.mickelus.tetra.items.TetraCreativeTabs;
@@ -28,7 +26,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class BlockForgedPillar extends TetraBlock {
-    public static final PropertyEnum<EnumFacing.Axis> propAxis = PropertyEnum.<EnumFacing.Axis>create("axis", EnumFacing.Axis.class);
+    public static final PropertyEnum<EnumFacing.Axis> propAxis = PropertyEnum.create("axis", EnumFacing.Axis.class);
 
     static final String unlocalizedName = "forged_pillar";
 

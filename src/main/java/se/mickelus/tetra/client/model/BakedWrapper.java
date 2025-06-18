@@ -1,7 +1,6 @@
 package se.mickelus.tetra.client.model;
 
 import com.google.common.collect.ImmutableList;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
@@ -14,10 +13,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ItemLayerModel;
 import net.minecraftforge.common.model.IModelState;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.function.Function;
-
-import javax.annotation.Nonnull;
 
 public class BakedWrapper implements IBakedModel {
 
@@ -27,7 +25,7 @@ public class BakedWrapper implements IBakedModel {
     private final Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter;
 
     public BakedWrapper(IModelState state, VertexFormat format, ItemOverrideList overrideList,
-            Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
+                        Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
         parent = new ItemLayerModel(ImmutableList.of(), overrideList).bake(state, format, bakedTextureGetter);
         this.state = state;
         this.format = format;

@@ -2,10 +2,10 @@ package se.mickelus.tetra.items.journal.gui.craft;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import se.mickelus.tetra.blocks.workbench.gui.GuiModuleGlyph;
-import se.mickelus.tetra.gui.impl.GuiColors;
 import se.mickelus.tetra.gui.GuiElement;
 import se.mickelus.tetra.gui.GuiString;
 import se.mickelus.tetra.gui.GuiTexture;
+import se.mickelus.tetra.gui.impl.GuiColors;
 import se.mickelus.tetra.module.schema.UpgradeSchema;
 
 import java.util.Arrays;
@@ -17,7 +17,7 @@ public class GuiJournalImprovement extends GuiElement {
     private final GuiTexture backdrop;
     private final GuiString label;
 
-    private UpgradeSchema schema;
+    private final UpgradeSchema schema;
 
     public GuiJournalImprovement(int x, int y, UpgradeSchema schema) {
         super(x, y, 52, 16);

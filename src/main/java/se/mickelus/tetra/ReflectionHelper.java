@@ -1,7 +1,6 @@
 package se.mickelus.tetra;
 
 import com.google.common.base.Preconditions;
-import net.minecraft.block.Block;
 import net.minecraft.launchwrapper.Launch;
 import org.apache.commons.lang3.StringUtils;
 

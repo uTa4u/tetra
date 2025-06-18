@@ -7,6 +7,7 @@ import net.minecraft.util.DamageSource;
 
 public class PotionBleeding extends Potion {
     public static PotionBleeding instance;
+
     protected PotionBleeding() {
         super(true, 0);
 

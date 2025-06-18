@@ -9,9 +9,9 @@ import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.data.DataHandler;
 
 public class BlockInteractionCriterion extends AbstractCriterionInstance {
-    private PropertyMatcher after = null;
-    private  Capability capability = null;
-    private int capabilityLevel = -1;
+    private final PropertyMatcher after = null;
+    private final Capability capability = null;
+    private final int capabilityLevel = -1;
 
     public static final GenericTrigger<BlockInteractionCriterion> trigger = new GenericTrigger<>("tetra:block_interaction", BlockInteractionCriterion::deserialize);
 
@@ -32,11 +32,7 @@ public class BlockInteractionCriterion extends AbstractCriterionInstance {
             return false;
         }
 
-        if (this.capabilityLevel != -1 && this.capabilityLevel != usedCapabilityLevel) {
-            return false;
-        }
-
-        return true;
+        return this.capabilityLevel == -1 || this.capabilityLevel == usedCapabilityLevel;
     }
 
     private static BlockInteractionCriterion deserialize(JsonObject json) {

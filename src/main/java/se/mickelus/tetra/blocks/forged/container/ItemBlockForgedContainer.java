@@ -37,7 +37,7 @@ public class ItemBlockForgedContainer extends ItemBlock {
 
         ItemStack itemstack = player.getHeldItem(hand);
 
-        if (!itemstack.isEmpty() && player.canPlayerEdit(pos, facing, itemstack) && worldIn.mayPlace(this.block, pos, true, facing, (Entity)null)) {
+        if (!itemstack.isEmpty() && player.canPlayerEdit(pos, facing, itemstack) && worldIn.mayPlace(this.block, pos, true, facing, null)) {
             int i = this.getMetadata(itemstack.getMetadata());
             IBlockState iblockstate1 = this.block.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, i, player, hand);
 

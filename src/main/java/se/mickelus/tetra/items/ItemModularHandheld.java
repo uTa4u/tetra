@@ -48,7 +48,6 @@ import se.mickelus.tetra.blocks.workbench.BlockWorkbench;
 import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.module.ItemEffect;
 import se.mickelus.tetra.module.ItemEffectHandler;
-import se.mickelus.tetra.module.ItemModuleMajor;
 import se.mickelus.tetra.util.CastOptional;
 
 import javax.annotation.Nullable;
@@ -69,7 +68,7 @@ public class ItemModularHandheld extends ItemModular {
 
     private static final Set<Material> cuttingMaterials = Sets.newHashSet(Material.PLANTS, Material.VINE, Material.CORAL, Material.LEAVES, Material.GOURD, Material.WEB, Material.CLOTH);
 
-    private static final String[] denailOreDict = new String[] { "plankWood", "slabWood", "stairWood", "fenceWood", "fenceGateWood", "doorWood", "chestWood"};
+    private static final String[] denailOreDict = new String[]{"plankWood", "slabWood", "stairWood", "fenceWood", "fenceGateWood", "doorWood", "chestWood"};
     private static final List<Predicate<IBlockState>> denailBlocks = ImmutableList.of(
             BlockMatcher.forBlock(Blocks.CRAFTING_TABLE),
             BlockStateMatcher.forBlock(BlockWorkbench.instance).where(BlockWorkbench.propVariant, Predicates.equalTo(BlockWorkbench.Variant.wood)),
@@ -90,7 +89,7 @@ public class ItemModularHandheld extends ItemModular {
             BlockMatcher.forBlock(Blocks.WOODEN_BUTTON),
             BlockMatcher.forBlock(Blocks.DAYLIGHT_DETECTOR),
             BlockMatcher.forBlock(Blocks.DAYLIGHT_DETECTOR_INVERTED)
-            );
+    );
 
     protected static final UUID ARMOR_MODIFIER = UUID.fromString("D96050BE-6A94-4A27-AA0B-2AF705327BA4");
 
@@ -166,12 +165,12 @@ public class ItemModularHandheld extends ItemModular {
 
             // todo: only trigger if target is standing on stone/earth/sand/gravel
             int earthbindLevel = getEffectLevel(itemStack, ItemEffect.earthbind);
-            if (earthbindLevel > 0 && attacker.getRNG().nextFloat() < Math.max(0.1, 0.5 * ( 1 - target.posY  / 128 ))) {
+            if (earthbindLevel > 0 && attacker.getRNG().nextFloat() < Math.max(0.1, 0.5 * (1 - target.posY / 128))) {
                 target.addPotionEffect(new PotionEffect(PotionEarthbound.instance, 80, 0, false, true));
 
                 if (target.world instanceof WorldServer) {
-                    ((WorldServer)target.world).spawnParticle(EnumParticleTypes.BLOCK_CRACK, target.posX, target.posY + 0.1, target.posZ,
-                            16, 0, 0.1,0, target.world.rand.nextGaussian() * 0.2,
+                    ((WorldServer) target.world).spawnParticle(EnumParticleTypes.BLOCK_CRACK, target.posX, target.posY + 0.1, target.posZ,
+                            16, 0, 0.1, 0, target.world.rand.nextGaussian() * 0.2,
                             Block.getStateId(target.world.getBlockState(new BlockPos(target.posX, target.posY - 1, target.posZ))));
                 }
             }
@@ -228,7 +227,7 @@ public class ItemModularHandheld extends ItemModular {
             }
         }
     }
-    
+
     protected void causeEnderReverbEffect(EntityLivingBase entity, ItemStack itemStack, double multiplier) {
         if (!entity.world.isRemote) {
             double effectProbability = getEffectEfficiency(itemStack, ItemEffect.enderReverb);
@@ -285,10 +284,11 @@ public class ItemModularHandheld extends ItemModular {
 
     /**
      * Flattens grass into a path similar to how vanilla shovels does it.
+     *
      * @param player the responsible player entity
-     * @param world the world in which the action takes place
-     * @param pos the position in the world
-     * @param hand the hand holding the tool
+     * @param world  the world in which the action takes place
+     * @param pos    the position in the world
+     * @param hand   the hand holding the tool
      * @param facing the clicked face
      * @return EnumActionResult.SUCCESS if successful, EnumActionResult.FAIL if block cannot be edited by player,
      * otherwise EnumActionResult.PASS
@@ -318,10 +318,11 @@ public class ItemModularHandheld extends ItemModular {
 
     /**
      * Tills dirt or grass, turning it into farmland. Tilling coarse dirt turns it into dirt.
+     *
      * @param player the responsible player entity
-     * @param world the world in which the action takes place
-     * @param pos the position in the world
-     * @param hand the hand holding the tool
+     * @param world  the world in which the action takes place
+     * @param pos    the position in the world
+     * @param hand   the hand holding the tool
      * @param facing the clicked face
      * @return EnumActionResult.SUCCESS if successful, EnumActionResult.FAIL if block cannot be edited by player,
      * otherwise EnumActionResult.PASS
@@ -376,10 +377,11 @@ public class ItemModularHandheld extends ItemModular {
 
     /**
      * Instantly break plank based blocks.
+     *
      * @param player the responsible player entity
-     * @param world the world in which the action takes place
-     * @param pos the position in the world
-     * @param hand the hand holding the tool
+     * @param world  the world in which the action takes place
+     * @param pos    the position in the world
+     * @param hand   the hand holding the tool
      * @param facing the clicked face
      * @return EnumActionResult.SUCCESS if successful, EnumActionResult.FAIL if block cannot be edited by player,
      * otherwise EnumActionResult.PASS
@@ -426,10 +428,11 @@ public class ItemModularHandheld extends ItemModular {
 
     /**
      * Perfoms a sweeping attack, dealing damage and playing effects similar to vanilla swords.
-     * @param itemStack the itemstack used for the attack
-     * @param target the attacking entity
-     * @param attacker the attacked entity
-     * @param sweepingLevel the level of the sweeping effect of the itemstack
+     *
+     * @param itemStack      the itemstack used for the attack
+     * @param target         the attacking entity
+     * @param attacker       the attacked entity
+     * @param sweepingLevel  the level of the sweeping effect of the itemstack
      * @param knockbackLevel the level of the knockback effect of the itemstack
      */
     private void sweepAttack(ItemStack itemStack, EntityLivingBase target, EntityLivingBase attacker, int sweepingLevel, int knockbackLevel) {
@@ -445,7 +448,7 @@ public class ItemModularHandheld extends ItemModular {
 
             // range values set up to mimic vanilla behaviour
             attacker.world.getEntitiesWithinAABB(EntityLivingBase.class,
-                    target.getEntityBoundingBox().grow(range, 0.25d, range)).stream()
+                            target.getEntityBoundingBox().grow(range, 0.25d, range)).stream()
                     .filter(entity -> entity != attacker)
                     .filter(entity -> !attacker.isOnSameTeam(entity))
                     .filter(entity -> attacker.getDistanceSq(entity) < (range + 2) * (range + 2))
@@ -469,16 +472,17 @@ public class ItemModularHandheld extends ItemModular {
     /**
      * Spawns sweeping particles in the given world at the given coordinates. Similar to the sweeping particle used
      * by vanilla swords.
-     * @param world The world in which to spawn the particle
-     * @param x the x coordinate
-     * @param y the y coordinate
-     * @param z the z coordinate
+     *
+     * @param world   The world in which to spawn the particle
+     * @param x       the x coordinate
+     * @param y       the y coordinate
+     * @param z       the z coordinate
      * @param xOffset x offset which is later multiplied by a random number (0-1)
      * @param zOffset z offset which is later multiplied by a random number (0-1)
      */
     public static void spawnSweepParticles(World world, double x, double y, double z, double xOffset, double zOffset) {
         if (world instanceof WorldServer) {
-            ((WorldServer)world).spawnParticle(EnumParticleTypes.SWEEP_ATTACK, x, y, z,
+            ((WorldServer) world).spawnParticle(EnumParticleTypes.SWEEP_ATTACK, x, y, z,
                     1, xOffset, 0, zOffset, 0);
         }
     }
@@ -510,14 +514,14 @@ public class ItemModularHandheld extends ItemModular {
 
         if (slot == EntityEquipmentSlot.MAINHAND) {
             multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getDamageModifier(itemStack), 0));
+                    new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getDamageModifier(itemStack), 0));
             multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
-                new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", getSpeedModifier(itemStack), 0));
+                    new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", getSpeedModifier(itemStack), 0));
         }
 
         if (slot == EntityEquipmentSlot.MAINHAND || slot == EntityEquipmentSlot.OFFHAND) {
             int armor = getEffectLevel(itemStack, ItemEffect.armor);
-            if  (armor > 0) {
+            if (armor > 0) {
                 multimap.put(SharedMonsterAttributes.ARMOR.getName(),
                         new AttributeModifier(ARMOR_MODIFIER, "Weapon modifier", armor, 0));
             }
@@ -602,8 +606,8 @@ public class ItemModularHandheld extends ItemModular {
     public Set<String> getToolClasses(ItemStack itemStack) {
         if (!isBroken(itemStack)) {
             return getCapabilities(itemStack).stream()
-                .map(Enum::toString)
-                .collect(Collectors.toSet());
+                    .map(Enum::toString)
+                    .collect(Collectors.toSet());
         }
         return Collections.emptySet();
     }
@@ -684,7 +688,7 @@ public class ItemModularHandheld extends ItemModular {
 
     @Override
     public ItemStack onCraftConsumeCapability(ItemStack providerStack, ItemStack targetStack, EntityPlayer player,
-            Capability capability, int capabilityLevel, boolean consumeResources) {
+                                              Capability capability, int capabilityLevel, boolean consumeResources) {
         if (consumeResources) {
             applyDamage(capabilityLevel, providerStack, player);
 
@@ -700,7 +704,7 @@ public class ItemModularHandheld extends ItemModular {
 
     @Override
     public ItemStack onActionConsumeCapability(ItemStack providerStack, ItemStack targetStack, EntityPlayer player,
-            Capability capability, int capabilityLevel, boolean consumeResources) {
+                                               Capability capability, int capabilityLevel, boolean consumeResources) {
         if (consumeResources) {
             applyDamage(capabilityLevel, providerStack, player);
 
