@@ -76,7 +76,7 @@ public class GuiModuleList extends GuiElement {
             ItemModuleMajor[] majorModulesPreview = item.getMajorModules(previewStack);
             for (int i = 0; i < majorModuleNames.length; i++) {
                 final int x = offsets.getX(i);
-                majorModuleElements[i] = new GuiModuleMajor(x, offsets.getY(i), x > 0 ? GuiAttachment.topLeft : GuiAttachment.topRight,
+                majorModuleElements[i] = new GuiModuleMajor(x, offsets.getY(i), x > 0 ? GuiAttachment.TOP_LEFT : GuiAttachment.TOP_RIGHT,
                         itemStack, previewStack, majorModuleKeys[i], majorModuleNames[i],
                         majorModules[i], majorModulesPreview[i], slotClickHandler, hoverHandler);
                 addChild(majorModuleElements[i]);
@@ -84,7 +84,7 @@ public class GuiModuleList extends GuiElement {
         } else {
             for (int i = 0; i < majorModuleNames.length; i++) {
                 final int x = offsets.getX(i);
-                majorModuleElements[i] = new GuiModuleMajor(x, offsets.getY(i), x > 0 ? GuiAttachment.topLeft : GuiAttachment.topRight,
+                majorModuleElements[i] = new GuiModuleMajor(x, offsets.getY(i), x > 0 ? GuiAttachment.TOP_LEFT : GuiAttachment.TOP_RIGHT,
                         itemStack, itemStack, majorModuleKeys[i], majorModuleNames[i],
                         majorModules[i], majorModules[i], slotClickHandler, hoverHandler);
                 addChild(majorModuleElements[i]);
@@ -122,7 +122,7 @@ public class GuiModuleList extends GuiElement {
                                      String slotKey, String slotName,
                                      ItemModule module, ItemModule previewModule) {
         final int x = offsets.getX(index);
-        return new GuiModule(x, offsets.getY(index), x > 0 ? GuiAttachment.topLeft : GuiAttachment.topRight,
+        return new GuiModule(x, offsets.getY(index), x > 0 ? GuiAttachment.TOP_LEFT : GuiAttachment.TOP_RIGHT,
                 itemStack, previewStack, slotKey, slotName, module, previewModule, slotClickHandler, hoverHandler);
     }
 }

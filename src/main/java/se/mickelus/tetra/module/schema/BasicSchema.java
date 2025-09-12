@@ -25,7 +25,7 @@ public abstract class BasicSchema extends BaseSchema {
         this.module = module;
         this.item = item;
 
-        ItemUpgradeRegistry.instance.registerSchema(this);
+        ItemUpgradeRegistry.INSTANCE.registerSchema(this);
     }
 
     @Override
@@ -75,9 +75,9 @@ public abstract class BasicSchema extends BaseSchema {
     @Override
     public SchemaType getType() {
         if (module instanceof ItemModuleMajor) {
-            return SchemaType.major;
+            return SchemaType.MAJOR;
         } else {
-            return SchemaType.minor;
+            return SchemaType.MINOR;
         }
     }
 

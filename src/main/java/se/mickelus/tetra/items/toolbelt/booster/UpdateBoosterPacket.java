@@ -3,9 +3,9 @@ package se.mickelus.tetra.items.toolbelt.booster;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import se.mickelus.tetra.NBTHelper;
 import se.mickelus.tetra.items.toolbelt.UtilToolbelt;
 import se.mickelus.tetra.network.AbstractPacket;
+import se.mickelus.tetra.util.NBTHelper;
 
 public class UpdateBoosterPacket extends AbstractPacket {
 

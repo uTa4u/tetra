@@ -15,13 +15,13 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.Loader;
-import se.mickelus.tetra.IntegrationHelper;
 import se.mickelus.tetra.blocks.salvage.BlockInteraction;
 import se.mickelus.tetra.blocks.salvage.IBlockCapabilityInteractive;
 import se.mickelus.tetra.capabilities.ICapabilityProvider;
 import se.mickelus.tetra.items.toolbelt.inventory.*;
 import se.mickelus.tetra.module.ItemEffect;
 import se.mickelus.tetra.util.CastOptional;
+import se.mickelus.tetra.util.IntegrationHelper;
 
 import java.util.Collection;
 import java.util.List;
@@ -37,16 +37,16 @@ public class UtilToolbelt {
         }
 
         switch (slotType) {
-            case quickslot:
+            case QUICKSLOT:
                 inventory = new InventoryQuickslot(toolbeltStack);
                 break;
-            case potion:
+            case POTION:
                 inventory = new InventoryPotions(toolbeltStack);
                 break;
-            case quiver:
+            case QUIVER:
                 inventory = new InventoryQuiver(toolbeltStack);
                 break;
-            case storage:
+            case STORAGE:
                 inventory = new InventoryStorage(toolbeltStack);
                 break;
         }
@@ -87,7 +87,7 @@ public class UtilToolbelt {
             sourceHand = EnumHand.MAIN_HAND;
         }
 
-        if (toolbeltStack.isEmpty() || itemStack.isEmpty() || itemStack.getItem() == ItemToolbeltModular.instance) {
+        if (toolbeltStack.isEmpty() || itemStack.isEmpty() || itemStack.getItem() == ItemToolbeltModular.INSTANCE) {
             return true;
         }
 
@@ -130,7 +130,7 @@ public class UtilToolbelt {
         InventoryPlayer inventoryPlayer = player.inventory;
         for (int i = 0; i < inventoryPlayer.mainInventory.size(); ++i) {
             ItemStack itemStack = inventoryPlayer.getStackInSlot(i);
-            if (ItemToolbeltModular.instance.equals(itemStack.getItem())) {
+            if (ItemToolbeltModular.INSTANCE.equals(itemStack.getItem())) {
                 return itemStack;
             }
         }
@@ -147,7 +147,7 @@ public class UtilToolbelt {
 
                 for (int i = 0; i < baubleInventory.getSizeInventory(); i++) {
                     ItemStack itemStack = baubleInventory.getStackInSlot(i);
-                    if (ItemToolbeltModular.instance.equals(itemStack.getItem())) {
+                    if (ItemToolbeltModular.INSTANCE.equals(itemStack.getItem())) {
                         return itemStack;
                     }
                 }
@@ -165,7 +165,7 @@ public class UtilToolbelt {
 
     public static void updateBauble(EntityPlayer player) {
         if (Loader.isModLoaded(IntegrationHelper.baublesModId)) {
-            int baubleSlot = BaublesApi.isBaubleEquipped(player, ItemToolbeltModular.instance);
+            int baubleSlot = BaublesApi.isBaubleEquipped(player, ItemToolbeltModular.INSTANCE);
             if (baubleSlot != -1) {
                 BaublesApi.getBaublesHandler(player).setChanged(baubleSlot, true);
             }
@@ -197,7 +197,7 @@ public class UtilToolbelt {
 
         for (int i = 0; i < inventory.getSizeInventory(); i++) {
             ItemStack itemStack = inventory.getStackInSlot(i);
-            if (effects.get(i).contains(ItemEffect.quickAccess) && !itemStack.isEmpty()) {
+            if (effects.get(i).contains(ItemEffect.QUICK_ACCESS) && !itemStack.isEmpty()) {
                 String requiredTool = blockState.getBlock().getHarvestTool(blockState);
                 if (requiredTool != null && itemStack.getItem().getHarvestLevel(itemStack, requiredTool, player, blockState) > -1) {
                     return i;

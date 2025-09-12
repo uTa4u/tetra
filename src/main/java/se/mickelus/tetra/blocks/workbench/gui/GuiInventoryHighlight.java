@@ -23,9 +23,9 @@ public class GuiInventoryHighlight extends GuiElement {
 
         dots = new GuiElement(2, 2, 12, 12);
         dots.addChild(new GuiRect(0, 0, 1, 1, GuiColors.normal));
-        dots.addChild(new GuiRect(0, 0, 1, 1, GuiColors.normal).setAttachment(GuiAttachment.topRight));
-        dots.addChild(new GuiRect(0, 0, 1, 1, GuiColors.normal).setAttachment(GuiAttachment.bottomLeft));
-        dots.addChild(new GuiRect(0, 0, 1, 1, GuiColors.normal).setAttachment(GuiAttachment.bottomRight));
+        dots.addChild(new GuiRect(0, 0, 1, 1, GuiColors.normal).setAttachment(GuiAttachment.TOP_RIGHT));
+        dots.addChild(new GuiRect(0, 0, 1, 1, GuiColors.normal).setAttachment(GuiAttachment.BOTTOM_LEFT));
+        dots.addChild(new GuiRect(0, 0, 1, 1, GuiColors.normal).setAttachment(GuiAttachment.BOTTOM_RIGHT));
         addChild(dots);
 
         animation = new AnimationChain(

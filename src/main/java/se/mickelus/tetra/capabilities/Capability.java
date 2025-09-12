@@ -25,25 +25,25 @@ public enum Capability {
      * level allows for more complex modules to be crafted and more difficult materials to be used.
      * Efficiency is currently unused, but may come to affect block interaction success rates.
      */
-    hammer,
+    HAMMER,
 
     /**
      * Axe: The axe capability maps to the axe harvest tool, it allows players to harvest blocks which require an
      * axe to harvest such as logs or planks. It is also used for crafting modules from wooden materials.
      */
-    axe,
+    AXE,
 
     /**
      * Pickaxe: The pickaxe capability maps to the pickaxe harvest tool, it allows players to harvest blocks which
      * require a pickaxe to harvest such as stone or ore.
      */
-    pickaxe,
+    PICKAXE,
 
     /**
      * Shovel: The shovel capability maps to the shovel harvest tool, it allows players to harvest blocks which
      * require a shovel to harvest such as dirt or soul sand.
      */
-    shovel,
+    SHOVEL,
 
     /**
      * Cut: The cut capability makes it possible to harvest blocks that are usually harvested using swords or shears,
@@ -51,10 +51,10 @@ public enum Capability {
      * todo: make harvest level affect what can be harvested
      * todo: drop leaf blocks if harvest level is high enough
      */
-    cut,
+    CUT,
 
     /**
      * Pry: Used for salvaging blocks.
      */
-    pry
+    PRY
 }

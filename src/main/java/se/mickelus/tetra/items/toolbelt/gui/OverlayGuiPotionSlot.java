@@ -33,8 +33,8 @@ public class OverlayGuiPotionSlot extends GuiElement {
     public OverlayGuiPotionSlot(int x, int y, ItemStack itemStack, int slot, boolean animateUp) {
         super(x, y, 23, 23);
 
-        setAttachmentPoint(GuiAttachment.middleLeft);
-        setAttachmentAnchor(GuiAttachment.middleLeft);
+        setAttachmentPoint(GuiAttachment.MIDDLE_LEFT);
+        setAttachmentAnchor(GuiAttachment.MIDDLE_LEFT);
 
         this.itemStack = itemStack;
         this.slot = slot;

@@ -11,7 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import org.apache.commons.lang3.ArrayUtils;
 import se.mickelus.tetra.ConfigHandler;
-import se.mickelus.tetra.NBTHelper;
 import se.mickelus.tetra.Tags;
 import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.items.ItemModular;
@@ -21,6 +20,7 @@ import se.mickelus.tetra.module.data.TweakData;
 import se.mickelus.tetra.module.improvement.SettlePacket;
 import se.mickelus.tetra.network.PacketHandler;
 import se.mickelus.tetra.util.CastOptional;
+import se.mickelus.tetra.util.NBTHelper;
 
 import java.util.Arrays;
 import java.util.Collection;

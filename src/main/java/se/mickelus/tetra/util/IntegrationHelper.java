@@ -1,4 +1,4 @@
-package se.mickelus.tetra;
+package se.mickelus.tetra.util;
 
 public class IntegrationHelper {
     public static final String baublesModId = "baubles";

@@ -2,6 +2,7 @@ package se.mickelus.tetra.blocks.geode;
 
 import net.minecraft.block.Block;
 
+// TODO: make this not use json
 public class GeodeVariant {
 
     /**

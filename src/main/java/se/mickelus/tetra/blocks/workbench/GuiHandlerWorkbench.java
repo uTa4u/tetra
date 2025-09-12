@@ -16,7 +16,7 @@ public class GuiHandlerWorkbench implements TetraGuiHandler {
     @Override
     public Object getClientGuiElement(EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
-        if (tileEntity != null && tileEntity instanceof TileEntityWorkbench) {
+        if (tileEntity instanceof TileEntityWorkbench) {
             return new GuiWorkbench(getContainer(player, world, x, y, z), (TileEntityWorkbench) tileEntity, player);
         }
         return null;
@@ -25,7 +25,7 @@ public class GuiHandlerWorkbench implements TetraGuiHandler {
     private ContainerWorkbench getContainer(EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 
-        if (tileEntity != null && tileEntity instanceof TileEntityWorkbench) {
+        if (tileEntity instanceof TileEntityWorkbench) {
             return new ContainerWorkbench(player.inventory, (TileEntityWorkbench) tileEntity, player);
         }
         return null;

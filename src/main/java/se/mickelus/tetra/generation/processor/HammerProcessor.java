@@ -6,8 +6,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.ITemplateProcessor;
 import net.minecraft.world.gen.structure.template.Template;
 import se.mickelus.tetra.blocks.hammer.BlockHammerBase;
-import se.mickelus.tetra.blocks.hammer.EnumHammerConfig;
-import se.mickelus.tetra.blocks.hammer.EnumHammerPlate;
+import se.mickelus.tetra.blocks.hammer.HammerConfig;
+import se.mickelus.tetra.blocks.hammer.HammerPlate;
 import se.mickelus.tetra.blocks.hammer.TileEntityHammerBase;
 import se.mickelus.tetra.items.cell.ItemCellMagmatic;
 
@@ -28,22 +28,22 @@ public class HammerProcessor implements ITemplateProcessor {
         if (blockInfo.blockState.getBlock() instanceof BlockHammerBase) {
 
             // randomize cells
-            ItemCellMagmatic item = ItemCellMagmatic.instance;
-            int discharge1 = random.nextInt(ItemCellMagmatic.maxCharge);
-            int discharge2 = ItemCellMagmatic.maxCharge - random.nextInt(Math.max(discharge1, 1));
+            ItemCellMagmatic item = ItemCellMagmatic.INSTANCE;
+            int discharge1 = random.nextInt(ItemCellMagmatic.MAX_CHARGE);
+            int discharge2 = ItemCellMagmatic.MAX_CHARGE - random.nextInt(Math.max(discharge1, 1));
             TileEntityHammerBase.writeCells(blockInfo.tileentityData,
                     new ItemStack(item, 1, discharge1), new ItemStack(item, 1, discharge2));
 
 
             // randomize configurations
-            EnumHammerConfig[] configs = EnumHammerConfig.values();
+            HammerConfig[] configs = HammerConfig.values();
             TileEntityHammerBase.writeConfig(blockInfo.tileentityData,
                     configs[random.nextInt(configs.length)], configs[random.nextInt(configs.length)]);
 
             // randomize plates
             if (random.nextFloat() < 0.1) {
                 TileEntityHammerBase.writePlate(blockInfo.tileentityData,
-                        random.nextBoolean() ? EnumHammerPlate.WEST : EnumHammerPlate.EAST, false);
+                        random.nextBoolean() ? HammerPlate.WEST : HammerPlate.EAST, false);
             }
         }
         return blockInfo;

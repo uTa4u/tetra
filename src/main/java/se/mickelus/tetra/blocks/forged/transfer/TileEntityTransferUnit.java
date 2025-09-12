@@ -23,7 +23,7 @@ import java.util.Optional;
 
 public class TileEntityTransferUnit extends TileEntity implements ITickable, IHeatTransfer {
     private boolean hasPlate;
-    private EnumTransferConfig config;
+    private TransferConfig config;
     private ItemStack cell;
 
     private boolean isSending = false;
@@ -34,7 +34,7 @@ public class TileEntityTransferUnit extends TileEntity implements ITickable, IHe
 
     public TileEntityTransferUnit() {
         hasPlate = true;
-        config = EnumTransferConfig.A;
+        config = TransferConfig.A;
         cell = ItemStack.EMPTY;
     }
 
@@ -52,12 +52,12 @@ public class TileEntityTransferUnit extends TileEntity implements ITickable, IHe
         return hasPlate;
     }
 
-    public EnumTransferConfig getConfiguration() {
+    public TransferConfig getConfiguration() {
         return config;
     }
 
-    public EnumTransferEffect getEffect() {
-        return EnumTransferEffect.fromConfig(config, 0);
+    public TransferEffect getEffect() {
+        return TransferEffect.fromConfig(config, 0);
     }
 
     /**
@@ -66,24 +66,24 @@ public class TileEntityTransferUnit extends TileEntity implements ITickable, IHe
      *
      * @return the effect with redstone power taken into consideration
      */
-    public EnumTransferEffect getEffectPowered() {
-        EnumTransferEffect effect = EnumTransferEffect.fromConfig(config, 0);
-        if (effect.equals(EnumTransferEffect.REDSTONE)) {
+    public TransferEffect getEffectPowered() {
+        TransferEffect effect = TransferEffect.fromConfig(config, 0);
+        if (effect.equals(TransferEffect.REDSTONE)) {
             EnumFacing facing = getFacing();
 
             if (world.isSidePowered(pos.offset(facing.rotateY()), facing.rotateY())) {
-                return EnumTransferEffect.SEND;
+                return TransferEffect.SEND;
             }
 
             if (world.isSidePowered(pos.offset(facing.rotateYCCW()), facing.rotateYCCW())) {
-                return EnumTransferEffect.RECEIVE;
+                return TransferEffect.RECEIVE;
             }
         }
         return effect;
     }
 
     public void reconfigure() {
-        config = EnumTransferConfig.getNextConfiguration(config);
+        config = TransferConfig.getNextConfiguration(config);
         updateTransferState();
         notifyBlockUpdate();
     }
@@ -128,14 +128,14 @@ public class TileEntityTransferUnit extends TileEntity implements ITickable, IHe
 
     @Override
     public boolean canRecieve() {
-        return getEffectPowered().equals(EnumTransferEffect.RECEIVE)
+        return getEffectPowered().equals(TransferEffect.RECEIVE)
                 && hasCell()
-                && getCharge() < ItemCellMagmatic.maxCharge;
+                && getCharge() < ItemCellMagmatic.MAX_CHARGE;
     }
 
     @Override
     public boolean canSend() {
-        return getEffectPowered().equals(EnumTransferEffect.SEND)
+        return getEffectPowered().equals(TransferEffect.SEND)
                 && hasCell()
                 && getCharge() > 0;
     }
@@ -206,7 +206,7 @@ public class TileEntityTransferUnit extends TileEntity implements ITickable, IHe
                     }
                     int overfill = item.recharge(cell, amount);
 
-                    if (item.getCharge(cell) == ItemCellMagmatic.maxCharge) {
+                    if (item.getCharge(cell) == ItemCellMagmatic.MAX_CHARGE) {
                         runFilledEffects();
                     }
 
@@ -311,7 +311,7 @@ public class TileEntityTransferUnit extends TileEntity implements ITickable, IHe
     }
 
     public EnumFacing getFacing() {
-        return world.getBlockState(pos).getValue(BlockTransferUnit.propFacing);
+        return world.getBlockState(pos).getValue(BlockTransferUnit.FACING);
     }
 
     @Override
@@ -324,11 +324,11 @@ public class TileEntityTransferUnit extends TileEntity implements ITickable, IHe
             cell = ItemStack.EMPTY;
         }
 
-        config = EnumTransferConfig.A;
-        if (compound.hasKey(EnumTransferConfig.prop.getName())) {
-            String enumName = compound.getString(EnumTransferConfig.prop.getName());
-            if (EnumUtils.isValidEnum(EnumTransferConfig.class, enumName)) {
-                config = EnumTransferConfig.valueOf(enumName);
+        config = TransferConfig.A;
+        if (compound.hasKey(TransferConfig.PROP.getName())) {
+            String enumName = compound.getString(TransferConfig.PROP.getName());
+            if (EnumUtils.isValidEnum(TransferConfig.class, enumName)) {
+                config = TransferConfig.valueOf(enumName);
             }
         }
 
@@ -347,8 +347,8 @@ public class TileEntityTransferUnit extends TileEntity implements ITickable, IHe
         compound.setBoolean("plate", hasPlate);
     }
 
-    public static void writeConfig(NBTTagCompound compound, EnumTransferConfig config) {
-        compound.setString(EnumTransferConfig.prop.getName(), config.toString());
+    public static void writeConfig(NBTTagCompound compound, TransferConfig config) {
+        compound.setString(TransferConfig.PROP.getName(), config.toString());
     }
 
     @Override

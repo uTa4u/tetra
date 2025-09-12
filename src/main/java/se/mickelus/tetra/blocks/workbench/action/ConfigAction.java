@@ -10,6 +10,7 @@ import se.mickelus.tetra.module.data.CapabilityData;
  * currently the only action type available, the provided item will be broken and rewards from the loot table will be
  * awarded to the player.
  */
+// TODO: add GroovyScript compat instead of using configs to define recipes
 public abstract class ConfigAction implements WorkbenchAction {
 
     /**

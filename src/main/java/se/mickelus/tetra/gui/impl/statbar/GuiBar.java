@@ -20,7 +20,7 @@ public class GuiBar extends GuiElement {
 
     protected boolean invertedDiff = false;
 
-    protected GuiAlignment alignment = GuiAlignment.left;
+    protected GuiAlignment alignment = GuiAlignment.LEFT;
 
     public GuiBar(int x, int y, int barLength, double min, double max) {
         this(x, y, barLength, min, max, false);
@@ -68,7 +68,7 @@ public class GuiBar extends GuiElement {
     @Override
     public void draw(int refX, int refY, int screenWidth, int screenHeight, int mouseX, int mouseY, float opacity) {
         drawRect(refX + x, refY + y + 6, refX + x + width, refY + y + 6 + height, colorWithOpacity(0xffffff, 0.14f * opacity));
-        if (alignment == GuiAlignment.right) {
+        if (alignment == GuiAlignment.RIGHT) {
             drawRect(refX + x + width - barLength, refY + y + 6, refX + x + width, refY + y + 6 + height, colorWithOpacity(0xffffffff, opacity));
             drawRect(refX + x + width - barLength - diffLength, refY + y + 6, refX + x + width - barLength, refY + y + 6 + height,
                     diffColor);

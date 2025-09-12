@@ -32,6 +32,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 import se.mickelus.tetra.Tags;
+import se.mickelus.tetra.TetraCreativeTab;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.ITetraBlock;
 import se.mickelus.tetra.blocks.Materials;
@@ -39,7 +40,6 @@ import se.mickelus.tetra.blocks.salvage.BlockInteraction;
 import se.mickelus.tetra.blocks.salvage.IBlockCapabilityInteractive;
 import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.items.ItemModular;
-import se.mickelus.tetra.items.TetraCreativeTabs;
 import se.mickelus.tetra.module.ItemEffectHandler;
 import se.mickelus.tetra.util.CastOptional;
 
@@ -47,43 +47,42 @@ import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.List;
 
-
 public class BlockForgedCrate extends BlockFalling implements ITetraBlock, IBlockCapabilityInteractive {
-    public static final PropertyDirection propFacing = BlockHorizontal.FACING;
-    public static final PropertyBool propStacked = PropertyBool.create("stacked");
-    public static final PropertyInteger propIntegrity = PropertyInteger.create("integrity", 0, 3);
+    public static final PropertyDirection FACING = BlockHorizontal.FACING;
+    public static final PropertyInteger INTEGRITY = PropertyInteger.create("integrity", 0, 3);
+    private static final PropertyBool STACKED = PropertyBool.create("stacked");
 
-    static final BlockInteraction[] interactions = new BlockInteraction[]{
-            new BlockInteraction(Capability.pry, 1, EnumFacing.EAST, 6, 8, 6, 8,
+    private static final BlockInteraction[] INTERACTIONS = new BlockInteraction[]{
+            new BlockInteraction(Capability.PRY, 1, EnumFacing.EAST, 6, 8, 6, 8,
                     BlockStateMatcher.ANY,
                     BlockForgedCrate::attemptBreakPry),
-            new BlockInteraction(Capability.hammer, 3, EnumFacing.EAST, 1, 4, 1, 4,
+            new BlockInteraction(Capability.HAMMER, 3, EnumFacing.EAST, 1, 4, 1, 4,
                     BlockStateMatcher.ANY,
                     BlockForgedCrate::attemptBreakHammer),
-            new BlockInteraction(Capability.hammer, 3, EnumFacing.EAST, 10, 13, 10, 13,
+            new BlockInteraction(Capability.HAMMER, 3, EnumFacing.EAST, 10, 13, 10, 13,
                     BlockStateMatcher.ANY,
                     BlockForgedCrate::attemptBreakHammer),
     };
 
-    static final String unlocalizedName = "forged_crate";
+    private static final String UNLOCALIZED_NAME = "forged_crate";
 
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
-    public static BlockForgedCrate instance;
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
+    public static BlockForgedCrate INSTANCE;
 
-    public static final ResourceLocation crateLootTable = TetraMod.getResource("forged/crate_break");
+    private static final ResourceLocation LOOT_TABLE = TetraMod.getResource("forged/crate_break");
 
     public BlockForgedCrate() {
         super(Materials.forgedCrate);
-        setRegistryName(unlocalizedName);
-        setTranslationKey(unlocalizedName);
-        setCreativeTab(TetraCreativeTabs.getInstance());
+        setRegistryName(UNLOCALIZED_NAME);
+        setTranslationKey(UNLOCALIZED_NAME);
+        setCreativeTab(TetraCreativeTab.INSTANCE);
 
         setHardness(10);
 
         this.setDefaultState(this.blockState.getBaseState()
-                .withProperty(propFacing, EnumFacing.EAST)
-                .withProperty(propStacked, false)
-                .withProperty(propIntegrity, 3));
+                .withProperty(FACING, EnumFacing.EAST)
+                .withProperty(STACKED, false)
+                .withProperty(INTEGRITY, 3));
     }
 
     @Override
@@ -92,17 +91,17 @@ public class BlockForgedCrate extends BlockFalling implements ITetraBlock, IBloc
     }
 
     private static boolean attemptBreakHammer(World world, BlockPos pos, IBlockState blockState, EntityPlayer player, EnumHand hand, EnumFacing facing) {
-        return attemptBreak(world, pos, blockState, player, player.getHeldItem(hand), Capability.hammer, 2, 1);
+        return attemptBreak(world, pos, blockState, player, player.getHeldItem(hand), Capability.HAMMER, 2, 1);
     }
 
     private static boolean attemptBreakPry(World world, BlockPos pos, IBlockState blockState, EntityPlayer player, EnumHand hand, EnumFacing facing) {
-        return attemptBreak(world, pos, blockState, player, player.getHeldItem(hand), Capability.pry, 0, 2);
+        return attemptBreak(world, pos, blockState, player, player.getHeldItem(hand), Capability.PRY, 0, 2);
     }
 
     private static boolean attemptBreak(World world, BlockPos pos, IBlockState blockState, EntityPlayer player, ItemStack itemStack,
                                         Capability capability, int min, int multiplier) {
 
-        int integrity = blockState.getValue(propIntegrity);
+        int integrity = blockState.getValue(INTEGRITY);
 
         int progress = CastOptional.cast(itemStack.getItem(), ItemModular.class)
                 .map(item -> item.getCapabilityLevel(itemStack, capability))
@@ -110,13 +109,13 @@ public class BlockForgedCrate extends BlockFalling implements ITetraBlock, IBloc
                 .orElse(1);
 
         if (integrity - progress >= 0) {
-            if (Capability.hammer.equals(capability)) {
+            if (Capability.HAMMER.equals(capability)) {
                 world.playSound(player, pos, SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, SoundCategory.PLAYERS, 1, 0.5f);
             } else {
                 world.playSound(player, pos, SoundEvents.BLOCK_LADDER_STEP, SoundCategory.PLAYERS, 0.7f, 2f);
             }
 
-            world.setBlockState(pos, blockState.withProperty(propIntegrity, integrity - progress));
+            world.setBlockState(pos, blockState.withProperty(INTEGRITY, integrity - progress));
         } else {
             world.playEvent(player, 2001, pos, Block.getStateId(blockState));
             ItemEffectHandler.breakBlock(world, player, itemStack, pos, blockState);
@@ -127,7 +126,7 @@ public class BlockForgedCrate extends BlockFalling implements ITetraBlock, IBloc
 
     @Override
     public BlockInteraction[] getPotentialInteractions(IBlockState state, EnumFacing face, Collection<Capability> capabilities) {
-        return interactions;
+        return INTERACTIONS;
     }
 
     @Override
@@ -139,7 +138,7 @@ public class BlockForgedCrate extends BlockFalling implements ITetraBlock, IBloc
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         CastOptional.cast(world, WorldServer.class)
                 .ifPresent(worldServer -> {
-                    LootTable table = worldServer.getLootTableManager().getLootTableFromLocation(crateLootTable);
+                    LootTable table = worldServer.getLootTableManager().getLootTableFromLocation(LOOT_TABLE);
                     LootContext.Builder builder = new LootContext.Builder(worldServer);
 
                     drops.addAll(table.generateLootForPools(worldServer.rand, builder.build()));
@@ -154,18 +153,18 @@ public class BlockForgedCrate extends BlockFalling implements ITetraBlock, IBloc
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, propFacing, propStacked, propIntegrity);
+        return new BlockStateContainer(this, FACING, STACKED, INTEGRITY);
     }
 
     @Override
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-        return this.getDefaultState().withProperty(propFacing, placer.getHorizontalFacing().getOpposite());
+        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         if (equals(worldIn.getBlockState(pos.down()).getBlock())) {
-            return super.getActualState(state, worldIn, pos).withProperty(propStacked, true);
+            return super.getActualState(state, worldIn, pos).withProperty(STACKED, true);
         }
         return super.getActualState(state, worldIn, pos);
     }
@@ -175,21 +174,21 @@ public class BlockForgedCrate extends BlockFalling implements ITetraBlock, IBloc
         IBlockState blockState = this.getDefaultState();
         int facingIndex = meta & 3;
         if (facingIndex < EnumFacing.HORIZONTALS.length) {
-            blockState = blockState.withProperty(propFacing, EnumFacing.HORIZONTALS[facingIndex]);
+            blockState = blockState.withProperty(FACING, EnumFacing.HORIZONTALS[facingIndex]);
         }
 
-        return blockState.withProperty(propIntegrity, meta >> 2);
+        return blockState.withProperty(INTEGRITY, meta >> 2);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(propFacing).getHorizontalIndex()
-                | (state.getValue(propIntegrity) << 2);
+        return state.getValue(FACING).getHorizontalIndex()
+                | (state.getValue(INTEGRITY) << 2);
     }
 
     @Override
     public IBlockState withRotation(IBlockState state, Rotation rot) {
-        return state.withProperty(propFacing, rot.rotate(state.getValue(propFacing)));
+        return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @Override
@@ -216,9 +215,9 @@ public class BlockForgedCrate extends BlockFalling implements ITetraBlock, IBloc
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         AxisAlignedBB aabb = new AxisAlignedBB(0.0625, 0, 0.0625, 0.9375, 0.875, 0.9375)
-                .offset(new Vec3d(state.getValue(propFacing).getDirectionVec()).scale(0.0625));
+                .offset(new Vec3d(state.getValue(FACING).getDirectionVec()).scale(0.0625));
 
-        if (getActualState(state, source, pos).getValue(propStacked)) {
+        if (getActualState(state, source, pos).getValue(STACKED)) {
             return aabb.offset(0, -0.125, 0);
         }
 

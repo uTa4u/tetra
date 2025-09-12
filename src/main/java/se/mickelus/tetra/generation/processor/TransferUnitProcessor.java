@@ -6,8 +6,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.ITemplateProcessor;
 import net.minecraft.world.gen.structure.template.Template;
 import se.mickelus.tetra.blocks.forged.transfer.BlockTransferUnit;
-import se.mickelus.tetra.blocks.forged.transfer.EnumTransferConfig;
 import se.mickelus.tetra.blocks.forged.transfer.TileEntityTransferUnit;
+import se.mickelus.tetra.blocks.forged.transfer.TransferConfig;
 import se.mickelus.tetra.items.cell.ItemCellMagmatic;
 
 import javax.annotation.Nullable;
@@ -28,14 +28,14 @@ public class TransferUnitProcessor implements ITemplateProcessor {
 
             // randomize cell
             if (random.nextFloat() < 0.05) {
-                int charge = random.nextInt(ItemCellMagmatic.maxCharge);
-                TileEntityTransferUnit.writeCell(blockInfo.tileentityData, new ItemStack(ItemCellMagmatic.instance, 1, charge));
+                int charge = random.nextInt(ItemCellMagmatic.MAX_CHARGE);
+                TileEntityTransferUnit.writeCell(blockInfo.tileentityData, new ItemStack(ItemCellMagmatic.INSTANCE, 1, charge));
             } else if (random.nextFloat() < 0.1) {
-                TileEntityTransferUnit.writeCell(blockInfo.tileentityData, new ItemStack(ItemCellMagmatic.instance, 1, 0));
+                TileEntityTransferUnit.writeCell(blockInfo.tileentityData, new ItemStack(ItemCellMagmatic.INSTANCE, 1, 0));
             }
 
             // randomize configurations
-            EnumTransferConfig[] configs = EnumTransferConfig.values();
+            TransferConfig[] configs = TransferConfig.values();
             TileEntityTransferUnit.writeConfig(blockInfo.tileentityData, configs[random.nextInt(configs.length)]);
 
             // randomize plates

@@ -18,33 +18,33 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.Tags;
+import se.mickelus.tetra.TetraCreativeTab;
 import se.mickelus.tetra.blocks.Materials;
 import se.mickelus.tetra.blocks.TetraBlock;
-import se.mickelus.tetra.items.TetraCreativeTabs;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class BlockForgedPillar extends TetraBlock {
-    public static final PropertyEnum<EnumFacing.Axis> propAxis = PropertyEnum.create("axis", EnumFacing.Axis.class);
+    private static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
 
-    static final String unlocalizedName = "forged_pillar";
+    private static final String UNLOCALIZED_NAME = "forged_pillar";
 
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
-    public static BlockForgedPillar instance;
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
+    public static BlockForgedPillar INSTANCE;
 
     public BlockForgedPillar() {
         super(Materials.forged);
 
-        setRegistryName(unlocalizedName);
-        setTranslationKey(unlocalizedName);
-        setCreativeTab(TetraCreativeTabs.getInstance());
+        setRegistryName(UNLOCALIZED_NAME);
+        setTranslationKey(UNLOCALIZED_NAME);
+        setCreativeTab(TetraCreativeTab.INSTANCE);
         setBlockUnbreakable();
         setResistance(25);
 
         hasItem = true;
 
-        this.setDefaultState(this.blockState.getBaseState().withProperty(propAxis, EnumFacing.Axis.Y));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.Y));
     }
 
     @SideOnly(Side.CLIENT)
@@ -60,25 +60,25 @@ public class BlockForgedPillar extends TetraBlock {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, propAxis);
+        return new BlockStateContainer(this, AXIS);
     }
 
     @Override
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-        return this.getDefaultState().withProperty(propAxis, facing.getAxis());
+        return this.getDefaultState().withProperty(AXIS, facing.getAxis());
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
         if (meta < EnumFacing.Axis.values().length) {
-            return this.getDefaultState().withProperty(propAxis, EnumFacing.Axis.values()[meta]);
+            return this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.values()[meta]);
         }
         return this.getDefaultState();
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(propAxis).ordinal();
+        return state.getValue(AXIS).ordinal();
     }
 
     @Override
@@ -86,11 +86,11 @@ public class BlockForgedPillar extends TetraBlock {
         switch (rot) {
             case COUNTERCLOCKWISE_90:
             case CLOCKWISE_90:
-                switch (state.getValue(propAxis)) {
+                switch (state.getValue(AXIS)) {
                     case X:
-                        return state.withProperty(propAxis, EnumFacing.Axis.Z);
+                        return state.withProperty(AXIS, EnumFacing.Axis.Z);
                     case Z:
-                        return state.withProperty(propAxis, EnumFacing.Axis.X);
+                        return state.withProperty(AXIS, EnumFacing.Axis.X);
                     default:
                         return state;
                 }

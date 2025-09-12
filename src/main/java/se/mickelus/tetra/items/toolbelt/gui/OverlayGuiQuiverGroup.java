@@ -14,7 +14,7 @@ public class OverlayGuiQuiverGroup extends GuiElement {
 
     public OverlayGuiQuiverGroup(int x, int y) {
         super(x, y, 0, 0);
-        setAttachmentPoint(GuiAttachment.bottomRight);
+        setAttachmentPoint(GuiAttachment.BOTTOM_RIGHT);
     }
 
     public void setInventory(InventoryQuiver inventory) {

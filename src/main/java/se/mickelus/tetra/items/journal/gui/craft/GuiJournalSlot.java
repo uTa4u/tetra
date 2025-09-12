@@ -25,7 +25,7 @@ public class GuiJournalSlot extends GuiClickable {
 
 
         slotString = new GuiString(-15, 1, label);
-        if (GuiAttachment.topLeft.equals(attachment)) {
+        if (GuiAttachment.TOP_LEFT.equals(attachment)) {
             slotString.setX(14);
         }
         slotString.setAttachmentPoint(attachment);

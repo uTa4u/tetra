@@ -1,10 +1,10 @@
 package se.mickelus.tetra.items.toolbelt.inventory;
 
 import net.minecraft.item.ItemStack;
-import se.mickelus.tetra.NBTHelper;
 import se.mickelus.tetra.items.toolbelt.ItemToolbeltModular;
 import se.mickelus.tetra.items.toolbelt.SlotType;
 import se.mickelus.tetra.module.ItemEffect;
+import se.mickelus.tetra.util.NBTHelper;
 
 import java.util.Collection;
 import java.util.List;
@@ -15,9 +15,9 @@ public class InventoryStorage extends InventoryToolbelt {
     public static int maxSize = 30; // 24;
 
     public InventoryStorage(ItemStack stack) {
-        super(inventoryKey, stack, maxSize, SlotType.storage);
+        super(inventoryKey, stack, maxSize, SlotType.STORAGE);
         ItemToolbeltModular item = (ItemToolbeltModular) stack.getItem();
-        numSlots = item.getNumSlots(stack, SlotType.storage);
+        numSlots = item.getNumSlots(stack, SlotType.STORAGE);
 
         readFromNBT(NBTHelper.getTag(stack));
     }
@@ -28,7 +28,7 @@ public class InventoryStorage extends InventoryToolbelt {
         // attempt to merge the itemstack with itemstacks in the toolbelt
         for (int i = 0; i < getSizeInventory(); i++) {
             ItemStack storedStack = getStackInSlot(i);
-            if (effects.get(i).contains(ItemEffect.quickAccess)
+            if (effects.get(i).contains(ItemEffect.QUICK_ACCESS)
                     && storedStack.isItemEqual(itemStack)
                     && storedStack.getCount() < storedStack.getMaxStackSize()) {
 
@@ -45,7 +45,7 @@ public class InventoryStorage extends InventoryToolbelt {
 
         // put item in the first empty slot
         for (int i = 0; i < getSizeInventory(); i++) {
-            if (effects.get(i).contains(ItemEffect.quickAccess) && getStackInSlot(i).isEmpty()) {
+            if (effects.get(i).contains(ItemEffect.QUICK_ACCESS) && getStackInSlot(i).isEmpty()) {
                 setInventorySlotContents(i, itemStack);
                 return true;
             }

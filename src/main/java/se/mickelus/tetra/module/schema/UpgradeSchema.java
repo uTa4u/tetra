@@ -110,7 +110,7 @@ public interface UpgradeSchema {
     SchemaType getType();
 
     default SchemaRarity getRarity() {
-        return SchemaRarity.basic;
+        return SchemaRarity.BASIC;
     }
 
     GlyphData getGlyph();

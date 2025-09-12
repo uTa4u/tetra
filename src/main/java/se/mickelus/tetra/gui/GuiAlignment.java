@@ -1,25 +1,25 @@
 package se.mickelus.tetra.gui;
 
 public enum GuiAlignment {
-    left,
-    center,
-    right;
+    LEFT,
+    CENTER,
+    RIGHT;
 
     public GuiAlignment flip() {
-        if (this == left) {
-            return right;
-        } else if (this == right) {
-            return left;
+        if (this == LEFT) {
+            return RIGHT;
+        } else if (this == RIGHT) {
+            return LEFT;
         }
-        return center;
+        return CENTER;
     }
 
     public GuiAttachment toAttachment() {
-        if (this == left) {
-            return GuiAttachment.topLeft;
-        } else if (this == right) {
-            return GuiAttachment.topRight;
+        if (this == LEFT) {
+            return GuiAttachment.TOP_LEFT;
+        } else if (this == RIGHT) {
+            return GuiAttachment.TOP_RIGHT;
         }
-        return GuiAttachment.topCenter;
+        return GuiAttachment.TOP_CENTER;
     }
 }

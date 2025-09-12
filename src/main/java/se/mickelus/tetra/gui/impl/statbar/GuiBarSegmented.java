@@ -34,7 +34,7 @@ public class GuiBarSegmented extends GuiBar {
 
     @Override
     public void draw(int refX, int refY, int screenWidth, int screenHeight, int mouseX, int mouseY, float opacity) {
-        if (alignment == GuiAlignment.right) {
+        if (alignment == GuiAlignment.RIGHT) {
             for (int i = 0; i < segmentCount; i++) {
                 drawSegmentReverse(refX, refY, i, colorWithOpacity(0xffffffff, opacity));
             }

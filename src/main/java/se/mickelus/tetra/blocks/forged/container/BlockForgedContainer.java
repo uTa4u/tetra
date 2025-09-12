@@ -30,13 +30,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 import se.mickelus.tetra.Tags;
+import se.mickelus.tetra.TetraCreativeTab;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.PropertyMatcher;
 import se.mickelus.tetra.blocks.TetraBlock;
 import se.mickelus.tetra.blocks.salvage.BlockInteraction;
 import se.mickelus.tetra.blocks.salvage.IBlockCapabilityInteractive;
 import se.mickelus.tetra.capabilities.Capability;
-import se.mickelus.tetra.items.TetraCreativeTabs;
 import se.mickelus.tetra.network.GuiHandlerRegistry;
 import se.mickelus.tetra.network.PacketHandler;
 import se.mickelus.tetra.network.TetraGuiHandler;
@@ -49,41 +49,42 @@ import java.util.List;
 import static com.google.common.base.Predicates.equalTo;
 
 public class BlockForgedContainer extends TetraBlock implements ITileEntityProvider, IBlockCapabilityInteractive {
-    public static final PropertyDirection propFacing = BlockHorizontal.FACING;
-    public static final PropertyBool propFlipped = PropertyBool.create("flipped");
-    public static final PropertyBool propLocked1 = PropertyBool.create("locked1");
-    public static final PropertyBool propLocked2 = PropertyBool.create("locked2");
-    public static final PropertyBool propLockedAdjacent = PropertyBool.create("adjacent");
-    public static final PropertyBool propOpen = PropertyBool.create("open");
+    public static final PropertyDirection PROP_FACING = BlockHorizontal.FACING;
+    public static final PropertyBool PROP_FLIPPED = PropertyBool.create("flipped");
+    // TODO: use PropertyEnum?
+    public static final PropertyBool PROP_LOCKED_1 = PropertyBool.create("locked1");
+    public static final PropertyBool PROP_LOCKED_2 = PropertyBool.create("locked2");
+    public static final PropertyBool PROP_LOCKED_ADJACENT = PropertyBool.create("adjacent");
+    public static final PropertyBool PROP_OPEN = PropertyBool.create("open");
 
-    public static final BlockInteraction[] interactions = new BlockInteraction[]{
-            new BlockInteraction(Capability.hammer, 3, EnumFacing.SOUTH, 5, 7, 2, 5,
-                    new PropertyMatcher().where(propLocked1, equalTo(true)).where(propFlipped, equalTo(false)),
+    private static final BlockInteraction[] INTERACTIONS = new BlockInteraction[]{
+            new BlockInteraction(Capability.HAMMER, 3, EnumFacing.SOUTH, 5, 7, 2, 5,
+                    new PropertyMatcher().where(PROP_LOCKED_1, equalTo(true)).where(PROP_FLIPPED, equalTo(false)),
                     BlockForgedContainer::breakLock0),
-            new BlockInteraction(Capability.hammer, 3, EnumFacing.SOUTH, 11, 13, 2, 5,
-                    new PropertyMatcher().where(propLocked2, equalTo(true)).where(propFlipped, equalTo(false)),
+            new BlockInteraction(Capability.HAMMER, 3, EnumFacing.SOUTH, 11, 13, 2, 5,
+                    new PropertyMatcher().where(PROP_LOCKED_2, equalTo(true)).where(PROP_FLIPPED, equalTo(false)),
                     BlockForgedContainer::breakLock1),
-            new BlockInteraction(Capability.hammer, 3, EnumFacing.SOUTH, 17, 19, 2, 5,
-                    new PropertyMatcher().where(propLocked1, equalTo(true)).where(propFlipped, equalTo(true)),
+            new BlockInteraction(Capability.HAMMER, 3, EnumFacing.SOUTH, 17, 19, 2, 5,
+                    new PropertyMatcher().where(PROP_LOCKED_1, equalTo(true)).where(PROP_FLIPPED, equalTo(true)),
                     BlockForgedContainer::breakLock2),
-            new BlockInteraction(Capability.hammer, 3, EnumFacing.SOUTH, 23, 25, 2, 5,
-                    new PropertyMatcher().where(propLocked2, equalTo(true)).where(propFlipped, equalTo(true)),
+            new BlockInteraction(Capability.HAMMER, 3, EnumFacing.SOUTH, 23, 25, 2, 5,
+                    new PropertyMatcher().where(PROP_LOCKED_2, equalTo(true)).where(PROP_FLIPPED, equalTo(true)),
                     BlockForgedContainer::breakLock3),
-            new BlockInteraction(Capability.pry, 1, EnumFacing.SOUTH, 1, 15, 3, 4,
+            new BlockInteraction(Capability.PRY, 1, EnumFacing.SOUTH, 1, 15, 3, 4,
                     new PropertyMatcher()
-                            .where(propLocked1, equalTo(false))
-                            .where(propLocked2, equalTo(false))
-                            .where(propLockedAdjacent, equalTo(false))
-                            .where(propOpen, equalTo(false))
-                            .where(propFlipped, equalTo(false)),
+                            .where(PROP_LOCKED_1, equalTo(false))
+                            .where(PROP_LOCKED_2, equalTo(false))
+                            .where(PROP_LOCKED_ADJACENT, equalTo(false))
+                            .where(PROP_OPEN, equalTo(false))
+                            .where(PROP_FLIPPED, equalTo(false)),
                     BlockForgedContainer::open),
-            new BlockInteraction(Capability.pry, 1, EnumFacing.SOUTH, 15, 28, 3, 4,
+            new BlockInteraction(Capability.PRY, 1, EnumFacing.SOUTH, 15, 28, 3, 4,
                     new PropertyMatcher()
-                            .where(propLocked1, equalTo(false))
-                            .where(propLocked2, equalTo(false))
-                            .where(propLockedAdjacent, equalTo(false))
-                            .where(propOpen, equalTo(false))
-                            .where(propFlipped, equalTo(true)),
+                            .where(PROP_LOCKED_1, equalTo(false))
+                            .where(PROP_LOCKED_2, equalTo(false))
+                            .where(PROP_LOCKED_ADJACENT, equalTo(false))
+                            .where(PROP_OPEN, equalTo(false))
+                            .where(PROP_FLIPPED, equalTo(true)),
                     BlockForgedContainer::open)
     };
 
@@ -92,30 +93,30 @@ public class BlockForgedContainer extends TetraBlock implements ITileEntityProvi
     private static final AxisAlignedBB aabbX1 = new AxisAlignedBB(-0.9375, 0.0, 0.0625, 0.9375, 0.75, 0.9375);
     private static final AxisAlignedBB aabbX2 = new AxisAlignedBB(0.0625, 0.0, 0.0625, 1.9375, 0.75, 0.9375);
 
-    public static final String unlocalizedName = "forged_container";
+    public static final String UNLOCALIZED_NAME = "forged_container";
 
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
-    public static BlockForgedContainer instance;
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
+    public static BlockForgedContainer INSTANCE;
 
     public BlockForgedContainer() {
         super(Material.IRON);
-        setRegistryName(unlocalizedName);
-        setTranslationKey(unlocalizedName);
-        GameRegistry.registerTileEntity(TileEntityForgedContainer.class, new ResourceLocation(Tags.MOD_ID, unlocalizedName));
-        setCreativeTab(TetraCreativeTabs.getInstance());
+        setRegistryName(UNLOCALIZED_NAME);
+        setTranslationKey(UNLOCALIZED_NAME);
+        GameRegistry.registerTileEntity(TileEntityForgedContainer.class, new ResourceLocation(Tags.MOD_ID, UNLOCALIZED_NAME));
+        setCreativeTab(TetraCreativeTab.INSTANCE);
 
         setBlockUnbreakable();
 
         hasItem = true;
 
         setDefaultState(getBlockState().getBaseState()
-                .withProperty(propFacing, EnumFacing.EAST)
-                .withProperty(propFlipped, false));
+                .withProperty(PROP_FACING, EnumFacing.EAST)
+                .withProperty(PROP_FLIPPED, false));
     }
 
     @Override
     public void init(PacketHandler packetHandler) {
-        GuiHandlerRegistry.instance.registerHandler(TetraGuiHandler.forgedContainerId, new GuiHandlerForgedContainer());
+        GuiHandlerRegistry.INSTANCE.registerHandler(TetraGuiHandler.forgedContainerId, new GuiHandlerForgedContainer());
         packetHandler.registerPacket(ChangeCompartmentPacket.class, Side.SERVER);
     }
 
@@ -189,8 +190,8 @@ public class BlockForgedContainer extends TetraBlock implements ITileEntityProvi
 
     @Override
     public BlockInteraction[] getPotentialInteractions(IBlockState state, EnumFacing face, Collection<Capability> capabilities) {
-        return Arrays.stream(interactions)
-                .filter(interaction -> interaction.isPotentialInteraction(state, state.getValue(propFacing), face, capabilities))
+        return Arrays.stream(INTERACTIONS)
+                .filter(interaction -> interaction.isPotentialInteraction(state, state.getValue(PROP_FACING), face, capabilities))
                 .toArray(BlockInteraction[]::new);
     }
 
@@ -204,7 +205,7 @@ public class BlockForgedContainer extends TetraBlock implements ITileEntityProvi
             TileEntityForgedContainer te = (TileEntityForgedContainer) world.getTileEntity(pos);
             if (te != null) {
                 if (te.getOrDelegate().isOpen()) {
-                    player.openGui(TetraMod.instance, TetraGuiHandler.forgedContainerId, world, pos.getX(), pos.getY(), pos.getZ());
+                    player.openGui(TetraMod.INSTANCE, TetraGuiHandler.forgedContainerId, world, pos.getX(), pos.getY(), pos.getZ());
                 }
             }
         } else {
@@ -239,9 +240,9 @@ public class BlockForgedContainer extends TetraBlock implements ITileEntityProvi
         AxisAlignedBB aabb = null;
 
         state = getActualState(state, source, pos);
-        EnumFacing facing = state.getValue(propFacing);
-        boolean flipped = state.getValue(propFlipped);
-        boolean open = state.getValue(propOpen);
+        EnumFacing facing = state.getValue(PROP_FACING);
+        boolean flipped = state.getValue(PROP_FLIPPED);
+        boolean open = state.getValue(PROP_OPEN);
 
         if (flipped) {
             switch (facing) {
@@ -284,7 +285,7 @@ public class BlockForgedContainer extends TetraBlock implements ITileEntityProvi
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, propFacing, propFlipped, propLocked1, propLocked2, propLockedAdjacent, propOpen);
+        return new BlockStateContainer(this, PROP_FACING, PROP_FLIPPED, PROP_LOCKED_1, PROP_LOCKED_2, PROP_LOCKED_ADJACENT, PROP_OPEN);
     }
 
     @Override
@@ -297,19 +298,19 @@ public class BlockForgedContainer extends TetraBlock implements ITileEntityProvi
 
             boolean anyLocked = Arrays.stream(te.getOrDelegate().isLocked()).anyMatch(isLocked -> isLocked);
 
-            if (state.getValue(propFlipped)) {
+            if (state.getValue(PROP_FLIPPED)) {
                 actualState = actualState
-                        .withProperty(propLocked1, te.isLocked(2))
-                        .withProperty(propLocked2, te.isLocked(3));
+                        .withProperty(PROP_LOCKED_1, te.isLocked(2))
+                        .withProperty(PROP_LOCKED_2, te.isLocked(3));
             } else {
                 actualState = actualState
-                        .withProperty(propLocked1, te.isLocked(0))
-                        .withProperty(propLocked2, te.isLocked(1));
+                        .withProperty(PROP_LOCKED_1, te.isLocked(0))
+                        .withProperty(PROP_LOCKED_2, te.isLocked(1));
             }
 
             actualState = actualState
-                    .withProperty(propOpen, te.isOpen())
-                    .withProperty(propLockedAdjacent, anyLocked);
+                    .withProperty(PROP_OPEN, te.isOpen())
+                    .withProperty(PROP_LOCKED_ADJACENT, anyLocked);
         }
 
         return actualState;
@@ -318,14 +319,14 @@ public class BlockForgedContainer extends TetraBlock implements ITileEntityProvi
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return super.getDefaultState()
-                .withProperty(propFacing, EnumFacing.HORIZONTALS[meta & 0b11])
-                .withProperty(propFlipped, (meta >> 2 & 1) == 1);
+                .withProperty(PROP_FACING, EnumFacing.HORIZONTALS[meta & 0b11])
+                .withProperty(PROP_FLIPPED, (meta >> 2 & 1) == 1);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(propFacing).getHorizontalIndex()
-                | (state.getValue(propFlipped) ? 1 << 2 : 0);
+        return state.getValue(PROP_FACING).getHorizontalIndex()
+                | (state.getValue(PROP_FLIPPED) ? 1 << 2 : 0);
     }
 
     @Override
@@ -337,23 +338,23 @@ public class BlockForgedContainer extends TetraBlock implements ITileEntityProvi
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         IBlockState iblockstate = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer);
 
-        return iblockstate.withProperty(propFacing, placer.getHorizontalFacing());
+        return iblockstate.withProperty(PROP_FACING, placer.getHorizontalFacing());
     }
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-        EnumFacing facing = state.getValue(propFacing);
-        worldIn.setBlockState(pos.offset(facing.rotateY()), getDefaultState().withProperty(propFlipped, true).withProperty(propFacing, facing));
+        EnumFacing facing = state.getValue(PROP_FACING);
+        worldIn.setBlockState(pos.offset(facing.rotateY()), getDefaultState().withProperty(PROP_FLIPPED, true).withProperty(PROP_FACING, facing));
     }
 
     @Override
     public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) {
         BlockPos relativePos;
-        if (state.getValue(propFlipped)) {
-            relativePos = pos.offset(state.getValue(propFacing).rotateYCCW());
+        if (state.getValue(PROP_FLIPPED)) {
+            relativePos = pos.offset(state.getValue(PROP_FACING).rotateYCCW());
         } else {
-            relativePos = pos.offset(state.getValue(propFacing).rotateY());
+            relativePos = pos.offset(state.getValue(PROP_FACING).rotateY());
         }
 
         if (!equals(world.getBlockState(relativePos).getBlock())) {
@@ -368,14 +369,14 @@ public class BlockForgedContainer extends TetraBlock implements ITileEntityProvi
 
     @Override
     public IBlockState withRotation(IBlockState state, Rotation rot) {
-        EnumFacing facing = state.getValue(propFacing);
+        EnumFacing facing = state.getValue(PROP_FACING);
 
         if (Rotation.CLOCKWISE_180.equals(rot)
                 || Rotation.CLOCKWISE_90.equals(rot) && (EnumFacing.NORTH.equals(facing) || EnumFacing.SOUTH.equals(facing))
                 || Rotation.COUNTERCLOCKWISE_90.equals(rot) && (EnumFacing.EAST.equals(facing) || EnumFacing.WEST.equals(facing))) {
-            state = state.withProperty(propFlipped, state.getValue(propFlipped));
+            state = state.withProperty(PROP_FLIPPED, state.getValue(PROP_FLIPPED));
         }
 
-        return state.withProperty(propFacing, rot.rotate(facing));
+        return state.withProperty(PROP_FACING, rot.rotate(facing));
     }
 }

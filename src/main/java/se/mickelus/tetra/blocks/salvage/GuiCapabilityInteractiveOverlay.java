@@ -13,14 +13,11 @@ import java.util.stream.Collectors;
 
 public class GuiCapabilityInteractiveOverlay extends GuiRootHud {
 
-
     public GuiCapabilityInteractiveOverlay() {
 
     }
 
     public void update(IBlockState blockState, EnumFacing face, EntityPlayer player, boolean transition) {
-
-
         if (blockState.getBlock() instanceof IBlockCapabilityInteractive) {
             IBlockCapabilityInteractive block = (IBlockCapabilityInteractive) blockState.getBlock();
 

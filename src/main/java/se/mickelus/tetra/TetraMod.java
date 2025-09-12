@@ -27,7 +27,6 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-import org.apache.commons.lang3.ArrayUtils;
 import se.mickelus.tetra.advancements.*;
 import se.mickelus.tetra.blocks.ITetraBlock;
 import se.mickelus.tetra.blocks.forged.*;
@@ -46,7 +45,6 @@ import se.mickelus.tetra.generation.TGenCommand;
 import se.mickelus.tetra.generation.WorldGenFeatures;
 import se.mickelus.tetra.items.ITetraItem;
 import se.mickelus.tetra.items.ItemPredicateModular;
-import se.mickelus.tetra.items.TetraCreativeTabs;
 import se.mickelus.tetra.items.cell.ItemCellMagmatic;
 import se.mickelus.tetra.items.duplex_tool.ItemDuplexToolModular;
 import se.mickelus.tetra.items.forged.*;
@@ -57,27 +55,42 @@ import se.mickelus.tetra.loot.FortuneBonusCondition;
 import se.mickelus.tetra.loot.FortuneBonusFunction;
 import se.mickelus.tetra.loot.SetMetadataFunction;
 import se.mickelus.tetra.module.ItemEffectHandler;
-import se.mickelus.tetra.module.ItemUpgradeRegistry;
 import se.mickelus.tetra.module.improvement.DestabilizationEffect;
 import se.mickelus.tetra.module.improvement.HonePacket;
 import se.mickelus.tetra.module.improvement.SettlePacket;
 import se.mickelus.tetra.module.schema.CleanseSchema;
 import se.mickelus.tetra.network.GuiHandlerRegistry;
 import se.mickelus.tetra.network.PacketHandler;
+import se.mickelus.tetra.potions.PotionBleeding;
+import se.mickelus.tetra.potions.PotionEarthbound;
 import se.mickelus.tetra.proxy.IProxy;
 
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-@Mod(useMetadata = true, modid = Tags.MOD_ID, version = Tags.VERSION)
+// TODO:
+//  1. Backport features from 1.20.1
+//  2. Make structures spawn under villages
+//  3. Add tetra village house with some loot
+//  4. Add tetra villager
+//  5. Draedon-lab-like new structures with epic loot
+//  6. An analogue for TC's smeltery
+//  7. Compat with the same materials as TC
+//  8. Compat with GroovyScript
+//  9. Refactor project structure to be more conventional (gui and item classes in blocks package, wtf???)
+//  10. Remove data folder (we won't have datapacks, so no reason for this overcomplication)
+@Mod(modid = Tags.MOD_ID, version = Tags.VERSION)
 public class TetraMod {
     @SidedProxy(clientSide = "se.mickelus.tetra.proxy.ClientProxy", serverSide = "se.mickelus.tetra.proxy.ServerProxy")
     public static IProxy proxy;
 
     @Mod.Instance(Tags.MOD_ID)
-    public static TetraMod instance;
+    public static TetraMod INSTANCE;
 
+    public static DataHandler dataHandler;
+
+    // TODO: move this to separate ModItems/ModBlocks classes
     private Item[] items;
     private Block[] blocks;
 
@@ -89,57 +102,46 @@ public class TetraMod {
         LootFunctionManager.registerFunction(new FortuneBonusFunction.Serializer());
         LootFunctionManager.registerFunction(new SetMetadataFunction.Serializer());
 
-        new DataHandler(event.getSourceFile());
+        dataHandler = new DataHandler(event.getSourceFile());
 
-        new ItemUpgradeRegistry();
-
-        new TetraCreativeTabs();
-
-        new GuiHandlerRegistry();
-
-        CriteriaTriggers.register(BlockLookTrigger.instance);
-        CriteriaTriggers.register(BlockUseCriterion.trigger);
-        CriteriaTriggers.register(BlockInteractionCriterion.trigger);
-        CriteriaTriggers.register(ModuleCraftCriterion.trigger);
-        CriteriaTriggers.register(ImprovementCraftCriterion.trigger);
+        CriteriaTriggers.register(BlockLookTrigger.INSTANCE);
+        CriteriaTriggers.register(BlockUseCriterion.TRIGGER);
+        CriteriaTriggers.register(BlockInteractionCriterion.TRIGGER);
+        CriteriaTriggers.register(ModuleCraftCriterion.TRIGGER);
+        CriteriaTriggers.register(ImprovementCraftCriterion.TRIGGER);
 
         MinecraftForge.EVENT_BUS.register(new ItemEffectHandler());
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(TetraMod.proxy);
-        MinecraftForge.EVENT_BUS.register(BlockLookTrigger.instance);
+        MinecraftForge.EVENT_BUS.register(BlockLookTrigger.INSTANCE);
 
         blocks = new Block[]{
                 new BlockWorkbench(),
                 new BlockGeode(),
+                new BlockHammerHead(),
+                new BlockHammerBase(),
+                new BlockForgedWall(),
+                new BlockForgedPillar(),
+                new BlockForgedPlatform(),
+                new BlockForgedPlatformSlab(),
+                new BlockForgedVent(),
+                new BlockForgedContainer(),
+                new BlockForgedCrate(),
+                new BlockTransferUnit(),
+                new BlockCoreExtractorBase(),
+                new BlockCoreExtractorPiston(),
+                new BlockCoreExtractorPipe(),
+                new BlockSeepingBedrock()
         };
-
-        if (ConfigHandler.generateFeatures) {
-            blocks = ArrayUtils.addAll(blocks,
-                    new BlockHammerHead(),
-                    new BlockHammerBase(),
-                    new BlockForgedWall(),
-                    new BlockForgedPillar(),
-                    new BlockForgedPlatform(),
-                    new BlockForgedPlatformSlab(),
-                    new BlockForgedVent(),
-                    new BlockForgedContainer(),
-                    new BlockForgedCrate(),
-                    new BlockTransferUnit(),
-                    new BlockCoreExtractorBase(),
-                    new BlockCoreExtractorPiston(),
-                    new BlockCoreExtractorPipe(),
-                    new BlockSeepingBedrock()
-            );
-        }
 
         items = new Item[]{
                 new ItemSwordModular(),
+                new ItemToolbeltModular(),
+                new ItemDuplexToolModular(),
                 new ItemGeode(),
                 new ItemPristineLapis(),
                 new ItemPristineEmerald(),
                 new ItemPristineDiamond(),
-                new ItemToolbeltModular(),
-                new ItemDuplexToolModular(),
                 new ItemCellMagmatic(),
                 new ItemBolt(),
                 new ItemBeam(),
@@ -150,16 +152,20 @@ public class TetraMod {
                 new ItemJournal()
         };
 
-        ForgeRegistries.POTIONS.registerAll(new PotionBleeding());
-        ForgeRegistries.POTIONS.registerAll(new PotionEarthbound());
+        ForgeRegistries.POTIONS.register(new PotionBleeding());
+        ForgeRegistries.POTIONS.register(new PotionEarthbound());
 
-        proxy.preInit(event,
+        proxy.preInit(
+                event,
                 Arrays.stream(items)
                         .filter(item -> item instanceof ITetraItem)
-                        .map(item -> (ITetraItem) item).toArray(ITetraItem[]::new),
+                        .map(item -> (ITetraItem) item)
+                        .toArray(ITetraItem[]::new),
                 Arrays.stream(blocks)
                         .filter(block -> block instanceof ITetraBlock)
-                        .map(block -> (ITetraBlock) block).toArray(ITetraBlock[]::new));
+                        .map(block -> (ITetraBlock) block)
+                        .toArray(ITetraBlock[]::new)
+        );
     }
 
     @EventHandler
@@ -171,7 +177,7 @@ public class TetraMod {
             GameRegistry.registerWorldGenerator(worldGenFeatures, 11);
         }
 
-        NetworkRegistry.INSTANCE.registerGuiHandler(instance, GuiHandlerRegistry.instance);
+        NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, GuiHandlerRegistry.INSTANCE);
 
         PacketHandler packetHandler = new PacketHandler();
 
@@ -191,18 +197,6 @@ public class TetraMod {
         new CleanseSchema();
     }
 
-    @SubscribeEvent
-    public void lootTableLoad(LootTableLoadEvent event) {
-        if (Tags.MOD_ID.equals(event.getName().getNamespace())) {
-            LootTable lootTable = event.getTable();
-            LootPool[] extendedPools = DataHandler.instance.getExtendedLootPools(event.getName());
-            Optional.ofNullable(extendedPools)
-                    .map(Arrays::stream)
-                    .orElseGet(Stream::empty)
-                    .forEach(lootTable::addPool);
-        }
-    }
-
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
@@ -214,12 +208,24 @@ public class TetraMod {
     }
 
     @SubscribeEvent
-    public void registerBlocks(RegistryEvent.Register<Block> event) {
+    public void onLootTableLoad(LootTableLoadEvent event) {
+        if (Tags.MOD_ID.equals(event.getName().getNamespace())) {
+            LootTable lootTable = event.getTable();
+            LootPool[] extendedPools = dataHandler.getExtendedLootPools(event.getName());
+            Optional.ofNullable(extendedPools)
+                    .map(Arrays::stream)
+                    .orElseGet(Stream::empty)
+                    .forEach(lootTable::addPool);
+        }
+    }
+
+    @SubscribeEvent
+    public void onRegisterBlock(RegistryEvent.Register<Block> event) {
         event.getRegistry().registerAll(blocks);
     }
 
     @SubscribeEvent
-    public void registerItems(RegistryEvent.Register<Item> event) {
+    public void onRegisterItem(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(items);
 
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {

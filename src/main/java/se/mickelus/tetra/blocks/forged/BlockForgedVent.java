@@ -26,6 +26,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.Tags;
+import se.mickelus.tetra.TetraCreativeTab;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.Materials;
 import se.mickelus.tetra.blocks.PropertyMatcher;
@@ -33,7 +34,6 @@ import se.mickelus.tetra.blocks.TetraBlock;
 import se.mickelus.tetra.blocks.salvage.BlockInteraction;
 import se.mickelus.tetra.blocks.salvage.IBlockCapabilityInteractive;
 import se.mickelus.tetra.capabilities.Capability;
-import se.mickelus.tetra.items.TetraCreativeTabs;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -44,68 +44,68 @@ import java.util.List;
 import static com.google.common.base.Predicates.equalTo;
 
 public class BlockForgedVent extends TetraBlock implements IBlockCapabilityInteractive {
+    private static final PropertyInteger ROTATION = PropertyInteger.create("rotation", 0, 3);
+    private static final PropertyBool X = PropertyBool.create("x");
+    private static final PropertyBool BROKEN = PropertyBool.create("broken");
 
-    static final String unlocalizedName = "forged_vent";
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
-    public static BlockForgedVent instance;
+    private static final String UNLOCALIZED_NAME = "forged_vent";
 
-    public static final PropertyInteger propRotation = PropertyInteger.create("rotation", 0, 3);
-    public static final PropertyBool propX = PropertyBool.create("x");
-    public static final PropertyBool propBroken = PropertyBool.create("broken");
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
+    public static BlockForgedVent INSTANCE;
 
-    public static final BlockInteraction[] interactions = new BlockInteraction[]{
-            new BlockInteraction(Capability.hammer, 3, EnumFacing.EAST, 1, 4, 12, 15,
-                    new PropertyMatcher().where(propBroken, equalTo(false)).where(propRotation, equalTo(0)),
+    private static final BlockInteraction[] INTERACTIONS = new BlockInteraction[]{
+            new BlockInteraction(Capability.HAMMER, 3, EnumFacing.EAST, 1, 4, 12, 15,
+                    new PropertyMatcher().where(BROKEN, equalTo(false)).where(ROTATION, equalTo(0)),
                     BlockForgedVent::breakBolt),
-            new BlockInteraction(Capability.hammer, 3, EnumFacing.EAST, 1, 4, 1, 4,
-                    new PropertyMatcher().where(propBroken, equalTo(false)).where(propRotation, equalTo(1)),
+            new BlockInteraction(Capability.HAMMER, 3, EnumFacing.EAST, 1, 4, 1, 4,
+                    new PropertyMatcher().where(BROKEN, equalTo(false)).where(ROTATION, equalTo(1)),
                     BlockForgedVent::breakBolt),
-            new BlockInteraction(Capability.hammer, 3, EnumFacing.EAST, 12, 15, 12, 15,
-                    new PropertyMatcher().where(propBroken, equalTo(false)).where(propRotation, equalTo(2)),
+            new BlockInteraction(Capability.HAMMER, 3, EnumFacing.EAST, 12, 15, 12, 15,
+                    new PropertyMatcher().where(BROKEN, equalTo(false)).where(ROTATION, equalTo(2)),
                     BlockForgedVent::breakBolt),
-            new BlockInteraction(Capability.hammer, 3, EnumFacing.EAST, 12, 15, 1, 4,
-                    new PropertyMatcher().where(propBroken, equalTo(false)).where(propRotation, equalTo(3)),
-                    BlockForgedVent::breakBolt),
-
-            new BlockInteraction(Capability.hammer, 3, EnumFacing.WEST, 12, 15, 12, 15,
-                    new PropertyMatcher().where(propBroken, equalTo(false)).where(propRotation, equalTo(0)),
-                    BlockForgedVent::breakBolt),
-            new BlockInteraction(Capability.hammer, 3, EnumFacing.WEST, 12, 15, 1, 4,
-                    new PropertyMatcher().where(propBroken, equalTo(false)).where(propRotation, equalTo(1)),
-                    BlockForgedVent::breakBolt),
-            new BlockInteraction(Capability.hammer, 3, EnumFacing.WEST, 1, 4, 12, 15,
-                    new PropertyMatcher().where(propBroken, equalTo(false)).where(propRotation, equalTo(2)),
-                    BlockForgedVent::breakBolt),
-            new BlockInteraction(Capability.hammer, 3, EnumFacing.WEST, 1, 4, 1, 4,
-                    new PropertyMatcher().where(propBroken, equalTo(false)).where(propRotation, equalTo(3)),
+            new BlockInteraction(Capability.HAMMER, 3, EnumFacing.EAST, 12, 15, 1, 4,
+                    new PropertyMatcher().where(BROKEN, equalTo(false)).where(ROTATION, equalTo(3)),
                     BlockForgedVent::breakBolt),
 
-            new BlockInteraction(Capability.pry, 1, EnumFacing.EAST, 7, 11, 8, 12,
-                    new PropertyMatcher().where(propBroken, equalTo(true)),
+            new BlockInteraction(Capability.HAMMER, 3, EnumFacing.WEST, 12, 15, 12, 15,
+                    new PropertyMatcher().where(BROKEN, equalTo(false)).where(ROTATION, equalTo(0)),
+                    BlockForgedVent::breakBolt),
+            new BlockInteraction(Capability.HAMMER, 3, EnumFacing.WEST, 12, 15, 1, 4,
+                    new PropertyMatcher().where(BROKEN, equalTo(false)).where(ROTATION, equalTo(1)),
+                    BlockForgedVent::breakBolt),
+            new BlockInteraction(Capability.HAMMER, 3, EnumFacing.WEST, 1, 4, 12, 15,
+                    new PropertyMatcher().where(BROKEN, equalTo(false)).where(ROTATION, equalTo(2)),
+                    BlockForgedVent::breakBolt),
+            new BlockInteraction(Capability.HAMMER, 3, EnumFacing.WEST, 1, 4, 1, 4,
+                    new PropertyMatcher().where(BROKEN, equalTo(false)).where(ROTATION, equalTo(3)),
+                    BlockForgedVent::breakBolt),
+
+            new BlockInteraction(Capability.PRY, 1, EnumFacing.EAST, 7, 11, 8, 12,
+                    new PropertyMatcher().where(BROKEN, equalTo(true)),
                     BlockForgedVent::breakPlate),
-            new BlockInteraction(Capability.pry, 1, EnumFacing.WEST, 7, 11, 8, 12,
-                    new PropertyMatcher().where(propBroken, equalTo(true)),
+            new BlockInteraction(Capability.PRY, 1, EnumFacing.WEST, 7, 11, 8, 12,
+                    new PropertyMatcher().where(BROKEN, equalTo(true)),
                     BlockForgedVent::breakPlate),
     };
 
-    private static final ResourceLocation boltLootTable = TetraMod.getResource("forged/bolt_break");
-    private static final ResourceLocation ventLootTable = TetraMod.getResource("forged/vent_break");
+    private static final ResourceLocation BOLT_LOOT_TABLE = TetraMod.getResource("forged/bolt_break");
+    private static final ResourceLocation VENT_LOOT_TABLE = TetraMod.getResource("forged/vent_break");
 
     public BlockForgedVent() {
         super(Materials.forged);
 
-        setRegistryName(unlocalizedName);
-        setTranslationKey(unlocalizedName);
-        setCreativeTab(TetraCreativeTabs.getInstance());
+        setRegistryName(UNLOCALIZED_NAME);
+        setTranslationKey(UNLOCALIZED_NAME);
+        setCreativeTab(TetraCreativeTab.INSTANCE);
         setBlockUnbreakable();
         setResistance(22);
 
         hasItem = true;
 
         this.setDefaultState(this.blockState.getBaseState()
-                .withProperty(propRotation, 0)
-                .withProperty(propX, true)
-                .withProperty(propBroken, false));
+                .withProperty(ROTATION, 0)
+                .withProperty(X, true)
+                .withProperty(BROKEN, false));
     }
 
     @Override
@@ -115,11 +115,11 @@ public class BlockForgedVent extends TetraBlock implements IBlockCapabilityInter
 
     private static boolean breakBolt(World world, BlockPos pos, IBlockState blockState, EntityPlayer player,
                                      EnumHand hand, EnumFacing facing) {
-        world.setBlockState(pos, world.getBlockState(pos).withProperty(propBroken, true), 2);
+        world.setBlockState(pos, world.getBlockState(pos).withProperty(BROKEN, true), 2);
 
         if (!world.isRemote) {
             WorldServer worldServer = (WorldServer) world;
-            LootTable table = worldServer.getLootTableManager().getLootTableFromLocation(boltLootTable);
+            LootTable table = worldServer.getLootTableManager().getLootTableFromLocation(BOLT_LOOT_TABLE);
             LootContext.Builder builder = new LootContext.Builder(worldServer);
             builder.withLuck(player.getLuck()).withPlayer(player);
 
@@ -137,9 +137,9 @@ public class BlockForgedVent extends TetraBlock implements IBlockCapabilityInter
 
     private static boolean breakPlate(World world, BlockPos pos, IBlockState blockState, EntityPlayer player,
                                       EnumHand hand, EnumFacing facing) {
-        List<BlockPos> connectedVents = getConnectedBlocks(world, pos, new LinkedList<>(), blockState.getValue(propX));
+        List<BlockPos> connectedVents = getConnectedBlocks(world, pos, new LinkedList<>(), blockState.getValue(X));
 
-        if (connectedVents.stream().anyMatch(blockPos -> !world.getBlockState(blockPos).getValue(propBroken))) {
+        if (connectedVents.stream().anyMatch(blockPos -> !world.getBlockState(blockPos).getValue(BROKEN))) {
             return false;
         }
 
@@ -150,7 +150,7 @@ public class BlockForgedVent extends TetraBlock implements IBlockCapabilityInter
 
         if (!world.isRemote) {
             WorldServer worldServer = (WorldServer) world;
-            LootTable table = worldServer.getLootTableManager().getLootTableFromLocation(ventLootTable);
+            LootTable table = worldServer.getLootTableManager().getLootTableFromLocation(VENT_LOOT_TABLE);
             LootContext.Builder builder = new LootContext.Builder(worldServer);
             builder.withLuck(player.getLuck()).withPlayer(player);
 
@@ -182,8 +182,8 @@ public class BlockForgedVent extends TetraBlock implements IBlockCapabilityInter
 
     @Override
     public BlockInteraction[] getPotentialInteractions(IBlockState state, EnumFacing face, Collection<Capability> capabilities) {
-        return Arrays.stream(interactions)
-                .filter(interaction -> interaction.isPotentialInteraction(state, state.getValue(propX) ? EnumFacing.EAST : EnumFacing.SOUTH, face, capabilities))
+        return Arrays.stream(INTERACTIONS)
+                .filter(interaction -> interaction.isPotentialInteraction(state, state.getValue(X) ? EnumFacing.EAST : EnumFacing.SOUTH, face, capabilities))
                 .toArray(BlockInteraction[]::new);
     }
 
@@ -200,13 +200,13 @@ public class BlockForgedVent extends TetraBlock implements IBlockCapabilityInter
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, propRotation, propX, propBroken);
+        return new BlockStateContainer(this, ROTATION, X, BROKEN);
     }
 
     @Override
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
         IBlockState iblockstate = super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer);
-        iblockstate = iblockstate.withProperty(propX, EnumFacing.Axis.X.equals(placer.getHorizontalFacing().getAxis()));
+        iblockstate = iblockstate.withProperty(X, EnumFacing.Axis.X.equals(placer.getHorizontalFacing().getAxis()));
 
         int rotation = 0;
 
@@ -218,7 +218,7 @@ public class BlockForgedVent extends TetraBlock implements IBlockCapabilityInter
             rotation++;
         }
 
-        iblockstate = iblockstate.withProperty(propRotation, rotation);
+        iblockstate = iblockstate.withProperty(ROTATION, rotation);
 
         return iblockstate;
     }
@@ -228,33 +228,33 @@ public class BlockForgedVent extends TetraBlock implements IBlockCapabilityInter
         IBlockState blockState = this.getDefaultState();
         int rotation = meta & 3;
         if (rotation < EnumFacing.HORIZONTALS.length) {
-            blockState = blockState.withProperty(propRotation, rotation);
+            blockState = blockState.withProperty(ROTATION, rotation);
         }
         return blockState
-                .withProperty(propX, (meta >> 2 & 1) == 1)
-                .withProperty(propBroken, meta >> 3 == 1);
+                .withProperty(X, (meta >> 2 & 1) == 1)
+                .withProperty(BROKEN, meta >> 3 == 1);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(propRotation)
-                | (state.getValue(propX) ? 1 << 2 : 0)
-                | (state.getValue(propBroken) ? 1 << 3 : 0);
+        return state.getValue(ROTATION)
+                | (state.getValue(X) ? 1 << 2 : 0)
+                | (state.getValue(BROKEN) ? 1 << 3 : 0);
     }
 
     @Override
     public IBlockState withRotation(IBlockState state, Rotation rot) {
-        boolean isXAxis = state.getValue(propX);
+        boolean isXAxis = state.getValue(X);
         if (rot.equals(Rotation.CLOCKWISE_90) || rot.equals(Rotation.COUNTERCLOCKWISE_90)) {
-            state = state.withProperty(propX, !isXAxis);
+            state = state.withProperty(X, !isXAxis);
         }
         if (rot.equals(Rotation.CLOCKWISE_180)
                 || (!isXAxis && rot.equals(Rotation.CLOCKWISE_90))
                 || (isXAxis && rot.equals(Rotation.COUNTERCLOCKWISE_90))) {
-            return state.withProperty(propRotation, state.getValue(propRotation) ^ 2);
+            return state.withProperty(ROTATION, state.getValue(ROTATION) ^ 2);
         }
 
-        return state.withProperty(propRotation, state.getValue(propRotation));
+        return state.withProperty(ROTATION, state.getValue(ROTATION));
     }
 
 
@@ -281,7 +281,7 @@ public class BlockForgedVent extends TetraBlock implements IBlockCapabilityInter
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        if (state.getValue(propX)) {
+        if (state.getValue(X)) {
             return new AxisAlignedBB(0, 0, 0.4375, 1, 1, 0.5625);
         }
         return new AxisAlignedBB(0.4375, 0, 0, 0.5625, 1, 1);

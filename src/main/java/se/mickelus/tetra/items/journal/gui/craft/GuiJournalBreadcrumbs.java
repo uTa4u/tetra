@@ -48,7 +48,7 @@ public class GuiJournalBreadcrumbs extends GuiElement {
         buttons = new ArrayList<>();
 
         GuiKeybinding keybinding = new GuiKeybinding(0, 3, "" + GuiJournalCraftRoot.backBinding);
-        keybinding.setAttachmentPoint(GuiAttachment.topRight);
+        keybinding.setAttachmentPoint(GuiAttachment.TOP_RIGHT);
         keybinding.setOpacity(0);
         addChild(keybinding);
         focusAnimation = new KeyframeAnimation(80, keybinding)

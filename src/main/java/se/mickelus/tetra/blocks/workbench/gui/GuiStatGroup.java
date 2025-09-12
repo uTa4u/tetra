@@ -65,7 +65,7 @@ public class GuiStatGroup extends GuiElement {
                 .map(capability -> new GuiStatBarCapability(0, 0, GuiStats.barLength, capability))
                 .forEach(bars::add);
 
-        bars.forEach(bar -> bar.setAttachmentAnchor(GuiAttachment.bottomCenter));
+        bars.forEach(bar -> bar.setAttachmentAnchor(GuiAttachment.BOTTOM_CENTER));
     }
 
     public void update(ItemStack itemStack, ItemStack previewStack, String slot, String improvement, EntityPlayer player) {
@@ -107,12 +107,12 @@ public class GuiStatGroup extends GuiElement {
         int xOffset = 3 + (count / 6) * (GuiStats.barLength + 3);
         if (count % 2 == 0) {
             bar.setX(xOffset);
-            bar.setAttachmentPoint(GuiAttachment.bottomLeft);
-            bar.setAlignment(GuiAlignment.left);
+            bar.setAttachmentPoint(GuiAttachment.BOTTOM_LEFT);
+            bar.setAlignment(GuiAlignment.LEFT);
         } else {
             bar.setX(-xOffset);
-            bar.setAttachmentPoint(GuiAttachment.bottomRight);
-            bar.setAlignment(GuiAlignment.right);
+            bar.setAttachmentPoint(GuiAttachment.BOTTOM_RIGHT);
+            bar.setAlignment(GuiAlignment.RIGHT);
         }
     }
 

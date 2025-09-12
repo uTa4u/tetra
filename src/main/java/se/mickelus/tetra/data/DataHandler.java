@@ -47,8 +47,6 @@ public class DataHandler {
 
     private final File configDir;
 
-    public static DataHandler instance;
-
     public DataHandler(File source) {
         this.source = source;
         configDir = Loader.instance().getConfigDir();
@@ -68,14 +66,11 @@ public class DataHandler {
                 .registerTypeAdapter(ResourceLocation.class, new ResourceLocationDeserializer())
                 .registerTypeAdapter(LootPool.class, new LootPoolDeserializer())
                 .registerTypeAdapter(LootEntry.class, new LootEntryDeserializer())
-                .registerTypeAdapter(LootEntry.class, new LootEntryDeserializer())
                 .registerTypeAdapter(RandomValueRange.class, new RandomValueRange.Serializer())
                 .registerTypeAdapter(LootFunction.class, new LootFunctionManager.Serializer())
                 .registerTypeAdapter(LootCondition.class, new LootConditionManager.Serializer())
                 .registerTypeAdapter(LootContext.EntityTarget.class, new LootContext.EntityTarget.Serializer())
                 .create();
-
-        instance = this;
     }
 
     public <T> T getModuleData(String moduleKey, Class<T> dataClass) {

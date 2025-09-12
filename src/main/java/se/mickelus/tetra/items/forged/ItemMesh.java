@@ -9,21 +9,21 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.items.TetraCreativeTabs;
+import se.mickelus.tetra.TetraCreativeTab;
 import se.mickelus.tetra.items.TetraItem;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemMesh extends TetraItem {
-    private static final String unlocalizedName = "forged_mesh";
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
-    public static ItemMesh instance;
+    private static final String UNLOCALIZED_NAME = "forged_mesh";
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
+    public static ItemMesh INSTANCE;
 
     public ItemMesh() {
-        setRegistryName(unlocalizedName);
-        setTranslationKey(unlocalizedName);
-        setCreativeTab(TetraCreativeTabs.getInstance());
+        setRegistryName(UNLOCALIZED_NAME);
+        setTranslationKey(UNLOCALIZED_NAME);
+        setCreativeTab(TetraCreativeTab.INSTANCE);
     }
 
     @SideOnly(Side.CLIENT)

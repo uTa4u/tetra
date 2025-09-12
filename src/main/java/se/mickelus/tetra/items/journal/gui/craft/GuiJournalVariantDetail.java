@@ -112,8 +112,8 @@ public class GuiJournalVariantDetail extends GuiElement {
             synergyIndicator.update(baseOutcome.itemStack, slot);
 
             ItemStack improvementStack = baseOutcome.itemStack;
-            UpgradeSchema[] improvementSchemas = Arrays.stream(ItemUpgradeRegistry.instance.getSchemas(slot))
-                    .filter(improvementSchema -> SchemaType.improvement.equals(improvementSchema.getType()))
+            UpgradeSchema[] improvementSchemas = Arrays.stream(ItemUpgradeRegistry.INSTANCE.getSchemas(slot))
+                    .filter(improvementSchema -> SchemaType.IMPROVEMENT.equals(improvementSchema.getType()))
                     .filter(improvementSchema -> improvementSchema.isApplicableForItem(improvementStack))
                     .toArray(UpgradeSchema[]::new);
 

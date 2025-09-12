@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 public class ModularModelLoader implements ICustomModelLoader {
     private IResourceManager resourceManager;
 
-    public static ModularModelLoader instance = new ModularModelLoader();
+    public static final ModularModelLoader INSTANCE = new ModularModelLoader();
 
     @Override
     public boolean accepts(ResourceLocation modelLocation) {

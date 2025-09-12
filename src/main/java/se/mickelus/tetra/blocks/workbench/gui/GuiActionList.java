@@ -33,10 +33,10 @@ public class GuiActionList extends GuiElement {
         int count = availableActions.length;
         setHeight(count * 2 + 20);
         for (int i = 0; i < count; i++) {
-            GuiAlignment alignment = i % 2 == 0 ? GuiAlignment.left : GuiAlignment.right;
+            GuiAlignment alignment = i % 2 == 0 ? GuiAlignment.LEFT : GuiAlignment.RIGHT;
             actionButtons[i] = new GuiActionButton(count > 1 ? -9 : -20, i * 14, actions[i], targetStack, alignment, clickHandler);
             actionButtons[i].setAttachmentPoint(alignment.toAttachment());
-            if (GuiAlignment.right.equals(alignment)) {
+            if (GuiAlignment.RIGHT.equals(alignment)) {
                 actionButtons[i].setX(-actionButtons[i].getX());
             }
             addChild(actionButtons[i]);

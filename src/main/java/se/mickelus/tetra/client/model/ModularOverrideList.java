@@ -11,8 +11,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ItemLayerModel;
-import se.mickelus.tetra.NBTHelper;
 import se.mickelus.tetra.items.ItemModular;
+import se.mickelus.tetra.util.NBTHelper;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;

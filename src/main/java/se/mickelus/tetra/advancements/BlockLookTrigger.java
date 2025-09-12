@@ -12,16 +12,16 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.PropertyMatcher;
-import se.mickelus.tetra.data.DataHandler;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class BlockLookTrigger extends GenericTrigger<BlockLookTrigger.Instance> {
-    private final Cache<UUID, IBlockState> stateCache;
+    public static final BlockLookTrigger INSTANCE = new BlockLookTrigger();
 
-    public static final BlockLookTrigger instance = new BlockLookTrigger();
+    private final Cache<UUID, IBlockState> stateCache;
 
     public BlockLookTrigger() {
         super("tetra:block_look", BlockLookTrigger::deserialize);
@@ -52,7 +52,7 @@ public class BlockLookTrigger extends GenericTrigger<BlockLookTrigger.Instance> 
     }
 
     public static Instance deserialize(JsonObject json) {
-        return DataHandler.instance.gson.fromJson(json, Instance.class);
+        return TetraMod.dataHandler.gson.fromJson(json, Instance.class);
     }
 
     public void trigger(EntityPlayerMP player, IBlockState state) {
@@ -63,9 +63,10 @@ public class BlockLookTrigger extends GenericTrigger<BlockLookTrigger.Instance> 
         private final PropertyMatcher block = null;
 
         public Instance() {
-            super(instance.getId());
+            super(INSTANCE.getId());
         }
 
+        // TODO: wtf is this
         public boolean test(IBlockState state) {
             return block != null && block.test(state);
         }

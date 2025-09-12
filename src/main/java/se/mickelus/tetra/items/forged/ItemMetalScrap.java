@@ -9,26 +9,26 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.items.TetraCreativeTabs;
+import se.mickelus.tetra.TetraCreativeTab;
 import se.mickelus.tetra.items.TetraItem;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemMetalScrap extends TetraItem {
-    private static final String unlocalizedName = "metal_scrap";
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
-    public static ItemMetalScrap instance;
+    private static final String UNLOCALIZED_NAME = "metal_scrap";
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
+    public static ItemMetalScrap INSTANCE;
 
     public ItemMetalScrap() {
-        setRegistryName(unlocalizedName);
-        setTranslationKey(unlocalizedName);
-        setCreativeTab(TetraCreativeTabs.getInstance());
+        setRegistryName(UNLOCALIZED_NAME);
+        setTranslationKey(UNLOCALIZED_NAME);
+        setCreativeTab(TetraCreativeTab.INSTANCE);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
-        tooltip.add(ChatFormatting.DARK_GRAY + I18n.format("item." + unlocalizedName + ".description"));
+        tooltip.add(ChatFormatting.DARK_GRAY + I18n.format("item." + UNLOCALIZED_NAME + ".description"));
     }
 }

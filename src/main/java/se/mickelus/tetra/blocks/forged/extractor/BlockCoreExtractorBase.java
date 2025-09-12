@@ -22,34 +22,33 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.Tags;
+import se.mickelus.tetra.TetraCreativeTab;
 import se.mickelus.tetra.blocks.TetraBlock;
-import se.mickelus.tetra.items.TetraCreativeTabs;
 import se.mickelus.tetra.util.TileEntityOptional;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class BlockCoreExtractorBase extends TetraBlock implements ITileEntityProvider {
-    public static final PropertyDirection propFacing = BlockHorizontal.FACING;
+    public static final PropertyDirection FACING = BlockHorizontal.FACING;
+    public static final String UNLOCALIZED_NAME = "core_extractor";
 
-    public static final String unlocalizedName = "core_extractor";
-
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
-    public static BlockCoreExtractorBase instance;
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
+    public static BlockCoreExtractorBase INSTANCE;
 
     public BlockCoreExtractorBase() {
         super(Material.IRON);
-        setRegistryName(unlocalizedName);
-        setTranslationKey(unlocalizedName);
-        GameRegistry.registerTileEntity(TileEntityCoreExtractorBase.class, new ResourceLocation(Tags.MOD_ID, unlocalizedName));
-        setCreativeTab(TetraCreativeTabs.getInstance());
+        setRegistryName(UNLOCALIZED_NAME);
+        setTranslationKey(UNLOCALIZED_NAME);
+        GameRegistry.registerTileEntity(TileEntityCoreExtractorBase.class, new ResourceLocation(Tags.MOD_ID, UNLOCALIZED_NAME));
+        setCreativeTab(TetraCreativeTab.INSTANCE);
 
         setBlockUnbreakable();
 
         hasItem = true;
 
         setDefaultState(getBlockState().getBaseState()
-                .withProperty(propFacing, EnumFacing.EAST));
+                .withProperty(FACING, EnumFacing.EAST));
     }
 
     @Override
@@ -65,7 +64,7 @@ public class BlockCoreExtractorBase extends TetraBlock implements ITileEntityPro
 
     @Override
     public void neighborChanged(IBlockState state, World world, BlockPos pos, Block fromBlock, BlockPos fromPos) {
-        if (!pos.offset(world.getBlockState(pos).getValue(propFacing)).equals(fromPos)) {
+        if (!pos.offset(world.getBlockState(pos).getValue(FACING)).equals(fromPos)) {
             TileEntityOptional.from(world, pos, TileEntityCoreExtractorBase.class)
                     .ifPresent(TileEntityCoreExtractorBase::updateTransferState);
         }
@@ -93,18 +92,18 @@ public class BlockCoreExtractorBase extends TetraBlock implements ITileEntityPro
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, propFacing);
+        return new BlockStateContainer(this, FACING);
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return getDefaultState()
-                .withProperty(propFacing, EnumFacing.HORIZONTALS[meta]);
+                .withProperty(FACING, EnumFacing.HORIZONTALS[meta]);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(propFacing).getHorizontalIndex();
+        return state.getValue(FACING).getHorizontalIndex();
     }
 
     @Override
@@ -116,11 +115,11 @@ public class BlockCoreExtractorBase extends TetraBlock implements ITileEntityPro
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         IBlockState iblockstate = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer);
 
-        return iblockstate.withProperty(propFacing, placer.getHorizontalFacing());
+        return iblockstate.withProperty(FACING, placer.getHorizontalFacing());
     }
 
     @Override
     public IBlockState withRotation(IBlockState state, Rotation rot) {
-        return state.withProperty(propFacing, rot.rotate(state.getValue(propFacing)));
+        return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
     }
 }

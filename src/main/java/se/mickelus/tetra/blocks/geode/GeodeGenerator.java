@@ -22,7 +22,7 @@ public class GeodeGenerator implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         final ChunkPos chunkPos = new ChunkPos(chunkX, chunkZ);
 
-        GeodeVariant[] variants = BlockGeode.instance.variants;
+        GeodeVariant[] variants = BlockGeode.INSTANCE.variants;
         for (int i = 0; i < variants.length; i++) {
             if (isvalidBiome(variants[i], world, chunkPos)) {
                 generateGeodes(variants[i], world, chunkPos, random, i);
@@ -36,7 +36,7 @@ public class GeodeGenerator implements IWorldGenerator {
                     getY(variant, random), random.nextInt(16));
             final IBlockState state = world.getBlockState(blockPos);
             if (isValidBlockState(variant, state)) {
-                world.setBlockState(blockPos, BlockGeode.instance.getStateFromMeta(index), 16);
+                world.setBlockState(blockPos, BlockGeode.INSTANCE.getStateFromMeta(index), 16);
             }
         }
     }

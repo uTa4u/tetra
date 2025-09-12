@@ -19,9 +19,8 @@ import se.mickelus.tetra.util.TileEntityOptional;
 import javax.annotation.Nullable;
 
 public class TileEntityCoreExtractorPiston extends TileEntity implements ITickable {
-
-    private static final long activationDuration = 95;
-    private static final int fillAmount = 32;
+    private static final long ACTIVATION_DURATION = 95;
+    private static final int FILL_AMOUNT = 32;
 
     private final TimeValues.VariableValue activationTime = new TimeValues.VariableValue(Float.NEGATIVE_INFINITY);
     private long endTime = Long.MAX_VALUE;
@@ -60,7 +59,7 @@ public class TileEntityCoreExtractorPiston extends TileEntity implements ITickab
         }
 
         if (!isActive()) {
-            endTime = world.getTotalWorldTime() + activationDuration;
+            endTime = world.getTotalWorldTime() + ACTIVATION_DURATION;
         }
     }
 
@@ -77,7 +76,7 @@ public class TileEntityCoreExtractorPiston extends TileEntity implements ITickab
     public void update() {
         if (endTime < world.getTotalWorldTime()) {
             TileEntityOptional.from(world, pos.offset(EnumFacing.DOWN), TileEntityCoreExtractorBase.class)
-                    .ifPresent(base -> base.fill(fillAmount));
+                    .ifPresent(base -> base.fill(FILL_AMOUNT));
 
             runEndEffects();
             endTime = Long.MAX_VALUE;

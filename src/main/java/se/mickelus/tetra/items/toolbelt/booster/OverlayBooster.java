@@ -7,8 +7,8 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import se.mickelus.tetra.NBTHelper;
 import se.mickelus.tetra.items.toolbelt.UtilToolbelt;
+import se.mickelus.tetra.util.NBTHelper;
 
 public class OverlayBooster {
 

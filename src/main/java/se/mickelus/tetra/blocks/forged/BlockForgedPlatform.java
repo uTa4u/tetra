@@ -11,31 +11,32 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import se.mickelus.tetra.Tags;
+import se.mickelus.tetra.TetraCreativeTab;
 import se.mickelus.tetra.blocks.Materials;
 import se.mickelus.tetra.blocks.TetraBlock;
-import se.mickelus.tetra.items.TetraCreativeTabs;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class BlockForgedPlatform extends TetraBlock {
-    static final String unlocalizedName = "forged_platform";
+    private static final String UNLOCALIZED_NAME = "forged_platform";
 
-    public static BlockForgedPlatform instance;
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
+    public static BlockForgedPlatform INSTANCE;
 
     public BlockForgedPlatform() {
         super(Materials.forged);
 
-        setRegistryName(unlocalizedName);
-        setTranslationKey(unlocalizedName);
-        setCreativeTab(TetraCreativeTabs.getInstance());
+        setRegistryName(UNLOCALIZED_NAME);
+        setTranslationKey(UNLOCALIZED_NAME);
+        setCreativeTab(TetraCreativeTab.INSTANCE);
         setBlockUnbreakable();
 
         hasItem = true;
-
-        instance = this;
     }
 
     @SideOnly(Side.CLIENT)

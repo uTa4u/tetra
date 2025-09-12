@@ -81,18 +81,18 @@ public class OverlayGuiToolbelt extends GuiRoot {
 
     public ToolbeltSlotType getFocusType() {
         if (quickslotGroup.getFocus() != -1) {
-            return ToolbeltSlotType.quickslot;
+            return ToolbeltSlotType.QUICKSLOT;
         }
 
         if (potionGroup.getFocus() != -1) {
-            return ToolbeltSlotType.potion;
+            return ToolbeltSlotType.POTION;
         }
 
         if (quiverGroup.getFocus() != -1) {
-            return ToolbeltSlotType.quiver;
+            return ToolbeltSlotType.QUIVER;
         }
 
-        return ToolbeltSlotType.quickslot;
+        return ToolbeltSlotType.QUICKSLOT;
     }
 
     public int getFocusIndex() {

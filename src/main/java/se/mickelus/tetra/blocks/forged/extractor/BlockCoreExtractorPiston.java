@@ -23,8 +23,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.Tags;
+import se.mickelus.tetra.TetraCreativeTab;
 import se.mickelus.tetra.blocks.TetraBlock;
-import se.mickelus.tetra.items.TetraCreativeTabs;
 import se.mickelus.tetra.util.TileEntityOptional;
 
 import javax.annotation.Nullable;
@@ -32,20 +32,19 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockCoreExtractorPiston extends TetraBlock implements ITileEntityProvider {
+    private static final String UNLOCALIZED_NAME = "extractor_piston";
+    private static final AxisAlignedBB AABB = new AxisAlignedBB(0.3125, 0, 0.3125, 0.6875, 1, 0.6875);
 
-    static final String unlocalizedName = "extractor_piston";
-    public static final AxisAlignedBB boundingBox = new AxisAlignedBB(0.3125, 0, 0.3125, 0.6875, 1, 0.6875);
-
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
-    public static BlockCoreExtractorPiston instance;
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
+    public static BlockCoreExtractorPiston INSTANCE;
 
     public BlockCoreExtractorPiston() {
         super(Material.IRON);
 
-        setRegistryName(unlocalizedName);
-        setTranslationKey(unlocalizedName);
-        GameRegistry.registerTileEntity(TileEntityCoreExtractorPiston.class, Tags.MOD_ID + ":" + "tile_" + unlocalizedName);
-        setCreativeTab(TetraCreativeTabs.getInstance());
+        setRegistryName(UNLOCALIZED_NAME);
+        setTranslationKey(UNLOCALIZED_NAME);
+        GameRegistry.registerTileEntity(TileEntityCoreExtractorPiston.class, Tags.MOD_ID + ":" + "tile_" + UNLOCALIZED_NAME);
+        setCreativeTab(TetraCreativeTab.INSTANCE);
         setBlockUnbreakable();
 
         hasItem = true;
@@ -84,7 +83,7 @@ public class BlockCoreExtractorPiston extends TetraBlock implements ITileEntityP
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return boundingBox;
+        return AABB;
     }
 
     @Override

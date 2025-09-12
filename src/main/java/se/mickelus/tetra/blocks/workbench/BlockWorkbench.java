@@ -34,6 +34,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.registries.IForgeRegistry;
 import se.mickelus.tetra.ConfigHandler;
 import se.mickelus.tetra.Tags;
+import se.mickelus.tetra.TetraCreativeTab;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.advancements.BlockUseCriterion;
 import se.mickelus.tetra.blocks.ITetraBlock;
@@ -42,8 +43,6 @@ import se.mickelus.tetra.blocks.hammer.BlockHammerHead;
 import se.mickelus.tetra.blocks.workbench.action.ConfigActionImpl;
 import se.mickelus.tetra.blocks.workbench.action.WorkbenchActionPacket;
 import se.mickelus.tetra.capabilities.Capability;
-import se.mickelus.tetra.data.DataHandler;
-import se.mickelus.tetra.items.TetraCreativeTabs;
 import se.mickelus.tetra.network.GuiHandlerRegistry;
 import se.mickelus.tetra.network.PacketHandler;
 
@@ -54,30 +53,27 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockWorkbench extends TetraBlock implements ITileEntityProvider {
+    public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
 
-    public static final PropertyEnum<Variant> propVariant = PropertyEnum.create("variant", Variant.class);
+    private static final String UNLOCALIZED_NAME = "workbench";
 
-    static final String unlocalizedName = "workbench";
+    private static final AxisAlignedBB AABB = new AxisAlignedBB(0.125, 0, 0, 0.875, 1, 1);
 
-    public static final AxisAlignedBB forgedAABB = new AxisAlignedBB(0.125, 0, 0, 0.875, 1, 1);
-
-    public static BlockWorkbench instance;
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
+    public static BlockWorkbench INSTANCE;
 
     public BlockWorkbench() {
         super(Material.WOOD);
 
-        setRegistryName(unlocalizedName);
-        setTranslationKey(unlocalizedName);
-        GameRegistry.registerTileEntity(TileEntityWorkbench.class, new ResourceLocation(Tags.MOD_ID, unlocalizedName));
-        setCreativeTab(TetraCreativeTabs.getInstance());
+        setRegistryName(UNLOCALIZED_NAME);
+        setTranslationKey(UNLOCALIZED_NAME);
+        GameRegistry.registerTileEntity(TileEntityWorkbench.class, new ResourceLocation(Tags.MOD_ID, UNLOCALIZED_NAME));
+        setCreativeTab(TetraCreativeTab.INSTANCE);
 
         hasItem = true;
 
-        instance = this;
-
-        this.setDefaultState(this.blockState.getBaseState().withProperty(propVariant, Variant.wood));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, Variant.WOOD));
     }
-
 
     public static EnumActionResult upgradeWorkbench(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing) {
         ItemStack itemStack = player.getHeldItem(hand);
@@ -90,9 +86,9 @@ public class BlockWorkbench extends TetraBlock implements ITileEntityProvider {
             world.playSound(player, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.5F);
 
             if (!world.isRemote) {
-                world.setBlockState(pos, instance.getDefaultState());
+                world.setBlockState(pos, INSTANCE.getDefaultState());
 
-                BlockUseCriterion.trigger((EntityPlayerMP) player, instance.getDefaultState(), ItemStack.EMPTY);
+                BlockUseCriterion.trigger((EntityPlayerMP) player, INSTANCE.getDefaultState(), ItemStack.EMPTY);
             }
             return EnumActionResult.SUCCESS;
         }
@@ -124,10 +120,10 @@ public class BlockWorkbench extends TetraBlock implements ITileEntityProvider {
 
     @Override
     public void getSubBlocks(CreativeTabs creativeTabs, NonNullList<ItemStack> items) {
-        if (TetraCreativeTabs.getInstance().equals(creativeTabs)) {
-            items.add(new ItemStack(this, 1, Variant.wood.ordinal()));
+        if (TetraCreativeTab.INSTANCE.equals(creativeTabs)) {
+            items.add(new ItemStack(this, 1, Variant.WOOD.ordinal()));
             if (ConfigHandler.generateFeatures) {
-                items.add(new ItemStack(this, 1, Variant.forged.ordinal()));
+                items.add(new ItemStack(this, 1, Variant.FORGED.ordinal()));
             }
         }
     }
@@ -135,7 +131,7 @@ public class BlockWorkbench extends TetraBlock implements ITileEntityProvider {
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        if (stack.getItemDamage() == Variant.forged.ordinal()) {
+        if (stack.getItemDamage() == Variant.FORGED.ordinal()) {
             tooltip.add(ChatFormatting.DARK_GRAY + I18n.format("forged_description"));
         }
     }
@@ -147,7 +143,7 @@ public class BlockWorkbench extends TetraBlock implements ITileEntityProvider {
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-        player.openGui(TetraMod.instance, GuiHandlerWorkbench.workbenchId, world, pos.getX(), pos.getY(), pos.getZ());
+        player.openGui(TetraMod.INSTANCE, GuiHandlerWorkbench.workbenchId, world, pos.getX(), pos.getY(), pos.getZ());
 
         return true;
     }
@@ -219,9 +215,9 @@ public class BlockWorkbench extends TetraBlock implements ITileEntityProvider {
     public void init(PacketHandler packetHandler) {
         super.init(packetHandler);
 
-        TileEntityWorkbench.initConfigActions(DataHandler.instance.getData("actions", ConfigActionImpl[].class));
+        TileEntityWorkbench.initConfigActions(TetraMod.dataHandler.getData("actions", ConfigActionImpl[].class));
 
-        GuiHandlerRegistry.instance.registerHandler(GuiHandlerWorkbench.workbenchId, new GuiHandlerWorkbench());
+        GuiHandlerRegistry.INSTANCE.registerHandler(GuiHandlerWorkbench.workbenchId, new GuiHandlerWorkbench());
         PacketHandler.instance.registerPacket(UpdateWorkbenchPacket.class, Side.SERVER);
         PacketHandler.instance.registerPacket(CraftWorkbenchPacket.class, Side.SERVER);
         PacketHandler.instance.registerPacket(WorkbenchActionPacket.class, Side.SERVER);
@@ -230,25 +226,25 @@ public class BlockWorkbench extends TetraBlock implements ITileEntityProvider {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, propVariant);
+        return new BlockStateContainer(this, VARIANT);
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
         if (meta < Variant.values().length) {
-            return getDefaultState().withProperty(propVariant, Variant.values()[meta]);
+            return getDefaultState().withProperty(VARIANT, Variant.values()[meta]);
         }
         return getDefaultState();
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(propVariant).ordinal();
+        return state.getValue(VARIANT).ordinal();
     }
 
     @Override
     public boolean isFullCube(IBlockState state) {
-        return state.getValue(propVariant).equals(Variant.wood);
+        return state.getValue(VARIANT).equals(Variant.WOOD);
     }
 
     @Override
@@ -258,37 +254,37 @@ public class BlockWorkbench extends TetraBlock implements ITileEntityProvider {
 
     @Override
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        return state.getValue(propVariant).equals(Variant.wood) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
+        return state.getValue(VARIANT).equals(Variant.WOOD) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
     }
 
     @Override
     public boolean isOpaqueCube(IBlockState state) {
-        return state.getValue(propVariant).equals(Variant.wood);
+        return state.getValue(VARIANT).equals(Variant.WOOD);
     }
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return state.getValue(propVariant).equals(Variant.wood) ? FULL_BLOCK_AABB : forgedAABB;
+        return state.getValue(VARIANT).equals(Variant.WOOD) ? FULL_BLOCK_AABB : AABB;
     }
 
     @Override
     public int getLightOpacity(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return state.getValue(propVariant).equals(Variant.wood) ? lightOpacity : 0;
+        return state.getValue(VARIANT).equals(Variant.WOOD) ? lightOpacity : 0;
     }
 
     @Override
     public Material getMaterial(IBlockState state) {
-        return state.getValue(propVariant).getMaterial();
+        return state.getValue(VARIANT).getMaterial();
     }
 
     @Override
     public float getBlockHardness(IBlockState state, World world, BlockPos pos) {
-        return state.getValue(propVariant).getHardness();
+        return state.getValue(VARIANT).getHardness();
     }
 
     public enum Variant implements IStringSerializable {
-        wood(Material.WOOD, 2.5f),
-        forged(Material.ANVIL, -1);
+        WOOD(Material.WOOD, 2.5f),
+        FORGED(Material.ANVIL, -1);
 
         private final Material material;
         private final float hardness;
@@ -308,7 +304,7 @@ public class BlockWorkbench extends TetraBlock implements ITileEntityProvider {
 
         @Override
         public String getName() {
-            return toString();
+            return toString().toLowerCase();
         }
     }
 }

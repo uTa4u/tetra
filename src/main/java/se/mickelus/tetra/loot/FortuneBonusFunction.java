@@ -42,7 +42,7 @@ public class FortuneBonusFunction extends LootFunction {
         if (player != null && requiredCapability != null) {
             ItemStack providingStack = CapabilityHelper.getProvidingItemStack(requiredCapability, capabilityLevel, player);
             if (!providingStack.isEmpty() && providingStack.getItem() instanceof ItemModular) {
-                fortuneLevel = ((ItemModular) providingStack.getItem()).getEffectLevel(providingStack, ItemEffect.fortune);
+                fortuneLevel = ((ItemModular) providingStack.getItem()).getEffectLevel(providingStack, ItemEffect.FORTUNE);
             }
         }
 

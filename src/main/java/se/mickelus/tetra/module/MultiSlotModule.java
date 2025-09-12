@@ -3,7 +3,7 @@ package se.mickelus.tetra.module;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.data.DataHandler;
+import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.module.data.ImprovementData;
 import se.mickelus.tetra.module.data.ModuleData;
 
@@ -13,20 +13,20 @@ public class MultiSlotModule<T extends ModuleData> extends ItemModuleMajor<T> {
 
     protected String slotSuffix;
 
-    protected String unlocalizedName;
+    protected String UNLOCALIZED_NAME;
 
     public MultiSlotModule(String slotKey, String moduleKey, String slotSuffix, String... improvementKeys) {
         super(slotKey, moduleKey + slotSuffix);
 
         this.slotSuffix = slotSuffix;
 
-        this.unlocalizedName = moduleKey;
+        this.UNLOCALIZED_NAME = moduleKey;
 
         this.dataKey = moduleKey + slotSuffix + "_material";
 
         if (improvementKeys.length > 0) {
             improvements = Arrays.stream(improvementKeys)
-                    .map(key -> DataHandler.instance.getModuleData(key, ImprovementData[].class))
+                    .map(key -> TetraMod.dataHandler.getModuleData(key, ImprovementData[].class))
                     .flatMap(Arrays::stream)
                     .toArray(ImprovementData[]::new);
         }
@@ -40,7 +40,7 @@ public class MultiSlotModule<T extends ModuleData> extends ItemModuleMajor<T> {
 
     @Override
     public String getUnlocalizedName() {
-        return unlocalizedName;
+        return UNLOCALIZED_NAME;
     }
 
     public ResourceLocation[] getAllTextures() {

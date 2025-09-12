@@ -14,14 +14,13 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class TileEntityCoreExtractorBase extends TileEntity implements ITickable, IHeatTransfer {
+    private static final String CHARGE_KEY = "charge";
+    private static final int MAX_CHARGE = 128;
+    private static final int DRAIN_AMOUNT = 4;
+    private static final int SEND_LIMIT = 4;
 
     private boolean isSending = false;
 
-    private static final int sendLimit = 4;
-
-    private static final String chargeKey = "charge";
-    private static final int maxCharge = 128;
-    private static final int drainAmount = 4;
     private int currentCharge = 0;
     private float efficiency;
 
@@ -75,7 +74,7 @@ public class TileEntityCoreExtractorBase extends TileEntity implements ITickable
 
     @Override
     public int getSendLimit() {
-        return sendLimit;
+        return SEND_LIMIT;
     }
 
     @Override
@@ -92,9 +91,9 @@ public class TileEntityCoreExtractorBase extends TileEntity implements ITickable
 
     @Override
     public int fill(int amount) {
-        if (amount + currentCharge > maxCharge) {
-            int overfill = amount + currentCharge - maxCharge;
-            currentCharge = maxCharge;
+        if (amount + currentCharge > MAX_CHARGE) {
+            int overfill = amount + currentCharge - MAX_CHARGE;
+            currentCharge = MAX_CHARGE;
             return overfill;
         }
 
@@ -123,7 +122,7 @@ public class TileEntityCoreExtractorBase extends TileEntity implements ITickable
             }
         } else if (currentCharge > 0) {
             if (world.getTotalWorldTime() % 20 == 0) {
-                currentCharge = Math.max(0, currentCharge - drainAmount);
+                currentCharge = Math.max(0, currentCharge - DRAIN_AMOUNT);
             }
         }
     }
@@ -187,7 +186,7 @@ public class TileEntityCoreExtractorBase extends TileEntity implements ITickable
     }
 
     public EnumFacing getFacing() {
-        return world.getBlockState(pos).getValue(BlockCoreExtractorBase.propFacing);
+        return world.getBlockState(pos).getValue(BlockCoreExtractorBase.FACING);
     }
 
     private Optional<IHeatTransfer> getConnectedUnit() {
@@ -202,8 +201,8 @@ public class TileEntityCoreExtractorBase extends TileEntity implements ITickable
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
 
-        if (compound.hasKey(chargeKey)) {
-            currentCharge = compound.getInteger(chargeKey);
+        if (compound.hasKey(CHARGE_KEY)) {
+            currentCharge = compound.getInteger(CHARGE_KEY);
         } else {
             currentCharge = 0;
         }
@@ -213,7 +212,7 @@ public class TileEntityCoreExtractorBase extends TileEntity implements ITickable
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
 
-        compound.setInteger(chargeKey, currentCharge);
+        compound.setInteger(CHARGE_KEY, currentCharge);
 
         return compound;
     }

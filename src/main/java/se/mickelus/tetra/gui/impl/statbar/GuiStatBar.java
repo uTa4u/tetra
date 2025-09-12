@@ -24,7 +24,7 @@ public class GuiStatBar extends GuiStatBase {
 
     protected List<String> tooltip;
 
-    protected GuiAlignment alignment = GuiAlignment.left;
+    protected GuiAlignment alignment = GuiAlignment.LEFT;
 
     protected IStatGetter statGetter;
     protected ILabelGetter labelGetter;
@@ -125,7 +125,7 @@ public class GuiStatBar extends GuiStatBase {
     }
 
     private void updateValueLabel(double value, double diffValue) {
-        valueString.setString(labelGetter.getLabel(value, diffValue, alignment == GuiAlignment.right));
+        valueString.setString(labelGetter.getLabel(value, diffValue, alignment == GuiAlignment.RIGHT));
     }
 
     @Override

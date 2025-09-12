@@ -1,30 +1,30 @@
 package se.mickelus.tetra.gui;
 
 public enum GuiAttachment {
-    topLeft,
-    topCenter,
-    topRight,
-    middleLeft,
-    middleCenter,
-    middleRight,
-    bottomLeft,
-    bottomCenter,
-    bottomRight;
+    TOP_LEFT,
+    TOP_CENTER,
+    TOP_RIGHT,
+    MIDDLE_LEFT,
+    MIDDLE_CENTER,
+    MIDDLE_RIGHT,
+    BOTTOM_LEFT,
+    BOTTOM_CENTER,
+    BOTTOM_RIGHT;
 
     public GuiAttachment flipHorizontal() {
         switch (this) {
-            case topLeft:
-                return topRight;
-            case topRight:
-                return topLeft;
-            case middleLeft:
-                return middleRight;
-            case middleRight:
-                return middleLeft;
-            case bottomLeft:
-                return bottomRight;
-            case bottomRight:
-                return bottomLeft;
+            case TOP_LEFT:
+                return TOP_RIGHT;
+            case TOP_RIGHT:
+                return TOP_LEFT;
+            case MIDDLE_LEFT:
+                return MIDDLE_RIGHT;
+            case MIDDLE_RIGHT:
+                return MIDDLE_LEFT;
+            case BOTTOM_LEFT:
+                return BOTTOM_RIGHT;
+            case BOTTOM_RIGHT:
+                return BOTTOM_LEFT;
             default:
                 return this;
         }

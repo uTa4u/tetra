@@ -10,7 +10,7 @@ public class GuiJournalSystemRoot extends GuiJournalRootBase {
     public GuiJournalSystemRoot(int x, int y) {
         super(x, y);
         GuiString test = new GuiString(0, 0, ChatFormatting.OBFUSCATED + "system");
-        test.setAttachment(GuiAttachment.middleCenter);
+        test.setAttachment(GuiAttachment.MIDDLE_CENTER);
         addChild(test);
     }
 }

@@ -10,7 +10,7 @@ import se.mickelus.tetra.gui.animation.KeyframeAnimation;
 import se.mickelus.tetra.gui.impl.GuiColors;
 
 public class GuiInteractiveCapability extends GuiElement {
-    private static final String texture = "textures/gui/block-interaction.png";
+    private static final String TEXTURE = "textures/gui/block-interaction.png";
 
     private final GuiTexture iconTexture;
     private final GuiTexture levelTexture;
@@ -30,10 +30,10 @@ public class GuiInteractiveCapability extends GuiElement {
         this.capabilityLevel = capabilityLevel;
         this.player = player;
 
-        iconTexture = new GuiTexture(1, 0, 8, 8, capability.ordinal() * 8, 8, texture);
+        iconTexture = new GuiTexture(1, 0, 8, 8, capability.ordinal() * 8, 8, TEXTURE);
         addChild(iconTexture);
 
-        levelTexture = new GuiTexture(2, 6, 5, 5, (capabilityLevel - 1) * 5, 21, texture);
+        levelTexture = new GuiTexture(2, 6, 5, 5, (capabilityLevel - 1) * 5, 21, TEXTURE);
         addChild(levelTexture);
 
         show = new KeyframeAnimation(100, this)

@@ -20,7 +20,7 @@ public class GuiCapabilityRequirementList extends GuiElement {
         indicators = new GuiCapabilityRequirement[capabilities.length];
         for (int i = 0; i < capabilities.length; i++) {
             indicators[i] = new GuiCapabilityRequirement(0, 0, capabilities[i]);
-            indicators[i].setAttachment(GuiAttachment.topRight);
+            indicators[i].setAttachment(GuiAttachment.TOP_RIGHT);
             addChild(indicators[i]);
         }
 

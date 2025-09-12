@@ -6,13 +6,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import se.mickelus.tetra.NBTHelper;
 import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.capabilities.ICapabilityProvider;
 import se.mickelus.tetra.module.data.ModuleData;
 import se.mickelus.tetra.module.data.TweakData;
 import se.mickelus.tetra.module.schema.Material;
 import se.mickelus.tetra.module.schema.RepairDefinition;
+import se.mickelus.tetra.util.NBTHelper;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -194,7 +194,7 @@ public abstract class ItemModule<T extends ModuleData> implements ICapabilityPro
     }
 
     public Material getRepairMaterial(ItemStack itemStack) {
-        RepairDefinition definition = ItemUpgradeRegistry.instance.getRepairDefinition(getData(itemStack).key);
+        RepairDefinition definition = ItemUpgradeRegistry.INSTANCE.getRepairDefinition(getData(itemStack).key);
         if (definition != null) {
             return definition.material;
         }
@@ -206,7 +206,7 @@ public abstract class ItemModule<T extends ModuleData> implements ICapabilityPro
     }
 
     public Collection<Capability> getRepairRequiredCapabilities(ItemStack itemStack) {
-        RepairDefinition definition = ItemUpgradeRegistry.instance.getRepairDefinition(getData(itemStack).key);
+        RepairDefinition definition = ItemUpgradeRegistry.INSTANCE.getRepairDefinition(getData(itemStack).key);
         if (definition != null) {
             return definition.requiredCapabilities.getValues();
         }
@@ -214,7 +214,7 @@ public abstract class ItemModule<T extends ModuleData> implements ICapabilityPro
     }
 
     public int getRepairRequiredCapabilityLevel(ItemStack itemStack, Capability capability) {
-        RepairDefinition definition = ItemUpgradeRegistry.instance.getRepairDefinition(getData(itemStack).key);
+        RepairDefinition definition = ItemUpgradeRegistry.INSTANCE.getRepairDefinition(getData(itemStack).key);
         if (definition != null) {
             return definition.requiredCapabilities.getLevel(capability);
         }

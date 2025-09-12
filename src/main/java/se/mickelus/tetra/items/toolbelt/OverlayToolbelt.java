@@ -56,7 +56,7 @@ public class OverlayToolbelt {
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
         if (restockBinding.isPressed()) {
-            equipToolbeltItem(ToolbeltSlotType.quickslot, -1, EnumHand.OFF_HAND);
+            equipToolbeltItem(ToolbeltSlotType.QUICKSLOT, -1, EnumHand.OFF_HAND);
         } else if (accessBinding.isPressed() && mc.inGameHasFocus) {
             showView();
         }
@@ -119,7 +119,7 @@ public class OverlayToolbelt {
             int index = UtilToolbelt.getQuickAccessSlotIndex(mc.player, mc.objectMouseOver, blockState);
 
             if (index > -1) {
-                equipToolbeltItem(ToolbeltSlotType.quickslot, index, EnumHand.MAIN_HAND);
+                equipToolbeltItem(ToolbeltSlotType.QUICKSLOT, index, EnumHand.MAIN_HAND);
             }
         }
     }

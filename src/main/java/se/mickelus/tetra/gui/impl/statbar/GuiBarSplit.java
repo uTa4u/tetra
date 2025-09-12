@@ -15,15 +15,15 @@ public class GuiBarSplit extends GuiBar {
         super(x, y, barLength, -range, range);
 
         negativeBar = new GuiBar(0, 0, (barLength - 5) / 2, 0, range, true);
-        negativeBar.setAlignment(GuiAlignment.right);
+        negativeBar.setAlignment(GuiAlignment.RIGHT);
         addChild(negativeBar);
 
         positiveBar = new GuiBar(0, 0, (barLength - 5) / 2, 0, range);
-        positiveBar.setAttachment(GuiAttachment.topRight);
+        positiveBar.setAttachment(GuiAttachment.TOP_RIGHT);
         addChild(positiveBar);
 
         GuiElement separator = new GuiRect(0, 5, 1, 3, GuiColors.muted);
-        separator.setAttachment(GuiAttachment.topCenter);
+        separator.setAttachment(GuiAttachment.TOP_CENTER);
         addChild(separator);
     }
 

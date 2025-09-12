@@ -11,12 +11,12 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import se.mickelus.tetra.RotationHelper;
 import se.mickelus.tetra.advancements.BlockInteractionCriterion;
 import se.mickelus.tetra.blocks.PropertyMatcher;
 import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.capabilities.CapabilityHelper;
 import se.mickelus.tetra.items.ItemModular;
+import se.mickelus.tetra.util.RotationHelper;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -38,10 +38,15 @@ public class BlockInteraction {
 
     public InteractionOutcome outcome;
 
-    public float successChance = 1;
-
-    public <V extends Comparable<V>> BlockInteraction(Capability requiredCapability, int requiredLevel, EnumFacing face, float minX, float maxX, float minY,
-                                                      float maxY, IProperty<V> property, V propertyValue, InteractionOutcome outcome) {
+    public <V extends Comparable<V>> BlockInteraction(
+            Capability requiredCapability,
+            int requiredLevel,
+            EnumFacing face,
+            float minX, float maxX,
+            float minY, float maxY,
+            IProperty<V> property, V propertyValue,
+            InteractionOutcome outcome
+    ) {
 
         this.requiredCapability = requiredCapability;
         this.requiredLevel = requiredLevel;

@@ -26,12 +26,12 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import se.mickelus.tetra.PotionEarthbound;
 import se.mickelus.tetra.capabilities.CapabilityHelper;
 import se.mickelus.tetra.items.ItemModular;
 import se.mickelus.tetra.items.ItemModularHandheld;
 import se.mickelus.tetra.items.toolbelt.UtilToolbelt;
 import se.mickelus.tetra.items.toolbelt.inventory.InventoryQuiver;
+import se.mickelus.tetra.potions.PotionEarthbound;
 
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -120,7 +120,7 @@ public class ItemEffectHandler {
                 .filter(itemStack -> !itemStack.isEmpty())
                 .filter(itemStack -> itemStack.getItem() instanceof ItemModular)
                 .ifPresent(itemStack -> {
-                    int intuitLevel = getEffectLevel(itemStack, ItemEffect.intuit);
+                    int intuitLevel = getEffectLevel(itemStack, ItemEffect.INTUIT);
                     int xp = event.getDroppedExperience();
                     if (intuitLevel > 0 && xp > 0) {
                         ((ItemModular) itemStack.getItem()).tickHoningProgression(event.getAttackingPlayer(), itemStack, intuitLevel * xp);
@@ -137,7 +137,7 @@ public class ItemEffectHandler {
                 .filter(itemStack -> !itemStack.isEmpty())
                 .filter(itemStack -> itemStack.getItem() instanceof ItemModular)
                 .ifPresent(itemStack -> {
-                    event.setLootingLevel(getEffectLevel(itemStack, ItemEffect.looting) + event.getLootingLevel());
+                    event.setLootingLevel(getEffectLevel(itemStack, ItemEffect.LOOTING) + event.getLootingLevel());
                 });
     }
 
@@ -150,7 +150,7 @@ public class ItemEffectHandler {
                 .filter(itemStack -> !itemStack.isEmpty())
                 .filter(itemStack -> itemStack.getItem() instanceof ItemModular)
                 .ifPresent(itemStack -> {
-                    int quickStrikeLevel = getEffectLevel(itemStack, ItemEffect.quickStrike);
+                    int quickStrikeLevel = getEffectLevel(itemStack, ItemEffect.QUICK_STRIKE);
                     if (quickStrikeLevel > 0) {
                         float maxDamage = (float) ((EntityLivingBase) event.getSource().getTrueSource())
                                 .getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
@@ -162,11 +162,11 @@ public class ItemEffectHandler {
                     }
 
                     if (EnumCreatureAttribute.UNDEAD.equals(event.getEntityLiving().getCreatureAttribute())) {
-                        event.setAmount(event.getAmount() + getEffectLevel(itemStack, ItemEffect.smite) * 2.5f);
+                        event.setAmount(event.getAmount() + getEffectLevel(itemStack, ItemEffect.SMITE) * 2.5f);
                     }
 
                     if (EnumCreatureAttribute.ARTHROPOD.equals(event.getEntityLiving().getCreatureAttribute())) {
-                        event.setAmount(event.getAmount() + getEffectLevel(itemStack, ItemEffect.arthropod) * 2.5f);
+                        event.setAmount(event.getAmount() + getEffectLevel(itemStack, ItemEffect.ARTHROPOD) * 2.5f);
                     }
                 });
     }
@@ -180,12 +180,12 @@ public class ItemEffectHandler {
                 .filter(itemStack -> !itemStack.isEmpty())
                 .filter(itemStack -> itemStack.getItem() instanceof ItemModular)
                 .ifPresent(itemStack -> {
-                    int penetratingLevel = getEffectLevel(itemStack, ItemEffect.armorPenetration);
+                    int penetratingLevel = getEffectLevel(itemStack, ItemEffect.ARMOR_PENETRATION);
                     if (penetratingLevel > 0 && event.getAmount() < penetratingLevel) {
                         event.setAmount(penetratingLevel);
                     }
 
-                    int unarmoredBonusLevel = getEffectLevel(itemStack, ItemEffect.unarmoredDamage);
+                    int unarmoredBonusLevel = getEffectLevel(itemStack, ItemEffect.UNARMORED_DAMAGE);
                     if (unarmoredBonusLevel > 0 && event.getEntityLiving().getTotalArmorValue() == 0) {
                         event.setAmount(event.getAmount() + unarmoredBonusLevel);
                     }
@@ -195,7 +195,7 @@ public class ItemEffectHandler {
 
     @SubscribeEvent
     public void onLivingJump(LivingEvent.LivingJumpEvent event) {
-        Optional.ofNullable(event.getEntityLiving().getActivePotionEffect(PotionEarthbound.instance))
+        Optional.ofNullable(event.getEntityLiving().getActivePotionEffect(PotionEarthbound.INSTANCE))
                 .ifPresent(effect -> event.getEntityLiving().motionY *= 0.5);
     }
 
@@ -208,7 +208,7 @@ public class ItemEffectHandler {
                 .filter(itemStack -> !itemStack.isEmpty())
                 .filter(itemStack -> itemStack.getItem() instanceof ItemModular)
                 .ifPresent(itemStack -> {
-                    int backstabLevel = getEffectLevel(itemStack, ItemEffect.backstab);
+                    int backstabLevel = getEffectLevel(itemStack, ItemEffect.BACKSTAB);
                     if (backstabLevel > 0 && event.getTarget() instanceof EntityLivingBase) {
                         EntityLivingBase attacker = event.getEntityLiving();
                         EntityLivingBase target = (EntityLivingBase) event.getTarget();
@@ -218,10 +218,10 @@ public class ItemEffectHandler {
                         }
                     }
 
-                    int critLevel = getEffectLevel(itemStack, ItemEffect.criticalStrike);
+                    int critLevel = getEffectLevel(itemStack, ItemEffect.CRITICAL_STRIKE);
                     if (critLevel > 0) {
                         if (event.getEntityLiving().getRNG().nextFloat() < critLevel * 0.01) {
-                            event.setDamageModifier(Math.max((float) getEffectEfficiency(itemStack, ItemEffect.criticalStrike), event.getDamageModifier()));
+                            event.setDamageModifier(Math.max((float) getEffectEfficiency(itemStack, ItemEffect.CRITICAL_STRIKE), event.getDamageModifier()));
                             event.setResult(Event.Result.ALLOW);
                         }
                     }
@@ -237,10 +237,10 @@ public class ItemEffectHandler {
                 .filter(itemStack -> !itemStack.isEmpty())
                 .filter(itemStack -> itemStack.getItem() instanceof ItemModular)
                 .filter(ItemStack::isItemDamaged)
-                .filter(itemStack -> getEffectLevel(itemStack, ItemEffect.mending) > 0)
+                .filter(itemStack -> getEffectLevel(itemStack, ItemEffect.MENDING) > 0)
                 .findAny()
                 .ifPresent(itemStack -> {
-                    int multiplier = getEffectLevel(itemStack, ItemEffect.mending) + 1;
+                    int multiplier = getEffectLevel(itemStack, ItemEffect.MENDING) + 1;
                     EntityXPOrb orb = event.getOrb();
                     int durabilityGain = Math.min(orb.xpValue * multiplier, itemStack.getItemDamage());
                     orb.xpValue -= durabilityGain / multiplier;
@@ -269,7 +269,7 @@ public class ItemEffectHandler {
                 .ifPresent(itemStack -> {
                     IBlockState state = event.getState();
                     if (!event.isSilkTouching()) {
-                        int fortuneLevel = getEffectLevel(itemStack, ItemEffect.fortune);
+                        int fortuneLevel = getEffectLevel(itemStack, ItemEffect.FORTUNE);
                         if (fortuneLevel > 0) {
                             event.getDrops().clear();
                             // calling the new getDrops method directly cause some mod compatibility issues
@@ -298,22 +298,22 @@ public class ItemEffectHandler {
                     if (tool != null) {
                         switch (tool) {
                             case "axe":
-                                strikingLevel = getEffectLevel(itemStack, ItemEffect.strikingAxe);
+                                strikingLevel = getEffectLevel(itemStack, ItemEffect.STRIKING_AXE);
                                 break;
                             case "pickaxe":
-                                strikingLevel = getEffectLevel(itemStack, ItemEffect.strikingPickaxe);
+                                strikingLevel = getEffectLevel(itemStack, ItemEffect.STRIKING_PICKAXE);
                                 break;
                             case "cut":
-                                strikingLevel = getEffectLevel(itemStack, ItemEffect.strikingCut);
+                                strikingLevel = getEffectLevel(itemStack, ItemEffect.STRIKING_CUT);
                                 break;
                             case "shovel":
-                                strikingLevel = getEffectLevel(itemStack, ItemEffect.strikingShovel);
+                                strikingLevel = getEffectLevel(itemStack, ItemEffect.STRIKING_SHOVEL);
                                 break;
                         }
                     }
 
                     if (strikingLevel > 0) {
-                        int sweepingLevel = getEffectLevel(itemStack, ItemEffect.sweepingStrike);
+                        int sweepingLevel = getEffectLevel(itemStack, ItemEffect.SWEEPING_STRIKE);
                         if (breakingPlayer.getCooledAttackStrength(0) > 0.9) {
                             if (sweepingLevel > 0) {
                                 breakBlocksAround(world, breakingPlayer, itemStack, pos, tool, sweepingLevel);
@@ -332,7 +332,7 @@ public class ItemEffectHandler {
                     }
 
                     if (!event.getWorld().isRemote) {
-                        int critLevel = getEffectLevel(itemStack, ItemEffect.criticalStrike);
+                        int critLevel = getEffectLevel(itemStack, ItemEffect.CRITICAL_STRIKE);
                         if (critLevel > 0) {
                             if (critBlock(world, breakingPlayer, pos, blockState, itemStack, tool, critLevel)) {
                                 event.setCanceled(true);
@@ -379,9 +379,9 @@ public class ItemEffectHandler {
                     event.getTargetX() + 24, event.getTargetY() + 24, event.getTargetZ() + 24);
 
             event.getEntity().getEntityWorld().getEntitiesWithinAABB(EntityPlayer.class, aabb).forEach(player -> {
-                int reverbLevel = CapabilityHelper.getPlayerEffectLevel(player, ItemEffect.enderReverb);
+                int reverbLevel = CapabilityHelper.getPlayerEffectLevel(player, ItemEffect.ENDER_REVERB);
                 if (reverbLevel > 0) {
-                    double effectProbability = CapabilityHelper.getPlayerEffectEfficiency(player, ItemEffect.enderReverb);
+                    double effectProbability = CapabilityHelper.getPlayerEffectEfficiency(player, ItemEffect.ENDER_REVERB);
                     if (effectProbability > 0) {
                         if (player.getRNG().nextDouble() < effectProbability * 2) {
                             player.attemptTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ());
@@ -503,7 +503,7 @@ public class ItemEffectHandler {
                 InventoryQuiver inventory = new InventoryQuiver(itemStack);
                 List<Collection<ItemEffect>> effects = inventory.getSlotEffects();
                 for (int i = 0; i < inventory.getSizeInventory(); i++) {
-                    if (effects.get(i).contains(ItemEffect.quickAccess) && !inventory.getStackInSlot(i).isEmpty()) {
+                    if (effects.get(i).contains(ItemEffect.QUICK_ACCESS) && !inventory.getStackInSlot(i).isEmpty()) {
                         event.getEntityPlayer().setHeldItem(EnumHand.OFF_HAND, inventory.getStackInSlot(i).splitStack(1));
                         event.getEntityPlayer().setActiveHand(event.getHand());
                         inventory.markDirty();

@@ -17,16 +17,14 @@ import se.mickelus.tetra.module.schema.RepairSchema;
 import se.mickelus.tetra.network.PacketHandler;
 
 public class ItemSwordModular extends ItemModularHandheld {
+    private final static String BLADE_KEY = "sword/blade";
+    private final static String HILT_KEY = "sword/hilt";
 
-    public final static String bladeKey = "sword/blade";
-    public final static String hiltKey = "sword/hilt";
+    private final static String GUARD_KEY = "sword/guard";
+    private final static String POMMEL_KEY = "sword/pommel";
+    private final static String FULLER_KEY = "sword/fuller";
 
-    public final static String guardKey = "sword/guard";
-    public final static String pommelKey = "sword/pommel";
-    public final static String fullerKey = "sword/fuller";
-
-
-    static final String unlocalizedName = "sword_modular";
+    private static final String UNLOCALIZED_NAME = "sword_modular";
 
     private final ItemModuleMajor basicBladeModule;
     private final ItemModuleMajor shortBladeModule;
@@ -34,104 +32,103 @@ public class ItemSwordModular extends ItemModularHandheld {
     private final ItemModuleMajor macheteModule;
     private final ItemModuleMajor hiltModule;
 
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
-    public static ItemSwordModular instance;
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
+    public static ItemSwordModular INSTANCE;
 
     public ItemSwordModular() {
-        setTranslationKey(unlocalizedName);
-        setRegistryName(unlocalizedName);
+        setTranslationKey(UNLOCALIZED_NAME);
+        setRegistryName(UNLOCALIZED_NAME);
         setMaxStackSize(1);
 
         blockDestroyDamage = 2;
 
-        majorModuleKeys = new String[]{bladeKey, hiltKey};
-        minorModuleKeys = new String[]{fullerKey, guardKey, pommelKey};
+        majorModuleKeys = new String[]{BLADE_KEY, HILT_KEY};
+        minorModuleKeys = new String[]{FULLER_KEY, GUARD_KEY, POMMEL_KEY};
 
-        requiredModules = new String[]{bladeKey, hiltKey};
+        requiredModules = new String[]{BLADE_KEY, HILT_KEY};
 
-        basicBladeModule = new BasicMajorModule(bladeKey, "sword/basic_blade",
+        basicBladeModule = new BasicMajorModule(BLADE_KEY, "sword/basic_blade",
                 "sword/improvements/shared_blade",
                 "sword/improvements/shared_blade_hone",
                 "sword/improvements/basic_blade",
                 "settling_improvements",
                 "destabilization_improvements");
-        shortBladeModule = new BasicMajorModule(bladeKey, "sword/short_blade",
+        shortBladeModule = new BasicMajorModule(BLADE_KEY, "sword/short_blade",
                 "sword/improvements/shared_blade",
                 "sword/improvements/shared_blade_hone",
                 "sword/improvements/short_blade",
                 "settling_improvements",
                 "destabilization_improvements");
-        heavyBladeModule = new BasicMajorModule(bladeKey, "sword/heavy_blade",
+        heavyBladeModule = new BasicMajorModule(BLADE_KEY, "sword/heavy_blade",
                 "sword/improvements/shared_blade",
                 "sword/improvements/shared_blade_hone",
                 "sword/improvements/heavy_blade",
                 "settling_improvements",
                 "destabilization_improvements");
-        macheteModule = new BasicMajorModule(bladeKey, "sword/machete",
+        macheteModule = new BasicMajorModule(BLADE_KEY, "sword/machete",
                 "sword/improvements/shared_blade",
                 "sword/improvements/shared_blade_hone",
                 "settling_improvements",
                 "destabilization_improvements");
 
-        hiltModule = new BasicMajorModule(hiltKey, "sword/basic_hilt",
+        hiltModule = new BasicMajorModule(HILT_KEY, "sword/basic_hilt",
                 "sword/improvements/shared_hilt",
                 "sword/improvements/shared_hilt_hone",
                 "settling_improvements",
                 "destabilization_improvements")
                 .withRenderLayer(Priority.LOWER);
 
-        new BasicModule(guardKey, "sword/makeshift_guard");
-        new BasicModule(guardKey, "sword/wide_guard");
-        new BasicModule(guardKey, "sword/forefinger_ring");
-        new BasicModule(guardKey, "sword/binding", "sword/tweaks/binding");
-        new BasicModule(guardKey, "sword/socket");
+        new BasicModule(GUARD_KEY, "sword/makeshift_guard");
+        new BasicModule(GUARD_KEY, "sword/wide_guard");
+        new BasicModule(GUARD_KEY, "sword/forefinger_ring");
+        new BasicModule(GUARD_KEY, "sword/binding", "sword/tweaks/binding");
+        new BasicModule(GUARD_KEY, "sword/socket");
 
-        new BasicModule(pommelKey, "sword/decorative_pommel");
-        new BasicModule(pommelKey, "sword/counterweight");
-        new BasicModule(pommelKey, "sword/grip_loop");
+        new BasicModule(POMMEL_KEY, "sword/decorative_pommel");
+        new BasicModule(POMMEL_KEY, "sword/counterweight");
+        new BasicModule(POMMEL_KEY, "sword/grip_loop");
 
-        new BasicModule(fullerKey, "sword/reinforced_fuller");
-
+        new BasicModule(FULLER_KEY, "sword/reinforced_fuller");
 
         updateConfig(ConfigHandler.honeSwordBase, ConfigHandler.honeSwordIntegrityMultiplier);
     }
 
     @Override
     public void init(PacketHandler packetHandler) {
-        ItemUpgradeRegistry.instance.registerConfigSchema("sword/basic_blade");
-        ItemUpgradeRegistry.instance.registerConfigSchema("sword/basic_blade_improvements");
+        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("sword/basic_blade");
+        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("sword/basic_blade_improvements");
         new BookEnchantSchema(basicBladeModule);
 
-        ItemUpgradeRegistry.instance.registerConfigSchema("sword/short_blade");
-        ItemUpgradeRegistry.instance.registerConfigSchema("sword/short_blade_improvements");
+        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("sword/short_blade");
+        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("sword/short_blade_improvements");
         new BookEnchantSchema(shortBladeModule);
 
-        ItemUpgradeRegistry.instance.registerConfigSchema("sword/heavy_blade");
+        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("sword/heavy_blade");
         new BookEnchantSchema(heavyBladeModule);
 
-        ItemUpgradeRegistry.instance.registerConfigSchema("sword/machete");
+        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("sword/machete");
         new BookEnchantSchema(macheteModule);
 
-        ItemUpgradeRegistry.instance.registerConfigSchema("sword/basic_hilt");
-        ItemUpgradeRegistry.instance.registerConfigSchema("sword/basic_hilt_improvements");
+        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("sword/basic_hilt");
+        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("sword/basic_hilt_improvements");
         new BookEnchantSchema(hiltModule);
 
-        ItemUpgradeRegistry.instance.registerConfigSchema("sword/wide_guard");
-        ItemUpgradeRegistry.instance.registerConfigSchema("sword/counterweight");
-        ItemUpgradeRegistry.instance.registerConfigSchema("sword/grip_loop");
-        ItemUpgradeRegistry.instance.registerConfigSchema("sword/forefinger_ring");
-        ItemUpgradeRegistry.instance.registerConfigSchema("sword/binding");
-        ItemUpgradeRegistry.instance.registerConfigSchema("sword/reinforced_fuller");
+        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("sword/wide_guard");
+        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("sword/counterweight");
+        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("sword/grip_loop");
+        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("sword/forefinger_ring");
+        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("sword/binding");
+        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("sword/reinforced_fuller");
 
-        ItemUpgradeRegistry.instance.registerConfigSchema("sword/shared_blade_hone");
-        ItemUpgradeRegistry.instance.registerConfigSchema("sword/shared_hilt_hone");
+        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("sword/shared_blade_hone");
+        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("sword/shared_hilt_hone");
 
-        ItemUpgradeRegistry.instance.registerConfigSchema("sword/socket");
+        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("sword/socket");
 
         new RepairSchema(this);
         RemoveSchema.registerRemoveSchemas(this);
 
-        ItemUpgradeRegistry.instance.registerReplacementDefinition("sword");
+        ItemUpgradeRegistry.INSTANCE.registerReplacementDefinition("sword");
     }
 
     public void updateConfig(int honeBase, int honeIntegrityMultiplier) {

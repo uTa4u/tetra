@@ -23,19 +23,19 @@ public class GuiJournalItems extends GuiElement {
         super(x, y, width, height);
 
 
-        sword = new GuiJournalItem(-39, 0, ItemSwordModular.instance, I18n.format("journal.craft.sword"),
-                () -> onItemSelect.accept(ItemSwordModular.instance), onSlotSelect);
-        sword.setAttachment(GuiAttachment.topCenter);
+        sword = new GuiJournalItem(-39, 0, ItemSwordModular.INSTANCE, I18n.format("journal.craft.sword"),
+                () -> onItemSelect.accept(ItemSwordModular.INSTANCE), onSlotSelect);
+        sword.setAttachment(GuiAttachment.TOP_CENTER);
         addChild(sword);
 
-        toolbelt = new GuiJournalItem(1, -40, ItemToolbeltModular.instance, I18n.format("journal.craft.toolbelt"),
-                () -> onItemSelect.accept(ItemToolbeltModular.instance), onSlotSelect);
-        toolbelt.setAttachment(GuiAttachment.topCenter);
+        toolbelt = new GuiJournalItem(1, -40, ItemToolbeltModular.INSTANCE, I18n.format("journal.craft.toolbelt"),
+                () -> onItemSelect.accept(ItemToolbeltModular.INSTANCE), onSlotSelect);
+        toolbelt.setAttachment(GuiAttachment.TOP_CENTER);
         addChild(toolbelt);
 
-        tools = new GuiJournalItem(41, 0, ItemDuplexToolModular.instance, I18n.format("journal.craft.tool"),
-                () -> onItemSelect.accept(ItemDuplexToolModular.instance), onSlotSelect);
-        tools.setAttachment(GuiAttachment.topCenter);
+        tools = new GuiJournalItem(41, 0, ItemDuplexToolModular.INSTANCE, I18n.format("journal.craft.tool"),
+                () -> onItemSelect.accept(ItemDuplexToolModular.INSTANCE), onSlotSelect);
+        tools.setAttachment(GuiAttachment.TOP_CENTER);
         addChild(tools);
     }
 

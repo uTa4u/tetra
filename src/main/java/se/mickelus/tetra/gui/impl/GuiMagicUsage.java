@@ -26,7 +26,7 @@ public class GuiMagicUsage extends GuiElement {
         addChild(new GuiStringSmall(0, 0, I18n.format("item.modular.magic_capacity.label")));
 
         valueString = new GuiStringSmall(0, 0, "");
-        valueString.setAttachment(GuiAttachment.topRight);
+        valueString.setAttachment(GuiAttachment.TOP_RIGHT);
         addChild(valueString);
 
         bar = new GuiBar(0, 0, barLength, 0, 0);

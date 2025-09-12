@@ -5,10 +5,12 @@ import net.minecraft.advancements.critereon.AbstractCriterionInstance;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.capabilities.Capability;
-import se.mickelus.tetra.data.DataHandler;
 
 public class ModuleCraftCriterion extends AbstractCriterionInstance {
+    public static final GenericTrigger<ModuleCraftCriterion> TRIGGER = new GenericTrigger<>("tetra:craft_module", ModuleCraftCriterion::deserialize);
+
     private final ItemPredicate before = null;
     private final ItemPredicate after = null;
 
@@ -21,18 +23,17 @@ public class ModuleCraftCriterion extends AbstractCriterionInstance {
     private final Capability capability = null;
     private final int capabilityLevel = -1;
 
-    public static final GenericTrigger<ModuleCraftCriterion> trigger = new GenericTrigger<>("tetra:craft_module", ModuleCraftCriterion::deserialize);
-
     public ModuleCraftCriterion() {
-        super(trigger.getId());
+        super(TRIGGER.getId());
     }
 
     public static void trigger(EntityPlayerMP player, ItemStack before, ItemStack after, String schema, String slot, String module,
                                String variant, Capability capability, int capabilityLevel) {
-        trigger.fulfillCriterion(player.getAdvancements(), criterion -> criterion.test(before, after, schema, slot, module, variant, capability,
+        TRIGGER.fulfillCriterion(player.getAdvancements(), criterion -> criterion.test(before, after, schema, slot, module, variant, capability,
                 capabilityLevel));
     }
 
+    // TODO: wtf is this
     public boolean test(ItemStack before, ItemStack after, String schema, String slot, String module, String variant,
                         Capability capability, int capabilityLevel) {
         if (this.before != null && !this.before.test(before)) {
@@ -67,6 +68,6 @@ public class ModuleCraftCriterion extends AbstractCriterionInstance {
     }
 
     private static ModuleCraftCriterion deserialize(JsonObject json) {
-        return DataHandler.instance.gson.fromJson(json, ModuleCraftCriterion.class);
+        return TetraMod.dataHandler.gson.fromJson(json, ModuleCraftCriterion.class);
     }
 }

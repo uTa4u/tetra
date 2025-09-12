@@ -1,6 +1,5 @@
 package se.mickelus.tetra.items;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
@@ -9,7 +8,6 @@ import net.minecraft.block.BlockDirt;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
-import net.minecraft.block.state.pattern.BlockStateMatcher;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -41,14 +39,13 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.oredict.OreDictionary;
-import se.mickelus.tetra.NBTHelper;
-import se.mickelus.tetra.PotionBleeding;
-import se.mickelus.tetra.PotionEarthbound;
-import se.mickelus.tetra.blocks.workbench.BlockWorkbench;
 import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.module.ItemEffect;
 import se.mickelus.tetra.module.ItemEffectHandler;
+import se.mickelus.tetra.potions.PotionBleeding;
+import se.mickelus.tetra.potions.PotionEarthbound;
 import se.mickelus.tetra.util.CastOptional;
+import se.mickelus.tetra.util.NBTHelper;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -56,7 +53,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ItemModularHandheld extends ItemModular {
+public abstract class ItemModularHandheld extends ItemModular {
 
     private static final Set<Block> axeBlocks = Sets.newHashSet(Blocks.PLANKS, Blocks.BOOKSHELF, Blocks.LOG, Blocks.LOG2, Blocks.CHEST, Blocks.PUMPKIN, Blocks.LIT_PUMPKIN, Blocks.MELON_BLOCK, Blocks.LADDER, Blocks.WOODEN_BUTTON, Blocks.WOODEN_PRESSURE_PLATE);
     private static final Set<Material> axeMaterials = Sets.newHashSet(Material.WOOD);
@@ -71,7 +68,8 @@ public class ItemModularHandheld extends ItemModular {
     private static final String[] denailOreDict = new String[]{"plankWood", "slabWood", "stairWood", "fenceWood", "fenceGateWood", "doorWood", "chestWood"};
     private static final List<Predicate<IBlockState>> denailBlocks = ImmutableList.of(
             BlockMatcher.forBlock(Blocks.CRAFTING_TABLE),
-            BlockStateMatcher.forBlock(BlockWorkbench.instance).where(BlockWorkbench.propVariant, Predicates.equalTo(BlockWorkbench.Variant.wood)),
+// FIXME
+//            BlockStateMatcher.forBlock(BlockWorkbench.INSTANCE).where(BlockWorkbench.VARIANT, Predicates.equalTo(BlockWorkbench.Variant.WOOD)),
             BlockMatcher.forBlock(Blocks.BOOKSHELF),
             BlockMatcher.forBlock(Blocks.TRAPPED_CHEST),
             BlockMatcher.forBlock(Blocks.RAIL),
@@ -110,9 +108,9 @@ public class ItemModularHandheld extends ItemModular {
         }
 
         if (!world.isRemote) {
-            int intuitLevel = getEffectLevel(itemStack, ItemEffect.intuit);
+            int intuitLevel = getEffectLevel(itemStack, ItemEffect.INTUIT);
             if (intuitLevel > 0) {
-                int xp = state.getBlock().getExpDrop(state, world, pos, getEffectLevel(itemStack, ItemEffect.fortune));
+                int xp = state.getBlock().getExpDrop(state, world, pos, getEffectLevel(itemStack, ItemEffect.FORTUNE));
                 if (xp > 0) {
                     tickHoningProgression(entity, itemStack, xp);
                 }
@@ -133,40 +131,40 @@ public class ItemModularHandheld extends ItemModular {
         if (!isBroken(itemStack)) {
             getAllModules(itemStack).forEach(module -> module.hitEntity(itemStack, target, attacker));
 
-            int fieryLevel = getEffectLevel(itemStack, ItemEffect.fiery);
+            int fieryLevel = getEffectLevel(itemStack, ItemEffect.FIERY);
             if (fieryLevel > 0) {
                 target.setFire(fieryLevel * 4);
             }
 
-            int knockbackLevel = getEffectLevel(itemStack, ItemEffect.knockback);
+            int knockbackLevel = getEffectLevel(itemStack, ItemEffect.KNOCKBACK);
             if (knockbackLevel > 0) {
                 target.knockBack(attacker, knockbackLevel * 0.5f,
                         MathHelper.sin(attacker.rotationYaw * 0.017453292F),
                         -MathHelper.cos(attacker.rotationYaw * 0.017453292F));
             }
 
-            int sweepingLevel = getEffectLevel(itemStack, ItemEffect.sweeping);
+            int sweepingLevel = getEffectLevel(itemStack, ItemEffect.SWEEPING);
             if (sweepingLevel > 0) {
                 sweepAttack(itemStack, target, attacker, sweepingLevel, knockbackLevel);
             }
 
-            int bleedingLevel = getEffectLevel(itemStack, ItemEffect.bleeding);
+            int bleedingLevel = getEffectLevel(itemStack, ItemEffect.BLEEDING);
             if (bleedingLevel > 0) {
                 if (!EnumCreatureAttribute.UNDEAD.equals(target.getCreatureAttribute()) && attacker.getRNG().nextFloat() < 0.3f) {
-                    target.addPotionEffect(new PotionEffect(PotionBleeding.instance, 40, bleedingLevel));
+                    target.addPotionEffect(new PotionEffect(PotionBleeding.INSTANCE, 40, bleedingLevel));
                 }
             }
 
-            int arthropodLevel = getEffectLevel(itemStack, ItemEffect.arthropod);
+            int arthropodLevel = getEffectLevel(itemStack, ItemEffect.ARTHROPOD);
             if (arthropodLevel > 0 && EnumCreatureAttribute.ARTHROPOD.equals(target.getCreatureAttribute())) {
                 int ticks = 20 + attacker.getRNG().nextInt(10 * arthropodLevel);
                 target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, ticks, 3));
             }
 
             // todo: only trigger if target is standing on stone/earth/sand/gravel
-            int earthbindLevel = getEffectLevel(itemStack, ItemEffect.earthbind);
+            int earthbindLevel = getEffectLevel(itemStack, ItemEffect.EARTHBIND);
             if (earthbindLevel > 0 && attacker.getRNG().nextFloat() < Math.max(0.1, 0.5 * (1 - target.posY / 128))) {
-                target.addPotionEffect(new PotionEffect(PotionEarthbound.instance, 80, 0, false, true));
+                target.addPotionEffect(new PotionEffect(PotionEarthbound.INSTANCE, 80, 0, false, true));
 
                 if (target.world instanceof WorldServer) {
                     ((WorldServer) target.world).spawnParticle(EnumParticleTypes.BLOCK_CRACK, target.posX, target.posY + 0.1, target.posZ,
@@ -188,8 +186,8 @@ public class ItemModularHandheld extends ItemModular {
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack itemStack = player.getHeldItem(hand);
-        int flatteningLevel = getEffectLevel(itemStack, ItemEffect.flattening);
-        int tillingLevel = getEffectLevel(itemStack, ItemEffect.tilling);
+        int flatteningLevel = getEffectLevel(itemStack, ItemEffect.FLATTENING);
+        int tillingLevel = getEffectLevel(itemStack, ItemEffect.TILLING);
 
         causeFierySelfEffect(player, itemStack, 2);
         causeEnderReverbEffect(player, itemStack, 1.7);
@@ -201,7 +199,7 @@ public class ItemModularHandheld extends ItemModular {
         }
 
 
-        int denailingLevel = getEffectLevel(itemStack, ItemEffect.denailing);
+        int denailingLevel = getEffectLevel(itemStack, ItemEffect.DENAILING);
         if (denailingLevel > 0 && player.getCooledAttackStrength(0) > 0.9) {
             EnumActionResult result = denailBlock(player, world, pos, hand, facing);
 
@@ -217,12 +215,12 @@ public class ItemModularHandheld extends ItemModular {
 
     protected void causeFierySelfEffect(EntityLivingBase entity, ItemStack itemStack, double multiplier) {
         if (!entity.world.isRemote) {
-            double fierySelfEfficiency = getEffectEfficiency(itemStack, ItemEffect.fierySelf);
+            double fierySelfEfficiency = getEffectEfficiency(itemStack, ItemEffect.FIERY_SELF);
             if (fierySelfEfficiency > 0) {
                 BlockPos pos = entity.getPosition();
                 float temperature = entity.world.getBiome(pos).getTemperature(pos);
                 if (entity.getRNG().nextDouble() < fierySelfEfficiency * temperature * multiplier) {
-                    entity.setFire(getEffectLevel(itemStack, ItemEffect.fierySelf));
+                    entity.setFire(getEffectLevel(itemStack, ItemEffect.FIERY_SELF));
                 }
             }
         }
@@ -230,7 +228,7 @@ public class ItemModularHandheld extends ItemModular {
 
     protected void causeEnderReverbEffect(EntityLivingBase entity, ItemStack itemStack, double multiplier) {
         if (!entity.world.isRemote) {
-            double effectProbability = getEffectEfficiency(itemStack, ItemEffect.enderReverb);
+            double effectProbability = getEffectEfficiency(itemStack, ItemEffect.ENDER_REVERB);
             if (effectProbability > 0) {
                 if (entity.getRNG().nextDouble() < effectProbability * multiplier) {
                     AxisAlignedBB aabb = new AxisAlignedBB(entity.getPosition()).grow(24);
@@ -246,10 +244,10 @@ public class ItemModularHandheld extends ItemModular {
 
     protected void causeHauntEffect(EntityLivingBase entity, ItemStack itemStack, double multiplier) {
         if (!entity.world.isRemote) {
-            double effectProbability = getEffectEfficiency(itemStack, ItemEffect.haunted);
+            double effectProbability = getEffectEfficiency(itemStack, ItemEffect.HAUNTED);
             if (effectProbability > 0) {
                 if (entity.getRNG().nextDouble() < effectProbability * multiplier) {
-                    int effectLevel = getEffectLevel(itemStack, ItemEffect.haunted);
+                    int effectLevel = getEffectLevel(itemStack, ItemEffect.HAUNTED);
 
                     EntityVex vex = new EntityVex(entity.world);
                     vex.setLimitedLife(effectLevel * 20);
@@ -444,7 +442,7 @@ public class ItemModularHandheld extends ItemModular {
         if (cooldown > 0.9) {
             float damage = (float) Math.max((getDamageModifier(itemStack) + 1) * (sweepingLevel * 0.125f), 1);
             float knockback = sweepingLevel > 4 ? (knockbackLevel + 1) * 0.5f : 0.5f;
-            double range = 1 + getEffectEfficiency(itemStack, ItemEffect.sweeping);
+            double range = 1 + getEffectEfficiency(itemStack, ItemEffect.SWEEPING);
 
             // range values set up to mimic vanilla behaviour
             attacker.world.getEntitiesWithinAABB(EntityLivingBase.class,
@@ -520,7 +518,7 @@ public class ItemModularHandheld extends ItemModular {
         }
 
         if (slot == EntityEquipmentSlot.MAINHAND || slot == EntityEquipmentSlot.OFFHAND) {
-            int armor = getEffectLevel(itemStack, ItemEffect.armor);
+            int armor = getEffectLevel(itemStack, ItemEffect.ARMOR);
             if (armor > 0) {
                 multimap.put(SharedMonsterAttributes.ARMOR.getName(),
                         new AttributeModifier(ARMOR_MODIFIER, "Weapon modifier", armor, 0));
@@ -586,7 +584,7 @@ public class ItemModularHandheld extends ItemModular {
     }
 
     public double getCounterWeightMultiplier(ItemStack itemStack) {
-        int counterWeightLevel = getEffectLevel(itemStack, ItemEffect.counterweight);
+        int counterWeightLevel = getEffectLevel(itemStack, ItemEffect.COUNTERWEIGHT);
         if (counterWeightLevel > 0) {
             int integrityCost = getIntegrityCost(itemStack);
 
@@ -729,7 +727,7 @@ public class ItemModularHandheld extends ItemModular {
         // this stops the tooltip renderer from showing enchantments
         nbt.setInteger("HideFlags", 1);
 
-        if (getEffects(itemStack).contains(ItemEffect.silkTouch)) {
+        if (getEffects(itemStack).contains(ItemEffect.SILK_TOUCH)) {
             Map<Enchantment, Integer> enchantments = new HashMap<>();
             enchantments.put(Enchantments.SILK_TOUCH, 1);
             EnchantmentHelper.setEnchantments(enchantments, itemStack);

@@ -17,11 +17,11 @@ public class OverlayGuiPotionGroup extends GuiElement {
 
     public OverlayGuiPotionGroup(int x, int y) {
         super(x, y, 0, 0);
-        setAttachmentPoint(GuiAttachment.topCenter);
+        setAttachmentPoint(GuiAttachment.TOP_CENTER);
 
         focusSlot = new GuiString(0, -15, "");
-        focusSlot.setAttachmentPoint(GuiAttachment.topCenter);
-        focusSlot.setAttachmentAnchor(GuiAttachment.topCenter);
+        focusSlot.setAttachmentPoint(GuiAttachment.TOP_CENTER);
+        focusSlot.setAttachmentAnchor(GuiAttachment.TOP_CENTER);
     }
 
     public void setInventory(InventoryPotions inventory) {

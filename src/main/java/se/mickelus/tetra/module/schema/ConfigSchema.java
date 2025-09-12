@@ -44,7 +44,7 @@ public class ConfigSchema extends BaseSchema {
         String[] faultyModuleOutcomes = Arrays.stream(definition.outcomes)
                 .map(this::getModuleKey)
                 .filter(Objects::nonNull)
-                .filter(moduleKey -> ItemUpgradeRegistry.instance.getModule(moduleKey) == null)
+                .filter(moduleKey -> ItemUpgradeRegistry.INSTANCE.getModule(moduleKey) == null)
                 .toArray(String[]::new);
 
         if (faultyModuleOutcomes.length != 0) {
@@ -273,7 +273,7 @@ public class ConfigSchema extends BaseSchema {
 
     private void applyOutcome(OutcomeDefinition outcome, ItemStack upgradedStack, boolean consumeMaterials, String slot, EntityPlayer player) {
         if (outcome.moduleKey != null) {
-            ItemModule module = ItemUpgradeRegistry.instance.getModule(getModuleKey(outcome));
+            ItemModule module = ItemUpgradeRegistry.INSTANCE.getModule(getModuleKey(outcome));
 
             ItemModule previousModule = removePreviousModule(upgradedStack, module.getSlot());
 
@@ -366,7 +366,7 @@ public class ConfigSchema extends BaseSchema {
                     GlyphData glyph;
 
                     if (outcome.moduleKey != null) {
-                        ItemModule module = ItemUpgradeRegistry.instance.getModule(getModuleKey(outcome));
+                        ItemModule module = ItemUpgradeRegistry.INSTANCE.getModule(getModuleKey(outcome));
 
                         key = outcome.moduleVariant;
                         glyph = module.getData(outcome.moduleVariant).glyph;

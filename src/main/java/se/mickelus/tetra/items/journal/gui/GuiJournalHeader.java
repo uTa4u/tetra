@@ -32,12 +32,12 @@ public class GuiJournalHeader extends GuiElement {
         // position buttons
         int spacing = width / (buttons.length + 1);
         for (int i = 0; i < buttons.length; i++) {
-            buttons[i].setAttachmentPoint(GuiAttachment.topCenter);
+            buttons[i].setAttachmentPoint(GuiAttachment.TOP_CENTER);
             buttons[i].setX((i + 1) * spacing);
             addChild(buttons[i]);
         }
 
-        changePage(JournalPage.craft);
+        changePage(JournalPage.CRAFT);
         for (int i = 0; i < buttons.length; i++) {
             KeyframeAnimation animation = getButtonAnimation(buttons[i], i, buttons.length);
             showAnimations.add(animation);
@@ -67,25 +67,25 @@ public class GuiJournalHeader extends GuiElement {
 
     private void setupSeparators() {
         GuiElement separator = new GuiRect(0, 0, width, 1, GuiColors.separator);
-        separator.setAttachment(GuiAttachment.topCenter);
+        separator.setAttachment(GuiAttachment.TOP_CENTER);
         showAnimations.add(new KeyframeAnimation(800, separator)
                 .applyTo(new Applier.Width(width / 2f, width), new Applier.Opacity(0, 0.3f)));
         addChild(separator);
 
         separator = new GuiRect(0, 0, width, 1, GuiColors.separator);
-        separator.setAttachment(GuiAttachment.topCenter);
+        separator.setAttachment(GuiAttachment.TOP_CENTER);
         showAnimations.add(new KeyframeAnimation(200, separator)
                 .applyTo(new Applier.Width(0, width), new Applier.Opacity(0, 0.3f)));
         addChild(separator);
 
         separator = new GuiRect(0, 16, width, 1, GuiColors.separator);
-        separator.setAttachment(GuiAttachment.topCenter);
+        separator.setAttachment(GuiAttachment.TOP_CENTER);
         showAnimations.add(new KeyframeAnimation(800, separator)
                 .applyTo(new Applier.Width(width / 1.25f, width), new Applier.Opacity(0, 0.3f)));
         addChild(separator);
 
         separator = new GuiRect(0, 16, width, 1, GuiColors.separator);
-        separator.setAttachment(GuiAttachment.topCenter);
+        separator.setAttachment(GuiAttachment.TOP_CENTER);
         showAnimations.add(new KeyframeAnimation(200, separator)
                 .applyTo(new Applier.Width(width / 2f, width), new Applier.Opacity(0, 0.3f)));
         addChild(separator);

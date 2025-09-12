@@ -20,32 +20,31 @@ import java.util.Collections;
 import java.util.stream.Stream;
 
 public class CleanseSchema implements UpgradeSchema {
-    private static final String key = "cleanse_schema";
+    private static final String KEY = "cleanse_schema";
 
-    private static final String nameSuffix = ".name";
-    private static final String descriptionSuffix = ".description";
-    private static final String slotLabel = "item.dyePowder.blue.name";
+    private static final String NAME_SUFFIX = ".name";
+    private static final String DESCRIPTION_SUFFIX = ".description";
+    private static final String SLOT_LABEL = "item.dyePowder.blue.name";
 
     private final GlyphData glyph = new GlyphData("textures/gui/workbench.png", 80, 32);
 
     public CleanseSchema() {
-
-        ItemUpgradeRegistry.instance.registerSchema(this);
+        ItemUpgradeRegistry.INSTANCE.registerSchema(this);
     }
 
     @Override
     public String getKey() {
-        return key;
+        return KEY;
     }
 
     @Override
     public String getName() {
-        return I18n.format(key + nameSuffix);
+        return I18n.format(KEY + NAME_SUFFIX);
     }
 
     @Override
     public String getDescription(ItemStack itemStack) {
-        return I18n.format(key + descriptionSuffix);
+        return I18n.format(KEY + DESCRIPTION_SUFFIX);
     }
 
     @Override
@@ -55,7 +54,7 @@ public class CleanseSchema implements UpgradeSchema {
 
     @Override
     public String getSlotName(final ItemStack itemStack, final int index) {
-        return I18n.format(slotLabel);
+        return I18n.format(SLOT_LABEL);
     }
 
     @Override
@@ -162,7 +161,7 @@ public class CleanseSchema implements UpgradeSchema {
 
     @Override
     public SchemaType getType() {
-        return SchemaType.other;
+        return SchemaType.OTHER;
     }
 
     @Override

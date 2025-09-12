@@ -26,9 +26,9 @@ public class GuiSliderSegmented extends GuiClickable {
         addChild(new GuiRect(5, 7, width - 9, 1, GuiColors.muted).setOpacity(0.7f));
 
         addChild(new GuiRect(0, 7, 4, 1, GuiColors.muted));
-        addChild(new GuiRect(1, 7, 4, 1, GuiColors.muted).setAttachment(GuiAttachment.topRight));
+        addChild(new GuiRect(1, 7, 4, 1, GuiColors.muted).setAttachment(GuiAttachment.TOP_RIGHT));
         addChild(new GuiRect(0, 4, 1, 3, GuiColors.muted));
-        addChild(new GuiRect(1, 4, 1, 3, GuiColors.muted).setAttachment(GuiAttachment.topRight));
+        addChild(new GuiRect(1, 4, 1, 3, GuiColors.muted).setAttachment(GuiAttachment.TOP_RIGHT));
 
         for (int i = 0; i < valueSteps; i++) {
             if ((i - valueSteps - 1) % 3 == 0) {

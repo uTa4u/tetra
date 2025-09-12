@@ -1,4 +1,4 @@
-package se.mickelus.tetra;
+package se.mickelus.tetra.util;
 
 import com.google.common.base.Preconditions;
 import net.minecraft.launchwrapper.Launch;

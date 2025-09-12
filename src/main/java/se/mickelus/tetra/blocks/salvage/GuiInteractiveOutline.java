@@ -8,8 +8,7 @@ import se.mickelus.tetra.gui.animation.Applier;
 import se.mickelus.tetra.gui.animation.KeyframeAnimation;
 
 public class GuiInteractiveOutline extends GuiElement {
-
-    private static final String texture = "textures/gui/block-interaction.png";
+    private static final String TEXTURE = "textures/gui/block-interaction.png";
 
     private final BlockInteraction blockInteraction;
 
@@ -29,7 +28,7 @@ public class GuiInteractiveOutline extends GuiElement {
 
         opacity = 0.3f;
 
-        topLeft = new GuiTexture(-2, -2, 4, 4, 0, 0, texture);
+        topLeft = new GuiTexture(-2, -2, 4, 4, 0, 0, TEXTURE);
         addChild(topLeft);
         new KeyframeAnimation(100, topLeft)
                 .applyTo(new Applier.Opacity(0, 1),
@@ -38,8 +37,8 @@ public class GuiInteractiveOutline extends GuiElement {
                 .withDelay(500)
                 .start();
 
-        topRight = new GuiTexture(2, -2, 4, 4, 3, 0, texture);
-        topRight.setAttachment(GuiAttachment.topRight);
+        topRight = new GuiTexture(2, -2, 4, 4, 3, 0, TEXTURE);
+        topRight.setAttachment(GuiAttachment.TOP_RIGHT);
         addChild(topRight);
         new KeyframeAnimation(100, topRight)
                 .applyTo(new Applier.Opacity(0, 1),
@@ -48,8 +47,8 @@ public class GuiInteractiveOutline extends GuiElement {
                 .withDelay(650)
                 .start();
 
-        bottomLeft = new GuiTexture(-2, 2, 4, 4, 3, 0, texture);
-        bottomLeft.setAttachment(GuiAttachment.bottomLeft);
+        bottomLeft = new GuiTexture(-2, 2, 4, 4, 3, 0, TEXTURE);
+        bottomLeft.setAttachment(GuiAttachment.BOTTOM_LEFT);
         addChild(bottomLeft);
         new KeyframeAnimation(100, bottomLeft)
                 .applyTo(new Applier.Opacity(0, 1),
@@ -58,8 +57,8 @@ public class GuiInteractiveOutline extends GuiElement {
                 .withDelay(500)
                 .start();
 
-        bottomRight = new GuiTexture(2, 2, 4, 4, 0, 0, texture);
-        bottomRight.setAttachment(GuiAttachment.bottomRight);
+        bottomRight = new GuiTexture(2, 2, 4, 4, 0, 0, TEXTURE);
+        bottomRight.setAttachment(GuiAttachment.BOTTOM_RIGHT);
         addChild(bottomRight);
         new KeyframeAnimation(100, bottomRight)
                 .applyTo(new Applier.Opacity(0, 1),
@@ -81,21 +80,21 @@ public class GuiInteractiveOutline extends GuiElement {
 
             if (Math.abs(centerX - 16) > Math.abs(centerY - 16)) {
                 if (centerX < 16) {
-                    capability.setAttachmentPoint(GuiAttachment.middleLeft);
-                    capability.setAttachmentAnchor(GuiAttachment.middleRight);
+                    capability.setAttachmentPoint(GuiAttachment.MIDDLE_LEFT);
+                    capability.setAttachmentAnchor(GuiAttachment.MIDDLE_RIGHT);
                 } else {
-                    capability.setAttachmentPoint(GuiAttachment.middleRight);
-                    capability.setAttachmentAnchor(GuiAttachment.middleLeft);
+                    capability.setAttachmentPoint(GuiAttachment.MIDDLE_RIGHT);
+                    capability.setAttachmentAnchor(GuiAttachment.MIDDLE_LEFT);
                     capability.setX(1);
                 }
             } else {
                 if (centerY < 16) {
-                    capability.setAttachmentPoint(GuiAttachment.topCenter);
-                    capability.setAttachmentAnchor(GuiAttachment.bottomCenter);
+                    capability.setAttachmentPoint(GuiAttachment.TOP_CENTER);
+                    capability.setAttachmentAnchor(GuiAttachment.BOTTOM_CENTER);
                     capability.setY(1);
                 } else {
-                    capability.setAttachmentPoint(GuiAttachment.bottomCenter);
-                    capability.setAttachmentAnchor(GuiAttachment.topCenter);
+                    capability.setAttachmentPoint(GuiAttachment.BOTTOM_CENTER);
+                    capability.setAttachmentAnchor(GuiAttachment.TOP_CENTER);
                     capability.setY(-2);
                 }
             }

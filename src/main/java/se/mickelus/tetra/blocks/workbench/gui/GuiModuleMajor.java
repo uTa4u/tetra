@@ -41,7 +41,7 @@ public class GuiModuleMajor extends GuiModule {
 
     public void showAnimation(int offset) {
         if (isVisible()) {
-            int direction = attachmentPoint == GuiAttachment.topLeft ? -2 : 2;
+            int direction = attachmentPoint == GuiAttachment.TOP_LEFT ? -2 : 2;
             new KeyframeAnimation(100, backdrop)
                     .withDelay(offset * 80)
                     .applyTo(new Applier.Opacity(0, 1), new Applier.TranslateX(direction, 0, true))
@@ -98,14 +98,14 @@ public class GuiModuleMajor extends GuiModule {
         } else {
             moduleString.setString(I18n.format("item.modular.empty_slot"));
         }
-        if (GuiAttachment.topRight.equals(attachmentPoint)) {
+        if (GuiAttachment.TOP_RIGHT.equals(attachmentPoint)) {
             moduleString.setX(-16);
         }
         moduleString.setAttachment(attachmentPoint);
         addChild(moduleString);
 
         slotString = new GuiStringSmall(19, 0, slotName);
-        if (GuiAttachment.topRight.equals(attachmentPoint)) {
+        if (GuiAttachment.TOP_RIGHT.equals(attachmentPoint)) {
             slotString.setX(-16);
         }
         slotString.setAttachment(attachmentPoint);
@@ -117,7 +117,7 @@ public class GuiModuleMajor extends GuiModule {
             glyph = new GuiModuleGlyph(0, 0, 16, 16,
                     glyphData.tint, glyphData.textureX, glyphData.textureY,
                     glyphData.textureLocation);
-            if (GuiAttachment.topRight.equals(attachmentPoint)) {
+            if (GuiAttachment.TOP_RIGHT.equals(attachmentPoint)) {
                 glyph.setX(1);
             }
             glyph.setAttachment(attachmentPoint);
@@ -145,7 +145,7 @@ public class GuiModuleMajor extends GuiModule {
                 color = module.getImprovement(itemStack, improvementKey).glyph.tint;
             }
 
-            if (GuiAttachment.topRight.equals(attachmentPoint)) {
+            if (GuiAttachment.TOP_RIGHT.equals(attachmentPoint)) {
                 improvementElements[i] = new GuiModuleImprovement(-17 + i * -5, 13, improvements[i], previewValue, color,
                         () -> hoverHandler.accept(slotKey, improvementKey),
                         () -> {

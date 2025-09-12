@@ -87,13 +87,13 @@ public class GuiSchemaDetail extends GuiElement {
         GlyphData glyphData = schema.getGlyph();
         GuiTexture border = null;
         GuiTexture glyphTexture;
-        if (schema.getType() == SchemaType.major) {
+        if (schema.getType() == SchemaType.MAJOR) {
             border = new GuiTexture(0, 2, 16, 9, 52, 3, WORKBENCH_TEXTURE);
             glyphTexture = new GuiTexture(-1, -1, 16, 16, glyphData.textureX, glyphData.textureY, glyphData.textureLocation);
-        } else if (schema.getType() == SchemaType.minor) {
+        } else if (schema.getType() == SchemaType.MINOR) {
             border = new GuiTexture(2, 1, 11, 11, 68, 0, WORKBENCH_TEXTURE);
             glyphTexture = new GuiTexture(4, 3, 8, 8, glyphData.textureX, glyphData.textureY, glyphData.textureLocation);
-        } else if (schema.getType() == SchemaType.improvement) {
+        } else if (schema.getType() == SchemaType.IMPROVEMENT) {
             border = new GuiTexture(0, 2, 16, 9, 52, 3, WORKBENCH_TEXTURE);
             glyphTexture = new GuiTexture(-1, -1, 16, 16, glyphData.textureX, glyphData.textureY, glyphData.textureLocation);
         } else {
@@ -108,7 +108,7 @@ public class GuiSchemaDetail extends GuiElement {
         glyphTexture.setColor(schema.getRarity().tint);
         glyph.addChild(glyphTexture);
 
-        if (schema.getType() == SchemaType.improvement) {
+        if (schema.getType() == SchemaType.IMPROVEMENT) {
             glyph.addChild(new GuiTexture(7, 7, 7, 7, 68, 16, WORKBENCH_TEXTURE));
         }
 
@@ -146,7 +146,7 @@ public class GuiSchemaDetail extends GuiElement {
     }
 
     public void updateMagicCapacity(UpgradeSchema schema, String slot, ItemStack itemStack, ItemStack previewStack) {
-        if (slot != null && (schema != null && SchemaType.major.equals(schema.getType()) && magicCapacity.providesCapacity(itemStack, previewStack, slot)
+        if (slot != null && (schema != null && SchemaType.MAJOR.equals(schema.getType()) && magicCapacity.providesCapacity(itemStack, previewStack, slot)
                 || magicCapacity.hasChanged(itemStack, previewStack, slot))) {
             magicCapacity.update(itemStack, previewStack, slot);
             magicCapacity.setVisible(true);

@@ -32,11 +32,11 @@ public class GuiJournalItem extends GuiClickable {
         deselectAnimations = new ArrayList<>();
 
         backdrop = new GuiTexture(0, 0, 52, 52, WORKBENCH_TEXTURE);
-        backdrop.setAttachment(GuiAttachment.middleCenter);
+        backdrop.setAttachment(GuiAttachment.MIDDLE_CENTER);
         addChild(backdrop);
 
         GuiString labelString = new GuiStringOutline(0, -1, label);
-        labelString.setAttachment(GuiAttachment.middleCenter);
+        labelString.setAttachment(GuiAttachment.MIDDLE_CENTER);
         addChild(labelString);
 
         // label animations
@@ -168,14 +168,14 @@ public class GuiJournalItem extends GuiClickable {
 
         for (int i = 0; i < majorModuleNames.length; i++) {
             final int x = majorOffsets.getX(i);
-            GuiAttachment attachment = x > 0 ? GuiAttachment.topLeft : GuiAttachment.topRight;
+            GuiAttachment attachment = x > 0 ? GuiAttachment.TOP_LEFT : GuiAttachment.TOP_RIGHT;
             slotGroup.addChild(new GuiJournalSlotMajor(x, majorOffsets.getY(i), attachment,
                     majorModuleKeys[i], majorModuleNames[i], onSlotSelect));
         }
 
         for (int i = 0; i < minorModuleNames.length; i++) {
             final int x = minorOffsets.getX(i);
-            GuiAttachment attachment = x > 0 ? GuiAttachment.topLeft : GuiAttachment.topRight;
+            GuiAttachment attachment = x > 0 ? GuiAttachment.TOP_LEFT : GuiAttachment.TOP_RIGHT;
             slotGroup.addChild(new GuiJournalSlot(x, minorOffsets.getY(i), attachment,
                     minorModuleKeys[i], minorModuleNames[i], onSlotSelect));
         }

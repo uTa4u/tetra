@@ -14,8 +14,8 @@ public class GuiElement extends Gui {
 
     protected int x;
     protected int y;
-    protected GuiAttachment attachmentPoint = GuiAttachment.topLeft;
-    protected GuiAttachment attachmentAnchor = GuiAttachment.topLeft;
+    protected GuiAttachment attachmentPoint = GuiAttachment.TOP_LEFT;
+    protected GuiAttachment attachmentAnchor = GuiAttachment.TOP_LEFT;
 
     protected int width;
     protected int height;
@@ -68,17 +68,17 @@ public class GuiElement extends Gui {
 
     protected static int getXOffset(GuiElement element, GuiAttachment attachment) {
         switch (attachment) {
-            case topLeft:
-            case middleLeft:
-            case bottomLeft:
+            case TOP_LEFT:
+            case MIDDLE_LEFT:
+            case BOTTOM_LEFT:
                 return 0;
-            case topCenter:
-            case middleCenter:
-            case bottomCenter:
+            case TOP_CENTER:
+            case MIDDLE_CENTER:
+            case BOTTOM_CENTER:
                 return element.getWidth() / 2;
-            case topRight:
-            case middleRight:
-            case bottomRight:
+            case TOP_RIGHT:
+            case MIDDLE_RIGHT:
+            case BOTTOM_RIGHT:
                 return element.getWidth();
         }
         return 0;
@@ -86,17 +86,17 @@ public class GuiElement extends Gui {
 
     protected static int getYOffset(GuiElement element, GuiAttachment attachment) {
         switch (attachment) {
-            case topLeft:
-            case topCenter:
-            case topRight:
+            case TOP_LEFT:
+            case TOP_CENTER:
+            case TOP_RIGHT:
                 return 0;
-            case middleLeft:
-            case middleCenter:
-            case middleRight:
+            case MIDDLE_LEFT:
+            case MIDDLE_CENTER:
+            case MIDDLE_RIGHT:
                 return element.getHeight() / 2;
-            case bottomCenter:
-            case bottomLeft:
-            case bottomRight:
+            case BOTTOM_CENTER:
+            case BOTTOM_LEFT:
+            case BOTTOM_RIGHT:
                 return element.getHeight();
         }
         return 0;

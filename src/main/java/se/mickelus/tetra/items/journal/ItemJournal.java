@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.items.TetraCreativeTabs;
+import se.mickelus.tetra.TetraCreativeTab;
 import se.mickelus.tetra.items.TetraItem;
 import se.mickelus.tetra.items.journal.gui.GuiJournal;
 
@@ -23,20 +23,20 @@ import java.util.List;
 
 public class ItemJournal extends TetraItem {
 
-    private static final String unlocalizedName = "journal";
+    private static final String UNLOCALIZED_NAME = "journal";
 
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
-    public static ItemJournal instance;
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
+    public static ItemJournal INSTANCE;
 
     public ItemJournal() {
         super();
 
-        setRegistryName(unlocalizedName);
-        setTranslationKey(unlocalizedName);
+        setRegistryName(UNLOCALIZED_NAME);
+        setTranslationKey(UNLOCALIZED_NAME);
 
         setMaxStackSize(1);
 
-        setCreativeTab(TetraCreativeTabs.getInstance());
+        setCreativeTab(TetraCreativeTab.INSTANCE);
     }
 
     @Override

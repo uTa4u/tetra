@@ -31,7 +31,7 @@ public class RemoveSchema extends BaseSchema {
         this.item = item;
         this.slot = slot;
 
-        ItemUpgradeRegistry.instance.registerSchema(this);
+        ItemUpgradeRegistry.INSTANCE.registerSchema(this);
     }
 
     public static void registerRemoveSchemas(ItemModular item) {
@@ -154,7 +154,7 @@ public class RemoveSchema extends BaseSchema {
 
     @Override
     public SchemaType getType() {
-        return SchemaType.other;
+        return SchemaType.OTHER;
     }
 
     @Override

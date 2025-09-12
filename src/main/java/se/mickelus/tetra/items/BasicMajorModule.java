@@ -1,6 +1,6 @@
 package se.mickelus.tetra.items;
 
-import se.mickelus.tetra.data.DataHandler;
+import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.module.ItemModuleMajor;
 import se.mickelus.tetra.module.ItemUpgradeRegistry;
 import se.mickelus.tetra.module.Priority;
@@ -13,11 +13,11 @@ public class BasicMajorModule extends ItemModuleMajor<ModuleData> {
     public BasicMajorModule(String slotKey, String moduleKey, String... improvementKeys) {
         super(slotKey, moduleKey);
 
-        data = DataHandler.instance.getModuleData(moduleKey, ModuleData[].class);
+        data = TetraMod.dataHandler.getModuleData(moduleKey, ModuleData[].class);
 
         if (improvementKeys.length > 0) {
             improvements = Arrays.stream(improvementKeys)
-                    .map(key -> DataHandler.instance.getModuleData(key, ImprovementData[].class))
+                    .map(key -> TetraMod.dataHandler.getModuleData(key, ImprovementData[].class))
                     .flatMap(Arrays::stream)
                     .toArray(ImprovementData[]::new);
         }
@@ -28,7 +28,7 @@ public class BasicMajorModule extends ItemModuleMajor<ModuleData> {
                 .max()
                 .orElse(0);
 
-        ItemUpgradeRegistry.instance.registerModule(moduleKey, this);
+        ItemUpgradeRegistry.INSTANCE.registerModule(moduleKey, this);
     }
 
     public BasicMajorModule withRenderLayer(Priority layer) {
