@@ -13,17 +13,17 @@ import java.util.Arrays;
 
 public class RepairAction implements WorkbenchAction {
 
-    public static final String KEY = "repair_action";
+    public static final String key = "repair_action";
 
     @Override
     public String getKey() {
-        return KEY;
+        return key;
     }
 
     @Override
     public boolean canPerformOn(EntityPlayer player, ItemStack itemStack) {
         if (itemStack.getItem() instanceof ItemModular) {
-            UpgradeSchema[] schemas = ItemUpgradeRegistry.INSTANCE.getAvailableSchemas(player, itemStack);
+            UpgradeSchema[] schemas = ItemUpgradeRegistry.instance.getAvailableSchemas(player, itemStack);
             return Arrays.stream(schemas)
                     .filter(upgradeSchema -> upgradeSchema.isApplicableForSlot(null, itemStack))
                     .anyMatch(upgradeSchema -> upgradeSchema instanceof RepairSchema);
@@ -44,7 +44,7 @@ public class RepairAction implements WorkbenchAction {
 
     @Override
     public void perform(EntityPlayer player, ItemStack itemStack, TileEntityWorkbench workbench) {
-        UpgradeSchema[] schemas = ItemUpgradeRegistry.INSTANCE.getAvailableSchemas(player, itemStack);
+        UpgradeSchema[] schemas = ItemUpgradeRegistry.instance.getAvailableSchemas(player, itemStack);
         Arrays.stream(schemas)
                 .filter(upgradeSchema -> upgradeSchema.isApplicableForSlot(null, itemStack))
                 .filter(upgradeSchema -> upgradeSchema instanceof RepairSchema)

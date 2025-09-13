@@ -8,9 +8,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.capabilities.CapabilityHelper;
+import se.mickelus.tetra.data.DataHandler;
 import se.mickelus.tetra.items.ItemModular;
 import se.mickelus.tetra.module.ItemEffect;
 
@@ -31,7 +31,7 @@ public class FortuneBonusCondition implements LootCondition {
         if (player != null && requiredCapability != null) {
             ItemStack itemStack = CapabilityHelper.getProvidingItemStack(requiredCapability, capabilityLevel, player);
             if (!itemStack.isEmpty() && itemStack.getItem() instanceof ItemModular) {
-                fortuneLevel = ((ItemModular) itemStack.getItem()).getEffectLevel(itemStack, ItemEffect.FORTUNE);
+                fortuneLevel = ((ItemModular) itemStack.getItem()).getEffectLevel(itemStack, ItemEffect.fortune);
             }
         }
 
@@ -44,11 +44,11 @@ public class FortuneBonusCondition implements LootCondition {
         }
 
         public void serialize(JsonObject json, FortuneBonusCondition value, JsonSerializationContext context) {
-            TetraMod.dataHandler.gson.toJsonTree(value).getAsJsonObject().entrySet().forEach(entry -> json.add(entry.getKey(), entry.getValue()));
+            DataHandler.instance.gson.toJsonTree(value).getAsJsonObject().entrySet().forEach(entry -> json.add(entry.getKey(), entry.getValue()));
         }
 
         public FortuneBonusCondition deserialize(JsonObject json, JsonDeserializationContext context) {
-            return TetraMod.dataHandler.gson.fromJson(json, FortuneBonusCondition.class);
+            return DataHandler.instance.gson.fromJson(json, FortuneBonusCondition.class);
         }
     }
 }

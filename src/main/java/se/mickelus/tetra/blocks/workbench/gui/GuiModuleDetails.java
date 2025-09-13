@@ -43,7 +43,7 @@ public class GuiModuleDetails extends GuiElement {
         addChild(description);
 
         emptyLabel = new GuiString(0, -3, TextFormatting.DARK_GRAY + I18n.format("workbench.module_detail.empty"));
-        emptyLabel.setAttachment(GuiAttachment.MIDDLE_CENTER);
+        emptyLabel.setAttachment(GuiAttachment.middleCenter);
         addChild(emptyLabel);
 
         synergyIndicator = new GuiSynergyIndicator(130, 8);
@@ -56,12 +56,12 @@ public class GuiModuleDetails extends GuiElement {
         repairGroup.addChild(repairTitle);
 
         noRepairLabel = new GuiStringSmall(0, 7, TextFormatting.GRAY + I18n.format("item.modular.repair_material.empty"));
-        noRepairLabel.setAttachment(GuiAttachment.TOP_CENTER);
+        noRepairLabel.setAttachment(GuiAttachment.topCenter);
         noRepairLabel.setVisible(false);
         repairGroup.addChild(noRepairLabel);
 
         repairMaterial = new GuiItem(-2, 0);
-        repairMaterial.setAttachment(GuiAttachment.TOP_RIGHT);
+        repairMaterial.setAttachment(GuiAttachment.topRight);
         repairGroup.addChild(repairMaterial);
 
         magicBar = new GuiMagicUsage(130, 30, 80);
@@ -93,7 +93,7 @@ public class GuiModuleDetails extends GuiElement {
 
             synergyIndicator.update(itemStack, module);
 
-            RepairDefinition repairDefinition = ItemUpgradeRegistry.INSTANCE.getRepairDefinition(module.getData(itemStack).key);
+            RepairDefinition repairDefinition = ItemUpgradeRegistry.instance.getRepairDefinition(module.getData(itemStack).key);
             boolean canRepair = repairDefinition != null && repairDefinition.material.getApplicableItemstacks().length > 0;
             if (canRepair) {
                 repairMaterial.setItem(repairDefinition.material.getApplicableItemstacks()[0]);

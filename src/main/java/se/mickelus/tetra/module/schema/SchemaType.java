@@ -7,20 +7,20 @@ public enum SchemaType {
     /**
      * Renders no outline.
      */
-    OTHER,
+    other,
 
     /**
      * Renders in the same way as major, but with a + int he bottom left. Use for improvement schemas.
      */
-    IMPROVEMENT,
+    improvement,
 
     /**
      * Renders the same outline as shown around minor modules, use for minor module schemas.
      */
-    MINOR,
+    minor,
 
     /**
      * Renders a similar outline as major modules, but cut off at the top and the bottom. Use for major module schemas.
      */
-    MAJOR
+    major
 }

@@ -35,10 +35,10 @@ public class GuiIntegrityBar extends GuiElement {
         super(x, y, 0, 8);
 
         label = new GuiStringSmall(0, 0, "");
-        label.setAttachment(GuiAttachment.TOP_CENTER);
+        label.setAttachment(GuiAttachment.topCenter);
         addChild(label);
 
-        setAttachmentPoint(GuiAttachment.TOP_CENTER);
+        setAttachmentPoint(GuiAttachment.topCenter);
 
         tooltip = Collections.singletonList(I18n.format("stats.integrity_usage.tooltip"));
     }

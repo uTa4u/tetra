@@ -6,8 +6,9 @@ import net.minecraft.item.ItemStack;
 import se.mickelus.tetra.module.ItemEffect;
 
 public class TooltipGetterUnbreaking implements ITooltipGetter {
-    private static final IStatGetter LEVEL_GETTER = new StatGetterEffectLevel(ItemEffect.UNBREAKING, 1);
-    private static final IStatGetter CHANCE_GETTER = new StatGetterUnbreaking();
+
+    private static final IStatGetter levelGetter = new StatGetterEffectLevel(ItemEffect.unbreaking, 1);
+    private static final IStatGetter chanceGetter = new StatGetterUnbreaking();
 
     public TooltipGetterUnbreaking() {
     }
@@ -16,7 +17,7 @@ public class TooltipGetterUnbreaking implements ITooltipGetter {
     @Override
     public String getTooltip(EntityPlayer player, ItemStack itemStack) {
         return I18n.format("stats.unbreaking.tooltip",
-                String.format("%d", (int) LEVEL_GETTER.getValue(player, itemStack)),
-                String.format("%.2f", CHANCE_GETTER.getValue(player, itemStack)));
+                String.format("%d", (int) levelGetter.getValue(player, itemStack)),
+                String.format("%.2f", chanceGetter.getValue(player, itemStack)));
     }
 }

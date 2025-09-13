@@ -42,7 +42,7 @@ public class ReplacementDeserializer implements JsonDeserializer<ReplacementDefi
             for (Map.Entry<String, JsonElement> moduleDefinition : JsonUtils.getJsonObject(jsonObject, "modules").entrySet()) {
                 String moduleKey = moduleDefinition.getValue().getAsJsonArray().get(0).getAsString();
                 String moduleVariant = moduleDefinition.getValue().getAsJsonArray().get(1).getAsString();
-                ItemModule module = ItemUpgradeRegistry.INSTANCE.getModule(moduleKey);
+                ItemModule module = ItemUpgradeRegistry.instance.getModule(moduleKey);
                 if (module == null) {
                     throw new JsonSyntaxException("Failed to parse replacement data due to missing module: " + moduleKey);
                 }

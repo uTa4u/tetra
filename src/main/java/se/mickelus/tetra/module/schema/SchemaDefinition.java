@@ -104,12 +104,12 @@ public class SchemaDefinition {
      * outline as minor and major modules, "improvement" looks like a major module outline with a plus, "other" has no
      * outline and the outline can instead be part of the glyph.
      */
-    public SchemaType displayType = SchemaType.OTHER;
+    public SchemaType displayType = SchemaType.other;
 
     /**
      * The rarity of a schema affects how it is rendered. Colors and effects are used to differentiate between effects.
      */
-    public SchemaRarity rarity = SchemaRarity.BASIC;
+    public SchemaRarity rarity = SchemaRarity.basic;
 
     /**
      * The glyph displayed for this schema, preferably the same as the module it will be used to craft but with no tint.

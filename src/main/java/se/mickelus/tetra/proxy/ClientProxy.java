@@ -40,7 +40,7 @@ import java.util.Arrays;
 public class ClientProxy implements IProxy {
 
     static {
-        ModelLoaderRegistry.registerLoader(ModularModelLoader.INSTANCE);
+        ModelLoaderRegistry.registerLoader(ModularModelLoader.instance);
     }
 
     @Override
@@ -70,22 +70,24 @@ public class ClientProxy implements IProxy {
 
     @SubscribeEvent
     public void registerModels(ModelRegistryEvent event) {
+
+
         if (ConfigHandler.generateFeatures) {
             // provides a decent item model for the container (which uses a TESR) without messing around with millions of blockstate variants
-            ModelLoader.setCustomStateMapper(BlockForgedContainer.INSTANCE, new StateMapperBase() {
+            ModelLoader.setCustomStateMapper(BlockForgedContainer.instance, new StateMapperBase() {
                 @Override
                 protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
                     return new ModelResourceLocation(Tags.MOD_ID + ":forged_container");
                 }
             });
 
-            ModelLoader.setCustomStateMapper(BlockForgedCrate.INSTANCE, new StateMap.Builder().ignore(BlockForgedCrate.INTEGRITY).build());
+            ModelLoader.setCustomStateMapper(BlockForgedCrate.instance, new StateMap.Builder().ignore(BlockForgedCrate.propIntegrity).build());
 
-            ModelLoader.setCustomStateMapper(BlockSeepingBedrock.INSTANCE, new StateMapperBase() {
+            ModelLoader.setCustomStateMapper(BlockSeepingBedrock.instance, new StateMapperBase() {
                 @Override
                 protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
                     return new ModelResourceLocation(Tags.MOD_ID + ":seeping_bedrock",
-                            "active=" + (state.getValue(BlockSeepingBedrock.ACTIVE) > 0));
+                            "active=" + (state.getValue(BlockSeepingBedrock.propActive) > 0));
                 }
             });
         }

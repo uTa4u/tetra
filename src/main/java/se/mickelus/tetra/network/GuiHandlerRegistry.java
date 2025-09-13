@@ -7,13 +7,14 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class GuiHandlerRegistry implements IGuiHandler {
+public class GuiHandlerRegistry implements IGuiHandler {
 
-    public static final GuiHandlerRegistry INSTANCE = new GuiHandlerRegistry();
+    public static GuiHandlerRegistry instance;
 
     private final Map<Integer, TetraGuiHandler> handlerMap;
 
     public GuiHandlerRegistry() {
+        instance = this;
         handlerMap = new HashMap<>();
     }
 

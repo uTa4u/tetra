@@ -1,4 +1,4 @@
-package se.mickelus.tetra.util;
+package se.mickelus.tetra;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Rotation;

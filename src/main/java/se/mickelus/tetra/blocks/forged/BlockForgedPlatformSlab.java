@@ -22,37 +22,37 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraCreativeTab;
 import se.mickelus.tetra.blocks.Materials;
 import se.mickelus.tetra.blocks.TetraBlock;
+import se.mickelus.tetra.items.TetraCreativeTabs;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 
 public class BlockForgedPlatformSlab extends TetraBlock {
-    private static final PropertyEnum<BlockSlab.EnumBlockHalf> HALF = PropertyEnum.create("half", BlockSlab.EnumBlockHalf.class);
-    private static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
-    private static final AxisAlignedBB AABB_TOP_HALF = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 1.0D, 1.0D, 1.0D);
+    public static final PropertyEnum<BlockSlab.EnumBlockHalf> halfProp = PropertyEnum.create("half", BlockSlab.EnumBlockHalf.class);
+    protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
+    protected static final AxisAlignedBB AABB_TOP_HALF = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 1.0D, 1.0D, 1.0D);
 
-    private static final String UNLOCALIZED_NAME = "forged_platform_slab";
+    static final String unlocalizedName = "forged_platform_slab";
 
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
-    public static BlockForgedPlatformSlab INSTANCE;
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
+    public static BlockForgedPlatformSlab instance;
 
     public BlockForgedPlatformSlab() {
         super(Materials.forged);
 
-        setRegistryName(UNLOCALIZED_NAME);
-        setTranslationKey(UNLOCALIZED_NAME);
-        setCreativeTab(TetraCreativeTab.INSTANCE);
+        setRegistryName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
+        setCreativeTab(TetraCreativeTabs.getInstance());
         setBlockUnbreakable();
 
         hasItem = true;
 
         fullBlock = false;
 
-        this.setDefaultState(this.blockState.getBaseState().withProperty(HALF, BlockSlab.EnumBlockHalf.BOTTOM));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(halfProp, BlockSlab.EnumBlockHalf.BOTTOM));
     }
 
     @SideOnly(Side.CLIENT)
@@ -77,17 +77,17 @@ public class BlockForgedPlatformSlab extends TetraBlock {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, HALF);
+        return new BlockStateContainer(this, halfProp);
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(HALF, meta == 1 ? BlockSlab.EnumBlockHalf.TOP : BlockSlab.EnumBlockHalf.BOTTOM);
+        return getDefaultState().withProperty(halfProp, meta == 1 ? BlockSlab.EnumBlockHalf.TOP : BlockSlab.EnumBlockHalf.BOTTOM);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        if (state.getValue(HALF) == BlockSlab.EnumBlockHalf.TOP) {
+        if (state.getValue(halfProp) == BlockSlab.EnumBlockHalf.TOP) {
             return 1;
         }
 
@@ -96,19 +96,19 @@ public class BlockForgedPlatformSlab extends TetraBlock {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return state.getValue(HALF) == BlockSlab.EnumBlockHalf.TOP ? AABB_TOP_HALF : AABB_BOTTOM_HALF;
+        return state.getValue(halfProp) == BlockSlab.EnumBlockHalf.TOP ? AABB_TOP_HALF : AABB_BOTTOM_HALF;
     }
 
     @Override
     public boolean isTopSolid(IBlockState state) {
-        return state.getValue(HALF) == BlockSlab.EnumBlockHalf.TOP;
+        return state.getValue(halfProp) == BlockSlab.EnumBlockHalf.TOP;
     }
 
     @Override
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        if (face == EnumFacing.UP && state.getValue(HALF) == BlockSlab.EnumBlockHalf.TOP) {
+        if (face == EnumFacing.UP && state.getValue(halfProp) == BlockSlab.EnumBlockHalf.TOP) {
             return BlockFaceShape.SOLID;
-        } else if (face == EnumFacing.DOWN && state.getValue(HALF) == BlockSlab.EnumBlockHalf.BOTTOM) {
+        } else if (face == EnumFacing.DOWN && state.getValue(halfProp) == BlockSlab.EnumBlockHalf.BOTTOM) {
             return BlockFaceShape.SOLID;
         }
         return BlockFaceShape.UNDEFINED;
@@ -130,7 +130,7 @@ public class BlockForgedPlatformSlab extends TetraBlock {
             return false;
         }
 
-        BlockSlab.EnumBlockHalf side = state.getValue(HALF);
+        BlockSlab.EnumBlockHalf side = state.getValue(halfProp);
         return (side == BlockSlab.EnumBlockHalf.TOP && face == EnumFacing.UP) || (side == BlockSlab.EnumBlockHalf.BOTTOM && face == EnumFacing.DOWN);
     }
 
@@ -140,9 +140,9 @@ public class BlockForgedPlatformSlab extends TetraBlock {
      */
     @Override
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-        IBlockState iblockstate = super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(HALF, BlockSlab.EnumBlockHalf.BOTTOM);
+        IBlockState iblockstate = super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(halfProp, BlockSlab.EnumBlockHalf.BOTTOM);
 
-        return facing != EnumFacing.DOWN && (facing == EnumFacing.UP || (double) hitY <= 0.5D) ? iblockstate : iblockstate.withProperty(HALF, BlockSlab.EnumBlockHalf.TOP);
+        return facing != EnumFacing.DOWN && (facing == EnumFacing.UP || (double) hitY <= 0.5D) ? iblockstate : iblockstate.withProperty(halfProp, BlockSlab.EnumBlockHalf.TOP);
     }
 
     @SideOnly(Side.CLIENT)

@@ -12,6 +12,7 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 import org.apache.commons.lang3.ArrayUtils;
+import se.mickelus.tetra.NBTHelper;
 import se.mickelus.tetra.blocks.workbench.action.RepairAction;
 import se.mickelus.tetra.blocks.workbench.action.WorkbenchAction;
 import se.mickelus.tetra.blocks.workbench.action.WorkbenchActionPacket;
@@ -22,7 +23,6 @@ import se.mickelus.tetra.module.ItemUpgradeRegistry;
 import se.mickelus.tetra.module.schema.UpgradeSchema;
 import se.mickelus.tetra.network.PacketHandler;
 import se.mickelus.tetra.util.CastOptional;
-import se.mickelus.tetra.util.NBTHelper;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -49,6 +49,7 @@ public class TileEntityWorkbench extends TileEntity implements IInventory {
     private static WorkbenchAction[] actions = new WorkbenchAction[]{
             new RepairAction()
     };
+
 
     public TileEntityWorkbench() {
         stacks = NonNullList.withSize(MATERIAL_SLOT_COUNT, ItemStack.EMPTY);
@@ -164,7 +165,7 @@ public class TileEntityWorkbench extends TileEntity implements IInventory {
             return ItemStack.EMPTY;
         }
 
-        ItemStack placeholder = ItemUpgradeRegistry.INSTANCE.getReplacement(stack);
+        ItemStack placeholder = ItemUpgradeRegistry.instance.getReplacement(stack);
         if (!placeholder.isEmpty()) {
             return placeholder;
         }
@@ -296,7 +297,7 @@ public class TileEntityWorkbench extends TileEntity implements IInventory {
         NBTHelper.readItemStacks(compound, stacks);
 
         String schemaKey = compound.getString(SCHEMA_KEY);
-        currentSchema = ItemUpgradeRegistry.INSTANCE.getSchema(schemaKey);
+        currentSchema = ItemUpgradeRegistry.instance.getSchema(schemaKey);
 
         if (compound.hasKey(CURRENT_SLOT_KEY)) {
             currentSlot = compound.getString(CURRENT_SLOT_KEY);

@@ -63,7 +63,7 @@ public class GuiJournalVariants extends GuiElement {
         variants = new GuiJournalVariantItem[outcomes.length];
         itemAnimations = new KeyframeAnimation[outcomes.length];
         for (int i = 0; i < outcomes.length; i++) {
-            if (SchemaType.MINOR.equals(outcomes[i].type)) {
+            if (SchemaType.minor.equals(outcomes[i].type)) {
                 variants[i] = new GuiJournalVariantItem((i / 2) * 15, (i % 2) * 15, outcomes[i],
                         onVariantHover, onVariantBlur, onVariantSelect);
                 variantsContainer.addChild(variants[i]);

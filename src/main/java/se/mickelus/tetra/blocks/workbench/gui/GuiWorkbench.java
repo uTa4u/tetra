@@ -31,6 +31,8 @@ import java.util.stream.Collectors;
 @SideOnly(Side.CLIENT)
 public class GuiWorkbench extends GuiContainer {
 
+    private static GuiWorkbench instance;
+
     private static final String WORKBENCH_TEXTURE = "textures/gui/workbench.png";
     private static final String INVENTORY_TEXTURE = "textures/gui/player-inventory.png";
 
@@ -89,8 +91,8 @@ public class GuiWorkbench extends GuiContainer {
         defaultGui.addChild(inventoryInfo);
 
         actionList = new GuiActionList(0, 120);
-        actionList.setAttachmentAnchor(GuiAttachment.TOP_CENTER);
-        actionList.setAttachmentPoint(GuiAttachment.MIDDLE_CENTER);
+        actionList.setAttachmentAnchor(GuiAttachment.topCenter);
+        actionList.setAttachmentPoint(GuiAttachment.middleCenter);
         defaultGui.addChild(actionList);
 
         slotDetail = new GuiSlotDetail(46, 102,
@@ -105,6 +107,8 @@ public class GuiWorkbench extends GuiContainer {
 
         currentMaterials = new ItemStack[TileEntityWorkbench.MATERIAL_SLOT_COUNT];
         Arrays.fill(currentMaterials, ItemStack.EMPTY);
+
+        instance = this;
     }
 
     @Override

@@ -31,8 +31,8 @@ public class OverlayGuiQuiverSlot extends GuiElement {
     public OverlayGuiQuiverSlot(int x, int y, ItemStack itemStack, int slot) {
         super(x, y, 23, 23);
 
-        setAttachmentPoint(GuiAttachment.BOTTOM_RIGHT);
-        setAttachmentAnchor(GuiAttachment.BOTTOM_RIGHT);
+        setAttachmentPoint(GuiAttachment.bottomRight);
+        setAttachmentAnchor(GuiAttachment.bottomRight);
 
         this.itemStack = itemStack;
 
@@ -51,14 +51,14 @@ public class OverlayGuiQuiverSlot extends GuiElement {
 
         if (itemStack != null) {
             count = new GuiStringOutline(-3, 1, itemStack.getCount() + "");
-            count.setAttachmentPoint(GuiAttachment.MIDDLE_LEFT);
-            count.setAttachmentAnchor(GuiAttachment.MIDDLE_RIGHT);
+            count.setAttachmentPoint(GuiAttachment.middleLeft);
+            count.setAttachmentAnchor(GuiAttachment.middleRight);
             addChild(count);
             count.setVisible(false);
 
             hoverLabel = new GuiString(-5, 0, itemStack.getDisplayName());
-            hoverLabel.setAttachmentPoint(GuiAttachment.MIDDLE_RIGHT);
-            hoverLabel.setAttachmentAnchor(GuiAttachment.MIDDLE_LEFT);
+            hoverLabel.setAttachmentPoint(GuiAttachment.middleRight);
+            hoverLabel.setAttachmentAnchor(GuiAttachment.middleLeft);
             addChild(hoverLabel);
             hoverLabel.setVisible(false);
         }

@@ -22,13 +22,13 @@ public class ForgedContainerProcessor implements ITemplateProcessor {
     @Override
     public Template.BlockInfo processBlock(World world, BlockPos pos, Template.BlockInfo blockInfo) {
         if (blockInfo.blockState.getBlock() instanceof BlockForgedContainer) {
-            int[] lockIntegrity = new int[TileEntityForgedContainer.LOCK_COUNT];
+            int[] lockIntegrity = new int[TileEntityForgedContainer.lockCount];
             for (int i = 0; i < lockIntegrity.length; i++) {
-                lockIntegrity[i] = 1 + random.nextInt(TileEntityForgedContainer.LOCK_INTEGRITY_MAX - 1);
+                lockIntegrity[i] = 1 + random.nextInt(TileEntityForgedContainer.lockIntegrityMax - 1);
             }
 
             TileEntityForgedContainer.writeLockData(blockInfo.tileentityData, lockIntegrity);
-            TileEntityForgedContainer.writeLidData(blockInfo.tileentityData, 1 + random.nextInt(TileEntityForgedContainer.LID_INTEGRITY_MAX - 1));
+            TileEntityForgedContainer.writeLidData(blockInfo.tileentityData, 1 + random.nextInt(TileEntityForgedContainer.lidIntegrityMax - 1));
         }
         return blockInfo;
     }

@@ -32,7 +32,7 @@ public class BookEnchantSchema implements UpgradeSchema {
     public BookEnchantSchema(ItemModuleMajor module) {
         this.module = module;
 
-        ItemUpgradeRegistry.INSTANCE.registerSchema(this);
+        ItemUpgradeRegistry.instance.registerSchema(this);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class BookEnchantSchema implements UpgradeSchema {
         if (acceptsMaterial(itemStack, 0, materials[0])) {
             return EnchantmentHelper.getEnchantments(materials[0]).entrySet().stream()
                     .anyMatch(entry -> {
-                        String improvementKey = ItemUpgradeRegistry.INSTANCE.getImprovementFromEnchantment(entry.getKey());
+                        String improvementKey = ItemUpgradeRegistry.instance.getImprovementFromEnchantment(entry.getKey());
                         return module.acceptsImprovementLevel(improvementKey, entry.getValue());
                     });
         }
@@ -112,7 +112,7 @@ public class BookEnchantSchema implements UpgradeSchema {
 
         Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(materials[0]);
         for (Map.Entry<Enchantment, Integer> entry : enchantments.entrySet()) {
-            String improvement = ItemUpgradeRegistry.INSTANCE.getImprovementFromEnchantment(entry.getKey());
+            String improvement = ItemUpgradeRegistry.instance.getImprovementFromEnchantment(entry.getKey());
             if (module.acceptsImprovementLevel(improvement, entry.getValue())) {
                 module.addImprovement(upgradedStack, improvement, entry.getValue());
 
@@ -149,7 +149,7 @@ public class BookEnchantSchema implements UpgradeSchema {
         int cost = 0;
         Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(materials[0]);
         for (Map.Entry<Enchantment, Integer> entry : enchantments.entrySet()) {
-            String improvement = ItemUpgradeRegistry.INSTANCE.getImprovementFromEnchantment(entry.getKey());
+            String improvement = ItemUpgradeRegistry.instance.getImprovementFromEnchantment(entry.getKey());
             if (module.acceptsImprovementLevel(improvement, entry.getValue())) {
                 cost += entry.getValue();
             }
@@ -162,7 +162,7 @@ public class BookEnchantSchema implements UpgradeSchema {
 
     @Override
     public SchemaType getType() {
-        return SchemaType.IMPROVEMENT;
+        return SchemaType.improvement;
     }
 
     @Override

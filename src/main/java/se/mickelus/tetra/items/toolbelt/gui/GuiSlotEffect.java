@@ -26,10 +26,10 @@ public class GuiSlotEffect extends GuiElement {
         tooltip = I18n.format(String.format("toolbelt.effect.tooltip.%s.%s", slotType.toString(), effect.toString()));
 
         switch (effect) {
-            case QUICK_ACCESS:
+            case quickAccess:
                 addChild(new GuiTexture(0, 0, 8, 8, 0, 64, texture).setColor(0xbbbbbb));
                 break;
-            case CELL_SOCKET:
+            case cellSocket:
                 addChild(new GuiTexture(0, 0, 8, 8, 8, 64, texture).setColor(0xbbbbbb));
                 break;
             default:

@@ -35,14 +35,14 @@ public class GuiStatBarIntegrity extends GuiStatBase {
         labelString = new GuiStringSmall(0, 0, I18n.format("stats.integrity"));
 
         valueString = new GuiStringSmall(0, 0, "");
-        valueString.setAttachment(GuiAttachment.TOP_RIGHT);
+        valueString.setAttachment(GuiAttachment.topRight);
 
         barNegative = new GuiBarSegmented(-1, 0, 27, 0, max, true);
-        barNegative.setAlignment(GuiAlignment.RIGHT);
+        barNegative.setAlignment(GuiAlignment.right);
         addChild(barNegative);
 
         barPositive = new GuiBarSegmented(1, 0, 27, 0, max);
-        barPositive.setAttachment(GuiAttachment.TOP_RIGHT);
+        barPositive.setAttachment(GuiAttachment.topRight);
         addChild(barPositive);
 
         addChild(labelString);

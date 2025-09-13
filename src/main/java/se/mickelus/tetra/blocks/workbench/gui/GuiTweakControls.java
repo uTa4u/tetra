@@ -29,15 +29,15 @@ public class GuiTweakControls extends GuiElement {
         super(x, y, 224, 67);
 
         untweakableLabel = new GuiString(0, -3, TextFormatting.DARK_GRAY + I18n.format("workbench.module_detail.not_tweakable"));
-        untweakableLabel.setAttachment(GuiAttachment.MIDDLE_CENTER);
+        untweakableLabel.setAttachment(GuiAttachment.middleCenter);
         addChild(untweakableLabel);
 
         tweakControls = new GuiElement(0, -4, width, height - 20);
-        tweakControls.setAttachment(GuiAttachment.MIDDLE_LEFT);
+        tweakControls.setAttachment(GuiAttachment.middleLeft);
         addChild(tweakControls);
 
         applyButton = new GuiButton(0, -10, I18n.format("workbench.slot_detail.tweak_apply"), () -> applyTweak.accept(tweaks));
-        applyButton.setAttachment(GuiAttachment.BOTTOM_CENTER);
+        applyButton.setAttachment(GuiAttachment.bottomCenter);
         addChild(applyButton);
 
         this.previewTweak = previewTweak;
@@ -53,7 +53,7 @@ public class GuiTweakControls extends GuiElement {
             for (int i = 0; i < data.length; i++) {
                 TweakData tweak = data[0];
                 GuiTweakSlider slider = new GuiTweakSlider(0, i * 22, 200, tweak, step -> applyTweak(tweak.key, step));
-                slider.setAttachment(GuiAttachment.TOP_CENTER);
+                slider.setAttachment(GuiAttachment.topCenter);
                 slider.setValue(module.getTweakStep(itemStack, tweak));
                 tweakControls.addChild(slider);
             }

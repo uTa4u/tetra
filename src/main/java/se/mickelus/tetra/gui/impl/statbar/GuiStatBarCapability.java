@@ -55,7 +55,7 @@ public class GuiStatBarCapability extends GuiStatBar {
     protected void realign() {
         super.realign();
 
-        if (GuiAlignment.LEFT.equals(alignment)) {
+        if (GuiAlignment.left.equals(alignment)) {
             bar.setX(16);
             capabilityElement.setX(-3);
         } else {

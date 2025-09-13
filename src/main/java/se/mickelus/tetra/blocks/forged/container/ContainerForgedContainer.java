@@ -24,10 +24,10 @@ public class ContainerForgedContainer extends Container {
 
         this.playerInventory = playerInventory;
 
-        compartmentSlots = new ToggleableSlot[TileEntityForgedContainer.COMPARTMENT_COUNT][];
+        compartmentSlots = new ToggleableSlot[TileEntityForgedContainer.compartmentCount][];
         for (int i = 0; i < compartmentSlots.length; i++) {
-            compartmentSlots[i] = new ToggleableSlot[TileEntityForgedContainer.COMPARTMENT_SIZE];
-            int offset = i * TileEntityForgedContainer.COMPARTMENT_SIZE;
+            compartmentSlots[i] = new ToggleableSlot[TileEntityForgedContainer.compartmentSize];
+            int offset = i * TileEntityForgedContainer.compartmentSize;
             for (int j = 0; j < 6; j++) {
                 for (int k = 0; k < 9; k++) {
                     int index = j * 9 + k;
@@ -81,8 +81,8 @@ public class ContainerForgedContainer extends Container {
                 if (!mergeItemStack(itemStack, tileEntity.getSizeInventory(), inventorySlots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!mergeItemStack(itemStack, currentCompartment * TileEntityForgedContainer.COMPARTMENT_SIZE,
-                    (currentCompartment + 1) * TileEntityForgedContainer.COMPARTMENT_SIZE, false)) {
+            } else if (!mergeItemStack(itemStack, currentCompartment * TileEntityForgedContainer.compartmentSize,
+                    (currentCompartment + 1) * TileEntityForgedContainer.compartmentSize, false)) {
                 return ItemStack.EMPTY;
             }
 

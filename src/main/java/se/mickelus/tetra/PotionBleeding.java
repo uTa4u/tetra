@@ -1,23 +1,20 @@
-package se.mickelus.tetra.potions;
+package se.mickelus.tetra;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import se.mickelus.tetra.Tags;
 
 public class PotionBleeding extends Potion {
-    private static final String UNLOCALIZED_NAME = "bleeding";
+    public static PotionBleeding instance;
 
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
-    public static PotionBleeding INSTANCE;
-
-    public PotionBleeding() {
+    protected PotionBleeding() {
         super(true, 0);
 
-        setRegistryName(UNLOCALIZED_NAME);
-        setPotionName(UNLOCALIZED_NAME);
+        setRegistryName("bleeding");
+        setPotionName("bleeding");
+
+        instance = this;
     }
 
     @Override

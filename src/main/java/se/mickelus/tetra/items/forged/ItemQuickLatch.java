@@ -13,27 +13,27 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraCreativeTab;
+import se.mickelus.tetra.items.TetraCreativeTabs;
 import se.mickelus.tetra.items.TetraItem;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemQuickLatch extends TetraItem {
-    private static final String UNLOCALIZED_NAME = "quick_latch";
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
-    public static ItemQuickLatch INSTANCE;
+    private static final String unlocalizedName = "quick_latch";
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
+    public static ItemQuickLatch instance;
 
     public ItemQuickLatch() {
-        setRegistryName(UNLOCALIZED_NAME);
-        setTranslationKey(UNLOCALIZED_NAME);
-        setCreativeTab(TetraCreativeTab.INSTANCE);
+        setRegistryName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
+        setCreativeTab(TetraCreativeTabs.getInstance());
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
-        tooltip.add(ChatFormatting.DARK_GRAY + I18n.format("item." + UNLOCALIZED_NAME + ".description"));
+        tooltip.add(ChatFormatting.DARK_GRAY + I18n.format("item." + unlocalizedName + ".description"));
         tooltip.add(ChatFormatting.DARK_GRAY + I18n.format("forged_description"));
     }
 

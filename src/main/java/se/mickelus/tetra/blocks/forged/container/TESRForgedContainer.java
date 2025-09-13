@@ -7,7 +7,7 @@ import se.mickelus.tetra.TetraMod;
 
 
 public class TESRForgedContainer extends TileEntitySpecialRenderer<TileEntityForgedContainer> {
-    private static final ResourceLocation TEXTURE = TetraMod.getResource("textures/blocks/forged_container/forged_container.png");
+    private static final ResourceLocation texture = TetraMod.getResource("textures/blocks/forged_container/forged_container.png");
     private final ModelForgedContainer model = new ModelForgedContainer();
 
     private static final float openDuration = 300;
@@ -24,7 +24,7 @@ public class TESRForgedContainer extends TileEntitySpecialRenderer<TileEntityFor
         GlStateManager.depthFunc(515);
         GlStateManager.depthMask(true);
 
-        this.bindTexture(TEXTURE);
+        this.bindTexture(texture);
 
         GlStateManager.pushMatrix();
         GlStateManager.enableRescaleNormal();

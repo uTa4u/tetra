@@ -38,8 +38,8 @@ public class ConfigHandler {
             if (event.getModID().equals(Tags.MOD_ID)) {
                 ConfigManager.sync(Tags.MOD_ID, Config.Type.INSTANCE);
 
-                ItemDuplexToolModular.INSTANCE.updateConfig(honeDuplexBase, honeDuplexIntegrityMultiplier);
-                ItemSwordModular.INSTANCE.updateConfig(honeSwordBase, honeSwordIntegrityMultiplier);
+                ItemDuplexToolModular.instance.updateConfig(honeDuplexBase, honeDuplexIntegrityMultiplier);
+                ItemSwordModular.instance.updateConfig(honeSwordBase, honeSwordIntegrityMultiplier);
             }
         }
     }

@@ -1,9 +1,9 @@
 package se.mickelus.tetra.items.toolbelt.inventory;
 
 import net.minecraft.item.ItemStack;
+import se.mickelus.tetra.NBTHelper;
 import se.mickelus.tetra.items.toolbelt.ItemToolbeltModular;
 import se.mickelus.tetra.items.toolbelt.SlotType;
-import se.mickelus.tetra.util.NBTHelper;
 
 import java.util.ArrayList;
 
@@ -13,9 +13,9 @@ public class InventoryQuiver extends InventoryToolbelt {
     public static int maxSize = 30; // 27;
 
     public InventoryQuiver(ItemStack stack) {
-        super(inventoryKey, stack, maxSize, SlotType.QUIVER);
+        super(inventoryKey, stack, maxSize, SlotType.quiver);
         ItemToolbeltModular item = (ItemToolbeltModular) stack.getItem();
-        numSlots = item.getNumSlots(stack, SlotType.QUIVER);
+        numSlots = item.getNumSlots(stack, SlotType.quiver);
 
         predicate = InventoryToolbelt.quiverPredicate;
 

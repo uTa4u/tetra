@@ -69,7 +69,7 @@ public class GuiModule extends GuiClickable {
 
     public void showAnimation(int offset) {
         if (isVisible()) {
-            int direction = attachmentPoint == GuiAttachment.TOP_LEFT ? -2 : 2;
+            int direction = attachmentPoint == GuiAttachment.topLeft ? -2 : 2;
             new KeyframeAnimation(100, backdrop)
                     .withDelay(offset * 80)
                     .applyTo(new Applier.Opacity(0, 1), new Applier.TranslateX(direction, 0, true))
@@ -98,7 +98,7 @@ public class GuiModule extends GuiClickable {
 
     protected void setupChildren(String moduleName, GlyphData glyphData, String slotName, boolean tweakable) {
         backdrop = new GuiModuleMinorBackdrop(1, -1, GuiColors.normal);
-        if (GuiAttachment.TOP_LEFT.equals(attachmentPoint)) {
+        if (GuiAttachment.topLeft.equals(attachmentPoint)) {
             backdrop.setX(-1);
         }
         backdrop.setAttachment(attachmentPoint);
@@ -106,7 +106,7 @@ public class GuiModule extends GuiClickable {
 
         if (tweakable) {
             tweakingIndicator = new GuiTextureOffset(1, -1, 11, 11, 112, 32, "textures/gui/workbench.png");
-            if (GuiAttachment.TOP_LEFT.equals(attachmentPoint)) {
+            if (GuiAttachment.topLeft.equals(attachmentPoint)) {
                 tweakingIndicator.setX(-1);
             }
             tweakingIndicator.setAttachment(attachmentPoint);
@@ -115,7 +115,7 @@ public class GuiModule extends GuiClickable {
 
 
         moduleString = new GuiString(-12, 1, moduleName != null ? moduleName : slotName);
-        if (GuiAttachment.TOP_LEFT.equals(attachmentPoint)) {
+        if (GuiAttachment.topLeft.equals(attachmentPoint)) {
             moduleString.setX(12);
         }
         moduleString.setAttachment(attachmentPoint);
@@ -127,7 +127,7 @@ public class GuiModule extends GuiClickable {
             glyph = new GuiModuleGlyph(0, 1, 8, 8,
                     glyphData.tint, glyphData.textureX, glyphData.textureY,
                     glyphData.textureLocation);
-            if (GuiAttachment.TOP_LEFT.equals(attachmentPoint)) {
+            if (GuiAttachment.topLeft.equals(attachmentPoint)) {
                 glyph.setX(1);
             }
             glyph.setAttachment(attachmentPoint);

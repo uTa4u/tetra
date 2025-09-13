@@ -166,10 +166,10 @@ public class GuiSlotDetail extends GuiElement {
 
     private void updateSchemaList(EntityPlayer player, TileEntityWorkbench tileEntity, String selectedSlot) {
         ItemStack targetStack = tileEntity.getTargetItemStack();
-        UpgradeSchema[] schemas = ItemUpgradeRegistry.INSTANCE.getAvailableSchemas(player, targetStack);
+        UpgradeSchema[] schemas = ItemUpgradeRegistry.instance.getAvailableSchemas(player, targetStack);
         schemas = Arrays.stream(schemas)
                 .filter(upgradeSchema -> upgradeSchema.isApplicableForSlot(selectedSlot, targetStack))
-//                .sorted(Comparator.comparing(UpgradeSchema::getRarity).thenComparing(UpgradeSchema::getType).thenComparing(UpgradeSchema::getKey))
+                .sorted(Comparator.comparing(UpgradeSchema::getRarity).thenComparing(UpgradeSchema::getType).thenComparing(UpgradeSchema::getKey))
                 .toArray(UpgradeSchema[]::new);
         schemaList.setSchemas(schemas);
     }

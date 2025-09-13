@@ -16,9 +16,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import se.mickelus.tetra.ConfigHandler;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraCreativeTab;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.blocks.TetraBlock;
+import se.mickelus.tetra.data.DataHandler;
+import se.mickelus.tetra.items.TetraCreativeTabs;
 import se.mickelus.tetra.network.PacketHandler;
 
 import javax.annotation.Nullable;
@@ -26,15 +26,15 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class BlockGeode extends TetraBlock {
-    private static final String UNLOCALIZED_NAME = "block_geode";
 
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
-    public static BlockGeode INSTANCE;
+    static final String unlocalizedName = "block_geode";
 
-    // TODO: make this not hacky??
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
+    public static BlockGeode instance;
+
     // hacky, but avoids some log warnings
-    public static final PropertyInteger VARIANT = PropertyInteger.create("variant", 0,
-            (int) Arrays.stream(TetraMod.dataHandler.getData("geode/variants", GeodeVariant[].class)).count() - 1);
+    public static PropertyInteger variantProp = PropertyInteger.create("variant", 0,
+            (int) Arrays.stream(DataHandler.instance.getData("geode/variants", GeodeVariant[].class)).count() - 1);
 
     public GeodeVariant[] variants = new GeodeVariant[0];
 
@@ -46,30 +46,30 @@ public class BlockGeode extends TetraBlock {
         setHarvestLevel("pickaxe", 0);
 
 
-        setTranslationKey(UNLOCALIZED_NAME);
-        setRegistryName(UNLOCALIZED_NAME);
+        setTranslationKey(unlocalizedName);
+        setRegistryName(unlocalizedName);
 
-        setCreativeTab(TetraCreativeTab.INSTANCE);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, 0));
+        setCreativeTab(TetraCreativeTabs.getInstance());
+        this.setDefaultState(this.blockState.getBaseState().withProperty(variantProp, 0));
     }
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, VARIANT);
+        return new BlockStateContainer(this, variantProp);
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(VARIANT, meta);
+        return this.getDefaultState().withProperty(variantProp, meta);
     }
 
     @Override
     public int getMetaFromState(IBlockState blockState) {
-        return blockState.getValue(VARIANT);
+        return blockState.getValue(variantProp);
     }
 
     private GeodeVariant getVariant(IBlockState state) {
-        int index = state.getValue(VARIANT);
+        int index = state.getValue(variantProp);
         if (index < variants.length) {
             return variants[index];
         }
@@ -84,7 +84,7 @@ public class BlockGeode extends TetraBlock {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return ItemGeode.INSTANCE;
+        return ItemGeode.instance;
     }
 
     @Override
@@ -114,7 +114,7 @@ public class BlockGeode extends TetraBlock {
             GameRegistry.registerWorldGenerator(new GeodeGenerator(), 10);
         }
 
-        variants = Arrays.stream(TetraMod.dataHandler.getData("geode/variants", GeodeVariant[].class))
+        variants = Arrays.stream(DataHandler.instance.getData("geode/variants", GeodeVariant[].class))
                 .filter(variant -> variant.block != null)
                 .toArray(GeodeVariant[]::new);
     }

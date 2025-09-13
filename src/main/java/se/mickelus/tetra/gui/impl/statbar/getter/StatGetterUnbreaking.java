@@ -16,7 +16,7 @@ public class StatGetterUnbreaking implements IStatGetter {
     @Override
     public double getValue(EntityPlayer player, ItemStack itemStack) {
         return CastOptional.cast(itemStack.getItem(), ItemModular.class)
-                .map(item -> item.getEffectLevel(itemStack, ItemEffect.UNBREAKING))
+                .map(item -> item.getEffectLevel(itemStack, ItemEffect.unbreaking))
                 .map(level -> 100 - 100d / (level + 1))
                 .orElse(0d);
     }
@@ -24,12 +24,12 @@ public class StatGetterUnbreaking implements IStatGetter {
     @Override
     public double getValue(EntityPlayer player, ItemStack itemStack, String slot) {
         int levelItem = CastOptional.cast(itemStack.getItem(), ItemModular.class)
-                .map(item -> item.getEffectLevel(itemStack, ItemEffect.UNBREAKING))
+                .map(item -> item.getEffectLevel(itemStack, ItemEffect.unbreaking))
                 .orElse(0);
 
         return CastOptional.cast(itemStack.getItem(), ItemModular.class)
                 .flatMap(item -> CastOptional.cast(item.getModuleFromSlot(itemStack, slot), ItemModule.class))
-                .map(module -> module.getEffectLevel(itemStack, ItemEffect.UNBREAKING))
+                .map(module -> module.getEffectLevel(itemStack, ItemEffect.unbreaking))
                 .map(level -> 100d / (levelItem - level + 1) - 100d / (levelItem + 1))
                 .orElse(0d);
     }
@@ -37,13 +37,13 @@ public class StatGetterUnbreaking implements IStatGetter {
     @Override
     public double getValue(EntityPlayer player, ItemStack itemStack, String slot, String improvement) {
         int levelItem = CastOptional.cast(itemStack.getItem(), ItemModular.class)
-                .map(item -> item.getEffectLevel(itemStack, ItemEffect.UNBREAKING))
+                .map(item -> item.getEffectLevel(itemStack, ItemEffect.unbreaking))
                 .orElse(0);
 
         return CastOptional.cast(itemStack.getItem(), ItemModular.class)
                 .flatMap(item -> CastOptional.cast(item.getModuleFromSlot(itemStack, slot), ItemModuleMajor.class))
                 .map(module -> module.getImprovement(itemStack, improvement))
-                .map(data -> data.effects.getLevel(ItemEffect.UNBREAKING))
+                .map(data -> data.effects.getLevel(ItemEffect.unbreaking))
                 .map(level -> 100d / (levelItem - level + 1) - 100d / (levelItem + 1))
                 .orElse(0d);
     }

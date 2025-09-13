@@ -28,17 +28,17 @@ public class GuiTabVerticalButton extends GuiClickable {
     public GuiTabVerticalButton(int x, int y, String label, String keybinding, Runnable onClickHandler, boolean initiallyActive) {
         super(x, y, 0, 15, onClickHandler);
 
-        setAttachmentPoint(GuiAttachment.TOP_RIGHT);
+        setAttachmentPoint(GuiAttachment.topRight);
 
         indicator = new GuiRect(0, 0, 1, 15, GuiColors.normal);
-        indicator.setAttachment(GuiAttachment.TOP_RIGHT);
+        indicator.setAttachment(GuiAttachment.topRight);
         addChild(indicator);
         indicatorFlash = new AnimationChain(
                 new KeyframeAnimation(40, indicator).applyTo(new Applier.TranslateX(-3)),
                 new KeyframeAnimation(60, indicator).applyTo(new Applier.TranslateX(0)));
 
         this.label = new GuiString(-5, 4, label);
-        this.label.setAttachment(GuiAttachment.TOP_RIGHT);
+        this.label.setAttachment(GuiAttachment.topRight);
         this.label.setOpacity(0);
         addChild(this.label);
         labelShow = new KeyframeAnimation(100, this.label).applyTo(new Applier.Opacity(1), new Applier.TranslateX(-5));

@@ -18,8 +18,8 @@ public class GuiPotionsBackdrop extends GuiElement {
     public GuiPotionsBackdrop(int x, int y, int numSlots, Collection<Collection<ItemEffect>> inventoryEffects) {
         super(x, y, numSlots * 17 - 9, 28);
 
-        setAttachmentPoint(GuiAttachment.TOP_CENTER);
-        setAttachmentAnchor(GuiAttachment.TOP_CENTER);
+        setAttachmentPoint(GuiAttachment.topCenter);
+        setAttachmentAnchor(GuiAttachment.topCenter);
 
         // background rects
         addChild(new GuiRect(0, 3, width, 22, 0xff000000));
@@ -28,14 +28,14 @@ public class GuiPotionsBackdrop extends GuiElement {
 
         // left cap
         GuiTexture leftCap = new GuiTexture(0, 0, 16, 28, 64, 0, texture);
-        leftCap.setAttachmentPoint(GuiAttachment.TOP_RIGHT);
+        leftCap.setAttachmentPoint(GuiAttachment.topRight);
         addChild(leftCap);
 
         GuiTexture rightCap = new GuiTexture(0, 0, 16, 28, 80, 0, texture);
-        rightCap.setAttachmentPoint(GuiAttachment.TOP_LEFT);
-        rightCap.setAttachmentAnchor(GuiAttachment.TOP_RIGHT);
+        rightCap.setAttachmentPoint(GuiAttachment.topLeft);
+        rightCap.setAttachmentAnchor(GuiAttachment.topRight);
         addChild(rightCap);
 
-        GuiSlotEffect.getEffectsForInventory(SlotType.POTION, inventoryEffects).forEach(this::addChild);
+        GuiSlotEffect.getEffectsForInventory(SlotType.potion, inventoryEffects).forEach(this::addChild);
     }
 }

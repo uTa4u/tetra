@@ -28,7 +28,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraCreativeTab;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.advancements.BlockUseCriterion;
 import se.mickelus.tetra.blocks.TetraBlock;
@@ -36,6 +35,7 @@ import se.mickelus.tetra.blocks.salvage.BlockInteraction;
 import se.mickelus.tetra.blocks.salvage.IBlockCapabilityInteractive;
 import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.items.ItemModular;
+import se.mickelus.tetra.items.TetraCreativeTabs;
 import se.mickelus.tetra.items.cell.ItemCellMagmatic;
 import se.mickelus.tetra.items.forged.ItemVentPlate;
 import se.mickelus.tetra.util.TileEntityOptional;
@@ -46,54 +46,52 @@ import java.util.Collection;
 import java.util.List;
 
 public class BlockHammerBase extends TetraBlock implements ITileEntityProvider, IBlockCapabilityInteractive {
-    static final PropertyDirection FACING = BlockHorizontal.FACING;
-    // TODO: turn into two instances of CellState enum (no, uncharged, charged)
-    private static final PropertyBool CELL_1 = PropertyBool.create("cell1");
-    private static final PropertyBool CELL_1_CHARGED = PropertyBool.create("cell1charged");
-    private static final PropertyBool CELL_2 = PropertyBool.create("cell2");
-    private static final PropertyBool CELL_2_CHARGED = PropertyBool.create("cell2charged");
+    public static final PropertyDirection propFacing = BlockHorizontal.FACING;
+    public static final PropertyBool propCell1 = PropertyBool.create("cell1");
+    public static final PropertyBool propCell1Charged = PropertyBool.create("cell1charged");
+    public static final PropertyBool propCell2 = PropertyBool.create("cell2");
+    public static final PropertyBool propCell2Charged = PropertyBool.create("cell2charged");
 
-    private static final ResourceLocation LOOT_TABLE = TetraMod.getResource("forged/plate_break");
+    private static final ResourceLocation plateLootTable = TetraMod.getResource("forged/plate_break");
 
-    private static final String UNLOCALIZED_NAME = "hammer_base";
+    static final String unlocalizedName = "hammer_base";
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
+    public static BlockHammerBase instance;
 
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
-    public static BlockHammerBase INSTANCE;
+    public static final BlockInteraction[] interactions = new BlockInteraction[]{
+            new BlockInteraction(Capability.pry, 1, EnumHammerPlate.EAST.face, 5, 11, 9, 11,
+                    EnumHammerPlate.EAST.prop, true, (world, pos, blockState, player, hand, hitFace) ->
+                    removePlate(world, pos, blockState, player, EnumHammerPlate.EAST, hitFace)),
+            new BlockInteraction(Capability.pry, 1, EnumHammerPlate.WEST.face, 5, 11, 9, 11,
+                    EnumHammerPlate.WEST.prop, true, (world, pos, blockState, player, hand, hitFace) ->
+                    removePlate(world, pos, blockState, player, EnumHammerPlate.WEST, hitFace)),
 
-    private static final BlockInteraction[] INTERACTIONS = new BlockInteraction[]{
-            new BlockInteraction(Capability.PRY, 1, HammerPlate.EAST.face, 5, 11, 9, 11,
-                    HammerPlate.EAST.prop, true, (world, pos, blockState, player, hand, hitFace) ->
-                    removePlate(world, pos, blockState, player, HammerPlate.EAST, hitFace)),
-            new BlockInteraction(Capability.PRY, 1, HammerPlate.WEST.face, 5, 11, 9, 11,
-                    HammerPlate.WEST.prop, true, (world, pos, blockState, player, hand, hitFace) ->
-                    removePlate(world, pos, blockState, player, HammerPlate.WEST, hitFace)),
-
-            new BlockInteraction(Capability.HAMMER, 1, EnumFacing.EAST, 6, 10, 2, 9,
-                    HammerPlate.EAST.prop, false, (world, pos, blockState, player, hand, hitFace) ->
+            new BlockInteraction(Capability.hammer, 1, EnumFacing.EAST, 6, 10, 2, 9,
+                    EnumHammerPlate.EAST.prop, false, (world, pos, blockState, player, hand, hitFace) ->
                     reconfigure(world, pos, blockState, player, EnumFacing.EAST)),
-            new BlockInteraction(Capability.HAMMER, 1, EnumFacing.WEST, 6, 10, 2, 9,
-                    HammerPlate.WEST.prop, false, (world, pos, blockState, player, hand, hitFace) ->
+            new BlockInteraction(Capability.hammer, 1, EnumFacing.WEST, 6, 10, 2, 9,
+                    EnumHammerPlate.WEST.prop, false, (world, pos, blockState, player, hand, hitFace) ->
                     reconfigure(world, pos, blockState, player, EnumFacing.WEST))
     };
 
     public BlockHammerBase() {
         super(Material.IRON);
 
-        setRegistryName(UNLOCALIZED_NAME);
-        setTranslationKey(UNLOCALIZED_NAME);
-        setCreativeTab(TetraCreativeTab.INSTANCE);
+        setRegistryName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
+        setCreativeTab(TetraCreativeTabs.getInstance());
         setBlockUnbreakable();
 
-        GameRegistry.registerTileEntity(TileEntityHammerBase.class, new ResourceLocation(Tags.MOD_ID, UNLOCALIZED_NAME));
+        GameRegistry.registerTileEntity(TileEntityHammerBase.class, new ResourceLocation(Tags.MOD_ID, unlocalizedName));
 
         hasItem = true;
 
         this.setDefaultState(this.blockState.getBaseState()
-                .withProperty(FACING, EnumFacing.EAST)
-                .withProperty(CELL_1, false)
-                .withProperty(CELL_1_CHARGED, false)
-                .withProperty(CELL_2, false)
-                .withProperty(CELL_2_CHARGED, false));
+                .withProperty(propFacing, EnumFacing.EAST)
+                .withProperty(propCell1, false)
+                .withProperty(propCell1Charged, false)
+                .withProperty(propCell2, false)
+                .withProperty(propCell2Charged, false));
     }
 
     @Override
@@ -111,14 +109,14 @@ public class BlockHammerBase extends TetraBlock implements ITileEntityProvider, 
     public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
         return TileEntityOptional.from(world, pos, TileEntityHammerBase.class)
                 .map(te -> state
-                        .withProperty(CELL_1, te.hasCellInSlot(0))
-                        .withProperty(CELL_1_CHARGED, te.getCellFuel(0) > 0)
-                        .withProperty(CELL_2, te.hasCellInSlot(1))
-                        .withProperty(CELL_2_CHARGED, te.getCellFuel(1) > 0)
-                        .withProperty(HammerPlate.EAST.prop, te.hasPlate(HammerPlate.EAST))
-                        .withProperty(HammerPlate.WEST.prop, te.hasPlate(HammerPlate.WEST))
-                        .withProperty(HammerConfig.propE, te.getConfiguration(EnumFacing.EAST))
-                        .withProperty(HammerConfig.propW, te.getConfiguration(EnumFacing.WEST)))
+                        .withProperty(propCell1, te.hasCellInSlot(0))
+                        .withProperty(propCell1Charged, te.getCellFuel(0) > 0)
+                        .withProperty(propCell2, te.hasCellInSlot(1))
+                        .withProperty(propCell2Charged, te.getCellFuel(1) > 0)
+                        .withProperty(EnumHammerPlate.EAST.prop, te.hasPlate(EnumHammerPlate.EAST))
+                        .withProperty(EnumHammerPlate.WEST.prop, te.hasPlate(EnumHammerPlate.WEST))
+                        .withProperty(EnumHammerConfig.propE, te.getConfiguration(EnumFacing.EAST))
+                        .withProperty(EnumHammerConfig.propW, te.getConfiguration(EnumFacing.WEST)))
                 .orElse(state);
     }
 
@@ -141,7 +139,7 @@ public class BlockHammerBase extends TetraBlock implements ITileEntityProvider, 
     public void applyEffects(World world, BlockPos pos, ItemStack itemStack, EntityPlayer player) {
         TileEntityOptional.from(world, pos, TileEntityHammerBase.class)
                 .ifPresent(te -> {
-                    if (te.hasEffect(HammerEffect.DAMAGING) && itemStack.getItem() instanceof ItemModular) {
+                    if (te.hasEffect(EnumHammerEffect.DAMAGING) && itemStack.getItem() instanceof ItemModular) {
                         ItemModular item = (ItemModular) itemStack.getItem();
                         int damage = (int) (itemStack.getMaxDamage() * 0.1);
                         item.applyDamage(damage, itemStack, player);
@@ -155,14 +153,14 @@ public class BlockHammerBase extends TetraBlock implements ITileEntityProvider, 
                 .orElse(0);
     }
 
-    public static boolean removePlate(World world, BlockPos pos, IBlockState state, EntityPlayer player, HammerPlate plate, EnumFacing face) {
+    public static boolean removePlate(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHammerPlate plate, EnumFacing face) {
         TileEntityOptional.from(world, pos, TileEntityHammerBase.class)
                 .ifPresent(te -> {
                     te.removePlate(plate);
 
                     if (!world.isRemote) {
                         WorldServer worldServer = (WorldServer) world;
-                        LootTable table = worldServer.getLootTableManager().getLootTableFromLocation(LOOT_TABLE);
+                        LootTable table = worldServer.getLootTableManager().getLootTableFromLocation(plateLootTable);
                         LootContext.Builder builder = new LootContext.Builder(worldServer);
                         builder.withLuck(player.getLuck()).withPlayer(player);
 
@@ -191,7 +189,7 @@ public class BlockHammerBase extends TetraBlock implements ITileEntityProvider, 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
                                     EnumFacing facing, float hitX, float hitY, float hitZ) {
-        EnumFacing blockFacing = state.getValue(FACING);
+        EnumFacing blockFacing = state.getValue(propFacing);
         TileEntityHammerBase te = TileEntityOptional.from(world, pos, TileEntityHammerBase.class).orElse(null);
         ItemStack heldStack = player.getHeldItem(hand);
 
@@ -230,8 +228,8 @@ public class BlockHammerBase extends TetraBlock implements ITileEntityProvider, 
                 return true;
             }
         } else if (heldStack.getItem() instanceof ItemVentPlate) {
-            if (Rotation.CLOCKWISE_90.rotate(blockFacing).equals(facing) && !te.hasPlate(HammerPlate.EAST)) {
-                te.attachPlate(HammerPlate.EAST);
+            if (Rotation.CLOCKWISE_90.rotate(blockFacing).equals(facing) && !te.hasPlate(EnumHammerPlate.EAST)) {
+                te.attachPlate(EnumHammerPlate.EAST);
                 world.notifyBlockUpdate(pos, state, state, 3);
 
                 if (!player.world.isRemote) {
@@ -241,8 +239,8 @@ public class BlockHammerBase extends TetraBlock implements ITileEntityProvider, 
                 heldStack.shrink(1);
 
                 return true;
-            } else if (Rotation.COUNTERCLOCKWISE_90.rotate(blockFacing).equals(facing) && !te.hasPlate(HammerPlate.WEST)) {
-                te.attachPlate(HammerPlate.WEST);
+            } else if (Rotation.COUNTERCLOCKWISE_90.rotate(blockFacing).equals(facing) && !te.hasPlate(EnumHammerPlate.WEST)) {
+                te.attachPlate(EnumHammerPlate.WEST);
                 world.notifyBlockUpdate(pos, state, state, 3);
 
                 if (!player.world.isRemote) {
@@ -272,8 +270,8 @@ public class BlockHammerBase extends TetraBlock implements ITileEntityProvider, 
 
     @Override
     public BlockInteraction[] getPotentialInteractions(IBlockState state, EnumFacing face, Collection<Capability> capabilities) {
-        return Arrays.stream(INTERACTIONS)
-                .filter(interaction -> interaction.isPotentialInteraction(state, state.getValue(FACING), face, capabilities))
+        return Arrays.stream(interactions)
+                .filter(interaction -> interaction.isPotentialInteraction(state, state.getValue(propFacing), face, capabilities))
                 .toArray(BlockInteraction[]::new);
     }
 
@@ -294,33 +292,33 @@ public class BlockHammerBase extends TetraBlock implements ITileEntityProvider, 
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING, CELL_1, CELL_1_CHARGED, CELL_2, CELL_2_CHARGED,
-                HammerPlate.EAST.prop, HammerPlate.WEST.prop, HammerConfig.propE, HammerConfig.propW);
+        return new BlockStateContainer(this, propFacing, propCell1, propCell1Charged, propCell2, propCell2Charged,
+                EnumHammerPlate.EAST.prop, EnumHammerPlate.WEST.prop, EnumHammerConfig.propE, EnumHammerConfig.propW);
     }
 
     @Override
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+        return this.getDefaultState().withProperty(propFacing, placer.getHorizontalFacing().getOpposite());
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState()
-                .withProperty(FACING, EnumFacing.HORIZONTALS[meta & 0xf]);
+                .withProperty(propFacing, EnumFacing.HORIZONTALS[meta & 0xf]);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getHorizontalIndex();
+        return state.getValue(propFacing).getHorizontalIndex();
     }
 
     @Override
     public IBlockState withRotation(IBlockState state, Rotation rot) {
-        return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
+        return state.withProperty(propFacing, rot.rotate(state.getValue(propFacing)));
     }
 
     @Override
     public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
-        return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
+        return state.withRotation(mirrorIn.toRotation(state.getValue(propFacing)));
     }
 }

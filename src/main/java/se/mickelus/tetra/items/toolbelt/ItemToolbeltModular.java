@@ -16,11 +16,12 @@ import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import se.mickelus.tetra.IntegrationHelper;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraCreativeTab;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.items.BasicModule;
 import se.mickelus.tetra.items.ItemModular;
+import se.mickelus.tetra.items.TetraCreativeTabs;
 import se.mickelus.tetra.items.toolbelt.booster.JumpHandlerBooster;
 import se.mickelus.tetra.items.toolbelt.booster.TickHandlerBooster;
 import se.mickelus.tetra.items.toolbelt.booster.UpdateBoosterPacket;
@@ -31,7 +32,6 @@ import se.mickelus.tetra.module.ItemUpgradeRegistry;
 import se.mickelus.tetra.module.schema.RemoveSchema;
 import se.mickelus.tetra.network.GuiHandlerRegistry;
 import se.mickelus.tetra.network.PacketHandler;
-import se.mickelus.tetra.util.IntegrationHelper;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -39,60 +39,58 @@ import java.util.stream.Collectors;
 
 @Optional.Interface(modid = IntegrationHelper.baublesModId, iface = IntegrationHelper.baublesApiClass)
 public class ItemToolbeltModular extends ItemModular implements IBauble {
+    private final static String unlocalizedName = "toolbelt_modular";
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
+    public static ItemToolbeltModular instance;
 
-    private final static String UNLOCALIZED_NAME = "toolbelt_modular";
+    public final static String slot1Key = "toolbelt/slot1";
+    public final static String slot2Key = "toolbelt/slot2";
+    public final static String slot3Key = "toolbelt/slot3";
+    public final static String beltKey = "toolbelt/belt";
 
-    public final static String SLOT_1_KEY = "toolbelt/slot1";
-    public final static String SLOT_2_KEY = "toolbelt/slot2";
-    public final static String SLOT_3_KEY = "toolbelt/slot3";
-    public final static String BELT_KEY = "toolbelt/belt";
-
-    public final static String SLOT_1_SUFFIX = "_slot1";
-    public final static String SLOT_2_SUFFIX = "_slot2";
-    public final static String SLOT_3_SUFFIX = "_slot3";
+    public final static String slot1Suffix = "_slot1";
+    public final static String slot2Suffix = "_slot2";
+    public final static String slot3Suffix = "_slot3";
 
     private final ItemModule defaultBelt;
     private final ItemModule defaultStrap;
 
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
-    public static ItemToolbeltModular INSTANCE;
-
     public ItemToolbeltModular() {
         super();
 
-        setRegistryName(UNLOCALIZED_NAME);
-        setTranslationKey(UNLOCALIZED_NAME);
+        setRegistryName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
 
         setMaxStackSize(1);
 
-        setCreativeTab(TetraCreativeTab.INSTANCE);
+        setCreativeTab(TetraCreativeTabs.getInstance());
 
-        majorModuleKeys = new String[]{SLOT_1_KEY, SLOT_2_KEY, SLOT_3_KEY};
-        minorModuleKeys = new String[]{BELT_KEY};
+        majorModuleKeys = new String[]{slot1Key, slot2Key, slot3Key};
+        minorModuleKeys = new String[]{beltKey};
 
-        requiredModules = new String[]{BELT_KEY};
+        requiredModules = new String[]{beltKey};
 
-        defaultBelt = new BasicModule(BELT_KEY, BELT_KEY);
+        defaultBelt = new BasicModule(beltKey, beltKey);
 
-        defaultStrap = new ToolbeltModule(SLOT_1_KEY, "strap", SLOT_1_SUFFIX);
-        new ToolbeltModule(SLOT_2_KEY, "strap", SLOT_2_SUFFIX);
-        new ToolbeltModule(SLOT_3_KEY, "strap", SLOT_3_SUFFIX);
+        defaultStrap = new ToolbeltModule(slot1Key, "strap", slot1Suffix);
+        new ToolbeltModule(slot2Key, "strap", slot2Suffix);
+        new ToolbeltModule(slot3Key, "strap", slot3Suffix);
 
-        new ToolbeltModule(SLOT_1_KEY, "potion_storage", SLOT_1_SUFFIX);
-        new ToolbeltModule(SLOT_2_KEY, "potion_storage", SLOT_2_SUFFIX);
-        new ToolbeltModule(SLOT_3_KEY, "potion_storage", SLOT_3_SUFFIX);
+        new ToolbeltModule(slot1Key, "potion_storage", slot1Suffix);
+        new ToolbeltModule(slot2Key, "potion_storage", slot2Suffix);
+        new ToolbeltModule(slot3Key, "potion_storage", slot3Suffix);
 
-        new ToolbeltModule(SLOT_1_KEY, "storage", SLOT_1_SUFFIX);
-        new ToolbeltModule(SLOT_2_KEY, "storage", SLOT_2_SUFFIX);
-        new ToolbeltModule(SLOT_3_KEY, "storage", SLOT_3_SUFFIX);
+        new ToolbeltModule(slot1Key, "storage", slot1Suffix);
+        new ToolbeltModule(slot2Key, "storage", slot2Suffix);
+        new ToolbeltModule(slot3Key, "storage", slot3Suffix);
 
-        new ToolbeltModule(SLOT_1_KEY, "quiver", SLOT_1_SUFFIX);
-        new ToolbeltModule(SLOT_2_KEY, "quiver", SLOT_2_SUFFIX);
-        new ToolbeltModule(SLOT_3_KEY, "quiver", SLOT_3_SUFFIX);
+        new ToolbeltModule(slot1Key, "quiver", slot1Suffix);
+        new ToolbeltModule(slot2Key, "quiver", slot2Suffix);
+        new ToolbeltModule(slot3Key, "quiver", slot3Suffix);
 
-        new ToolbeltModule(SLOT_1_KEY, "booster", SLOT_1_SUFFIX);
-        new ToolbeltModule(SLOT_2_KEY, "booster", SLOT_2_SUFFIX);
-        new ToolbeltModule(SLOT_3_KEY, "booster", SLOT_3_SUFFIX);
+        new ToolbeltModule(slot1Key, "booster", slot1Suffix);
+        new ToolbeltModule(slot2Key, "booster", slot2Suffix);
+        new ToolbeltModule(slot3Key, "booster", slot3Suffix);
     }
 
     @Override
@@ -103,7 +101,7 @@ public class ItemToolbeltModular extends ItemModular implements IBauble {
 
     @Override
     public void init(PacketHandler packetHandler) {
-        GuiHandlerRegistry.INSTANCE.registerHandler(GuiHandlerToolbelt.toolbeltId, new GuiHandlerToolbelt());
+        GuiHandlerRegistry.instance.registerHandler(GuiHandlerToolbelt.toolbeltId, new GuiHandlerToolbelt());
 
         packetHandler.registerPacket(EquipToolbeltItemPacket.class, Side.SERVER);
         packetHandler.registerPacket(UpdateBoosterPacket.class, Side.SERVER);
@@ -111,15 +109,15 @@ public class ItemToolbeltModular extends ItemModular implements IBauble {
 
         InventoryToolbelt.initializePredicates();
 
-        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("toolbelt/belt");
-        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("toolbelt/strap");
-        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("toolbelt/strap_improvements");
-        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("toolbelt/booster");
-        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("toolbelt/potion_storage");
-        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("toolbelt/storage");
-        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("toolbelt/storage_improvements");
-        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("toolbelt/quiver");
-        ItemUpgradeRegistry.INSTANCE.registerConfigSchema("toolbelt/quiver_improvements");
+        ItemUpgradeRegistry.instance.registerConfigSchema("toolbelt/belt");
+        ItemUpgradeRegistry.instance.registerConfigSchema("toolbelt/strap");
+        ItemUpgradeRegistry.instance.registerConfigSchema("toolbelt/strap_improvements");
+        ItemUpgradeRegistry.instance.registerConfigSchema("toolbelt/booster");
+        ItemUpgradeRegistry.instance.registerConfigSchema("toolbelt/potion_storage");
+        ItemUpgradeRegistry.instance.registerConfigSchema("toolbelt/storage");
+        ItemUpgradeRegistry.instance.registerConfigSchema("toolbelt/storage_improvements");
+        ItemUpgradeRegistry.instance.registerConfigSchema("toolbelt/quiver");
+        ItemUpgradeRegistry.instance.registerConfigSchema("toolbelt/quiver_improvements");
 
         RemoveSchema.registerRemoveSchemas(this);
     }
@@ -141,7 +139,7 @@ public class ItemToolbeltModular extends ItemModular implements IBauble {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-        player.openGui(TetraMod.INSTANCE, GuiHandlerToolbelt.toolbeltId, world, hand.ordinal(), 0, 0);
+        player.openGui(TetraMod.instance, GuiHandlerToolbelt.toolbeltId, world, hand.ordinal(), 0, 0);
 
         return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
     }

@@ -11,12 +11,12 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.util.Constants;
-import se.mickelus.tetra.TetraMod;
+import se.mickelus.tetra.NBTHelper;
+import se.mickelus.tetra.data.DataHandler;
 import se.mickelus.tetra.items.ItemPredicateComposite;
 import se.mickelus.tetra.items.toolbelt.ItemToolbeltModular;
 import se.mickelus.tetra.items.toolbelt.SlotType;
 import se.mickelus.tetra.module.ItemEffect;
-import se.mickelus.tetra.util.NBTHelper;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -59,7 +59,7 @@ public class InventoryToolbelt implements IInventory {
     }
 
     private static ItemPredicate getPredicate(String inventory) {
-        ItemPredicate[] predicates = Arrays.stream(TetraMod.dataHandler.getData(String.format("toolbelt/%s_predicates", inventory), ItemPredicate[].class))
+        ItemPredicate[] predicates = Arrays.stream(DataHandler.instance.getData(String.format("toolbelt/%s_predicates", inventory), ItemPredicate[].class))
                 .filter(Objects::nonNull)
                 .toArray(ItemPredicate[]::new);
 
@@ -289,7 +289,7 @@ public class InventoryToolbelt implements IInventory {
     }
 
     public List<Collection<ItemEffect>> getSlotEffects() {
-        return ItemToolbeltModular.INSTANCE.getSlotEffects(toolbeltItemStack, inventoryType);
+        return ItemToolbeltModular.instance.getSlotEffects(toolbeltItemStack, inventoryType);
     }
 
     public static void setPredicates(ItemPredicate[] predicates) {

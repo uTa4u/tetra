@@ -3,7 +3,7 @@ package se.mickelus.tetra.items.toolbelt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import se.mickelus.tetra.TetraMod;
+import se.mickelus.tetra.data.DataHandler;
 import se.mickelus.tetra.module.ItemUpgradeRegistry;
 import se.mickelus.tetra.module.MultiSlotModule;
 import se.mickelus.tetra.module.data.ImprovementData;
@@ -14,12 +14,12 @@ public class ToolbeltModule extends MultiSlotModule<ModuleData> {
         super(slotKey, "toolbelt/" + moduleKey, slotSuffix);
 
         // this uses the unsuffixed module key, to use the same data for both sides
-        data = TetraMod.dataHandler.getModuleData("toolbelt/" + moduleKey, ModuleData[].class);
+        data = DataHandler.instance.getModuleData("toolbelt/" + moduleKey, ModuleData[].class);
 
-        improvements = TetraMod.dataHandler.getModuleData("toolbelt/improvements/" + moduleKey, ImprovementData[].class);
+        improvements = DataHandler.instance.getModuleData("toolbelt/improvements/" + moduleKey, ImprovementData[].class);
 
         // this uses the suffixed module key, to avoid passing the slot key to every method that makes use of data
-        ItemUpgradeRegistry.INSTANCE.registerModule(this.moduleKey, this);
+        ItemUpgradeRegistry.instance.registerModule(this.moduleKey, this);
     }
 
     @Override

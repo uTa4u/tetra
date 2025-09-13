@@ -18,33 +18,35 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootTable;
+import se.mickelus.tetra.NBTHelper;
 import se.mickelus.tetra.TetraMod;
-import se.mickelus.tetra.util.NBTHelper;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Random;
 
 public class TileEntityForgedContainer extends TileEntity implements IInventory {
-    private static final ResourceLocation LOOT_TABLE = TetraMod.getResource("forged/lock_break");
-    public static final int COMPARTMENT_COUNT = 3;
-    public static final int COMPARTMENT_SIZE = 54;
-    public static final int LOCK_INTEGRITY_MAX = 4;
-    public static final int LOCK_COUNT = 4;
-    public static final int LID_INTEGRITY_MAX = 5;
 
     private final NonNullList<ItemStack> stacks;
 
+    public static int lockIntegrityMax = 4;
+    public static int lockCount = 4;
     private final int[] lockIntegrity;
 
+    public static int lidIntegrityMax = 5;
     private int lidIntegrity = 3;
+
+    private static final ResourceLocation lockLootTable = TetraMod.getResource("forged/lock_break");
+
+    public static int compartmentCount = 3;
+    public static int compartmentSize = 54;
 
     public long openTime = -1;
 
     public TileEntityForgedContainer() {
-        stacks = NonNullList.withSize(COMPARTMENT_SIZE * COMPARTMENT_COUNT, ItemStack.EMPTY);
+        stacks = NonNullList.withSize(compartmentSize * compartmentCount, ItemStack.EMPTY);
 
-        lockIntegrity = new int[LOCK_COUNT];
+        lockIntegrity = new int[lockCount];
         Arrays.fill(lockIntegrity, 1);
     }
 
@@ -59,11 +61,11 @@ public class TileEntityForgedContainer extends TileEntity implements IInventory 
     }
 
     public EnumFacing getFacing() {
-        return world.getBlockState(pos).getValue(BlockForgedContainer.PROP_FACING);
+        return world.getBlockState(pos).getValue(BlockForgedContainer.propFacing);
     }
 
     public boolean isFlipped() {
-        return world.getBlockState(pos).getValue(BlockForgedContainer.PROP_FLIPPED);
+        return world.getBlockState(pos).getValue(BlockForgedContainer.propFlipped);
     }
 
     public void open(EntityPlayer player) {
@@ -143,7 +145,7 @@ public class TileEntityForgedContainer extends TileEntity implements IInventory 
                 }
 
                 if (lockIntegrity[index] == 0) {
-                    LootTable table = worldServer.getLootTableManager().getLootTableFromLocation(LOOT_TABLE);
+                    LootTable table = worldServer.getLootTableManager().getLootTableFromLocation(lockLootTable);
                     LootContext.Builder builder = new LootContext.Builder(worldServer);
                     builder.withLuck(player.getLuck()).withPlayer(player);
 
@@ -305,7 +307,7 @@ public class TileEntityForgedContainer extends TileEntity implements IInventory 
 
     @Override
     public String getName() {
-        return BlockForgedContainer.UNLOCALIZED_NAME;
+        return BlockForgedContainer.unlocalizedName;
     }
 
     @Override

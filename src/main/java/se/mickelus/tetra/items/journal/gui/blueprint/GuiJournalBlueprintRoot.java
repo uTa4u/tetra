@@ -11,7 +11,7 @@ public class GuiJournalBlueprintRoot extends GuiJournalRootBase {
         super(x, y);
 
         GuiString test = new GuiString(0, 0, ChatFormatting.OBFUSCATED + "structures");
-        test.setAttachment(GuiAttachment.MIDDLE_CENTER);
+        test.setAttachment(GuiAttachment.middleCenter);
         addChild(test);
     }
 }

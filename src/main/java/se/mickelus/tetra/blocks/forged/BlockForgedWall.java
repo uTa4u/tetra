@@ -13,25 +13,25 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraCreativeTab;
 import se.mickelus.tetra.blocks.Materials;
 import se.mickelus.tetra.blocks.TetraBlock;
+import se.mickelus.tetra.items.TetraCreativeTabs;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class BlockForgedWall extends TetraBlock {
-    private static final String UNLOCALIZED_NAME = "forged_wall";
+    static final String unlocalizedName = "forged_wall";
 
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
-    public static BlockForgedWall INSTANCE;
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
+    public static BlockForgedWall instance;
 
     public BlockForgedWall() {
         super(Materials.forged);
 
-        setRegistryName(UNLOCALIZED_NAME);
-        setTranslationKey(UNLOCALIZED_NAME);
-        setCreativeTab(TetraCreativeTab.INSTANCE);
+        setRegistryName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
+        setCreativeTab(TetraCreativeTabs.getInstance());
         setBlockUnbreakable();
         setResistance(22);
 

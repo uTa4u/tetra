@@ -23,10 +23,10 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.server.FMLServerHandler;
 import se.mickelus.tetra.ConfigHandler;
+import se.mickelus.tetra.RotationHelper;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraMod;
+import se.mickelus.tetra.data.DataHandler;
 import se.mickelus.tetra.generation.processor.*;
-import se.mickelus.tetra.util.RotationHelper;
 
 import java.util.*;
 
@@ -38,7 +38,7 @@ public class WorldGenFeatures implements IWorldGenerator {
     public static WorldGenFeatures instance;
 
     public WorldGenFeatures() {
-        features = TetraMod.dataHandler.getGenerationFeatures();
+        features = DataHandler.instance.getGenerationFeatures();
 
         DataFixer dataFixer;
         if (FMLCommonHandler.instance().getEffectiveSide().equals(Side.CLIENT)) {
@@ -53,7 +53,7 @@ public class WorldGenFeatures implements IWorldGenerator {
             new Timer("featureReload").schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    GenerationFeature[] features = TetraMod.dataHandler.getGenerationFeatures();
+                    GenerationFeature[] features = DataHandler.instance.getGenerationFeatures();
                     Minecraft.getMinecraft().addScheduledTask(() -> WorldGenFeatures.instance.features = features);
                 }
             }, 0, 1000);

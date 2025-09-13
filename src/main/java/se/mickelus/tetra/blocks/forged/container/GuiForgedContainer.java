@@ -17,8 +17,9 @@ import java.util.stream.IntStream;
 
 @SideOnly(Side.CLIENT)
 public class GuiForgedContainer extends GuiContainer {
-    private static final String CONTAINER_TEXTURE = "textures/gui/forged-container.png";
-    private static final String PLAYER_INVENTORY_TEXTURE = "textures/gui/player-inventory.png";
+
+    private static final String containerTexture = "textures/gui/forged-container.png";
+    private static final String playerInventoryTexture = "textures/gui/player-inventory.png";
 
     private final TileEntityForgedContainer tileEntity;
     private final ContainerForgedContainer container;
@@ -39,11 +40,11 @@ public class GuiForgedContainer extends GuiContainer {
         this.container = container;
 
         gui = new GuiElement(0, 0, xSize, ySize);
-        gui.addChild(new GuiTexture(0, -13, 179, 128, CONTAINER_TEXTURE));
-        gui.addChild(new GuiTexture(0, 103, 179, 106, PLAYER_INVENTORY_TEXTURE));
+        gui.addChild(new GuiTexture(0, -13, 179, 128, containerTexture));
+        gui.addChild(new GuiTexture(0, 103, 179, 106, playerInventoryTexture));
 
         compartmentButtons = new GuiTabVerticalGroup(10, 26, this::changeCompartment,
-                IntStream.range(1, TileEntityForgedContainer.COMPARTMENT_COUNT + 1)
+                IntStream.range(1, TileEntityForgedContainer.compartmentCount + 1)
                         .mapToObj(i -> I18n.format("forged_container.compartment", i))
                         .toArray(String[]::new));
         gui.addChild(compartmentButtons);
@@ -71,8 +72,8 @@ public class GuiForgedContainer extends GuiContainer {
 
     @Override
     public void updateScreen() {
-        int size = TileEntityForgedContainer.COMPARTMENT_SIZE;
-        for (int i = 0; i < TileEntityForgedContainer.COMPARTMENT_COUNT; i++) {
+        int size = TileEntityForgedContainer.compartmentSize;
+        for (int i = 0; i < TileEntityForgedContainer.compartmentCount; i++) {
             boolean hasContent = false;
             for (int j = 0; j < size; j++) {
                 if (!tileEntity.getStackInSlot(i * size + j).isEmpty()) {

@@ -43,10 +43,10 @@ public class GuiJournalSchemas extends GuiElement {
     public void update(ItemModular item, String slot) {
         int offset = 0;
         int pageLines = 8;
-        UpgradeSchema[] schemas = Arrays.stream(ItemUpgradeRegistry.INSTANCE.getSchemas(slot))
+        UpgradeSchema[] schemas = Arrays.stream(ItemUpgradeRegistry.instance.getSchemas(slot))
                 .filter(schema -> !schema.isHoning())
-                .filter(schema -> !schema.getRarity().equals(SchemaRarity.TEMPORARY))
-                .filter(schema -> !schema.getType().equals(SchemaType.IMPROVEMENT))
+                .filter(schema -> !schema.getRarity().equals(SchemaRarity.temporary))
+                .filter(schema -> !schema.getType().equals(SchemaType.improvement))
                 .filter(Filter.distinct(UpgradeSchema::getName))
                 .toArray(UpgradeSchema[]::new);
 

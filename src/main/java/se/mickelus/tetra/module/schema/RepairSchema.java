@@ -26,7 +26,7 @@ public class RepairSchema extends BaseSchema {
 
     public RepairSchema(ItemModular item) {
         this.item = item;
-        ItemUpgradeRegistry.INSTANCE.registerSchema(this);
+        ItemUpgradeRegistry.instance.registerSchema(this);
     }
 
     public String getSlot(ItemStack itemStack) {
@@ -155,7 +155,7 @@ public class RepairSchema extends BaseSchema {
 
     @Override
     public SchemaType getType() {
-        return SchemaType.OTHER;
+        return SchemaType.other;
     }
 
     @Override

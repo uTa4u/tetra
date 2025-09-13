@@ -37,7 +37,7 @@ public class ModularModel implements IModel {
 
     @Override
     public Collection<ResourceLocation> getTextures() {
-        return ItemUpgradeRegistry.INSTANCE.getAllModules().stream()
+        return ItemUpgradeRegistry.instance.getAllModules().stream()
                 .flatMap((itemModule -> Arrays.stream(itemModule.getAllTextures())))
                 .collect(Collectors.toList());
     }

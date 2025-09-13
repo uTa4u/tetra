@@ -56,7 +56,7 @@ public class UpdateWorkbenchPacket extends AbstractPacket {
 
         try {
             String schemaKey = readString(buffer);
-            schema = ItemUpgradeRegistry.INSTANCE.getSchema(schemaKey);
+            schema = ItemUpgradeRegistry.instance.getSchema(schemaKey);
 
             selectedSlot = readString(buffer);
 

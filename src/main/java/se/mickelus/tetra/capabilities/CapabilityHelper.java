@@ -74,7 +74,7 @@ public class CapabilityHelper {
     }
 
     private static ItemStack getReplacement(ItemStack itemStack) {
-        ItemStack replacement = ItemUpgradeRegistry.INSTANCE.getReplacement(itemStack);
+        ItemStack replacement = ItemUpgradeRegistry.instance.getReplacement(itemStack);
         if (!replacement.isEmpty()) {
             return replacement;
         }

@@ -5,9 +5,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.util.Constants;
+import se.mickelus.tetra.NBTHelper;
 import se.mickelus.tetra.items.toolbelt.ItemToolbeltModular;
 import se.mickelus.tetra.items.toolbelt.SlotType;
-import se.mickelus.tetra.util.NBTHelper;
 
 public class InventoryQuickslot extends InventoryToolbelt {
 
@@ -19,9 +19,9 @@ public class InventoryQuickslot extends InventoryToolbelt {
     private final NonNullList<ItemStack> inventoryShadows;
 
     public InventoryQuickslot(ItemStack stack) {
-        super(inventoryKey, stack, maxSize, SlotType.QUICK);
+        super(inventoryKey, stack, maxSize, SlotType.quick);
         ItemToolbeltModular item = (ItemToolbeltModular) stack.getItem();
-        numSlots = item.getNumSlots(stack, SlotType.QUICK);
+        numSlots = item.getNumSlots(stack, SlotType.quick);
 
         inventoryShadows = NonNullList.withSize(maxSize, ItemStack.EMPTY);
 

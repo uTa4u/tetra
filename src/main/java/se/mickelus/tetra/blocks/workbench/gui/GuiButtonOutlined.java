@@ -13,7 +13,7 @@ public class GuiButtonOutlined extends GuiClickable {
     private final GuiRect borderBottom;
 
     public GuiButtonOutlined(int x, int y, String label, Runnable onClickHandler) {
-        this(x, y, label, GuiAlignment.LEFT, onClickHandler);
+        this(x, y, label, GuiAlignment.left, onClickHandler);
     }
 
     public GuiButtonOutlined(int x, int y, String label, GuiAlignment alignment, Runnable onClickHandler) {

@@ -5,12 +5,10 @@ import net.minecraft.advancements.critereon.AbstractCriterionInstance;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.capabilities.Capability;
+import se.mickelus.tetra.data.DataHandler;
 
 public class ImprovementCraftCriterion extends AbstractCriterionInstance {
-    public static final GenericTrigger<ImprovementCraftCriterion> TRIGGER = new GenericTrigger<>("tetra:craft_improvement", ImprovementCraftCriterion::deserialize);
-
     private final ItemPredicate before = null;
     private final ItemPredicate after = null;
 
@@ -23,17 +21,18 @@ public class ImprovementCraftCriterion extends AbstractCriterionInstance {
     private final Capability capability = null;
     private final int capabilityLevel = -1;
 
+    public static final GenericTrigger<ImprovementCraftCriterion> trigger = new GenericTrigger<>("tetra:craft_improvement", ImprovementCraftCriterion::deserialize);
+
     public ImprovementCraftCriterion() {
-        super(TRIGGER.getId());
+        super(trigger.getId());
     }
 
     public static void trigger(EntityPlayerMP player, ItemStack before, ItemStack after, String schema, String slot, String improvement,
                                int improvementLevel, Capability capability, int capabilityLevel) {
-        TRIGGER.fulfillCriterion(player.getAdvancements(), criterion -> criterion.test(before, after, schema, slot, improvement, improvementLevel,
+        trigger.fulfillCriterion(player.getAdvancements(), criterion -> criterion.test(before, after, schema, slot, improvement, improvementLevel,
                 capability, capabilityLevel));
     }
 
-    // TODO: wtf is this
     public boolean test(ItemStack before, ItemStack after, String schema, String slot, String improvement, int improvementLevel,
                         Capability capability, int capabilityLevel) {
 
@@ -69,6 +68,6 @@ public class ImprovementCraftCriterion extends AbstractCriterionInstance {
     }
 
     private static ImprovementCraftCriterion deserialize(JsonObject json) {
-        return TetraMod.dataHandler.gson.fromJson(json, ImprovementCraftCriterion.class);
+        return DataHandler.instance.gson.fromJson(json, ImprovementCraftCriterion.class);
     }
 }

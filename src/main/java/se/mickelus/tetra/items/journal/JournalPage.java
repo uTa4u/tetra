@@ -1,9 +1,9 @@
 package se.mickelus.tetra.items.journal;
 
 public enum JournalPage {
-    CRAFT("CRFT"),
-    STRUCTURES("STRC"),
-    SYSTEM("SYST");
+    craft("CRFT"),
+    structures("STRC"),
+    system("SYST");
 
     public String label;
 

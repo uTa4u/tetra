@@ -1,6 +1,6 @@
 package se.mickelus.tetra.module.improvement;
 
-import se.mickelus.tetra.TetraMod;
+import se.mickelus.tetra.data.DataHandler;
 import se.mickelus.tetra.module.data.ImprovementData;
 
 import java.util.Arrays;
@@ -20,7 +20,7 @@ public class DestabilizationEffect {
     public String improvementKey;
 
     public static void LoadEffects() {
-        effects = TetraMod.dataHandler.getData("modules/destabilization", DestabilizationEffect[].class);
+        effects = DataHandler.instance.getData("modules/destabilization", DestabilizationEffect[].class);
     }
 
     public static String[] getKeys() {

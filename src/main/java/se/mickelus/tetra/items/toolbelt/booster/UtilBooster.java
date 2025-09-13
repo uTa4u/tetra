@@ -47,7 +47,7 @@ public class UtilBooster {
     public static int getBoosterLevel(ItemStack itemStack) {
         if (!itemStack.isEmpty() && itemStack.getItem() instanceof ItemModular) {
             ItemModular item = (ItemModular) itemStack.getItem();
-            return item.getEffectLevel(itemStack, ItemEffect.BOOSTER);
+            return item.getEffectLevel(itemStack, ItemEffect.booster);
         }
 
         return 0;

@@ -26,9 +26,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraCreativeTab;
 import se.mickelus.tetra.blocks.TetraBlock;
 import se.mickelus.tetra.capabilities.Capability;
+import se.mickelus.tetra.items.TetraCreativeTabs;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
@@ -36,22 +36,24 @@ import java.util.Collections;
 import java.util.List;
 
 public class BlockHammerHead extends TetraBlock implements ITileEntityProvider {
-    private static final String UNLOCALIZED_NAME = "hammer_head";
-    private static final AxisAlignedBB AABB = new AxisAlignedBB(0.125, 0.8125, 0.125, 0.875, 1, 0.875);
 
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
-    public static BlockHammerHead INSTANCE;
+    static final String unlocalizedName = "hammer_head";
+    public static final AxisAlignedBB boundingBox = new AxisAlignedBB(0.125, 0.8125, 0.125, 0.875, 1, 0.875);
+
+    public static BlockHammerHead instance;
 
     public BlockHammerHead() {
         super(Material.IRON);
 
-        setRegistryName(UNLOCALIZED_NAME);
-        setTranslationKey(UNLOCALIZED_NAME);
-        GameRegistry.registerTileEntity(TileEntityHammerHead.class, Tags.MOD_ID + ":" + "tile_" + UNLOCALIZED_NAME);
-        setCreativeTab(TetraCreativeTab.INSTANCE);
+        setRegistryName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
+        GameRegistry.registerTileEntity(TileEntityHammerHead.class, Tags.MOD_ID + ":" + "tile_" + unlocalizedName);
+        setCreativeTab(TetraCreativeTabs.getInstance());
         setBlockUnbreakable();
 
         hasItem = true;
+
+        instance = this;
 
         this.setDefaultState(this.blockState.getBaseState());
     }
@@ -74,7 +76,7 @@ public class BlockHammerHead extends TetraBlock implements ITileEntityProvider {
             BlockHammerBase baseBlock = (BlockHammerBase) world.getBlockState(basePos).getBlock();
 
             if (baseBlock.isFueled(world, basePos)) {
-                return Collections.singletonList(Capability.HAMMER);
+                return Collections.singletonList(Capability.hammer);
             }
         }
         return super.getCapabilities(world, pos, blockState);
@@ -83,7 +85,7 @@ public class BlockHammerHead extends TetraBlock implements ITileEntityProvider {
     @Override
     public int getCapabilityLevel(World world, BlockPos pos, IBlockState blockState, Capability capability) {
         BlockPos basePos = pos.offset(EnumFacing.UP);
-        if (Capability.HAMMER.equals(capability) && world.getBlockState(basePos).getBlock() instanceof BlockHammerBase) {
+        if (Capability.hammer.equals(capability) && world.getBlockState(basePos).getBlock() instanceof BlockHammerBase) {
             BlockHammerBase baseBlock = (BlockHammerBase) world.getBlockState(basePos).getBlock();
 
             if (baseBlock.isFueled(world, basePos)) {
@@ -123,7 +125,7 @@ public class BlockHammerHead extends TetraBlock implements ITileEntityProvider {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return AABB;
+        return boundingBox;
     }
 
     @Override

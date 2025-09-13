@@ -28,7 +28,7 @@ public class GuiSettleProgress extends GuiElement {
         addChild(labelString);
 
         valueString = new GuiStringSmall(0, 0, "");
-        valueString.setAttachment(GuiAttachment.TOP_RIGHT);
+        valueString.setAttachment(GuiAttachment.topRight);
         addChild(valueString);
 
         bar = new GuiBar(0, 0, barLength, 0, 1);
@@ -49,14 +49,14 @@ public class GuiSettleProgress extends GuiElement {
 
         if (isArrested) {
             labelString.setString(TextFormatting.RED + I18n.format("arrested.name"));
-            labelString.setAttachment(GuiAttachment.TOP_CENTER);
+            labelString.setAttachment(GuiAttachment.topCenter);
             tooltip = Collections.singletonList(I18n.format("arrested.description"));
 
             valueString.setString("");
             bar.setValue(0, 0);
         } else if (fullySettled) {
             labelString.setString(TextFormatting.GREEN + I18n.format("item.modular.settle_full.label"));
-            labelString.setAttachment(GuiAttachment.TOP_CENTER);
+            labelString.setAttachment(GuiAttachment.topCenter);
 
             if (isGain) {
                 tooltip = Collections.singletonList(I18n.format("item.modular.settle_full_gain.description"));
@@ -68,7 +68,7 @@ public class GuiSettleProgress extends GuiElement {
             bar.setValue(1f, 1f);
         } else if (settleMaxCount == 0) {
             labelString.setString(I18n.format("item.modular.settle_full_null.label"));
-            labelString.setAttachment(GuiAttachment.TOP_CENTER);
+            labelString.setAttachment(GuiAttachment.topCenter);
             tooltip = Collections.singletonList(I18n.format("item.modular.settle_full_null.description"));
 
             valueString.setString("");
@@ -78,7 +78,7 @@ public class GuiSettleProgress extends GuiElement {
                     * module.getDurability(itemStack) * ConfigHandler.settleLimitDurabilityMultiplier;
 
             labelString.setString(I18n.format("item.modular.settle_progress.label"));
-            labelString.setAttachment(GuiAttachment.TOP_LEFT);
+            labelString.setAttachment(GuiAttachment.topLeft);
             tooltip = Collections.singletonList(I18n.format(isGain ? "item.modular.settle_progress_gain.description" : "item.modular.settle_progress_cost.description",
                     limit - value /*String.format("%.0f", (100f * progress))*/, limit, ConfigHandler.settleLimitBase, (int) durabilityPenalty));
 

@@ -35,29 +35,27 @@ public class GuiSchemaListItem extends GuiClickable {
         addChild(label);
 
         GlyphData glyphData = schema.getGlyph();
-        switch (schema.getType()) {
-            case MAJOR:
-                border = new GuiTexture(0, 2, 16, 9, 52, 3, "textures/gui/workbench.png");
-                glyph = new GuiTexture(-1, -1, 16, 16, glyphData.textureX, glyphData.textureY, glyphData.textureLocation);
-                break;
-            case MINOR:
-                border = new GuiTexture(2, 1, 11, 11, 68, 0, "textures/gui/workbench.png");
-                glyph = new GuiTexture(4, 3, 8, 8, glyphData.textureX, glyphData.textureY, glyphData.textureLocation);
-                break;
-            case IMPROVEMENT:
-                border = new GuiTexture(0, 2, 16, 9, 52, 3, "textures/gui/workbench.png");
-                glyph = new GuiTexture(-1, -1, 16, 16, glyphData.textureX, glyphData.textureY, glyphData.textureLocation);
-                addChild(new GuiTexture(7, 7, 7, 7, 68, 16, "textures/gui/workbench.png"));
-                break;
-            case OTHER:
-                glyph = new GuiTexture(-1, -1, 16, 16, glyphData.textureX, glyphData.textureY, glyphData.textureLocation);
-                break;
+        if (schema.getType() == SchemaType.major) {
+            border = new GuiTexture(0, 2, 16, 9, 52, 3, "textures/gui/workbench.png");
+            glyph = new GuiTexture(-1, -1, 16, 16, glyphData.textureX, glyphData.textureY, glyphData.textureLocation);
+        } else if (schema.getType() == SchemaType.minor) {
+            border = new GuiTexture(2, 1, 11, 11, 68, 0, "textures/gui/workbench.png");
+            glyph = new GuiTexture(4, 3, 8, 8, glyphData.textureX, glyphData.textureY, glyphData.textureLocation);
+        } else if (schema.getType() == SchemaType.improvement) {
+            border = new GuiTexture(0, 2, 16, 9, 52, 3, "textures/gui/workbench.png");
+            glyph = new GuiTexture(-1, -1, 16, 16, glyphData.textureX, glyphData.textureY, glyphData.textureLocation);
+        } else if (schema.getType() == SchemaType.other) {
+            glyph = new GuiTexture(-1, -1, 16, 16, glyphData.textureX, glyphData.textureY, glyphData.textureLocation);
         }
 
         if (border != null) {
             border.setOpacity(0.3f);
             border.setColor(rarity.tint);
             addChild(border);
+        }
+
+        if (schema.getType() == SchemaType.improvement) {
+            addChild(new GuiTexture(7, 7, 7, 7, 68, 16, "textures/gui/workbench.png"));
         }
 
         glyph.setColor(rarity.tint);
@@ -82,9 +80,10 @@ public class GuiSchemaListItem extends GuiClickable {
 
     @Override
     public List<String> getTooltipLines() {
-        if (hasFocus() && rarity.equals(SchemaRarity.TEMPORARY)) {
+        if (hasFocus() && rarity.equals(SchemaRarity.temporary)) {
             return Collections.singletonList(I18n.format("workbench.schema_list.temporary"));
         }
+
         return null;
     }
 }

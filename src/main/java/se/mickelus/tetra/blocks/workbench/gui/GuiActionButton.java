@@ -28,7 +28,7 @@ public class GuiActionButton extends GuiElement {
     private final GuiRect borderBottom;
 
     public GuiActionButton(int x, int y, WorkbenchAction action, ItemStack targetStack, Consumer<WorkbenchAction> clickHandler) {
-        this(x, y, action, targetStack, GuiAlignment.LEFT, clickHandler);
+        this(x, y, action, targetStack, GuiAlignment.left, clickHandler);
     }
 
     public GuiActionButton(int x, int y, WorkbenchAction action, ItemStack targetStack, GuiAlignment alignment,
@@ -67,7 +67,7 @@ public class GuiActionButton extends GuiElement {
 
         GuiString labelString = new GuiStringOutline(7, 1, label);
         labelString.setAttachment(alignment.flip().toAttachment());
-        if (GuiAlignment.LEFT.equals(alignment)) {
+        if (GuiAlignment.left.equals(alignment)) {
             labelString.setX(-labelString.getX());
         }
         labelClickable.addChild(labelString);
@@ -86,7 +86,7 @@ public class GuiActionButton extends GuiElement {
             }
         };
         iconClickable.setAttachment(alignment.toAttachment());
-        if (GuiAlignment.RIGHT.equals(alignment)) {
+        if (GuiAlignment.right.equals(alignment)) {
             iconClickable.setX(-iconClickable.getX());
         }
 
@@ -94,7 +94,7 @@ public class GuiActionButton extends GuiElement {
         addChild(iconClickable);
 
         Capability[] capabilities = action.getRequiredCapabilitiesFor(targetStack);
-        capabilityIndicator = new GuiCapabilityRequirement(6, 7, capabilities.length > 0 ? capabilities[0] : Capability.HAMMER);
+        capabilityIndicator = new GuiCapabilityRequirement(6, 7, capabilities.length > 0 ? capabilities[0] : Capability.hammer);
         iconClickable.addChild(capabilityIndicator);
     }
 

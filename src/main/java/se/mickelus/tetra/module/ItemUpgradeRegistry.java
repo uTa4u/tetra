@@ -5,16 +5,16 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import se.mickelus.tetra.TetraMod;
+import se.mickelus.tetra.data.DataHandler;
 import se.mickelus.tetra.items.ItemModular;
 import se.mickelus.tetra.module.schema.*;
 
 import java.util.*;
 import java.util.function.Function;
 
-public final class ItemUpgradeRegistry {
+public class ItemUpgradeRegistry {
 
-    public static final ItemUpgradeRegistry INSTANCE = new ItemUpgradeRegistry();
+    public static ItemUpgradeRegistry instance;
 
     private final List<Function<ItemStack, ItemStack>> replacementFunctions;
     private final List<ReplacementDefinition> replacementDefinitions;
@@ -25,6 +25,7 @@ public final class ItemUpgradeRegistry {
     private final Map<String, ItemModule> moduleMap;
 
     public ItemUpgradeRegistry() {
+        instance = this;
         replacementFunctions = new ArrayList<>();
         replacementDefinitions = new ArrayList<>();
         schemaMap = new HashMap<>();
@@ -58,7 +59,7 @@ public final class ItemUpgradeRegistry {
     }
 
     public void registerConfigSchema(String path) {
-        for (SchemaDefinition definition : TetraMod.dataHandler.getSchemaDefinitions(path)) {
+        for (SchemaDefinition definition : DataHandler.instance.getSchemaDefinitions(path)) {
             if (definition.slots.length == definition.keySuffixes.length) {
                 for (int i = 0; i < definition.slots.length; i++) {
                     try {
@@ -100,7 +101,7 @@ public final class ItemUpgradeRegistry {
     }
 
     public void registerReplacementDefinition(String path) {
-        Collections.addAll(replacementDefinitions, TetraMod.dataHandler.getReplacementDefinition(path));
+        Collections.addAll(replacementDefinitions, DataHandler.instance.getReplacementDefinition(path));
     }
 
     public void registerReplacementFunction(Function<ItemStack, ItemStack> replacementFunction) {
@@ -131,7 +132,7 @@ public final class ItemUpgradeRegistry {
             ItemModular item = (ItemModular) modularStack.getItem();
             Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(sourceStack);
             for (Map.Entry<Enchantment, Integer> entry : enchantments.entrySet()) {
-                String improvement = ItemUpgradeRegistry.INSTANCE.getImprovementFromEnchantment(entry.getKey());
+                String improvement = ItemUpgradeRegistry.instance.getImprovementFromEnchantment(entry.getKey());
                 ItemModuleMajor[] modules = Arrays.stream(item.getMajorModules(modularStack))
                         .filter(module -> module.acceptsImprovement(improvement))
                         .toArray(ItemModuleMajor[]::new);

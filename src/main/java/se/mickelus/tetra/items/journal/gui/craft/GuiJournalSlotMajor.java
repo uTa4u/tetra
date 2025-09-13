@@ -20,14 +20,14 @@ public class GuiJournalSlotMajor extends GuiClickable {
         setAttachmentPoint(attachment);
 
         backdrop = new GuiTexture(0, 0, 15, 15, 52, 0, texture);
-        if (GuiAttachment.TOP_RIGHT.equals(attachment)) {
+        if (GuiAttachment.topRight.equals(attachment)) {
             backdrop.setX(-1);
         }
         backdrop.setAttachment(attachment);
         addChild(backdrop);
 
         slotString = new GuiString(18, 3, label);
-        if (GuiAttachment.TOP_RIGHT.equals(attachment)) {
+        if (GuiAttachment.topRight.equals(attachment)) {
             slotString.setX(-18);
         }
         slotString.setAttachment(attachment);

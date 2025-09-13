@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraCreativeTab;
+import se.mickelus.tetra.items.TetraCreativeTabs;
 import se.mickelus.tetra.items.TetraItem;
 
 import javax.annotation.Nullable;
@@ -22,22 +22,22 @@ import java.util.List;
 
 public class ItemCellMagmatic extends TetraItem {
 
-    private static final String UNLOCALIZED_NAME = "magmatic_cell";
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
-    public static ItemCellMagmatic INSTANCE;
+    private static final String unlocalizedName = "magmatic_cell";
+    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + unlocalizedName)
+    public static ItemCellMagmatic instance;
 
-    private static final String CHARGED_PROP_KEY = "tetra:charged";
+    private final String chargedPropKey = "tetra:charged";
 
-    public static final int MAX_CHARGE = 128;
+    public static final int maxCharge = 128;
 
     public ItemCellMagmatic() {
-        setRegistryName(UNLOCALIZED_NAME);
-        setTranslationKey(UNLOCALIZED_NAME);
-        setCreativeTab(TetraCreativeTab.INSTANCE);
-        setMaxDamage(MAX_CHARGE);
+        setRegistryName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
+        setCreativeTab(TetraCreativeTabs.getInstance());
+        setMaxDamage(maxCharge);
         setMaxStackSize(1);
 
-        this.addPropertyOverride(new ResourceLocation(CHARGED_PROP_KEY), new IItemPropertyGetter() {
+        this.addPropertyOverride(new ResourceLocation(chargedPropKey), new IItemPropertyGetter() {
             @SideOnly(Side.CLIENT)
             public float apply(ItemStack itemStack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
                 return getCharge(itemStack) > 0 ? 1 : 0;
@@ -50,9 +50,9 @@ public class ItemCellMagmatic extends TetraItem {
         super.addInformation(stack, worldIn, tooltip, flagIn);
         int charge = getCharge(stack);
 
-        if (charge == MAX_CHARGE) {
+        if (charge == maxCharge) {
             tooltip.add(I18n.format("item.magmatic_cell.charge", I18n.format("item.magmatic_cell.charge_full")));
-        } else if (charge > MAX_CHARGE * 0.4) {
+        } else if (charge > maxCharge * 0.4) {
 
             tooltip.add(I18n.format("item.magmatic_cell.charge", I18n.format("item.magmatic_cell.charge_good")));
         } else if (charge > 0) {
@@ -70,7 +70,7 @@ public class ItemCellMagmatic extends TetraItem {
             itemList.add(new ItemStack(this));
 
             ItemStack emptyStack = new ItemStack(this);
-            emptyStack.setItemDamage(MAX_CHARGE);
+            emptyStack.setItemDamage(maxCharge);
             itemList.add(emptyStack);
         }
     }

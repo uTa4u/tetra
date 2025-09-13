@@ -21,6 +21,7 @@ import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.text.WordUtils;
 import org.lwjgl.input.Keyboard;
 import se.mickelus.tetra.ConfigHandler;
+import se.mickelus.tetra.NBTHelper;
 import se.mickelus.tetra.capabilities.Capability;
 import se.mickelus.tetra.capabilities.ICapabilityProvider;
 import se.mickelus.tetra.module.ItemEffect;
@@ -33,7 +34,6 @@ import se.mickelus.tetra.module.improvement.DestabilizationEffect;
 import se.mickelus.tetra.module.improvement.HonePacket;
 import se.mickelus.tetra.module.schema.Material;
 import se.mickelus.tetra.network.PacketHandler;
-import se.mickelus.tetra.util.NBTHelper;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -100,7 +100,7 @@ public abstract class ItemModular extends TetraItem implements IItemModular, ICa
         if (stackTag != null) {
             return Stream.concat(Arrays.stream(majorModuleKeys), Arrays.stream(minorModuleKeys))
                     .map(stackTag::getString)
-                    .map(ItemUpgradeRegistry.INSTANCE::getModule)
+                    .map(ItemUpgradeRegistry.instance::getModule)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());
         }
@@ -115,7 +115,7 @@ public abstract class ItemModular extends TetraItem implements IItemModular, ICa
 
         for (int i = 0; i < majorModuleKeys.length; i++) {
             String moduleName = stackTag.getString(majorModuleKeys[i]);
-            ItemModule module = ItemUpgradeRegistry.INSTANCE.getModule(moduleName);
+            ItemModule module = ItemUpgradeRegistry.instance.getModule(moduleName);
             if (module instanceof ItemModuleMajor) {
                 modules[i] = (ItemModuleMajor) module;
             }
@@ -131,7 +131,7 @@ public abstract class ItemModular extends TetraItem implements IItemModular, ICa
 
         for (int i = 0; i < minorModuleKeys.length; i++) {
             String moduleName = stackTag.getString(minorModuleKeys[i]);
-            ItemModule module = ItemUpgradeRegistry.INSTANCE.getModule(moduleName);
+            ItemModule module = ItemUpgradeRegistry.instance.getModule(moduleName);
             modules[i] = module;
         }
 
@@ -192,7 +192,7 @@ public abstract class ItemModular extends TetraItem implements IItemModular, ICa
     }
 
     public ItemModule getModuleFromSlot(ItemStack itemStack, String slot) {
-        return ItemUpgradeRegistry.INSTANCE.getModule(NBTHelper.getTag(itemStack).getString(slot));
+        return ItemUpgradeRegistry.instance.getModule(NBTHelper.getTag(itemStack).getString(slot));
     }
 
     public void applyDamage(int amount, ItemStack itemStack, EntityLivingBase responsibleEntity) {
@@ -293,7 +293,7 @@ public abstract class ItemModular extends TetraItem implements IItemModular, ICa
 
     private int getReducedDamage(int amount, ItemStack itemStack, EntityLivingBase responsibleEntity) {
         if (amount > 0) {
-            int level = getEffectLevel(itemStack, ItemEffect.UNBREAKING);
+            int level = getEffectLevel(itemStack, ItemEffect.unbreaking);
             int reduction = 0;
 
             for (int i = 0; i < amount; i++) {

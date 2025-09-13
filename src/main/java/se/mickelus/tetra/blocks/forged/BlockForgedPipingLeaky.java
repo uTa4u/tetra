@@ -5,27 +5,25 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import se.mickelus.tetra.Tags;
-import se.mickelus.tetra.TetraCreativeTab;
 import se.mickelus.tetra.blocks.Materials;
 import se.mickelus.tetra.blocks.TetraBlock;
+import se.mickelus.tetra.items.TetraCreativeTabs;
 
-// TODO: unused
 public class BlockForgedPipingLeaky extends TetraBlock {
-    private static final String UNLOCALIZED_NAME = "forged_piping_leaky";
+    static final String unlocalizedName = "forged_piping_leaky";
 
-    @GameRegistry.ObjectHolder(Tags.MOD_ID + ":" + UNLOCALIZED_NAME)
-    public static BlockForgedPipingLeaky INSTANCE;
+    public static BlockForgedPipingLeaky instance;
 
     public BlockForgedPipingLeaky() {
         super(Materials.forged);
 
-        setRegistryName(UNLOCALIZED_NAME);
-        setTranslationKey(UNLOCALIZED_NAME);
-        setCreativeTab(TetraCreativeTab.INSTANCE);
+        setRegistryName(unlocalizedName);
+        setTranslationKey(unlocalizedName);
+        setCreativeTab(TetraCreativeTabs.getInstance());
         setBlockUnbreakable();
         setResistance(23);
+
+        instance = this;
     }
 
     @Override
